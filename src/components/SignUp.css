@@ -106,7 +106,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 90px 40px;
+  padding: 40px 100px;
 }
 
 .signup-pic {
@@ -209,8 +209,4 @@ button {
   align-items: center;
   padding: 0 25px;
   transition: all 0.4s;
-}
-
-.validate-input {
-  position: relative;
 }

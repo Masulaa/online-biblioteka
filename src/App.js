@@ -7,10 +7,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/'>
-        <Route path='/SignUp' element={<SignUp/>} />
+        <Route path='/' element={<SignUp/>} />
         <Route path='/LogIn' element={<LogIn/>}/>
-        </Route>
       </Routes>
     </BrowserRouter>
   );

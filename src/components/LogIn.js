@@ -34,7 +34,7 @@ const SignUp = () => {
 
           <form className="login-form" onSubmit={showAccount}>
             <span className="login-form-title">Online Biblioteka</span>
-            <span className="login-form-title2">Create Your Account</span>
+            <span className="login-form-title2">Log Into Your Account</span>
 
             <div className="wrap-input" data-validate="Username is required">
               <input onChange={(e)=>{setUserName(e.target.value)}} className="input" type="text" name="username" placeholder="Username" />
@@ -56,14 +56,14 @@ const SignUp = () => {
               <button type="submit" className="login-form-btn">Login</button>
             </div>
 
-            <div className="text-center p-t-12">
-              <a className="txt2" href="#">
+            <div className="forgot">
+              <Link to="">
                 Forgot Username / Password?
-              </a>
+              </Link>
             </div>
 
             <div className="loginbutton">
-              <Link to="/SignUp" className="signup-link"><span className="signup"><FaLongArrowAltRight/></span>Create your account</Link>
+              <Link to="/" className="signup-link"><span className="signup"><FaLongArrowAltRight/></span>Create your account</Link>
             </div>
           </form>
         </div>
