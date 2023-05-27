@@ -28,7 +28,7 @@ const SignUp = () => {
     <div className="limiter">
       <div className="container-login">
         <div className="wrap-login">
-          <div className="login-pic js-tilt">
+          <div className="login-pic">
             <img src={img01} alt="IMG" />
           </div>
 
@@ -56,14 +56,15 @@ const SignUp = () => {
               <button type="submit" className="login-form-btn">Login</button>
             </div>
 
-            <div className="forgot">
+            <div>
               <Link to="">
-                Forgot Username / Password?
+                <p className="forgot">
+                Forgot Username / Password?</p>
               </Link>
             </div>
 
-            <div className="loginbutton">
-              <Link to="/" className="signup-link"><span className="signup"><FaLongArrowAltRight/></span>Create your account</Link>
+            <div className="signupbutton">
+              <Link to="/"><span className="signup-button"><FaLongArrowAltRight/>Create your account</span ></Link>
             </div>
           </form>
         </div>

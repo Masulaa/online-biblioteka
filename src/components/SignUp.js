@@ -43,7 +43,7 @@ const SignUp = () => {
     <div className="limiter">
       <div className="container-signup">
         <div className="wrap-signup">
-          <div className="signup-pic js-tilt">
+          <div className="signup-pic">
             <img src={img01} alt="IMG" />
           </div>
 
@@ -102,7 +102,7 @@ const SignUp = () => {
             </div>
 
             <div className="loginbutton">
-              <Link to="/Login" className="login-link"><span className="loginicon"><FaLongArrowAltRight/></span>Login instead</Link>
+              <Link to="/Login"><span className="login-button"><FaLongArrowAltRight/>Login instead</span></Link>
             </div>
           </form>
         </div>

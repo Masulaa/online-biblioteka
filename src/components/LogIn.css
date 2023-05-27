@@ -108,9 +108,11 @@ input:focus {
     justify-content: space-between;
     padding: 90px 40px;
   }
-  
+
+
   .login-pic {
     width: 316px;
+    margin-left: 60px;
   }
   
   .login-pic img {
@@ -122,10 +124,14 @@ input:focus {
   }
 
   .forgot{
-    text-decoration: none;
+    padding-top: 3px;
   }
 
   .forgot:hover{
+    color: #57b846;
+  }
+
+  .signup-button:hover{
     color: #57b846;
   }
   
@@ -191,8 +197,9 @@ input:focus {
   .signupbutton{
     text-align: center;
     align-items: center;
+    padding-top: 3px;
   }
-  
+
   .container--form-btn {
     width: 100%;
     display: flex;
@@ -218,3 +225,6 @@ input:focus {
     transition: all 0.4s;
   }
   
+  .login-form-btn:hover{
+    background: #26651b;
+  }
