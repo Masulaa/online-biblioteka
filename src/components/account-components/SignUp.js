@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import { FiAtSign } from "react-icons/fi";
 import { FaUserAlt } from "react-icons/fa"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsFillLockFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md"
 import { FaLongArrowAltRight } from "react-icons/fa";
-import './SignUp.css';
-import img01 from '../images/slika1.png'
+import '../account-components/SignUp.css';
+import img01 from '../../images/slika1.png'
 
 const SignUp = () => {
 
@@ -16,27 +16,24 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("")
+  const navigate = useNavigate();
 
   const showAccount = (e) => {
     e.preventDefault();
-    if (userName && lastName && firstName){
-      alert("Username:" + userName + "\nFirst name:" + firstName + "Last name:" + lastName);
-    }
-    else{
+   
+    if(password.length === 0 || userName.length === 0 || email.length === 0 || firstName.length === 0 || lastName.length === 0 ){
       alert("Unesite informacije")
     }
-    if (email && password && confirmedPassword) {
-      if(confirmedPassword!==password){
+   if(confirmedPassword!==password){
         alert("Niste tacno unijeli potvrdjenu lozinku")
       }
-      if (password.length < 8 && confirmedPassword!==password) {
+      else if (password.length < 8 || password.leght >=0) {
         alert("Sifra mora da bude minimum 8 karaktera.");
-      } else {
-        alert("Email: " + email + "\nPassword: " + password);
       }
-    } else {
-      alert("Molimo vas da unesete i email i sifru.");
-    }
+      else if (userName && lastName && firstName && email && password){
+        console.log("Username:" + userName + "\nFirst name:" + firstName + "\nLast name:" + lastName + "\nEmail: " + email + "\nPassword: " + password);
+        navigate("/NovaKnjiga")
+      }
   }
 
   return (
@@ -98,7 +95,7 @@ const SignUp = () => {
                 <BsFillLockFill/></span></div>
 
             <div className="container-login-form-btn">
-              <button type="submit" className="signup-form-btn">Register</button>
+            <button type="submit" className="signup-form-btn" onClick={showAccount}>Register</button>
             </div>
 
             <div className="loginbutton">
