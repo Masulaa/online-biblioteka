@@ -52,17 +52,17 @@ function EvidencijaKnjige() {
             </nav>
           </aside>
           <main>
-            <div className='ak47'>
+            <div className='abc'>
               <div className='dva'>
-                <h2 className='pokemon'>Knjige</h2>
-                <div className='chugchug'></div>
-                <button className="lovcen" onClick={()=>{navigate('/EvidencijaKnjige/NovaKnjiga')}}>Nova Knjiga</button>
+                <h2 className='bca'>Knjige</h2>
+                <div className='regul'></div>
+                <button className="dugme1" onClick={()=>{navigate('/EvidencijaKnjige/NovaKnjiga')}}>Nova Knjiga</button>
               </div>
               <div className='jedan'>
-                <HiMagnifyingGlassCircle className="RTX4080" />
-                <input type="text" placeholder="Search..." className="RTX4090" />
+                <HiMagnifyingGlassCircle className="ikonica-search" />
+                <input type="text" placeholder="Search..." className="search" />
               </div>
-              <Table className="alooo"></Table>
+              <Table></Table>
             </div>
           </main>
         </div>
