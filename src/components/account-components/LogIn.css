@@ -61,8 +61,7 @@ textarea {
   border: none;
 }
 
-textarea:focus,
-input:focus {
+.polja:focus {
   border-color: transparent !important;
 }
   

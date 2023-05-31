@@ -32,7 +32,7 @@ const SignUp = () => {
       }
       else if (userName && lastName && firstName && email && password){
         console.log("Username:" + userName + "\nFirst name:" + firstName + "\nLast name:" + lastName + "\nEmail: " + email + "\nPassword: " + password);
-        navigate("/NovaKnjiga")
+        navigate("/EvidencijaKnjige")
       }
   }
 
@@ -49,7 +49,7 @@ const SignUp = () => {
             <span className="signup-form-title2">Create Your Account</span>
 
             <div className="wrap-input" data-validate="Username is required">
-              <input onChange={(e)=>{setUserName(e.target.value)}} className="input" type="text" name="username" placeholder="Username" />
+              <input onChange={(e)=>{setUserName(e.target.value)}} className="input polja" type="text" name="username" placeholder="Username" />
               <span className="focus-input"></span>
               <span className="symbol-input">
                 <FiAtSign />
@@ -57,7 +57,7 @@ const SignUp = () => {
             </div>            
 
             <div className="wrap-input" data-validate="First name is required">
-              <input onChange={(e)=>{setFirstName(e.target.value)}} className="input" type="text" name="firstname" placeholder="First name" />
+              <input onChange={(e)=>{setFirstName(e.target.value)}} className="input polja" type="text" name="firstname" placeholder="First name" />
               <span className="focus-input"></span>
               <span className="symbol-input">
                 <FaUserAlt/>
@@ -65,7 +65,7 @@ const SignUp = () => {
             </div>
 
             <div className="wrap-input" data-validate="Last name is required">
-              <input onChange={(e)=>{setLastName(e.target.value)}} className="input" type="text" name="lastname" placeholder="Last name" />
+              <input onChange={(e)=>{setLastName(e.target.value)}} className="input polja" type="text" name="lastname" placeholder="Last name" />
               <span className="focus-input"></span>
               <span className="symbol-input">
                 <FaUserAlt/>
@@ -73,7 +73,7 @@ const SignUp = () => {
             </div>
 
             <div className="wrap-input" data-validate="Email is required">
-              <input onChange={(e)=>{setEmail(e.target.value)}} className="input" type="email" name="email" placeholder="Email" />
+              <input onChange={(e)=>{setEmail(e.target.value)}} className="input polja" type="email" name="email" placeholder="Email" />
               <span className="focus-input"></span>
               <span className="symbol-input">
                 <MdEmail/>
@@ -81,7 +81,7 @@ const SignUp = () => {
             </div>
 
             <div className="wrap-input" data-validate="Password is required">
-              <input onChange={(e)=>{setPassword(e.target.value)}} className="input" type="password" name="pass" placeholder="Password" />
+              <input onChange={(e)=>{setPassword(e.target.value)}} className="input polja" type="password" name="pass" placeholder="Password" />
               <span className="focus-input"></span>
               <span className="symbol-input">
                 <BsFillLockFill/>
@@ -89,13 +89,13 @@ const SignUp = () => {
             </div>
 
          <div className="wrap-input" data-validate="Password is required">
-              <input onChange={(e)=>{setConfirmedPassword(e.target.value)}} className="input" type="password" name="passconf" placeholder="Password Confirmation" />
+              <input onChange={(e)=>{setConfirmedPassword(e.target.value)}} className="input polja" type="password" name="passconf" placeholder="Password Confirmation" />
               <span className="focus-input"></span>
               <span className="symbol-input">
                 <BsFillLockFill/></span></div>
 
             <div className="container-login-form-btn">
-            <button type="submit" className="signup-form-btn" onClick={showAccount}>Register</button>
+            <button type="submit" className="signup-form-btn polja" onClick={showAccount}>Register</button>
             </div>
 
             <div className="loginbutton">

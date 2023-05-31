@@ -19,7 +19,7 @@ const LogIn = () => {
         return alert("Sifra mora da bude minimum 8 karaktera.");
       } else {
         console.log("Username: " + userName + "\nPassword: " + password);
-        navigate("/NovaKnjiga");
+        navigate("/EvidencijaKnjige");
       }
     } else {
       return alert("Molimo vas da unesete i username i sifru.");
@@ -43,7 +43,7 @@ const LogIn = () => {
                 onChange={(e) => {
                   setUserName(e.target.value);
                 }}
-                className="input"
+                className="input polja"
                 type="text"
                 name="username"
                 placeholder="Username"
@@ -59,7 +59,7 @@ const LogIn = () => {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-                className="input"
+                className="input polja"
                 type="password"
                 name="pass"
                 placeholder="Password"
