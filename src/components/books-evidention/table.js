@@ -1,4 +1,5 @@
 import React from "react";
+import './table.css';
 import { BiDotsVerticalRounded } from "react-icons/bi";
 const Table = () => {
   const data = [
@@ -70,7 +71,7 @@ const Table = () => {
             <td>{item.dummy3}</td>
             <td>{item.dummy4}</td>
             <td>{item.dummy5}</td>
-            <td>
+            <td className="tri-tacke">
             <BiDotsVerticalRounded className="dots"/>
             </td>
           </tr>

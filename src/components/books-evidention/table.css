@@ -1,0 +1,46 @@
+th,tr,td{
+    text-align: center;
+}
+@media screen and (max-width: 1650px) {
+ .line{
+        top: 230px;
+    }
+    .settings{
+    position: absolute;
+    top: 240px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  table{
+    height: 50%;
+    width: 50%;
+  }
+  .line{
+    top: 250px ;
+  }
+  .settings{
+    position: absolute;
+    top: 250px;
+  }
+  }
+  @media screen and (max-width: 1024px) {
+    table{
+      height: 50%;
+      width: 40%;
+    }
+    tr,th,td{
+        font-size: 10px;
+    }
+    }
+
+    .tri-tacke{
+        height: 64px;
+        justify-content: center;
+    }
+    @media screen and (max-width: 768px) {
+        table{
+          height: 50%;
+          width: 32%;
+        }
+    }

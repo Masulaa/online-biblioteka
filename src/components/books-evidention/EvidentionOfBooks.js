@@ -46,9 +46,10 @@ function EvidencijaKnjige() {
                 <li><AiOutlineProfile className="icon"/></li>
                 <li><TbArrowsLeftRight className="icon"/></li>
               </ul>
-              <span className='prav'></span>
-              <div className='line'></div>
+              <div className='line'>
+
               <FiSettings className="settings"/>
+              </div>
             </nav>
           </aside>
           <main>
