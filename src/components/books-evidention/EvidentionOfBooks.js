@@ -56,7 +56,7 @@ function EvidencijaKnjige() {
               <div className='dva'>
                 <h2 className='bca'>Knjige</h2>
                 <div className='regul'></div>
-                <button className="dugme1" onClick={()=>{navigate('/EvidencijaKnjige/NovaKnjiga')}}>Nova Knjiga</button>
+                <button className="dugme1" onClick={()=>{navigate('/EvidentionOfBooks/NewBook')}}>Nova Knjiga</button>
               </div>
               <div className='jedan'>
                 <HiMagnifyingGlassCircle className="ikonica-search" />

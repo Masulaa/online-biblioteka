@@ -19,7 +19,7 @@ const LogIn = () => {
         return alert("Sifra mora da bude minimum 8 karaktera.");
       } else {
         console.log("Username: " + userName + "\nPassword: " + password);
-        navigate("/EvidencijaKnjige");
+        navigate("/EvidentionOfBooks");
       }
     } else {
       return alert("Molimo vas da unesete i username i sifru.");
