@@ -1,6 +1,6 @@
 import React from "react";
-import "./NovaKnjiga.css"
-import "../EvidencijaKnjige.css";
+import "./NewBook.css"
+import "../EvidentionOfBooks.css";
 
 import { GiHamburgerMenu} from 'react-icons/gi';
 import { TbDashboard} from 'react-icons/tb';
