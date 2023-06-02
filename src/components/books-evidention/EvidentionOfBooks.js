@@ -46,36 +46,27 @@ function EvidencijaKnjige() {
                 <li><AiOutlineProfile className="icon"/></li>
                 <li><TbArrowsLeftRight className="icon"/></li>
               </ul>
-              <div className='line'>
+              <div className='linez'>
 
               <FiSettings className="settings"/>
               </div>
             </nav>
           </aside>
-          <main>
-            <div className='abc'>
-              <div className='dva'>
-                <h2 className='bca'>Knjige</h2>
-                <div className='regul'></div>
-                <button className="dugme1" onClick={()=>{navigate('/EvidentionOfBooks/NewBook')}}>Nova Knjiga</button>
-              </div>
-              <div className='jedan'>
-                <HiMagnifyingGlassCircle className="ikonica-search" />
-                <input type="text" placeholder="Search..." className="search" />
-              </div>
-              <Table></Table>
-            </div>
-          </main>
+         
         </div>
-        <footer>
-          <div className="f1">
-            Rows per page:20<SlArrowDown />
-          </div>
-          <div className="f2">
-            1 of 1
-            <SlArrowLeft /><SlArrowRight />
-          </div>
-        </footer>
+     <div className='naslov'> Knjige</div>
+
+     <div className='new-book'>
+     <button className='nova-knjiga'>Nova Knjiga</button>
+     <span className='search-span'>
+    <HiMagnifyingGlassCircle className='search-bar-icon'/>
+     <input type='text' placeholder='  search...' className='search'></input>
+     </span>
+     </div>
+
+
+      <Table></Table>
+
       </body>
     </html>
   );
