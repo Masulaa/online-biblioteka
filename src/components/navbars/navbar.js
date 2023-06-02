@@ -8,7 +8,6 @@ import { MdPeopleAlt} from 'react-icons/md';
 import { HiDocumentDuplicate} from 'react-icons/hi';
 import { TbArrowsLeftRight} from 'react-icons/tb';
 import { FiSettings} from 'react-icons/fi';
-import { HiMagnifyingGlassCircle } from 'react-icons/hi2';
 function NavBar()
 {
     const navigate = useNavigate();

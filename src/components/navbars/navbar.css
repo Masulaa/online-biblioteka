@@ -3,7 +3,7 @@
     flex-direction: column;
     margin-top: 55px;
   }
-  
+
   .all-lists{
     display: flex;
     flex-direction: row;
@@ -15,15 +15,76 @@
   .bottomicons{
     position:fixed;
     bottom: 0;
-  
+
   }.sidebar {
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
   }
-  
+
   .line{
     margin-top: -5px;
   }
-  
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: #76A5AF;
+  }.logo {
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 15px;
+    font-size: 30px;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+  }.profile1 {
+    background-color: rgb(88, 124, 131);
+    padding: 0.6rem;
+  }  .profile-tab {
+    width: 32px;
+    height: 32px;
+    background-color: #ccc;
+    border-radius: 20px;
+  }  aside {
+    background-color: #3a3a3a;
+    width: 50px;
+    padding-bottom: 214px;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+  }
+  .side-nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .side-nav button {
+    width: 20%;
+    background-color: #f1f1f1;
+    border: none;
+    text-align: left;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .icon {
+    padding-left: 2px;
+    color: white;
+    margin: 5px;
+    font-size: 35px;
+  }
+
+  .settings {
+    position:fixed;
+    color: white;
+    font-size: 35px;
+    padding-left: 6px;
+    margin-top: 340px;
+  }

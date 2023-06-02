@@ -1,84 +1,94 @@
-import React from "react";
-import "./table.css";
-import { BiDotsVerticalRounded } from "react-icons/bi";
+import React, { useState } from 'react';
+import './table.css';
+
+const data = [
+  { id: 1, naziv: 'Knjiga 1', autor: 'Autor 1', kategorija: 'Kategorija 1', naRaspolaganju: 5, rezervisano: 2, izdate: 3, uPrekoracenju: 0, ukupnaKolicina: 10 },
+  { id: 2, naziv: 'Knjiga 2', autor: 'Autor 2', kategorija: 'Kategorija 2', naRaspolaganju: 3, rezervisano: 1, izdate: 2, uPrekoracenju: 1, ukupnaKolicina: 7 },
+];
 
 const Table = () => {
-  const data = [
-    {
-      title: "Book 1",
-      author: "Author 1",
-      category: "Category 1",
-      dummy1: "Dummy 1",
-      dummy2: "Dummy 2",
-      dummy3: "Dummy 3",
-      dummy4: "Dummy 4",
-      dummy5: "Dummy 5",
-    },
-    {
-      title: "Book 1",
-      author: "Author 1",
-      category: "Category 1",
-      dummy1: "Dummy 1",
-      dummy2: "Dummy 2",
-      dummy3: "Dummy 3",
-      dummy4: "Dummy 4",
-      dummy5: "Dummy 5",
-    },
-    {
-      title: "Book 1",
-      author: "Author 1",
-      category: "Category 1",
-      dummy1: "Dummy 1",
-      dummy2: "Dummy 2",
-      dummy3: "Dummy 3",
-      dummy4: "Dummy 4",
-      dummy5: "Dummy 5",
-    },
-    // Add more data rows here
-  ];
+  const [selectedAll, setSelectedAll] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleSelectAll = (event) => {
+    setSelectedAll(event.target.checked);
+  };
+
+  const handleSelectItem = (id) => {
+    // Implement your logic to handle individual item selection here
+  };
+
+  const handlePageChange = (direction) => {
+    if (direction === 'next') {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else if (direction === 'previous') {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   return (
-    <div className="table-container">
-      <table>
+    <div>
+      <table className="table">
         <thead>
           <tr>
             <th>
-              <input type="checkbox" />
+              <input type="checkbox" checked={selectedAll} onChange={handleSelectAll} />
             </th>
             <th>Naziv knjige</th>
             <th>Autor</th>
             <th>Kategorija</th>
             <th>Na raspolaganju</th>
             <th>Rezervisano</th>
-            <th>Izdato</th>
-            <th>U prekoracenju</th>
+            <th>Izdate</th>
+            <th>U prekoračenju</th>
             <th>Ukupna količina</th>
             <th></th>
           </tr>
         </thead>
+        
         <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
+          {currentItems.map((item) => (
+            <tr key={item.id}>
               <td>
-                <input type="checkbox" />
+                <input type="checkbox" checked={selectedAll} onChange={() => handleSelectItem(item.id)} />
               </td>
-              <td>
-                {item.title} <img src="path/to/picture.jpg" alt="" />
-              </td>
-              <td>{item.author}</td>
-              <td>{item.category}</td>
-              <td>{item.dummy1}</td>
-              <td>{item.dummy2}</td>
-              <td>{item.dummy3}</td>
-              <td>{item.dummy4}</td>
-              <td>{item.dummy5}</td>
-              <td className="tri-tacke">
-                <BiDotsVerticalRounded className="dots" />
+              <td>{item.naziv}</td>
+              <td>{item.autor}</td>
+              <td>{item.kategorija}</td>
+              <td>{item.naRaspolaganju}</td>
+              <td>{item.rezervisano}</td>
+              <td>{item.izdate}</td>
+              <td>{item.uPrekoracenju}</td>
+              <td>{item.ukupnaKolicina}</td>
+              <td className="options">
+                <div className="dropdown">
+                  <div className="dots">&#x2026;</div>
+                  <div className="dropdown-content">
+                    <div>Obriši</div>
+                    <div>Izmijeni</div>
+                    <div>Izdaj knjigu</div>
+                  </div>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button disabled={currentPage === 1} onClick={() => handlePageChange('previous')}>
+            &lt; Prethodno
+          </button>
+          <button disabled={currentPage === totalPages} onClick={() => handlePageChange('next')}>
+            Sljedeće &gt;
+          </button>
+        </div>
+      )}
     </div>
   );
 };

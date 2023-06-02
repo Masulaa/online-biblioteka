@@ -1,46 +1,45 @@
 import './EvidentionOfBooks.css';
 import Table from './table';
 import { useNavigate } from "react-router-dom";
+import NavBar from '../navbars/navbar';
+
+import { GiHamburgerMenu} from 'react-icons/gi';
+import { TbDashboard} from 'react-icons/tb';
+import { AiOutlineProfile} from 'react-icons/ai';
+import { MdPeopleAlt} from 'react-icons/md';
+import { HiDocumentDuplicate} from 'react-icons/hi';
+import { TbArrowsLeftRight} from 'react-icons/tb';
+import { FiSettings} from 'react-icons/fi';
 import { HiMagnifyingGlassCircle } from 'react-icons/hi2';
 import { SlArrowDown} from 'react-icons/sl';
 import { SlArrowLeft} from 'react-icons/sl';
 import { SlArrowRight} from 'react-icons/sl';
-import NavBar from '../navbars/navbar';
 
 function EvidencijaKnjige() {
   const navigate = useNavigate();
   return (
     <html>
+
       <head>
+        
         <title>My Site</title>
       </head>
       <body>
-        <NavBar/>
-        <div className="main-content">
-          <main>
-            <div className='abc'>
-              <div className='dva'>
-                <h2 className='bca'>Knjige</h2>
-                <div className='regul'></div>
-                <button className="dugme1" onClick={()=>{navigate('/EvidentionOfBooks/NewBook')}}>Nova Knjiga</button>
-              </div>
-              <div className='jedan'>
-                <HiMagnifyingGlassCircle className="ikonica-search" />
-                <input type="text" placeholder="Search..." className="search" />
-              </div>
-              <Table></Table>
-            </div>
-          </main>
-        </div>
-        <footer>
-          <div className="f1">
-            Rows per page:20<SlArrowDown />
-          </div>
-          <div className="f2">
-            1 of 1
-            <SlArrowLeft /><SlArrowRight />
-          </div>
-        </footer>
+      <NavBar></NavBar>
+
+     <div className='naslov'> Knjige</div>
+
+     <div className='new-book'>
+     <button className='nova-knjiga' onClick={()=>{navigate('/EvidentionOfBooks/NewBook/BookDetails')}}>Nova Knjiga</button>
+     <span className='search-span'>
+    <HiMagnifyingGlassCircle className='search-bar-icon'/>
+     <input type='text' placeholder='  search...' className='search'></input>
+     </span>
+     </div>
+
+
+      <Table></Table>
+
       </body>
     </html>
   );
