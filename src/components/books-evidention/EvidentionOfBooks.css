@@ -46,7 +46,9 @@
     background-color: rgb(88, 124, 131);
     padding: 0.6rem;
   }
-  
+  input{
+    border: 2px solid black;
+  }
   .create-btn {
     background-color: #134F5C;
     margin: auto;
