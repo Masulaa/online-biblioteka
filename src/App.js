@@ -4,6 +4,7 @@ import SignUp from './components/account-components/SignUp';
 import EvidentionOfBooks from './components/books-evidention/EvidentionOfBooks'
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NewBook from './components/books-evidention/new-book/NewBook';
+import BookDetails from './components/books-evidention/book-details/details';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/LogIn' element={<LogIn/>}/>
         <Route path='/EvidentionOfBooks' element={<EvidentionOfBooks/>}/>
         <Route path='/EvidentionOfBooks/NewBook' element={<NewBook/>}/>
+        <Route path='/BD' element={<BookDetails/>}/>
       </Routes>
     </BrowserRouter>
   );
