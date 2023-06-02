@@ -1,6 +1,32 @@
-th,tr,td{
-    text-align: center;
+.table-container {
+  display: grid;
+  justify-content: center;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1200px;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+.tri-tacke {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media screen and (max-width: 1650px) {
  .line{
         top: 230px;
