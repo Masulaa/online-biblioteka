@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { HiOutlineArrowUturnUp} from 'react-icons/hi2';
 import { FaRegHandScissors} from 'react-icons/fa';
 import { HiOutlineArrowPath} from 'react-icons/hi2';
-import { LuCalendarCheck2 } from "react-icons/lu";
 import { BsThreeDotsVertical} from "react-icons/bs";
 import NavBar from "../../navbars/navbar";
 
@@ -33,7 +32,6 @@ function BookDetails() {
                <Link to="#"className="links2"><HiOutlineArrowUturnUp/>Otpisi Knjigu</Link>&nbsp;
                <Link to="#"className="links2"><FaRegHandScissors/>Izdaj Knjigu</Link>&nbsp;
                <Link to="#"className="links2"><HiOutlineArrowPath/>Vrati Knjigu</Link>&nbsp;
-               <Link to="#"className="links2"><LuCalendarCheck2/>Rezervisi Knjigu</Link>&nbsp;
             <BsThreeDotsVertical/>
               </div>  
              </div>    
