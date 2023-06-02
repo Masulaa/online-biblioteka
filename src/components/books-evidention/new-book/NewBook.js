@@ -44,13 +44,18 @@ return(
          </div>
          <div className="info2">
             <label>Izaberite autore</label>
-            <p>-Ovdje input-</p>
+            <select>
+                <option>Ivo Andric</option>
+                <option>Petar II Petrovic Njegos</option>
+                <option>Mesa Selimovic</option>
+                <option>Ivan Mazuranic</option>
+            </select>
             <label>Izdavac</label>
             <select>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
+                <option>Dzoli</option>
+                <option>Nova Knjiga</option>
+                <option>Stara Knjiga</option>
+                <option>Gradska Knjizara</option>
             </select>
             <label>Godina Izdavanja</label>
             <select>

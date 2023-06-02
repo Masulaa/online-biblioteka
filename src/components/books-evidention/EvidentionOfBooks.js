@@ -3,17 +3,8 @@ import Table from './table';
 import { useNavigate } from "react-router-dom";
 import NavBar from '../navbars/navbar';
 
-import { GiHamburgerMenu} from 'react-icons/gi';
-import { TbDashboard} from 'react-icons/tb';
-import { AiOutlineProfile} from 'react-icons/ai';
-import { MdPeopleAlt} from 'react-icons/md';
-import { HiDocumentDuplicate} from 'react-icons/hi';
-import { TbArrowsLeftRight} from 'react-icons/tb';
-import { FiSettings} from 'react-icons/fi';
 import { HiMagnifyingGlassCircle } from 'react-icons/hi2';
-import { SlArrowDown} from 'react-icons/sl';
-import { SlArrowLeft} from 'react-icons/sl';
-import { SlArrowRight} from 'react-icons/sl';
+
 
 function EvidencijaKnjige() {
   const navigate = useNavigate();

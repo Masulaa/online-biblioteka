@@ -78,6 +78,19 @@
     margin: 0 5px;
   }
 
+  
+  .rows-per-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .rows-per-page span {
+    margin-right: 5px;
+  }
+  
+
   @media screen and (max-width: 1440px) {
     .table{
         width: 70%;
