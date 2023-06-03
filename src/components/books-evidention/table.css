@@ -50,6 +50,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     right: 0;
+    margin-top: -100px;
   }
   
   .dropdown-content div {
@@ -76,12 +77,16 @@
   
   .pagination button {
     margin: 0 5px;
+    border: none;
+    font-size: 20px;
   }
 
+  .pagination button:hover{
+    color: #76A5AF;
+  }
   
   .rows-per-page {
     display: flex;
-    align-items: center;
     justify-content: center;
     margin-top: 10px;
   }
@@ -90,6 +95,12 @@
     margin-right: 5px;
   }
   
+  .inputs{  
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 20%;
+  }
 
   @media screen and (max-width: 1440px) {
     .table{

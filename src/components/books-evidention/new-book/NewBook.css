@@ -35,10 +35,59 @@ a{
 }
 
 .line2{
-  background-color: #333333;
-  height: 2px;
+  border-bottom: 1px solid black;
   width: 1000rem;
   margin-left: -500px;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 2rem;
+  border:none;
+}
+
+.submit {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-right: 2rem;
+  background-color: #76a5af;
+  color: white;
+  border-radius: 25px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+
+.cancel{
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 2px solid #76a5af;
+  background-color: white;
+  color: #76a5af;
+  border-radius: 25px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.cancel:hover{ 
+  border: 2px solid #51737b;
+  background-color: #51737b;
+  color: white;
+}
+
+.submit:hover{
+  background-color: #51737b;
+}
+
+.paragraf{
+  color: #76A5AF;
+  transition: background-color 0.3s ease;
+}
+
+.paragraf:hover{
+  color: #51737b;
 }
 
 .Stranica p{

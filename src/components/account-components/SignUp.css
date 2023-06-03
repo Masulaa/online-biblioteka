@@ -67,7 +67,6 @@ textarea {
 }
 
 button {
-  border: none;
   background: transparent;
   cursor: pointer;
 }
@@ -199,6 +198,7 @@ button {
 }
 
 .signup-form-btn {
+  border: none;
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;

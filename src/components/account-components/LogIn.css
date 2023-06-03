@@ -66,7 +66,6 @@ textarea {
 }
   
   button {
-    border: none;
     background: transparent;
     cursor: pointer;
   }
@@ -208,6 +207,7 @@ textarea {
   }
   
   .login-form-btn {
+    border: none;
     font-family: Montserrat-Bold;
     font-size: 15px;
     line-height: 1.5;

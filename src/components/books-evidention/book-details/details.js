@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import "./details.css";
 import { Link } from 'react-router-dom';
 
@@ -10,19 +9,13 @@ import NavBar from "../../navbars/navbar";
 
 
 function BookDetails() {
-  const navigate = useNavigate();
   return (
-    <html>
-      <head>
-        <title>My Site</title>
-      </head>
       <body>
       <NavBar/>
 
           <main>
             <div className='abc'>
               <div className='dva'>
-                {/*add here img before text*/}
                 <div className="all">
                  <h2 className='bca'>Nesto </h2>
                   <div className="links">
@@ -40,8 +33,6 @@ function BookDetails() {
             </div>
         </main>
       </body>
-
-</html>
 
   );
 }

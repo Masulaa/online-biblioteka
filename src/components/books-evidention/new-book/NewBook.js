@@ -1,11 +1,14 @@
 import React, { Fragment, useState } from "react";
 import "./NewBook.css"
+import { Link, useNavigate } from "react-router-dom";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import NavBar from "../../navbars/navbar";
 
 function NovaKnjiga(){
+
+  const navigate = useNavigate();
 
   const [sadrzaj, setSadrzaj] = useState("");
 
@@ -20,7 +23,7 @@ return(
   <div class="main-content">
     <div className="Glavno">
       <h1>Nova Knjiga</h1>
-        <p><a href="/">Evidencija Knjiga</a> / Nova knjiga</p>
+        <p><Link to="/EvidentionOfBooks"><span className="paragraf">Evidencija Knjiga</span></Link> / Nova knjiga</p>
         <div className="line2"></div>
          <div className="Stranica">
           <p>Osnovne Detalji</p>
@@ -75,7 +78,15 @@ return(
                 <option>2011</option>
                 <option>2010</option>
             </select>
-         </div>
+            <div className="buttons">
+            <button
+          className="submit">Potvrdi</button>
+                      <button
+          className="cancel"
+          onClick={()=>{
+            navigate("/EvidentionOfBooks")
+          }}>Poništi</button>
+         </div></div>
     </div>
  <main>
  </main>

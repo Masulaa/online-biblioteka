@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
 import './table.css';
 
 const data = [
@@ -8,7 +7,6 @@ const data = [
 ];
 
 const Table = () => {
-  const dispatch = useDispatch();
 
   const [selectedAll, setSelectedAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -145,7 +143,9 @@ const Table = () => {
       </div>
       <div className="rows-per-page">
         <span>Rows per page:</span>
-        <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
+        <select className='inputs' value={itemsPerPage} onChange={handleItemsPerPageChange}>
+          <option value={1}>1</option>
+          <option value={5}>5</option>
           <option value={10}>10</option>
           <option value={20}>20</option>
           <option value={50}>50</option>
