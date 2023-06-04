@@ -10,7 +10,6 @@ function EvidentionOfBooks() {
   return (
     <body>
       <NavBar />
-
       <div className="naslov">
         <h1>Knjige</h1>
       </div>
@@ -33,7 +32,6 @@ function EvidentionOfBooks() {
           ></input>
         </span>
       </div>
-
       <Table/>
     </body>
   );

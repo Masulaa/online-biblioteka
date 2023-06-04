@@ -8,6 +8,7 @@ import BookDetails from './components/books-evidention/book-details/details';
 
 function App() {
   return (
+    <div className="container">
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<SignUp/>} />
@@ -15,7 +16,7 @@ function App() {
         <Route path='/EvidentionOfBooks' element={<EvidentionOfBooks/>}/>
         <Route path='/EvidentionOfBooks/NewBook/BookDetails' element={<NewBook/>}/>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter></div>
   );
 }
 
