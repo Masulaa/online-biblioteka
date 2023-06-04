@@ -9,8 +9,20 @@
     flex-direction: row;
     justify-content: toend;
   }
+
   .line{
-  margin: 0;
+      width: 50px;
+      height: 3px;
+      background-color: white;
+      margin-bottom: 10px;
+      position: fixed;
+      margin-top: 320px;
+      transition:  all 0.3s ease-in-out;
+  }  
+  .line-expanded{
+    margin: 0;    
+    margin-top: -5px;
+    width: 100%;
   }
   .bottomicons{
     position:fixed;
@@ -23,16 +35,36 @@
     height: 100%;
   }
 
-  .line{
-    margin-top: -5px;
+  .par{
+    opacity: 0;
+    font-weight: 400;
+    margin-left: 10px;
+    font-size: 20px;
+    color: white;
+    margin-top: 7px;    
+    transition: all 0.3s ease-in-out;
+    transform: translateY(-20px);
+  }  
+  
+  .par-expanded{
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 1;
   }
+
+  .celija{
+    display: flex;
+    flex-direction: row;
+  }
+
   .top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 50px;
     background-color: #76A5AF;
-  }.logo {
+  }
+  .logo {
     color: white;
     font-weight: bold;
     font-size: 1rem;
@@ -42,22 +74,45 @@
   .profile {
     display: flex;
     align-items: center;
-  }.profile1 {
+  }
+  .profile1 {
     background-color: rgb(88, 124, 131);
     padding: 0.6rem;
-  }  .profile-tab {
+  }  
+  .profile-tab {
     width: 32px;
     height: 32px;
     background-color: #ccc;
     border-radius: 20px;
-  }  aside {
+  }  
+  .aside {
     background-color: #3a3a3a;
     width: 50px;
     padding-bottom: 214px;
     height: 100%;
     position: fixed;
     z-index: 1;
+    transition:  width 0.4s ease-in-out;
   }
+  .aside-expanded {
+  background-color: #3a3a3a;
+  width: 250px;
+  padding-bottom: 214px;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  border-radius: 0px 5px 0px 5px;
+  transition:  width 0.4s ease-in-out;
+}
+
+.aside-expanded::before{
+  width: 250px;
+}
+
+.aside::before{
+  width: 50px;
+}
+
   .side-nav ul {
     list-style-type: none;
     padding: 0;
@@ -74,7 +129,7 @@
     margin-bottom: 10px;
   }
 
-  .icon {
+  .icon2 {
     padding-left: 2px;
     color: white;
     margin: 5px;
@@ -82,7 +137,7 @@
     transition: font-size 0.3s ease;
     cursor: pointer;
   }
-  .icon:hover{
+  .icon2:hover{
     font-size: 40px;
   }
   .settings {

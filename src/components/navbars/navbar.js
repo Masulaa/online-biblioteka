@@ -1,5 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "./navbar.css";
+
+import { useDispatch } from "react-redux";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TbDashboard } from "react-icons/tb";
 import { AiOutlineProfile } from "react-icons/ai";
@@ -7,8 +12,24 @@ import { MdPeopleAlt } from "react-icons/md";
 import { HiDocumentDuplicate } from "react-icons/hi";
 import { TbArrowsLeftRight } from "react-icons/tb";
 import { FiSettings } from "react-icons/fi";
+
+import { menuActions } from "../../store/menuStore";
 function NavBar() {
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const [isTouched, setIsTouched] = useState(false);
+
+  const isTouchedHandler = () => {
+    setIsTouched(!isTouched);
+    if(!isTouched){
+    dispatch(menuActions.openMenu())}
+    else {
+      dispatch(menuActions.closeMenu());
+    }
+  };
+
   return (
     <div>
       <header className="header">
@@ -24,35 +45,62 @@ function NavBar() {
       </header>
 
       <div className="main-content">
-        <aside>
+        <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>
           <nav className="sidebar">
             <ul className="lista">
-              <li>
-                <GiHamburgerMenu className="icon" />
+              <li className="celija">
+                <GiHamburgerMenu className="icon2" onClick={isTouchedHandler} />
               </li>
-              <li>
-                <TbDashboard className="icon" />
+              <li className="celija">
+                <TbDashboard className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Dashboard
+                </p>
               </li>
-              <li>
-                <AiOutlineProfile className="icon" />
+              <li className="celija">
+                <AiOutlineProfile className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Bibliotekari
+                </p>
               </li>
-              <li>
-                <MdPeopleAlt className="icon" />
+              <li className="celija">
+                <MdPeopleAlt className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Učenici
+                </p>
               </li>
-              <li>
-                <HiDocumentDuplicate className="icon" onClick={()=>{
-                  navigate('/EvidentionOfBooks')
-                }} />
+              <li className="celija">
+                <HiDocumentDuplicate
+                  className="icon2"
+                  onClick={() => {
+                    navigate("/EvidentionOfBooks");
+                  }}
+                />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Knjige
+                </p>
               </li>
-              <li>
-                <AiOutlineProfile className="icon" />
+              <li className="celija">
+                <AiOutlineProfile className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Autori
+                </p>
               </li>
-              <li>
-                <TbArrowsLeftRight className="icon" />
-              </li>
+              <li className="celija">
+                <TbArrowsLeftRight className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Izdavanje Knjiga
+                </p>
+              </li >
               <div className="bottomicons">
-                <span className="line"></span>
-                <FiSettings className="icon" />
+                <li className="celija">
+                <span
+                  className={`line ${isTouched ? "line-expanded" : ""}`}
+                ></span>
+                <FiSettings className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Settings
+                </p></li>
               </div>
             </ul>
             <div className="all-lists"></div>

@@ -185,15 +185,6 @@ select{
   background-color: white;
 }
 
-.line {
-  width: 50px;
-  height: 3px;
-  background-color: white;
-  margin-bottom: 10px;
-  position: fixed;
-  margin-top: 320px;
-}
-
 .settings {
   position:fixed;
   color: white;
