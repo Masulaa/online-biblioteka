@@ -16,9 +16,9 @@ function App() {
         <Route path='/LogIn' element={<LogIn/>}/>
         <Route path='/EvidentionOfBooks' element={<EvidentionOfBooks/>}/>
         <Route path='/EvidentionOfBooks/NewBook' element={<NewBook/>}/>
-        <Route path='/EvidentionOfBooks/EditBook/BasicDetails' element={<EditBook/>}></Route>
-        <Route path="/EvidentionOfBooks/EditBook/Specification" element={<Specification/>}></Route>
-        <Route path="/EvidentionOfBooks/EditBook/Multimedia" element={<Multimedia/>}></Route>
+        <Route path='EvidentionOfBooks/EditBook/BasicDetails' element={<EditBook/>}></Route>
+        <Route path='EvidentionOfBooks/EditBook/Specification' element={<Specification/>}></Route>
+        <Route path='EvidentionOfBooks/EditBook/Multimedia' element={<Multimedia/>}></Route>
       </Routes>
     </BrowserRouter>
   );
