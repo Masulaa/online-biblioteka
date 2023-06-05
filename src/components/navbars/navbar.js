@@ -1,47 +1,114 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "./navbar.css";
-import { Link } from 'react-router-dom';
-import { GiHamburgerMenu} from 'react-icons/gi';
-import { TbDashboard} from 'react-icons/tb';
-import { AiOutlineProfile} from 'react-icons/ai';
-import { MdPeopleAlt} from 'react-icons/md';
-import { HiDocumentDuplicate} from 'react-icons/hi';
-import { TbArrowsLeftRight} from 'react-icons/tb';
-import { FiSettings} from 'react-icons/fi';
-function NavBar()
-{
-    const navigate = useNavigate();
-    return(<div>
-        <header className='header'>
-                  <nav className="top-nav">
-                    <div className="logo">Biblioteka</div>
-                    <div className="profile">
-                      <button className="create-btn">Kreiraj</button>
-                      <div className="profile1">
-                        <div className="profile-tab"></div>
-                      </div>
-                    </div>
-                  </nav>
-                </header>
-        
-                <div className="main-content">
-                  <aside>
-                    <nav className="sidebar">
-                      
-                      <ul className='lista'>
-                        <li><GiHamburgerMenu className="icon"/></li>
-                        <li><TbDashboard className="icon"/></li>
-                        <li><AiOutlineProfile className="icon"/></li>
-                        <li><MdPeopleAlt className="icon"/></li>
-                        <li><HiDocumentDuplicate className="icon"/></li>
-                        <li><AiOutlineProfile className="icon"/></li>
-                        <li><TbArrowsLeftRight className="icon"/></li>
-                        <div className="bottomicons">
-                        <span className='line'></span>
-                        <FiSettings className="icon"/>
-                        </div>
-                      </ul><div className="all-lists"></div>
-                    </nav>
-                  </aside></div></div>
-                  );
-}export default NavBar;
+
+import { useDispatch } from "react-redux";
+
+import { GiHamburgerMenu } from "react-icons/gi";
+import { TbDashboard } from "react-icons/tb";
+import { AiOutlineProfile } from "react-icons/ai";
+import { MdPeopleAlt } from "react-icons/md";
+import { HiDocumentDuplicate } from "react-icons/hi";
+import { TbArrowsLeftRight } from "react-icons/tb";
+import { FiSettings } from "react-icons/fi";
+
+import { menuActions } from "../../store/menuStore";
+function NavBar() {
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const [isTouched, setIsTouched] = useState(false);
+
+  const isTouchedHandler = () => {
+    setIsTouched(!isTouched);
+    if(!isTouched){
+    dispatch(menuActions.openMenu())}
+    else {
+      dispatch(menuActions.closeMenu());
+    }
+  };
+
+  return (
+    <div>
+      <header className="header">
+        <nav className="top-nav">
+          <div className="logo">Biblioteka</div>
+          <div className="profile">
+            <button className="create-btn">Kreiraj</button>
+            <div className="profile1">
+              <div className="profile-tab"></div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <div className="main-content">
+        <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>
+          <nav className="sidebar">
+            <ul className="lista">
+              <li className="celija">
+                <GiHamburgerMenu className="icon2" onClick={isTouchedHandler} />
+              </li>
+              <li className="celija">
+                <TbDashboard className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Dashboard
+                </p>
+              </li>
+              <li className="celija">
+                <AiOutlineProfile className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Bibliotekari
+                </p>
+              </li>
+              <li className="celija">
+                <MdPeopleAlt className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Učenici
+                </p>
+              </li>
+              <li className="celija">
+                <HiDocumentDuplicate
+                  className="icon2"
+                  onClick={() => {
+                    navigate("/EvidentionOfBooks");
+                  }}
+                />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Knjige
+                </p>
+              </li>
+              <li className="celija">
+                <AiOutlineProfile className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Autori
+                </p>
+              </li>
+              <li className="celija">
+                <TbArrowsLeftRight className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Izdavanje Knjiga
+                </p>
+              </li >
+              <div className="bottomicons">
+                <li className="celija">
+                <span
+                  className={`line ${isTouched ? "line-expanded" : ""}`}
+                ></span>
+                <FiSettings className="icon2" />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  Settings
+                </p></li>
+              </div>
+            </ul>
+            <div className="all-lists"></div>
+          </nav>
+        </aside>
+      </div>
+    </div>
+  );
+}
+
+export default NavBar;

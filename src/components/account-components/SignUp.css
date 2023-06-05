@@ -101,7 +101,7 @@ button {
   width: 960px;
   background: #fff;
   border-radius: 10px;
-  overflow: hidden;
+  overflow-x: hidden;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

@@ -11,6 +11,7 @@ import Specification from './components/books-evidention/edit-book/Specification
 
 function App() {
   return (
+    <div className="container">
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<SignUp/>} />
@@ -21,7 +22,7 @@ function App() {
         <Route path='EvidentionOfBooks/EditBook/Specification' element={<Specification/>}></Route>
         <Route path='EvidentionOfBooks/EditBook/Multimedia' element={<Multimedia/>}></Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter></div>
   );
 }
 

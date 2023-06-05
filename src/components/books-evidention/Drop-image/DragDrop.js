@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
-import './DragDrop.css';
+import React, { useState } from "react";
+import "./DragDrop.css";
 
 const DragDrop = () => {
-  const [imageSrc, setImageSrc] = useState('');
+  const [imageSrc, setImageSrc] = useState("");
+  const [fileName, setFileName] = useState("");
   const [isFileSelected, setIsFileSelected] = useState(false);
 
   const handleDrop = (event) => {
     event.preventDefault();
 
     const file = event.dataTransfer.files[0];
-    const reader = new FileReader();
+    const isImage = file.type.startsWith("image/");
+    if (isImage) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const contents = event.target.result;
+        setImageSrc(contents);
+        setFileName(file.name);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImageSrc(event.dataTransfer.getData("text"));
+      setFileName("");
+    }
 
-    reader.onload = (event) => {
-      const contents = event.target.result;
-      setImageSrc(contents);
-    };
-
-    reader.readAsDataURL(file);
     setIsFileSelected(true);
   };
 
@@ -31,6 +38,7 @@ const DragDrop = () => {
     reader.onload = (event) => {
       const contents = event.target.result;
       setImageSrc(contents);
+      setFileName(file.name);
     };
 
     reader.readAsDataURL(file);
@@ -38,14 +46,15 @@ const DragDrop = () => {
   };
 
   const handleDeleteImage = () => {
-    setImageSrc('');
+    setImageSrc("");
+    setFileName("");
     setIsFileSelected(false);
   };
 
   return (
     <div className="drag-drop-container">
       <div
-        className={`drop-area${imageSrc ? ' with-image' : ''}`}
+        className={`drop-area${imageSrc ? " with-image" : ""}`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
@@ -55,6 +64,7 @@ const DragDrop = () => {
             <button className="delete-button" onClick={handleDeleteImage}>
               Izbriši
             </button>
+            <p className="image-name">{fileName}</p>
           </div>
         ) : (
           <React.Fragment>

@@ -40,10 +40,25 @@ body {
   color: white;
   border-radius: 25px;
   font-size: 15px;
-  transition: background-color 0.3s ease;
+  transition: z-index 1s ease, background-color 0.4s ease;
   border: none;
+  z-index:1;
+  opacity: 1;
 }
 
+.nova-knjiga-iza {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 80px;
+  background-color: #76a5af;
+  color: white;
+  border-radius: 25px;
+  font-size: 15px;
+  transition: all 0.4s ease;
+  border: none;
+  z-index:0;
+  opacity: 0;
+}
 .nova-knjiga:hover {
   background-color: #51737b;
 }
@@ -55,6 +70,7 @@ body {
   justify-content: space-between;
 }
 .search-bar-icon {
+  color: #76a5af;
   font-size: 35px;
 }
 

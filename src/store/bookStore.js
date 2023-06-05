@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   kategorije: ["lektire", "udžbenici", "roman", "drama", "zbirke pjesama"],
@@ -40,11 +40,4 @@ const bookSlice = createSlice({
 });
 
 export const bookActions = bookSlice.actions;
-
-const items = configureStore({
-  reducer: {
-    books: bookSlice.reducer
-  }
-});
-
-export default items;
+export default bookSlice.reducer;

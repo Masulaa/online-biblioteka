@@ -1,22 +1,44 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import "../EvidentionOfBooks.css";
-import "../new-book/NewBook.css";
 import "./EditBook.css";
 import "../Drop-image/UploadDocument.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../navbars/navbar";
 import DragDrop from "../Drop-image/DragDrop";
 
 function Multimedia() {
+  const [fileName, setFileName] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedFileName = localStorage.getItem("fileName");
+    if (savedFileName) setFileName(savedFileName);
+  }, []);
+
+  const handleConfirm = () => {
+    console.log("Ime fajla:", fileName);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("fileName", fileName);
+  }, [fileName]);
+
+  const handleFileNameChange = (name) => {
+    setFileName(name);
+  };
+
   return (
     <Fragment>
       <NavBar />
-      <div class="main-content">
+      <div className="main-content">
         <div className="Glavno">
           <h1>Izmjeni Knjigu</h1>
           <p>
-            <Link to="/EvidentionOfBooks"><span className="paragraf">Evidencija Knjiga</span></Link> / Izmjeni
-            Knjigu
+            <Link to="/EvidentionOfBooks">
+              <span className="paragraf">Evidencija Knjiga</span>
+            </Link>{" "}
+            / Izmjeni Knjigu
           </p>
           <div className="line2"></div>
           <div className="Stranica">
@@ -34,7 +56,15 @@ function Multimedia() {
         </div>
       </div>
       <div className="Upload">
-      <DragDrop/>
+        <DragDrop onFileUpload={(file) => handleFileNameChange(file.name)} />
+      </div>
+      <div className="buttons-multi">
+        <button className="submit" onClick={handleConfirm}>
+          Potvrdi
+        </button>
+        <button className="cancel" onClick={() => navigate("/EvidentionOfBooks")}>
+          Poništi
+        </button>
       </div>
     </Fragment>
   );
