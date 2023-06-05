@@ -32,17 +32,14 @@ function NavBar() {
 
   return (
     <div>
-      <header className="header">
-        <nav className="top-nav">
-          <div className="logo">Biblioteka</div>
-          <div className="profile">
-            <button className="create-btn">Kreiraj</button>
-            <div className="profile1">
-              <div className="profile-tab"></div>
-            </div>
-          </div>
-        </nav>
-      </header>
+<div class="top-nav">
+  <div class="logo">Biblioteka</div>
+  <button class="create-btn">Kreiraj</button>
+  <div class="profile">
+    <div class="profile-tab"></div>
+  </div>
+</div>
+
 
       <div className="main-content">
         <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>

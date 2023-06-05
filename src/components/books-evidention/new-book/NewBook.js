@@ -28,7 +28,7 @@ function EditBook() {
       <NavBar/>
       <div className="main-content">
         <div className="Glavno">
-          <h1>Nova Knjiga</h1>
+          <h1 className="naslov1">Nova Knjiga</h1>
           <p className="text-text">
             <Link to="/EvidentionOfBooks"><span className="paragraf">Evidencija Knjiga</span></Link> / Izmjeni
             Knjigu
