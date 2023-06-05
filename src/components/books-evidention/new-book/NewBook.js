@@ -29,7 +29,7 @@ function EditBook() {
       <div className="main-content">
         <div className="Glavno">
           <h1>Nova Knjiga</h1>
-          <p>
+          <p className="text-text">
             <Link to="/EvidentionOfBooks"><span className="paragraf">Evidencija Knjiga</span></Link> / Izmjeni
             Knjigu
           </p>
@@ -46,6 +46,10 @@ function EditBook() {
               </Link>
           </div>
           <div className="line2"></div>
+
+
+          <div className="container">
+
           <div className="info">
             <label>Naziv Knjige</label>
             <input
@@ -72,6 +76,8 @@ function EditBook() {
               onChange={(e) => setGenres(e.target.value)}
             />
           </div>
+
+
           <div className="info2">
             <label>Izaberite autore</label>
             <select
@@ -135,10 +141,12 @@ function EditBook() {
           onClick={()=>{
             navigate("/EvidentionOfBooks")
           }}>Poništi</button>
+          </div>
          </div>
           </div>
           </div>
-      </div>
+          </div>
+          
     </Fragment>
   );
 }
