@@ -63,35 +63,48 @@
     display: flex;
     flex-direction: row;
   }
-
   .top-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 50px;
-    background-color: #76A5AF;
-  }
+   
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 50px;
+      background-color: #76a5af;
+      padding: 0rem 0.625rem 0rem 0rem;
+      z-index: 9999; 
+    }
+    
+  
   .logo {
-    color: white;
+    padding: 15pxs;
     font-weight: bold;
     font-size: 1rem;
-    padding: 15px;
-    font-size: 30px;
+    color: white;
   }
+  
+  .create-btn {
+    background-color: #51737b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+  
   .profile {
     display: flex;
     align-items: center;
   }
-  .profile1 {
-    background-color: rgb(88, 124, 131);
-    padding: 0.6rem;
-  }  
+  
   .profile-tab {
     width: 32px;
     height: 32px;
     background-color: #ccc;
     border-radius: 20px;
-  }  
+  }
+  
   .aside {
     background-color: #3a3a3a;
     width: 50px;

@@ -23,7 +23,11 @@
   
   margin: 0% 4.3%;
   /* background-color:red; */
-  position: fixed;
+  position: absolute;
+}
+
+.main-content{
+    overflow-y: scroll;
 }
 
 *{
@@ -116,7 +120,7 @@ border: 2px solid rgba(0,0,0,0.4);
 }
 
 .info2{
-  position: fixed;
+  position: absolute;
   margin: -440px 700px;
   margin-top: -350px;
 }
@@ -213,5 +217,10 @@ select{
     .Stranica{
       margin-left: 30px;
     }
+    body{
+      overflow-y: scroll;    }
+      .buttons{
+        margin-bottom: 0px;
+      }
   }
 
