@@ -29,6 +29,7 @@ function NavBar() {
       dispatch(menuActions.closeMenu());
     }
   };
+  
 
   return (
     <div>
@@ -45,7 +46,7 @@ function NavBar() {
         <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>
           <nav className="sidebar">
             <ul className="lista">
-              <li className="celija">
+              <li className="celija an">
                 <GiHamburgerMenu className="icon2" onClick={isTouchedHandler} />
               </li>
               <li className="celija">

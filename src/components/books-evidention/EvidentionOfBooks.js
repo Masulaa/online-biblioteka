@@ -17,13 +17,14 @@ function EvidentionOfBooks() {
   return (
     <body>
       <NavBar />
+      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
       <div className="naslov">
         <h1>Knjige</h1>
       </div>
       <div className="line2"></div>
       <div className="new-book">
         <button
-          className={isMenuOpen ? 'nova-knjiga-iza' : 'nova-knjiga'}
+          className='nova-knjiga'
           onClick={() => {
             navigate("/EvidentionOfBooks/NewBook/BookDetails");
           }}
@@ -40,6 +41,7 @@ function EvidentionOfBooks() {
         </span>
       </div>
       <Table/>
+      </div>
     </body>
   );
 }

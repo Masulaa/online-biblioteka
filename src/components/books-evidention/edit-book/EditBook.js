@@ -1,14 +1,15 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import NavBar from "../../navbars/navbar";
-import "./NewBook.css";
+import "./EditBook.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 function EditBook() {
   const [bookName, setBookName] = useState("");
+  const [shortSummary, setShortSummary] = useState("");
   const [categories, setCategories] = useState("");
   const [genres, setGenres] = useState("");
   const [authors, setAuthors] = useState("");
@@ -18,42 +19,91 @@ function EditBook() {
 
   const navigate = useNavigate();
 
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
-
   const [sadrzaj, setSadrzaj] = useState("");
 
   const handleSadrzajChange = (value) => {
-    setSadrzaj(value);}
+    setSadrzaj(value);
+  };
 
+  const handleConfirm = () => {
+    console.log("Naziv knjige:", bookName);
+    console.log("Kratki sadržaj:", sadrzaj);
+    console.log("Kategorije:", categories);
+    console.log("Žanrovi:", genres);
+    console.log("Autori:", authors);
+    console.log("Izdavač:", publisher);
+    console.log("Godina izdavanja:", year);
+    console.log("Količina:", quantity);
+  };
+
+  useEffect(() => {
+    const savedBookName = localStorage.getItem("bookName");
+    const savedShortSummary = localStorage.getItem("shortSummary");
+    const savedCategories = localStorage.getItem("categories");
+    const savedGenres = localStorage.getItem("genres");
+    const savedAuthors = localStorage.getItem("authors");
+    const savedPublisher = localStorage.getItem("publisher");
+    const savedYear = localStorage.getItem("year");
+    const savedQuantity = localStorage.getItem("quantity");
+
+    if (savedBookName) setBookName(savedBookName);
+    if (savedShortSummary) setShortSummary(savedShortSummary);
+    if (savedCategories) setCategories(savedCategories);
+    if (savedGenres) setGenres(savedGenres);
+    if (savedAuthors) setAuthors(savedAuthors);
+    if (savedPublisher) setPublisher(savedPublisher);
+    if (savedYear) setYear(savedYear);
+    if (savedQuantity) setQuantity(parseInt(savedQuantity));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("bookName", bookName);
+    localStorage.setItem("shortSummary", shortSummary);
+    localStorage.setItem("categories", categories);
+    localStorage.setItem("genres", genres);
+    localStorage.setItem("authors", authors);
+    localStorage.setItem("publisher", publisher);
+    localStorage.setItem("year", year);
+    localStorage.setItem("quantity", quantity.toString());
+  }, [
+    bookName,
+    shortSummary,
+    categories,
+    genres,
+    authors,
+    publisher,
+    year,
+    quantity,
+  ]);
+
+  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
   return (
     <Fragment>
-      <NavBar/>
+      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
       <div className="main-content">
         <div className="Glavno">
-          <h1 className="naslov1">Nova Knjiga</h1>
-          <p className="text-text">
-            <Link to="/EvidentionOfBooks"><span className="paragraf">Evidencija Knjiga</span></Link> / Izmjeni
-            Knjigu
+          <h1 className="naslov1">Izmjeni Knjigu</h1>
+          <p>
+            <Link to="/EvidentionOfBooks">
+              <span className="paragraf">Evidencija Knjiga</span>
+            </Link>{" "}
+            / Izmjeni Knjigu
           </p>
           <div className="line2"></div>
           <div className="Stranica">
-              <Link to="/EvidentionOfBooks/NewBook/BookDetails">
-                <p>Osnovne Detalji</p>
-              </Link>
-              <Link to="/EvidentionOfBooks/NewBook/Specification">
-                <p>Specifikacija</p>
-              </Link>
-              <Link to="/EvidentionOfBooks/NewBook/Multimedia">
-                <p>Multimedija</p>
-              </Link>
+            <Link to="/EvidentionOfBooks/EditBook/BookDetails">
+              <p>Osnovne Detalji</p>
+            </Link>
+            <Link to="/EvidentionOfBooks/EditBook/Specification">
+              <p>Specifikacija</p>
+            </Link>
+            <Link to="/EvidentionOfBooks/EditBook/Multimedia">
+              <p>Multimedija</p>
+            </Link>
           </div>
           <div className="line2"></div>
-
-
-          <div className="container">
-
           <div className="info">
             <label>Naziv Knjige</label>
             <input
@@ -61,7 +111,7 @@ function EditBook() {
               value={bookName}
               onChange={(e) => setBookName(e.target.value)}
             />
-            <label>Kratki sadrzaj</label>
+            <label>Kratki sadržaj</label>
             <ReactQuill
               value={sadrzaj}
               onChange={handleSadrzajChange}
@@ -73,15 +123,13 @@ function EditBook() {
               value={categories}
               onChange={(e) => setCategories(e.target.value)}
             />
-            <label>Izaberite Zanrove</label>
+            <label>Izaberite Žanrove</label>
             <input
               className="input0"
               value={genres}
               onChange={(e) => setGenres(e.target.value)}
             />
           </div>
-
-
           <div className="info2">
             <label>Izaberite autore</label>
             <select
@@ -89,13 +137,13 @@ function EditBook() {
               value={authors}
               onChange={(e) => setAuthors(e.target.value)}
             >
-                <option> </option>
-                <option>Ivo Andric</option>
-                <option>Petar II Petrovic Njegos</option>
-                <option>Mesa Selimovic</option>
-                <option>Ivan Mazuranic</option>
+              <option> </option>
+              <option>Ivo Andrić</option>
+              <option>Petar II Petrović Njegoš</option>
+              <option>Meša Selimović</option>
+              <option>Ivan Mažuranić</option>
             </select>
-            <label>Izdavac</label>
+            <label>Izdavač</label>
             <select
               className="input0"
               value={publisher}
@@ -138,19 +186,22 @@ function EditBook() {
               onChange={(e) => setQuantity(parseInt(e.target.value))}
             />
             <div className="buttons">
-            <button
-          className="submit">Potvrdi</button>
-                      <button
-          className="cancel"
-          onClick={()=>{
-            navigate("/EvidentionOfBooks")
-          }}>Poništi</button>
+              <button className="submit" onClick={handleConfirm}>
+                Potvrdi
+              </button>
+              <button
+                className="cancel"
+                onClick={() => {
+                  navigate("/EvidentionOfBooks");
+                }}
+              >
+                Poništi
+              </button>
+            </div>
           </div>
-         </div>
-          </div>
-          </div>
-          </div>
-          </div>  
+        </div>
+      </div>
+      </div>
     </Fragment>
   );
 }
