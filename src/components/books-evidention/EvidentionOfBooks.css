@@ -12,6 +12,17 @@
   font-family: Poppins-Regular;
 }
 
+.Glavno1{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px); /* Dodaje efekat zablure */
+}
+
 body {
   margin: 0;
   padding: 0;
