@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { TbDashboard } from "react-icons/tb";
-import { AiOutlineProfile } from "react-icons/ai";
-import { MdPeopleAlt } from "react-icons/md";
-import { HiDocumentDuplicate } from "react-icons/hi";
-import { TbArrowsLeftRight } from "react-icons/tb";
-import { FiSettings } from "react-icons/fi";
+import React, { useState, useEffect, Fragment } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import "../EvidentionOfBooks.css";
+import NavBar from "../../navbars/navbar";
 import "../new-book/NewBook.css";
-import "./EditBook.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function EditBook() {
   const [bookName, setBookName] = useState("");
@@ -21,6 +15,13 @@ function EditBook() {
   const [publisher, setPublisher] = useState("");
   const [year, setYear] = useState("");
   const [quantity, setQuantity] = useState(0);
+
+  const navigate = useNavigate();
+
+  const [sadrzaj, setSadrzaj] = useState("");
+
+  const handleSadrzajChange = (value) => {
+    setSadrzaj(value);}
 
   useEffect(() => {
     const savedBookName = localStorage.getItem("bookName");
@@ -63,24 +64,13 @@ function EditBook() {
   ]);
 
   return (
-    <div>
-      <header className="header">
-        <nav className="top-nav">
-          <div className="logo">Biblioteka</div>
-          <div className="profile">
-            <button className="create-btn">Kreiraj</button>
-            <div className="profile1">
-              <div className="profile-tab"></div>
-            </div>
-          </div>
-        </nav>
-      </header>
-
+    <Fragment>
+      <NavBar/>
       <div className="main-content">
         <div className="Glavno">
           <h1>Izmjeni Knjigu</h1>
           <p>
-            <Link to="/EvidentionOfBooks">Evidencija Knjiga</Link> / Izmjeni
+            <Link to="/EvidentionOfBooks"><span className="paragraf">Evidencija Knjiga</span></Link> / Izmjeni
             Knjigu
           </p>
           <div className="line2"></div>
@@ -104,10 +94,10 @@ function EditBook() {
               onChange={(e) => setBookName(e.target.value)}
             />
             <label>Kratki sadrzaj</label>
-            <input
-              className="ks input0"
-              value={shortSummary}
-              onChange={(e) => setShortSummary(e.target.value)}
+            <ReactQuill
+              value={sadrzaj}
+              onChange={handleSadrzajChange}
+              className="input0"
             />
             <label>Izaberite kategorije</label>
             <input
@@ -124,11 +114,17 @@ function EditBook() {
           </div>
           <div className="info2">
             <label>Izaberite autore</label>
-            <input
+            <select
               className="input0"
               value={authors}
               onChange={(e) => setAuthors(e.target.value)}
-            />
+            >
+                <option> </option>
+                <option>Ivo Andric</option>
+                <option>Petar II Petrovic Njegos</option>
+                <option>Mesa Selimovic</option>
+                <option>Ivan Mazuranic</option>
+            </select>
             <label>Izdavac</label>
             <select
               className="input0"
@@ -171,42 +167,19 @@ function EditBook() {
               value={quantity}
               onChange={(e) => setQuantity(parseInt(e.target.value))}
             />
+            <div className="buttons">
+            <button
+          className="submit">Potvrdi</button>
+                      <button
+          className="cancel"
+          onClick={()=>{
+            navigate("/EvidentionOfBooks")
+          }}>Poništi</button>
+         </div>
           </div>
-          <div className="line2"></div>
-        </div>
+          </div>
       </div>
-
-      <aside>
-        <nav className="side-nav">
-          <ul className="lista">
-            <li>
-              <GiHamburgerMenu className="icon" />
-            </li>
-            <li>
-              <TbDashboard className="icon" />
-            </li>
-            <li>
-              <AiOutlineProfile className="icon" />
-            </li>
-            <li>
-              <MdPeopleAlt className="icon" />
-            </li>
-            <li>
-              <HiDocumentDuplicate className="icon" />
-            </li>
-            <li>
-              <AiOutlineProfile className="icon" />
-            </li>
-            <li>
-              <TbArrowsLeftRight className="icon" />
-            </li>
-          </ul>
-          <span className="prav"></span>
-          <div className="line"></div>
-          <FiSettings className="settings" />
-        </nav>
-      </aside>
-    </div>
+    </Fragment>
   );
 }
 

@@ -7,28 +7,81 @@ const data = [
 ];
 
 const Table = () => {
+
   const [selectedAll, setSelectedAll] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const handleSelectAll = (event) => {
     setSelectedAll(event.target.checked);
+    if (event.target.checked) {
+      setSelectedItems(data.map(item => item.id));
+    } else {
+      setSelectedItems([]);
+    }
   };
 
   const handleSelectItem = (id) => {
-    // Implement your logic to handle individual item selection here
+    if (selectedItems.includes(id)) {
+      setSelectedItems(selectedItems.filter(itemId => itemId !== id));
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
   };
 
-  const handlePageChange = (direction) => {
-    if (direction === 'next') {
-      setCurrentPage((prevPage) => prevPage + 1);
-    } else if (direction === 'previous') {
-      setCurrentPage((prevPage) => prevPage - 1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={currentPage === i ? "active" : ""}
+        >
+          {i}
+        </button>
+      );
     }
+    return pageNumbers;
+  };
+
+  const renderLeftArrow = () => {
+    if (currentPage !== 1) {
+      return (
+        <button onClick={() => handlePageChange(currentPage - 1)}>
+          &larr;
+        </button>
+      );
+    }
+    return null;
+  };
+  const renderRightArrow = () => {
+    if (currentPage !== totalPages) {
+      return (
+        <button onClick={() => handlePageChange(currentPage + 1)}>
+          &rarr;
+        </button>
+      );
+    }
+    return null;
+  };
+
+  const handleItemsPerPageChange = (event) => {
+    setItemsPerPage(parseInt(event.target.value));
+    setCurrentPage(1); 
   };
 
   return (
@@ -50,12 +103,16 @@ const Table = () => {
             <th></th>
           </tr>
         </thead>
-        
+
         <tbody>
           {currentItems.map((item) => (
             <tr key={item.id}>
               <td>
-                <input type="checkbox" checked={selectedAll} onChange={() => handleSelectItem(item.id)} />
+                <input
+                  type="checkbox"
+                  checked={selectedItems.includes(item.id)}
+                  onChange={() => handleSelectItem(item.id)}
+                />
               </td>
               <td>{item.naziv}</td>
               <td>{item.autor}</td>
@@ -79,16 +136,22 @@ const Table = () => {
           ))}
         </tbody>
       </table>
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button disabled={currentPage === 1} onClick={() => handlePageChange('previous')}>
-            &lt; Prethodno
-          </button>
-          <button disabled={currentPage === totalPages} onClick={() => handlePageChange('next')}>
-            Sljedeće &gt;
-          </button>
-        </div>
-      )}
+      <div className="pagination">
+        {renderLeftArrow()}
+        {renderPageNumbers()}
+        {renderRightArrow()}
+      </div>
+      <div className="rows-per-page">
+        <span>Rows per page:</span>
+        <select className='inputs' value={itemsPerPage} onChange={handleItemsPerPageChange}>
+          <option value={1}>1</option>
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={50}>50</option>
+          <option value={100}>100</option>
+        </select>
+      </div>
     </div>
   );
 };

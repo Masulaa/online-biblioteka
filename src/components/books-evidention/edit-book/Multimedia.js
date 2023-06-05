@@ -5,8 +5,6 @@ import "./EditBook.css";
 import "../Drop-image/UploadDocument.css";
 import { Link } from "react-router-dom";
 import NavBar from "../../navbars/navbar";
-// import UploadDocument from "../Drop-image/UploadDocument";
-// import DropUpload from "../Drop-image/DropUpload";
 import DragDrop from "../Drop-image/DragDrop";
 
 function Multimedia() {
@@ -17,7 +15,7 @@ function Multimedia() {
         <div className="Glavno">
           <h1>Izmjeni Knjigu</h1>
           <p>
-            <Link to="/EvidentionOfBooks">Evidencija Knjiga</Link> / Izmjeni
+            <Link to="/EvidentionOfBooks"><span className="paragraf">Evidencija Knjiga</span></Link> / Izmjeni
             Knjigu
           </p>
           <div className="line2"></div>

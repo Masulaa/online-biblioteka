@@ -16,10 +16,8 @@ const DragDrop = () => {
       setImageSrc(contents);
     };
 
-    if (file) {
-      reader.readAsDataURL(file);
-      setIsFileSelected(true);
-    }
+    reader.readAsDataURL(file);
+    setIsFileSelected(true);
   };
 
   const handleDragOver = (event) => {
@@ -35,10 +33,13 @@ const DragDrop = () => {
       setImageSrc(contents);
     };
 
-    if (file) {
-      reader.readAsDataURL(file);
-      setIsFileSelected(true);
-    }
+    reader.readAsDataURL(file);
+    setIsFileSelected(true);
+  };
+
+  const handleDeleteImage = () => {
+    setImageSrc('');
+    setIsFileSelected(false);
   };
 
   return (
@@ -51,13 +52,16 @@ const DragDrop = () => {
         {imageSrc ? (
           <div className="image-container">
             <img className="uploaded-image" src={imageSrc} alt="" />
+            <button className="delete-button" onClick={handleDeleteImage}>
+              Izbriši
+            </button>
           </div>
         ) : (
           <React.Fragment>
             <div className="dashed-border" />
-            <p className="drop-text">Drag images here to attach or</p>
+            <p className="drop-text">Prevuci sliku ovdje za dodavanje ili</p>
             <label htmlFor="fileInput" className="browse-button">
-              Browse
+              Pretraži
             </label>
             <input
               type="file"
