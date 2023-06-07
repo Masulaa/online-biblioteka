@@ -22,10 +22,11 @@ function App() {
         <Route path='/EvidentionOfBooks/NewBook/BookDetails' element={<NewBook/>}/>
         <Route path='/EvidentionOfBooks/EditBook/BookDetails' element={<EditBook/>}/>
         <Route path='/EvidentionOfBooks/EditBook/Specification' element={<Specification/>}/>
-        <Route path='/EvidentionOfBooks/BookDetails' element={<BookDetails/>}/>
-        <Route path='/EvidentionOfBooks/BookDetails/E' element={<BookEvid/>}/>
-        <Route path='/EvidentionOfBooks/BookDetails/S' element={<BookSpec/>}/>
-        <Route path='/EvidentionOfBooks/BookDetails/M' element={<BookMulti/>}/>
+        <Route path='/EvidentionOfBooks/EditBook/Multimedia' element={<Multimedia/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails' element={<details/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/Evidention' element={<BookEvid/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/Specification' element={<BookSpec/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/Multimedia' element={<BookMulti/>}/>
 
       </Routes>
     </BrowserRouter></div>

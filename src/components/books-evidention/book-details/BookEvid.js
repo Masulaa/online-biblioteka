@@ -204,22 +204,22 @@ return (
         <tbody>
           {currentItems.map((item) => (
             <tr key={item.id}>
-              <td>
+              <td className="td">
                 <input
                   type="checkbox"
                   checked={selectedItems.includes(item.id)}
                   onChange={() => handleSelectItem(item.id)}
                 />
               </td>
-              <td>{item.naziv}</td>
-              <td>{item.autor}</td>
-              <td>{item.kategorija}</td>
-              <td>{item.naRaspolaganju}</td>
-              <td>{item.rezervisano}</td>
-              <td>{item.izdate}</td>
-              <td>{item.uPrekoracenju}</td>
-              <td>{item.ukupnaKolicina}</td>
-              <td className="options2">
+              <td className="td">{item.naziv}</td>
+              <td className="td">{item.autor}</td>
+              <td className="td">{item.kategorija}</td>
+              <td className="td">{item.naRaspolaganju}</td>
+              <td className="td">{item.rezervisano}</td>
+              <td className="td">{item.izdate}</td>
+              <td className="td">{item.uPrekoracenju}</td>
+              <td className="td">{item.ukupnaKolicina}</td>
+              <td className="options2 td">
                 <div className="dropdown">
                   <div className="dots">&#x2026;</div>
                   <div className="dropdown-content">

@@ -129,6 +129,7 @@ const Table = () => {
                 <div className="dropdown">
                   <div className="dots">&#x2026;</div>
                   <div className="dropdown-content">
+                    <div onClick={()=>{navigate('/EvidentionOfBooks/BookDetails')}}>Pogledaj detalje</div>
                     <div>Obriši</div>
                     <div onClick={()=>{navigate('/EvidentionOfBooks/EditBook/BookDetails')}}>Izmijeni</div>
                     <div>Izdaj knjigu</div>
