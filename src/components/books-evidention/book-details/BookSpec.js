@@ -9,8 +9,8 @@ import {MdDoubleArrow} from "react-icons/md"
 import NavBar from "../../navbars/navbar";
 import { GiBckwardTime } from "react-icons/gi";
 
+function BookSpec() {
 
-function BookDetails() {
   const navigate = useNavigate();
 
 return (
@@ -25,7 +25,7 @@ return (
             <a href="/" className="tag">Evidencija Knjiga</a> &#160; / &#160; <a href="/" className="tag">Knjiga-467</a>
           </p>
         </div>
-<Link></Link>
+
         <div className="icons">
           <button className="icon1"><HiOutlineArrowUturnUp />Otpisi knjigu</button>
           <button className="icon1"><FaRegHandScissors />Izdaj knjigu</button>
@@ -39,12 +39,12 @@ return (
       <div className="options-container">
         <div className="line-above" />
         <div className="options">
-          <div className="option1">
+          <div className="option" onClick={() => {
+            navigate("/EvidentionOfBooks/BookDetails/");
+          }}>
             Osnovni Detalji
           </div>
-          <div className="option"  onClick={() => {
-            navigate("/EvidentionOfBooks/BookDetails/S");
-          }}>
+          <div className="option1">
             Specifikacije
           </div>
           <div className="option" onClick={() => {
@@ -52,7 +52,7 @@ return (
           }}>
             Evidencija Iznamljivanja
           </div>
-          <div className="option" onClick={() => {
+          <div className="option"onClick={() => {
             navigate("/EvidentionOfBooks/BookDetails/M");
           }}>
             Multimedija
@@ -99,7 +99,7 @@ return (
            <a className="more2"> <BsArrowClockwise/>Prikazi&#160;Sve</a>
 
 </div>
-<div className="str">
+<div>
 <div>
   <p className="main-site-detail">Naziv knjige</p>
   <p>Dummy</p>
@@ -114,26 +114,14 @@ return (
   <p className="main-site-detail">Godina izdavanja</p>
   <p>Dummy</p>
 </div>
-
-<div className="text-limit">Once upon a time in the vibrant city of Rainbowville, there lived a charismatic and openly gay man named Boris. Affectionately known as Risbo, he became an iconic figure in the community, radiating love, acceptance, and pride wherever he went. 
-Risbo's journey towards self-discovery and embracing his true identity was not without its challenges. Growing up in a small town where LGBTQ+ acceptance was limited, he knew that he had to find a place where he could truly be himself. With unwavering courage, Risbo made the decision to move to Rainbowville, a city renowned for its inclusivity and diversity.
-From the moment he arrived in Rainbowville, Risbo's vibrant personality and infectious laughter captured the hearts of the community. He quickly became a beloved figure, admired by both friends and strangers alike. His quick wit and fabulous sense of style made him a source of inspiration for many, as they saw in him the embodiment of authenticity and self-expression.
-Risbo's creativity knew no bounds. He had a knack for organizing extravagant parties that would leave everyone in awe. His energy and enthusiasm were infectious, making every event he planned an unforgettable experience. From rainbow-themed decorations to dazzling performances, Risbo had a way of turning any occasion into a celebration of love and acceptance.
-But it wasn't just the parties that made Risbo a cherished member of the community. He was also a mentor and role model for younger LGBTQ+ individuals, offering support and guidance to those still on their journey of self-discovery. He understood the struggles they faced and was always there to lend a helping hand or a listening ear.
-Risbo's passion for equality and social justice extended far beyond the borders of Rainbowville. He dedicated his time and efforts to working with local LGBTQ+ organizations, advocating for equal rights and fighting against discrimination. Risbo's voice resonated not only within the city but also throughout the region, as he fearlessly spoke out against injustice and rallied others to join him in the fight for a more inclusive society.
-</div>
 </div>
       </div>
-
     </div>
 
     <main>
-
     </main>
-    
   </div>
-  
 </div>
 );
 }
-export default BookDetails
+export default BookSpec
