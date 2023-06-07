@@ -7,7 +7,7 @@
   border:none;
 }
 
-.submit {
+.submit-multi {
   padding-left: 30px;
   padding-right: 30px;
   margin-right: 2rem;
@@ -19,7 +19,7 @@
   border: none;
 }
 
-.cancel{
+.cancel-multi{
   padding-left: 30px;
   padding-right: 30px;
   border: 2px solid #76a5af;
@@ -30,12 +30,12 @@
   transition: background-color 0.3s ease;
 }
 
-.cancel:hover{ 
+.cancel-multi:hover{ 
   border: 2px solid #51737b;
   background-color: #51737b;
   color: white;
 }
 
-.submit:hover{
+.submit-multi:hover{
   background-color: #51737b;
 }

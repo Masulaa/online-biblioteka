@@ -20,7 +20,7 @@ body {
 }
 
 .naslov {
-  padding: 10px;
+  padding: 3.438rem 0.5rem 	0.5rem 	0.5rem;
   display: flex;
   justify-content: flex-start;
   margin-left: 60px;

@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import "../EvidentionOfBooks.css";
+import "./Multimedia.css";
 import "./EditBook.css";
 import "../Drop-image/UploadDocument.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,7 +33,7 @@ function Multimedia() {
       <NavBar />
       <div className="main-content">
         <div className="Glavno">
-          <h1>Izmjeni Knjigu</h1>
+          <h1 className="naslov1">Izmjeni Knjigu</h1>
           <p>
             <Link to="/EvidentionOfBooks">
               <span className="paragraf">Evidencija Knjiga</span>
@@ -59,10 +59,10 @@ function Multimedia() {
         <DragDrop onFileUpload={(file) => handleFileNameChange(file.name)} />
       </div>
       <div className="buttons-multi">
-        <button className="submit" onClick={handleConfirm}>
+        <button className="submit-multi" onClick={handleConfirm}>
           Potvrdi
         </button>
-        <button className="cancel" onClick={() => navigate("/EvidentionOfBooks")}>
+        <button className="cancel-multi" onClick={() => navigate("/EvidentionOfBooks")}>
           Poništi
         </button>
       </div>

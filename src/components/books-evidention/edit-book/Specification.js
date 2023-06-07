@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import NavBar from "../../navbars/navbar";
 import "./EditBook.css";
-import "./Multimedia.css"
+import "./Specification.css"
 import "react-quill/dist/quill.snow.css";
 
 function Specification() {
@@ -51,7 +51,7 @@ function Specification() {
 
       <div className="main-content">
         <div className="Glavno">
-          <h1>Izmjeni Knjigu</h1>
+          <h1 className="naslov1">Izmjeni Knjigu</h1>
           <p>
             <Link to="/EvidentionOfBooks">
               <span className="paragraf">Evidencija Knjiga</span>

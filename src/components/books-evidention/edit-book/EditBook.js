@@ -80,7 +80,7 @@ function EditBook() {
       <NavBar />
       <div className="main-content">
         <div className="Glavno">
-          <h1>Izmjeni Knjigu</h1>
+          <h1 className="naslov1">Izmjeni Knjigu</h1>
           <p>
             <Link to="/EvidentionOfBooks">
               <span className="paragraf">Evidencija Knjiga</span>

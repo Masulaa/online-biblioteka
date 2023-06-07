@@ -10,7 +10,6 @@
   justify-content: toend;
 }
 
-
 .line{
     width: 50px;
     height: 3px;
@@ -43,57 +42,76 @@
   font-size: 20px;
   color: white;
   margin-top: 7px;    
-  transition: all 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   transform: translateY(-20px);
+  transform: translateX(-20px);
+  visibility: hidden;
+  position: absolute;
 }  
 
 .par-expanded{
   opacity: 1;
-  transform: translateY(0);
-  z-index: 1;
+  transform: translateY(0px);
+  transform: translateX(0px);
+  transition: opacity 0.3s ease-in-out, transform 0.1s ease-in-out;
+  visibility: visible;
+  position: relative;
 }
+
 
 .celija{
   display: flex;
   flex-direction: row;
 }
-
 .top-nav {
-  position: relative;
-  bottom: 0;
-  top: 0;
-  width: 100%;
-  height: 50px;
-  background-color: #76A5AF;
-}
+ 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    background-color: #76a5af;
+    padding: 0rem 0.625rem 0rem 0rem;
+    z-index: 9999; 
+  }
+  
+
 .logo {
-  color: white;
+  padding: 15pxs;
   font-weight: bold;
   font-size: 1rem;
-  padding: 15px;
-  font-size: 30px;
+  color: white;
 }
+
+.create-btn {
+  background-color: #51737b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
 .profile {
   display: flex;
   align-items: center;
 }
-.profile1 {
-  background-color: rgb(88, 124, 131);
-  padding: 0.6rem;
-}  
+
 .profile-tab {
   width: 32px;
   height: 32px;
   background-color: #ccc;
   border-radius: 20px;
-}  
+}
+
 .aside {
   background-color: #3a3a3a;
   width: 50px;
   padding-bottom: 214px;
   height: 100%;
   position: fixed;
-  z-index: 2;
+  z-index: 1;
   transition:  width 0.4s ease-in-out;
 }
 .aside-expanded {
@@ -102,7 +120,6 @@ width: 250px;
 padding-bottom: 214px;
 height: 100%;
 position: fixed;
-z-index: 1;
 border-radius: 0px 5px 0px 5px;
 transition:  width 0.4s ease-in-out;
 }
