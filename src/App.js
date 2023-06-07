@@ -4,7 +4,6 @@ import SignUp from './components/account-components/SignUp';
 import EvidentionOfBooks from './components/books-evidention/EvidentionOfBooks'
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NewBook from './components/books-evidention/new-book/NewBook';
-import BookDetails from './components/books-evidention/book-details/details';
 import EditBook from './components/books-evidention/edit-book/EditBook';
 import Specification from './components/books-evidention/edit-book/Specification'
 import Multimedia from './components/books-evidention/edit-book/Multimedia'
