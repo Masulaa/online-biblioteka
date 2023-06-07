@@ -33,11 +33,11 @@ function NavBar() {
 
   return (
     <div>
-<div className="top-nav">
-  <div className="logo">Biblioteka</div>
-  <button className="create-btn">Kreiraj</button>
-  <div className="profile">
-    <div className="profile-tab"></div>
+<div class="top-nav">
+  <div class="logo">Biblioteka</div>
+  <button class="create-btn">Kreiraj</button>
+  <div class="profile">
+    <div class="profile-tab"></div>
   </div>
 </div>
 
@@ -91,10 +91,10 @@ function NavBar() {
                 </p>
               </li >
               <div className="bottomicons">
+                <li className="celija">
                 <span
                   className={`line ${isTouched ? "line-expanded" : ""}`}
-                ></span>                
-                <li className="celija">
+                ></span>
                 <FiSettings className="icon2" />
                 <p className={`par ${isTouched ? "par-expanded" : ""}`}>
                   Settings

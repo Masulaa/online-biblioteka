@@ -20,7 +20,7 @@ function Multimedia() {
   }, []);
 
   const handleConfirm = () => {
-    console.log("Ime fajla:", fileName );
+    console.log("Ime fajla:", fileName);
   };
 
   useEffect(() => {
