@@ -1,5 +1,5 @@
 
-import "./details.css";
+import "./BookDetails.css";
 import { Link } from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 import { HiOutlineArrowUturnUp, HiOutlineArrowPath } from 'react-icons/hi2';

@@ -1,4 +1,4 @@
-import "./details.css";
+import "./BookDetails.css";
 import { Link } from 'react-router-dom';
 
 import { HiOutlineArrowUturnUp} from 'react-icons/hi2';
