@@ -6,13 +6,15 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import "./LogIn.css";
 import img01 from "../../images/slika1.png";
 
+import { AuthService } from "../../api/api";
+
 const LogIn = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const showAccount = (e) => {
+  const showAccount = async(e) => {
     e.preventDefault();
     if (userName && password) {
       if (password.length < 8) {
@@ -22,9 +24,28 @@ const LogIn = () => {
         navigate("/EvidentionOfBooks");
       }
     } else {
-      return alert("Molimo vas da unesete i username i sifru.");
+      return alert("Molimo vas da unesete i username i sifru.");    }  
+      
+    // if we made it through all the checks let's call API to register
+    // Build user data - request body/payload object here
+    
+    const userData = {
+      username: userName,
+      password: password,
+      device: "test",
+    };
+
+    // try sending API call to the API, if call fails for whatever reason we will "catch" the error
+    try {
+      const response = await AuthService.signup(userData);
+      console.log("API Response", response);
+    } catch (error) {
+      console.error("Error calling registration API", error);
     }
   };
+
+
+  
 
   return (
     <div className="limiter">

@@ -4,12 +4,15 @@ import SignUp from './components/account-components/SignUp';
 import EvidentionOfBooks from './components/books-evidention/EvidentionOfBooks'
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NewBook from './components/books-evidention/new-book/NewBook';
-import BookDetails from './components/books-evidention/book-details/details';
 import EditBook from './components/books-evidention/edit-book/EditBook';
 import Specification from './components/books-evidention/edit-book/Specification'
 import Multimedia from './components/books-evidention/edit-book/Multimedia'
 import SpecificationBook from './components/books-evidention/new-book/SpecificationBook';
 import MultimediaBook from './components/books-evidention/new-book/MultimediaBook';
+import BookDetails from './components/books-evidention/book-details/details';
+import BookEvid from './components/books-evidention/book-details/BookEvid';
+import BookMulti from './components/books-evidention/book-details/BookMulti';
+import BookSpec from './components/books-evidention/book-details/BookSpec';
 
 function App() {
   return (
@@ -24,7 +27,11 @@ function App() {
         <Route path='/EvidentionOfBooks/NewBook/Multimedia' element={<MultimediaBook/>}/>
         <Route path='/EvidentionOfBooks/EditBook/BookDetails' element={<EditBook/>}/>
         <Route path='/EvidentionOfBooks/EditBook/Specification' element={<Specification/>}/>
-        <Route path='/EvidentionOfBooks/EditBook/Multimedia' element={<Multimedia/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails' element={<BookDetails/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/E' element={<BookEvid/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/S' element={<BookSpec/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/M' element={<BookMulti/>}/>
+
       </Routes>
     </BrowserRouter></div>
   );

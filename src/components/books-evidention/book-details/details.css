@@ -1,70 +1,70 @@
 .links{
-    display:flex;
-    margin: 0;
+  display:flex;
+  margin: 0;
 padding: 10px;
 margin-left: 3.1rem;
 
 
 }
 .evidention{
-    color:#4484f1;
+  color:#4484f1;
 }
 .book{
-    color:#4484f1;
+  color:#4484f1;
 }
 
 
 .links,
 .links2 {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
+display: flex;
+align-items: center;
+margin-top: 10px;
 }
 
 .links a,
 .links2 a {
-  text-decoration: none;
-  color: #000;
-  margin-right: 10px;
+text-decoration: none;
+color: #000;
+margin-right: 10px;
 }
 
 .links a:last-child,
 .links2 a:last-child {
-  margin-right: 0;
+margin-right: 0;
 }
 
 .links a:hover,
 .links2 a:hover {
-  text-decoration: underline;
+text-decoration: underline;
 }
 
 .lista{
-  display: flex;
-  flex-direction: column;
-  margin-top: 55px;
+display: flex;
+flex-direction: column;
+margin-top: 55px;
 }
 
 .all-lists{
-  display: flex;
-  flex-direction: row;
-  justify-content: toend;
+display: flex;
+flex-direction: row;
+justify-content: toend;
 }
 .line{
 margin: 0;
 }
 .bottomicons{
-  position:fixed;
-  bottom: 0;
+position:fixed;
+bottom: 0;
 
 }.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
+position: fixed;
+top: 0;
+left: 0;
+height: 100%;
 }
 
 .line{
-  margin-top: -5px;
+margin-top: -5px;
 }
 
 main{
