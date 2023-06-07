@@ -7,7 +7,10 @@ import NewBook from './components/books-evidention/new-book/NewBook';
 import EditBook from './components/books-evidention/edit-book/EditBook';
 import Specification from './components/books-evidention/edit-book/Specification'
 import Multimedia from './components/books-evidention/edit-book/Multimedia'
-
+import BookDetails from './components/books-evidention/book-details/details';
+import BookEvid from './components/books-evidention/book-details/BookEvid';
+import BookMulti from './components/books-evidention/book-details/BookMulti';
+import BookSpec from './components/books-evidention/book-details/BookSpec';
 function App() {
   return (
     <div className="container">
@@ -19,7 +22,11 @@ function App() {
         <Route path='/EvidentionOfBooks/NewBook/BookDetails' element={<NewBook/>}/>
         <Route path='/EvidentionOfBooks/EditBook/BookDetails' element={<EditBook/>}/>
         <Route path='/EvidentionOfBooks/EditBook/Specification' element={<Specification/>}/>
-        <Route path='/EvidentionOfBooks/EditBook/Multimedia' element={<Multimedia/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails' element={<BookDetails/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/E' element={<BookEvid/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/S' element={<BookSpec/>}/>
+        <Route path='/EvidentionOfBooks/BookDetails/M' element={<BookMulti/>}/>
+
       </Routes>
     </BrowserRouter></div>
   );
