@@ -5,7 +5,7 @@ const DragDrop = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [fileName, setFileName] = useState("");
   const [isFileSelected, setIsFileSelected] = useState(false);
-
+  
   const handleDrop = (event) => {
     event.preventDefault();
 

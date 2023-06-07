@@ -1,5 +1,6 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import NavBar from "../../navbars/navbar";
 import "./NewBook.css";
@@ -17,6 +18,8 @@ function EditBook() {
 
   const navigate = useNavigate();
 
+  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
+
   const [sadrzaj, setSadrzaj] = useState("");
 
   const handleSadrzajChange = (value) => {
@@ -26,6 +29,7 @@ function EditBook() {
   return (
     <Fragment>
       <NavBar/>
+      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
       <div className="main-content">
         <div className="Glavno">
           <h1 className="naslov1">Nova Knjiga</h1>
@@ -146,7 +150,7 @@ function EditBook() {
           </div>
           </div>
           </div>
-          
+          </div>  
     </Fragment>
   );
 }

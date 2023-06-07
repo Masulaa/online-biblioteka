@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './table.css';
+import { useNavigate } from 'react-router-dom';
 
 const data = [
   { id: 1, naziv: 'Knjiga 1', autor: 'Autor 1', kategorija: 'Kategorija 1', naRaspolaganju: 5, rezervisano: 2, izdate: 3, uPrekoracenju: 0, ukupnaKolicina: 10 },
@@ -7,6 +8,8 @@ const data = [
 ];
 
 const Table = () => {
+
+  const navigate = useNavigate();
 
   const [selectedAll, setSelectedAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -127,7 +130,7 @@ const Table = () => {
                   <div className="dots">&#x2026;</div>
                   <div className="dropdown-content">
                     <div>Obriši</div>
-                    <div>Izmijeni</div>
+                    <div onClick={()=>{navigate('/EvidentionOfBooks/EditBook/BookDetails')}}>Izmijeni</div>
                     <div>Izdaj knjigu</div>
                   </div>
                 </div>

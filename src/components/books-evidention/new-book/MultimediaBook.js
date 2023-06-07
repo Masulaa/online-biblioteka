@@ -3,13 +3,13 @@ import React, { Fragment, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 
-import "./Multimedia.css";
-import "./EditBook.css";
+import "./MultimediaBook.css";
+import "./NewBook.js";
 import DragDrop from "../../dragdropupload/DragDrop";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../navbars/navbar";
 
-function Multimedia() {
+function MultimediaBook() {
   const [fileName, setFileName] = useState("");
 
   const navigate = useNavigate();
@@ -39,22 +39,22 @@ function Multimedia() {
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
       <div className="main-content">
         <div className="Glavno">
-          <h1 className="naslov1">Izmjeni Knjigu</h1>
+          <h1 className="naslov1">Nova Knjiga</h1>
           <p>
             <Link to="/EvidentionOfBooks">
               <span className="paragraf">Evidencija Knjiga</span>
             </Link>{" "}
-            / Izmjeni Knjigu
+            / Nova Knjiga
           </p>
           <div className="line2"></div>
           <div className="Stranica">
-            <Link to="/EvidentionOfBooks/EditBook/BookDetails">
+            <Link to="/EvidentionOfBooks/NewBook/BookDetails">
               <p>Osnovne Detalji</p>
             </Link>
-            <Link to="/EvidentionOfBooks/EditBook/Specification">
+            <Link to="/EvidentionOfBooks/NewBook/Specification">
               <p>Specifikacija</p>
             </Link>
-            <Link to="/EvidentionOfBooks/EditBook/Multimedia">
+            <Link to="/EvidentionOfBooks/NewBook/Multimedia">
               <p>Multimedija</p>
             </Link>
           </div>
@@ -77,4 +77,4 @@ function Multimedia() {
   );
 }
 
-export default Multimedia;
+export default MultimediaBook;

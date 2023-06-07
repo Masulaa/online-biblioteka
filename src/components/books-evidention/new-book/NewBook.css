@@ -40,6 +40,16 @@
   margin-left: -500px;
 }
 
+.blur-showed{
+  filter: blur(10px);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.blur{ 
+ transition: all 0.4s ease-in-out;
+}
+
 .naslov1 {
   padding: 3rem 0rem 	0rem 	0rem;
   display: flex;
@@ -135,13 +145,6 @@ border: 2px solid rgba(0,0,0,0.4);
 
 select{
   width: 300px;
-}
-
-.top-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
 }
 
 .logo {

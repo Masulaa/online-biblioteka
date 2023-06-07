@@ -7,6 +7,7 @@ import { MdEmail } from "react-icons/md"
 import { FaLongArrowAltRight } from "react-icons/fa";
 import '../account-components/SignUp.css';
 import img01 from '../../images/slika1.png'
+import { AuthService } from "../../api/api";
 
 const SignUp = () => {
 
@@ -18,7 +19,7 @@ const SignUp = () => {
   const [confirmedPassword, setConfirmedPassword] = useState("")
   const navigate = useNavigate();
 
-  const showAccount = (e) => {
+  const showAccount = async (e) => {
     e.preventDefault();
    
     if(password.length === 0 || userName.length === 0 || email.length === 0 || firstName.length === 0 || lastName.length === 0 ){
@@ -34,6 +35,27 @@ const SignUp = () => {
         console.log("Username:" + userName + "\nFirst name:" + firstName + "\nLast name:" + lastName + "\nEmail: " + email + "\nPassword: " + password);
         navigate("/EvidentionOfBooks")
       }
+
+    // if we made it through all the checks let's call API to register
+    // Build user data - request body/payload object here
+    const userData = {
+      name: firstName,
+      surname: lastName,
+      email: email,
+      username: userName,
+      password: password,
+      password_confirmation: confirmedPassword,
+      device: "test",
+    };
+
+    // try sending API call to the API, if call fails for whatever reason we will "catch" the error
+    try {
+      const response = await AuthService.register(userData)
+      console.log("API Response", response)
+    } catch (error){
+      console.error("Error calling registration API", error)
+    }
+
   }
 
   return (

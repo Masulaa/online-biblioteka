@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import NavBar from "../../navbars/navbar";
 import "./EditBook.css";
@@ -75,9 +76,12 @@ function EditBook() {
     quantity,
   ]);
 
+  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
+
   return (
     <Fragment>
       <NavBar />
+      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
       <div className="main-content">
         <div className="Glavno">
           <h1 className="naslov1">Izmjeni Knjigu</h1>
@@ -89,7 +93,7 @@ function EditBook() {
           </p>
           <div className="line2"></div>
           <div className="Stranica">
-            <Link to="/EvidentionOfBooks/EditBook/BasicDetails">
+            <Link to="/EvidentionOfBooks/EditBook/BookDetails">
               <p>Osnovne Detalji</p>
             </Link>
             <Link to="/EvidentionOfBooks/EditBook/Specification">
@@ -196,6 +200,7 @@ function EditBook() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </Fragment>
   );

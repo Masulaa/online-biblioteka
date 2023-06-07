@@ -45,24 +45,24 @@ function NavBar() {
         <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>
           <nav className="sidebar">
             <ul className="lista">
-              <li className="celija">
+              <li className="celija an">
                 <GiHamburgerMenu className="icon2" onClick={isTouchedHandler} />
               </li>
               <li className="celija">
                 <TbDashboard className="icon2" />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                <p className={`par ${isTouched ? "par-expanded" : ""}`} onClick={isTouchedHandler}>
                   Dashboard
                 </p>
               </li>
               <li className="celija">
                 <AiOutlineProfile className="icon2" />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                <p className={`par ${isTouched ? "par-expanded" : ""}`} onClick={isTouchedHandler}>
                   Bibliotekari
                 </p>
               </li>
               <li className="celija">
                 <MdPeopleAlt className="icon2" />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                <p className={`par ${isTouched ? "par-expanded" : ""}`} onClick={isTouchedHandler}>
                   Učenici
                 </p>
               </li>
@@ -70,6 +70,7 @@ function NavBar() {
                 <HiDocumentDuplicate
                   className="icon2"
                   onClick={() => {
+                    isTouchedHandler();
                     navigate("/EvidentionOfBooks");
                   }}
                 />
@@ -78,13 +79,13 @@ function NavBar() {
                 </p>
               </li>
               <li className="celija">
-                <AiOutlineProfile className="icon2" />
+                <AiOutlineProfile className="icon2" onClick={isTouchedHandler} />
                 <p className={`par ${isTouched ? "par-expanded" : ""}`}>
                   Autori
                 </p>
               </li>
               <li className="celija">
-                <TbArrowsLeftRight className="icon2" />
+                <TbArrowsLeftRight className="icon2" onClick={isTouchedHandler}/>
                 <p className={`par ${isTouched ? "par-expanded" : ""}`}>
                   Izdavanje Knjiga
                 </p>
@@ -94,7 +95,7 @@ function NavBar() {
                 <span
                   className={`line ${isTouched ? "line-expanded" : ""}`}
                 ></span>
-                <FiSettings className="icon2" />
+                <FiSettings className="icon2" onClick={isTouchedHandler}/>
                 <p className={`par ${isTouched ? "par-expanded" : ""}`}>
                   Settings
                 </p></li>

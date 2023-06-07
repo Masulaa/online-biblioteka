@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 
 
 import NavBar from "../../navbars/navbar";
-import "./EditBook.css";
-import "./Specification.css"
+import "./NewBook";
+import "./SpecificationBook.css"
 import "react-quill/dist/quill.snow.css";
 
-function Specification() {
+function SpecificationBook() {
   const [numOfPages, setNumOfPages] = useState(0);
   const [script, setScript] = useState("");
   const [binding, setBinding] = useState("");
@@ -55,22 +55,22 @@ function Specification() {
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
       <div className="main-content">
         <div className="Glavno">
-          <h1 className="naslov1">Izmjeni Knjigu</h1>
+          <h1 className="naslov1">Nova Knjiga</h1>
           <p>
             <Link to="/EvidentionOfBooks">
               <span className="paragraf">Evidencija Knjiga</span>
             </Link>{" "}
-            / Izmjeni Knjigu
+            / Nova Knjiga
           </p>
           <div className="line2"></div>
           <div className="Stranica">
-            <Link to="/EvidentionOfBooks/EditBook/BookDetails">
+            <Link to="/EvidentionOfBooks/NewBook/BookDetails">
               <p>Osnovne Detalji</p>
             </Link>
-            <Link to="/EvidentionOfBooks/EditBook/Specification">
+            <Link to="/EvidentionOfBooks/NewBook/Specification">
               <p>Specifikacija</p>
             </Link>
-            <Link to="/EvidentionOfBooks/EditBook/Multimedia">
+            <Link to="/EvidentionOfBooks/NewBook/Multimedia">
               <p>Multimedija</p>
             </Link>
           </div>
@@ -139,4 +139,4 @@ function Specification() {
   );
 }
 
-export default Specification;
+export default SpecificationBook;
