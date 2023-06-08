@@ -23,3 +23,9 @@ export const AuthService = {
       return client.post('login', userData)
   }
 }
+
+export const BookService = {
+  ListBooks(){
+    return client.get('books')
+  }
+}

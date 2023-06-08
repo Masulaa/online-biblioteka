@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './table.css';
 import { useNavigate } from 'react-router-dom';
-
-const data = [
-  { id: 1, naziv: 'Knjiga 1', autor: 'Autor 1', kategorija: 'Kategorija 1', naRaspolaganju: 5, rezervisano: 2, izdate: 3, uPrekoracenju: 0, ukupnaKolicina: 10 },
-  { id: 2, naziv: 'Knjiga 2', autor: 'Autor 2', kategorija: 'Kategorija 2', naRaspolaganju: 3, rezervisano: 1, izdate: 2, uPrekoracenju: 1, ukupnaKolicina: 7 },
-];
+import { BookService } from '../../api/api';
 
 const Table = () => {
-
   const navigate = useNavigate();
+
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  const fetchBooks = async () => {
+    try {
+      const response = await BookService.ListBooks();
+      setBooks(response.data);
+    } catch (error) {
+      console.log('Error fetching books:', error);
+    }
+  };
 
   const [selectedAll, setSelectedAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -17,7 +27,7 @@ const Table = () => {
   const handleSelectAll = (event) => {
     setSelectedAll(event.target.checked);
     if (event.target.checked) {
-      setSelectedItems(data.map(item => item.id));
+      setSelectedItems(books.map((book) => book.id));
     } else {
       setSelectedItems([]);
     }
@@ -25,7 +35,7 @@ const Table = () => {
 
   const handleSelectItem = (id) => {
     if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter(itemId => itemId !== id));
+      setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
     } else {
       setSelectedItems([...selectedItems, id]);
     }
@@ -37,9 +47,9 @@ const Table = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = books.slice(indexOfFirstItem, indexOfLastItem);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(books.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -52,7 +62,7 @@ const Table = () => {
         <button
           key={i}
           onClick={() => handlePageChange(i)}
-          className={currentPage === i ? "active" : ""}
+          className={currentPage === i ? 'active' : ''}
         >
           {i}
         </button>
@@ -64,19 +74,16 @@ const Table = () => {
   const renderLeftArrow = () => {
     if (currentPage !== 1) {
       return (
-        <button onClick={() => handlePageChange(currentPage - 1)}>
-          &larr;
-        </button>
+        <button onClick={() => handlePageChange(currentPage - 1)}>&larr;</button>
       );
     }
     return null;
   };
+
   const renderRightArrow = () => {
     if (currentPage !== totalPages) {
       return (
-        <button onClick={() => handlePageChange(currentPage + 1)}>
-          &rarr;
-        </button>
+        <button onClick={() => handlePageChange(currentPage + 1)}>&rarr;</button>
       );
     }
     return null;
@@ -84,7 +91,7 @@ const Table = () => {
 
   const handleItemsPerPageChange = (event) => {
     setItemsPerPage(parseInt(event.target.value));
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   return (
@@ -93,7 +100,11 @@ const Table = () => {
         <thead>
           <tr>
             <th>
-              <input type="checkbox" checked={selectedAll} onChange={handleSelectAll} />
+              <input
+                type="checkbox"
+                checked={selectedAll}
+                onChange={handleSelectAll}
+              />
             </th>
             <th>Naziv knjige</th>
             <th>Autor</th>
@@ -108,30 +119,34 @@ const Table = () => {
         </thead>
 
         <tbody>
-          {currentItems.map((item) => (
-            <tr key={item.id}>
+          {currentItems.map((book) => (
+            <tr key={book.id}>
               <td>
                 <input
                   type="checkbox"
-                  checked={selectedItems.includes(item.id)}
-                  onChange={() => handleSelectItem(item.id)}
+                  checked={selectedItems.includes(book.id)}
+                  onChange={() => handleSelectItem(book.id)}
                 />
               </td>
-              <td>{item.naziv}</td>
-              <td>{item.autor}</td>
-              <td>{item.kategorija}</td>
-              <td>{item.naRaspolaganju}</td>
-              <td>{item.rezervisano}</td>
-              <td>{item.izdate}</td>
-              <td>{item.uPrekoracenju}</td>
-              <td>{item.ukupnaKolicina}</td>
+              <td>{book.naziv}</td>
+              <td>{book.autor}</td>
+              <td>{book.kategorija}</td>
+              <td>{book.naRaspolaganju}</td>
+              <td>{book.rezervisano}</td>
+              <td>{book.izdate}</td>
+              <td>{book.uPrekoracenju}</td>
+              <td>{book.ukupnaKolicina}</td>
               <td className="options">
                 <div className="dropdown">
                   <div className="dots">&#x2026;</div>
                   <div className="dropdown-content">
-                    <div onClick={()=>{navigate('/EvidentionOfBooks/BookDetails')}}>Pogledaj detalje</div>
+                    <div onClick={() => { navigate('/EvidentionOfBooks/BookDetails') }}>
+                      Pogledaj detalje
+                    </div>
                     <div>Obriši</div>
-                    <div onClick={()=>{navigate('/EvidentionOfBooks/EditBook/BookDetails')}}>Izmijeni</div>
+                    <div onClick={() => { navigate('/EvidentionOfBooks/EditBook/BookDetails') }}>
+                      Izmijeni
+                    </div>
                     <div>Izdaj knjigu</div>
                   </div>
                 </div>
@@ -147,7 +162,11 @@ const Table = () => {
       </div>
       <div className="rows-per-page">
         <span>Rows per page:</span>
-        <select className='inputs' value={itemsPerPage} onChange={handleItemsPerPageChange}>
+        <select
+          className="inputs"
+          value={itemsPerPage}
+          onChange={handleItemsPerPageChange}
+        >
           <option value={1}>1</option>
           <option value={5}>5</option>
           <option value={10}>10</option>

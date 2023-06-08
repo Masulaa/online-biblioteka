@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./DragDrop.css";
 
+import { ImBin } from "react-icons/im";
+
 const DragDrop = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [fileName, setFileName] = useState("");
@@ -62,7 +64,7 @@ const DragDrop = () => {
           <div className="image-container">
             <img className="uploaded-image" src={imageSrc} alt="" />
             <button className="delete-button" onClick={handleDeleteImage}>
-              Izbriši
+              <ImBin/>
             </button>
             <p className="image-name">{fileName}</p>
           </div>
