@@ -1,13 +1,13 @@
 import "./EvidentionOfBooks.css";
 import Table from "./table";
+import NavBar from "../navbars/navbar";  
+import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import NavBar from "../navbars/navbar";
 
 import { HiMagnifyingGlassCircle } from "react-icons/hi2";
-import pic1 from "../../images/blob-scene-haikei.png"
 
 function EvidentionOfBooks() {
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
@@ -15,7 +15,7 @@ function EvidentionOfBooks() {
   const navigate = useNavigate();
 
   return (
-    <body>
+    <React.Fragment>
       <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="naslov">
@@ -40,10 +40,9 @@ function EvidentionOfBooks() {
             ></input>
           </span>
         </div>
-        <Table />
+       {/* <Table /> */}
       </div>
-
-    </body>
+    </React.Fragment>
   );
 }
 

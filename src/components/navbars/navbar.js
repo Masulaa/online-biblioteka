@@ -50,19 +50,27 @@ function NavBar() {
               </li>
               <li className="celija">
                 <TbDashboard className="icon2" />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`} onClick={isTouchedHandler}>
+                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
                   Dashboard
                 </p>
               </li>
               <li className="celija">
-                <AiOutlineProfile className="icon2" />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`} onClick={isTouchedHandler}>
+                <AiOutlineProfile className="icon2" onClick={() => {
+                    if(isTouched){
+                    isTouchedHandler();}
+                    navigate("/LibrarianEvidention");
+                  }}/>
+                <p className={`par ${isTouched ? "par-expanded" : ""}`} >
                   Bibliotekari
                 </p>
               </li>
               <li className="celija">
-                <MdPeopleAlt className="icon2" />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`} onClick={isTouchedHandler}>
+                <MdPeopleAlt className="icon2" onClick={() => {
+                    if(isTouched){
+                    isTouchedHandler();}
+                    navigate("/StudentEvidention");
+                  }} />
+                <p className={`par ${isTouched ? "par-expanded" : ""}`} >
                   Učenici
                 </p>
               </li>
@@ -70,7 +78,8 @@ function NavBar() {
                 <HiDocumentDuplicate
                   className="icon2"
                   onClick={() => {
-                    isTouchedHandler();
+                    if(isTouched){
+                    isTouchedHandler();}
                     navigate("/EvidentionOfBooks");
                   }}
                 />
@@ -79,7 +88,11 @@ function NavBar() {
                 </p>
               </li>
               <li className="celija">
-                <AiOutlineProfile className="icon2" onClick={isTouchedHandler} />
+                <AiOutlineProfile className="icon2"                    onClick={() => {
+                    if(isTouched){
+                    isTouchedHandler();}
+                    navigate("/AuthorEvidention");
+                  }}/>
                 <p className={`par ${isTouched ? "par-expanded" : ""}`}>
                   Autori
                 </p>

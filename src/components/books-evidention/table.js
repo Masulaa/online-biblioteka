@@ -1,182 +1,167 @@
-import React, { useState, useEffect } from 'react';
-import './table.css';
-import { useNavigate } from 'react-router-dom';
-import { BookService } from '../../api/api';
+// import React, { useState, useEffect } from 'react';
+// import './table.css';
+// import { useNavigate } from 'react-router-dom';
 
-const Table = () => {
-  const navigate = useNavigate();
+// import { BookService } from "../../api/api";
 
-  const [books, setBooks] = useState([]);
+// const Table = () => {
 
-  useEffect(() => {
-    fetchBooks();
-  }, []);
+//   const navigate = useNavigate();
 
-  const fetchBooks = async () => {
-    try {
-      const response = await BookService.ListBooks();
-      setBooks(response.data);
-    } catch (error) {
-      console.log('Error fetching books:', error);
-    }
-  };
+//   const [selectedAll, setSelectedAll] = useState(false);
+//   const [selectedItems, setSelectedItems] = useState([]);
 
-  const [selectedAll, setSelectedAll] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
+//   const [books, setBooks] = useState([]);
 
-  const handleSelectAll = (event) => {
-    setSelectedAll(event.target.checked);
-    if (event.target.checked) {
-      setSelectedItems(books.map((book) => book.id));
-    } else {
-      setSelectedItems([]);
-    }
-  };
+//   useEffect(() => {
+//     BookService.ListBooks()
+//       .then(response => {
+//         setBooks(response.data);
+//       })
+//       .catch(error => {
+//         console.log('Greška pri dobijanju knjiga:', error);
+//       });
+//   }, []);
 
-  const handleSelectItem = (id) => {
-    if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
-    } else {
-      setSelectedItems([...selectedItems, id]);
-    }
-  };
+//   const handleSelectAll = (event) => {
+//     setSelectedAll(event.target.checked);
+//     if (event.target.checked) {
+//       setSelectedItems(books.map(book => book.id));
+//     } else {
+//       setSelectedItems([]);
+//     }
+//   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(20);
+//   const handleSelectItem = (id) => {
+//     if (selectedItems.includes(id)) {
+//       setSelectedItems(selectedItems.filter(itemId => itemId !== id));
+//     } else {
+//       setSelectedItems([...selectedItems, id]);
+//     }
+//   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const [itemsPerPage, setItemsPerPage] = useState(20);
 
-  const currentItems = books.slice(indexOfFirstItem, indexOfLastItem);
+//   const indexOfLastItem = currentPage * itemsPerPage;
+//   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const totalPages = Math.ceil(books.length / itemsPerPage);
+//   const currentItems = books.slice(indexOfFirstItem, indexOfLastItem);
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+//   const totalPages = Math.ceil(books.length / itemsPerPage);
 
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(
-        <button
-          key={i}
-          onClick={() => handlePageChange(i)}
-          className={currentPage === i ? 'active' : ''}
-        >
-          {i}
-        </button>
-      );
-    }
-    return pageNumbers;
-  };
+//   const handlePageChange = (pageNumber) => {
+//     setCurrentPage(pageNumber);
+//   };
 
-  const renderLeftArrow = () => {
-    if (currentPage !== 1) {
-      return (
-        <button onClick={() => handlePageChange(currentPage - 1)}>&larr;</button>
-      );
-    }
-    return null;
-  };
+//   const renderPageNumbers = () => {
+//     const pageNumbers = [];
+//     for (let i = 1; i <= totalPages; i++) {
+//       pageNumbers.push(
+//         <button
+//           key={i}
+//           onClick={() => handlePageChange(i)}
+//           className={currentPage === i ? "active" : ""}
+//         >
+//           {i}
+//         </button>
+//       );
+//     }
+//     return pageNumbers;
+//   };
 
-  const renderRightArrow = () => {
-    if (currentPage !== totalPages) {
-      return (
-        <button onClick={() => handlePageChange(currentPage + 1)}>&rarr;</button>
-      );
-    }
-    return null;
-  };
+//   const renderLeftArrow = () => {
+//     if (currentPage !== 1) {
+//       return (
+//         <button onClick={() => handlePageChange(currentPage - 1)}>
+//           &larr;
+//         </button>
+//       );
+//     }
+//     return null;
+//   };
 
-  const handleItemsPerPageChange = (event) => {
-    setItemsPerPage(parseInt(event.target.value));
-    setCurrentPage(1);
-  };
+//   const renderRightArrow = () => {
+//     if (currentPage !== totalPages) {
+//       return (
+//         <button onClick={() => handlePageChange(currentPage + 1)}>
+//           &rarr;
+//         </button>
+//       );
+//     }
+//     return null;
+//   };
 
-  return (
-    <div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={selectedAll}
-                onChange={handleSelectAll}
-              />
-            </th>
-            <th>Naziv knjige</th>
-            <th>Autor</th>
-            <th>Kategorija</th>
-            <th>Na raspolaganju</th>
-            <th>Rezervisano</th>
-            <th>Izdate</th>
-            <th>U prekoračenju</th>
-            <th>Ukupna količina</th>
-            <th></th>
-          </tr>
-        </thead>
+//   const handleItemsPerPageChange = (event) => {
+//     setItemsPerPage(parseInt(event.target.value));
+//     setCurrentPage(1);
+//   };
 
-        <tbody>
-          {currentItems.map((book) => (
-            <tr key={book.id}>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={selectedItems.includes(book.id)}
-                  onChange={() => handleSelectItem(book.id)}
-                />
-              </td>
-              <td>{book.naziv}</td>
-              <td>{book.autor}</td>
-              <td>{book.kategorija}</td>
-              <td>{book.naRaspolaganju}</td>
-              <td>{book.rezervisano}</td>
-              <td>{book.izdate}</td>
-              <td>{book.uPrekoracenju}</td>
-              <td>{book.ukupnaKolicina}</td>
-              <td className="options">
-                <div className="dropdown">
-                  <div className="dots">&#x2026;</div>
-                  <div className="dropdown-content">
-                    <div onClick={() => { navigate('/EvidentionOfBooks/BookDetails') }}>
-                      Pogledaj detalje
-                    </div>
-                    <div>Obriši</div>
-                    <div onClick={() => { navigate('/EvidentionOfBooks/EditBook/BookDetails') }}>
-                      Izmijeni
-                    </div>
-                    <div>Izdaj knjigu</div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="pagination">
-        {renderLeftArrow()}
-        {renderPageNumbers()}
-        {renderRightArrow()}
-      </div>
-      <div className="rows-per-page">
-        <span>Rows per page:</span>
-        <select
-          className="inputs"
-          value={itemsPerPage}
-          onChange={handleItemsPerPageChange}
-        >
-          <option value={1}>1</option>
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-          <option value={100}>100</option>
-        </select>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <table className="table">
+//         <thead>
+//           <tr>
+//             <th>
+//               <input type="checkbox" checked={selectedAll} onChange={handleSelectAll} />
+//             </th>
+//             <th>Naziv knjige</th>
+//             <th>Autor</th>
+//             <th>Kategorija</th>
+//             <th>Na raspolaganju</th>
+//             <th>Rezervisano</th>
+//             <th>Izdate</th>
+//             <th>U prekoračenju</th>
+//             <th>Ukupna količina</th>
+//             <th></th>
+//           </tr>
+//         </thead>
 
-export default Table;
+//         <tbody>
+//           {currentItems.map((book) => (
+//             <tr key={book.id}>
+//               <td>
+//                 <input
+//                   type="checkbox"
+//                   checked={selectedItems.includes(book.id)}
+//                   onChange={() => handleSelectItem(book.id)}
+//                 />
+//               </td>
+//               <td>{book.naziv}</td>
+//               <td>{book.autor}</td>
+//               <td>{book.kategorija}</td>
+//               <td>{book.naRaspolaganju}</td>
+//               <td>{book.rezervisano}</td>
+//               <td>{book.izdate}</td>
+//               <td>{book.uPrekoracenju}</td>
+//               <td>{book.ukupnaKolicina}</td>
+//               <td>
+//                 <button onClick={() => navigate(`/book/${book.id}`)}>
+//                   Detalji
+//                 </button>
+//               </td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+
+//       <div className="pagination">
+//         <div className="page-numbers">
+//           {renderLeftArrow()}
+//           {renderPageNumbers()}
+//           {renderRightArrow()}
+//         </div>
+//         <div className="items-per-page">
+//           <span>Stavki po stranici: </span>
+//           <select value={itemsPerPage} onChange={handleItemsPerPageChange}>
+//             <option value="10">10</option>
+//             <option value="20">20</option>
+//             <option value="30">30</option>
+//           </select>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Table;

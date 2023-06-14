@@ -16,13 +16,12 @@
     background-color: white;
     margin-bottom: 10px;
     position: fixed;
-
     transition:  all 0.3s ease-in-out;
 }  
 .line-expanded{
   margin: 0;    
   margin-top: -5px;
-  width: 100%;
+  width: 300px;
 }
 .bottomicons{
   position:fixed;

@@ -1,0 +1,237 @@
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../../fonts/poppins/Poppins-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('../../fonts/poppins/Poppins-Bold.ttf');
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('../../fonts/poppins/Poppins-Medium.ttf');
+  }
+  
+  @font-face {
+    font-family: Montserrat-Bold;
+    src: url('../../fonts/montserrat/Montserrat-Bold.ttf');
+  }
+  
+  .Glavno{
+    
+    margin: 0% 4.3%;
+    /* background-color:red; */
+    position: absolute;
+  }
+  
+  .main-content{
+      overflow-y: scroll;
+  }
+  
+  *{
+    font-family: Poppins-Regular;
+  }
+  
+  .line2{
+    border-bottom: 1px solid black;
+    width: 1000rem;
+    margin-left: -500px;
+  }
+  
+  .blur-showed{
+    filter: blur(10px);
+    opacity: 1;
+    pointer-events: none;
+  }
+  
+  .blur{ 
+   transition: all 0.4s ease-in-out;
+  }
+  
+  .naslov1 {
+    padding: 3rem 0rem 	0rem 	0rem;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 0px;
+    width: 100%;
+  }
+  
+  .buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2rem;
+    border:none;
+  }
+  
+  .submit {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-right: 2rem;
+    background-color: #76a5af;
+    color: white;
+    border-radius: 25px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    border: none;
+  }
+  
+  .cancel{
+    padding-left: 30px;
+    padding-right: 30px;
+    border: 2px solid #76a5af;
+    background-color: white;
+    color: #76a5af;
+    border-radius: 25px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cancel:hover{ 
+    border: 2px solid #51737b;
+    background-color: #51737b;
+    color: white;
+  }
+  
+  .submit:hover{
+    background-color: #51737b;
+  }
+  
+  .paragraf{
+    color: #76A5AF;
+    transition: background-color 0.3s ease;
+  }
+  
+  .paragraf:hover{
+    color: #51737b;
+  }
+  
+  .Stranica p{
+    margin-right: 0.5%;
+    display:inline-flex;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  label{
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+  
+  .input0{
+  width: 500px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 2px solid rgba(0,0,0,0.4);
+  }
+  
+  .info{
+    margin: 0.2%;
+    display: block;
+  }
+  
+  .ks{
+    height: 200px;
+  }
+  
+  .info2{
+    position: absolute;
+    margin: -440px 700px;
+    margin-top: -350px;
+  }
+  
+  select{
+    width: 300px;
+  }
+  
+  .logo {
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 15px;
+    font-size: 30px;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile1 {
+    background-color: rgb(88, 124, 131);
+    padding: 0.6rem;
+  }
+  
+  .create-btn {
+    background-color: #134F5C;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-right: 50px;
+    font-size: 15px;
+    vertical-align: middle;
+    height: 25px;
+    width: 130px;
+  }
+  
+  .profile-tab {
+    width: 32px;
+    height: 32px;
+    background-color: #ccc;
+    border-radius: 20px;
+  }
+  
+  
+  
+  .icon {
+    padding-left: 2px;
+    color: white;
+    margin: 5px;
+    font-size: 35px;
+  }
+  
+  .prav {
+    height: 20px;
+    width: 20px;
+    background-color: white;
+  }
+  
+  .settings {
+    position:fixed;
+    color: white;
+    font-size: 35px;
+    padding-left: 6px;
+    margin-top: 340px;
+  }
+  
+  
+  @media screen and (max-width: 1280px) {
+    .container{
+      display: flex;
+      flex-direction: column;
+    }
+      .info2{ 
+        margin-left: 30px;
+        margin-top: 380px;
+      }
+      .text-text{
+        margin-left: 30px;
+      }
+      h1{
+        margin-left: 30px;
+      }
+      .Stranica{
+        margin-left: 30px;
+      }
+      body{
+        overflow-y: scroll;    }
+        .buttons{
+          margin-bottom: 0px;
+        }
+    }
+  

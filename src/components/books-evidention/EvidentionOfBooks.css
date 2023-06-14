@@ -15,15 +15,31 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   overflow-x: hidden;
 }
 
+.blur-showed {
+  filter: blur(10px);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.blur {
+  transition: all 0.4s ease-in-out;
+}
+
 .naslov {
-  padding: 3.438rem 0.5rem 	0.5rem 	0.5rem;
+  padding: 3.438rem 0.5rem 0.5rem 0.5rem;
   display: flex;
   justify-content: flex-start;
   margin-left: 60px;
+  width: 100%;
+}
+
+.futer {
+  position: fixed;
+  left: 0;
+  bottom: -20px;
   width: 100%;
 }
 
@@ -40,20 +56,10 @@ body {
   color: white;
   border-radius: 25px;
   font-size: 15px;
-  transition:background-color 0.4s ease;
+  transition: background-color 0.4s ease;
   border: none;
-  z-index:0;
+  z-index: 0;
   opacity: 1;
-}
-
-.blur-showed{
-  filter: blur(10px);
-  opacity: 1;
-  pointer-events: none;
-}
-
-.blur{ 
- transition: all 0.4s ease-in-out;
 }
 
 .nova-knjiga:hover {
@@ -66,6 +72,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
 .search-bar-icon {
   color: #76a5af;
   font-size: 35px;
@@ -77,35 +84,8 @@ body {
   border-radius: 10px;
   width: 70%;
 }
+
 .search-span {
   display: flex;
   flex-direction: row;
-}
-.footer{
-  z-index: 1;
-  --footer-background: #ed5565;
-  display: grid;
-  position: relative;
-  grid-area: footer;
-  min-height: 12rem;
-}
-
-.bubbles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1rem;
-  background-color: var(--footer-background);
-  fill: url("#blob");
-}
-
-.bubble{
-  position: absolute;
-  left: var(--position, 50%);
-  background:var(--footer-background);
-  border-radius: 100%;
-  animation: bubble-size
-  var(--time, 4s) ease-in infinite
-  var(--delay, 0s);
 }

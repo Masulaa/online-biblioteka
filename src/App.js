@@ -18,9 +18,16 @@ import BookDetails from './components/books-evidention/book-details/BookDetails'
 import BookEvid from './components/books-evidention/book-details/BookEvid';
 import BookMulti from './components/books-evidention/book-details/BookMulti';
 import BookSpec from './components/books-evidention/book-details/BookSpec';
+
+import StudentEvidention from './components/student/StudentEvidention'
+import NewStudent from './components/student/NewStudent';
+import LibrarianEvidention from './components/librarian/LibrarianEvidention';
+import NewLibrarian from './components/librarian/NewLibrarian';
+import AuthorEvidention from './components/author/AuthorEvidention';
+import NewAuthor from './components/author/NewAuthor';
+
 function App() {
   return (
-    <div className="container">
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<SignUp/>} />
@@ -36,9 +43,16 @@ function App() {
         <Route path='/EvidentionOfBooks/BookDetails/Evidention' element={<BookEvid/>}/>
         <Route path='/EvidentionOfBooks/BookDetails/Specification' element={<BookSpec/>}/>
         <Route path='/EvidentionOfBooks/BookDetails/Multimedia' element={<BookMulti/>}/>
+        <Route path='/StudentEvidention' element={<StudentEvidention/>}/>
+        <Route path='/StudentEvidention/NewStudent' element={<NewStudent/>}/> 
+        <Route path='/LibrarianEvidention' element={<LibrarianEvidention/>}/>
+        <Route path='/LibrarianEvidention/NewLibrarian' element={<NewLibrarian/>}/> 
+        <Route path='/AuthorEvidention' element={<AuthorEvidention/>}/>
+        <Route path='/AuthorEvidention/NewAuthor' element={<NewAuthor/>}/> 
+
 
       </Routes>
-    </BrowserRouter></div>
+    </BrowserRouter>
   );
 }
 

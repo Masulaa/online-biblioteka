@@ -117,7 +117,7 @@ const SignUp = () => {
                 <BsFillLockFill/></span></div>
 
             <div className="container-login-form-btn">
-            <button type="submit" className="signup-form-btn polja" onClick={showAccount}>Register</button>
+            <button type="submit" className="signup-form-btn" onClick={showAccount}>Register</button>
             </div>
 
             <div className="loginbutton">
