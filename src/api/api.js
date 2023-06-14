@@ -35,6 +35,7 @@ client.interceptors.request.use(
     const token = LocalStorage.get("BearerToken");
 
     console.log(`Is there Auth header alraedy ${config.headers.Authorization}`);
+    console.log(`Token in the LocalStorage ${token}`);
 
     if (!config.headers.Authorization) {
       config.headers.Authorization = `Bearer ${token}`;

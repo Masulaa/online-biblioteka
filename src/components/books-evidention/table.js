@@ -15,7 +15,7 @@ const Table = () => {
   const fetchBooks = async () => {
     try {
       const response = await BookService.ListBooks();
-      setBooks(response.data);
+      setBooks(response.data.data);
     } catch (error) {
       console.log('Error fetching books:', error);
     }
@@ -47,6 +47,7 @@ const Table = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
+  console.log("Books is", books) 
   const currentItems = books.slice(indexOfFirstItem, indexOfLastItem);
 
   const totalPages = Math.ceil(books.length / itemsPerPage);
@@ -128,14 +129,14 @@ const Table = () => {
                   onChange={() => handleSelectItem(book.id)}
                 />
               </td>
-              <td>{book.naziv}</td>
-              <td>{book.autor}</td>
-              <td>{book.kategorija}</td>
-              <td>{book.naRaspolaganju}</td>
+              <td>{book.title}</td>
+              <td>{book.authors.map(a => `${a.name} ${a.surname}`).join(', ')}</td>
+              <td>{book.categories.map(c => c.name).join(', ')}</td>
+              <td>{book.ableToBorrow ? 'Da' : 'Ne'}</td>
               <td>{book.rezervisano}</td>
-              <td>{book.izdate}</td>
+              <td>{book.rSamples}</td>
               <td>{book.uPrekoracenju}</td>
-              <td>{book.ukupnaKolicina}</td>
+              <td>{book.samples}</td>
               <td className="options">
                 <div className="dropdown">
                   <div className="dots">&#x2026;</div>
