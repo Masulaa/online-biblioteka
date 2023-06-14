@@ -40,7 +40,7 @@ function EvidentionOfBooks() {
             ></input>
           </span>
         </div>
-       {/* <Table /> */}
+       {<Table />}
       </div>
     </React.Fragment>
   );
