@@ -55,8 +55,8 @@ ul, li {
   list-style-type: none;
 }
 
-input,
-textarea {
+.input,
+.textarea {
 outline: none;
 border: none;
 }

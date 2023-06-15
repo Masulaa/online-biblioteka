@@ -1,11 +1,10 @@
 import "./EvidentionOfBooks.css";
 import Table from "./table";
-import NavBar from "../navbars/navbar";  
+import NavBar from "../navbars/navbar";
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 
 import { HiMagnifyingGlassCircle } from "react-icons/hi2";
 
@@ -40,7 +39,7 @@ function EvidentionOfBooks() {
             ></input>
           </span>
         </div>
-       {<Table />}
+        {<Table />}
       </div>
     </React.Fragment>
   );

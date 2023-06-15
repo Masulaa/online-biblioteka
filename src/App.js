@@ -25,12 +25,14 @@ import LibrarianEvidention from './components/librarian/LibrarianEvidention';
 import NewLibrarian from './components/librarian/NewLibrarian';
 import AuthorEvidention from './components/author/AuthorEvidention';
 import NewAuthor from './components/author/NewAuthor';
+import LoadingSpinner from './components/account-components/loading-spinner/LoadingSpinner';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<SignUp/>} />
+        <Route path='/test' element={<LoadingSpinner/>}/>
         <Route path='/LogIn' element={<LogIn/>}/>
         <Route path='/EvidentionOfBooks' element={<EvidentionOfBooks/>}/>
         <Route path='/EvidentionOfBooks/NewBook/BookDetails' element={<NewBook/>}/>

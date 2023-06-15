@@ -23,6 +23,13 @@ th {
   text-align: left;
 }
 
+.loading{
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  width: auto;
+}
+
 input[type='checkbox'] {
   margin-top: 0;
   margin-bottom: 0;

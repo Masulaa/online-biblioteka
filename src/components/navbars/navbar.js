@@ -23,23 +23,22 @@ function NavBar() {
 
   const isTouchedHandler = () => {
     setIsTouched(!isTouched);
-    if(!isTouched){
-    dispatch(menuActions.openMenu())}
-    else {
+    if (!isTouched) {
+      dispatch(menuActions.openMenu());
+    } else {
       dispatch(menuActions.closeMenu());
     }
   };
 
   return (
     <div>
-<div class="top-nav">
-  <div class="logo">Biblioteka</div>
-  <button class="create-btn">Kreiraj</button>
-  <div class="profile">
-    <div class="profile-tab"></div>
-  </div>
-</div>
-
+      <div class="top-nav">
+        <div class="logo">Biblioteka</div>
+        <button class="create-btn">Kreiraj</button>
+        <div class="profile">
+          <div class="profile-tab"></div>
+        </div>
+      </div>
 
       <div className="main-content">
         <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>
@@ -55,22 +54,46 @@ function NavBar() {
                 </p>
               </li>
               <li className="celija">
-                <AiOutlineProfile className="icon2" onClick={() => {
-                    if(isTouched){
-                    isTouchedHandler();}
+                <AiOutlineProfile
+                  className="icon2"
+                  onClick={() => {
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
                     navigate("/LibrarianEvidention");
-                  }}/>
-                <p className={`par ${isTouched ? "par-expanded" : ""}`} >
+                  }}
+                />
+                <p
+                  className={`par ${isTouched ? "par-expanded" : ""}`}
+                  onClick={() => {
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
+                    navigate("/LibrarianEvidention");
+                  }}
+                >
                   Bibliotekari
                 </p>
               </li>
               <li className="celija">
-                <MdPeopleAlt className="icon2" onClick={() => {
-                    if(isTouched){
-                    isTouchedHandler();}
+                <MdPeopleAlt
+                  className="icon2"
+                  onClick={() => {
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
                     navigate("/StudentEvidention");
-                  }} />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`} >
+                  }}
+                />
+                <p
+                  className={`par ${isTouched ? "par-expanded" : ""}`}
+                  onClick={() => {
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
+                    navigate("/StudentEvidention");
+                  }}
+                >
                   Učenici
                 </p>
               </li>
@@ -78,40 +101,65 @@ function NavBar() {
                 <HiDocumentDuplicate
                   className="icon2"
                   onClick={() => {
-                    if(isTouched){
-                    isTouchedHandler();}
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
                     navigate("/EvidentionOfBooks");
                   }}
                 />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                <p
+                  className={`par ${isTouched ? "par-expanded" : ""}`}
+                  onClick={() => {
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
+                    navigate("/EvidentionOfBooks");
+                  }}
+                >
                   Knjige
                 </p>
               </li>
               <li className="celija">
-                <AiOutlineProfile className="icon2"                    onClick={() => {
-                    if(isTouched){
-                    isTouchedHandler();}
+                <AiOutlineProfile
+                  className="icon2"
+                  onClick={() => {
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
                     navigate("/AuthorEvidention");
-                  }}/>
-                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  }}
+                />
+                <p
+                  className={`par ${isTouched ? "par-expanded" : ""}`}
+                  onClick={() => {
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
+                    navigate("/AuthorEvidention");
+                  }}
+                >
                   Autori
                 </p>
               </li>
               <li className="celija">
-                <TbArrowsLeftRight className="icon2" onClick={isTouchedHandler}/>
+                <TbArrowsLeftRight
+                  className="icon2"
+                  onClick={isTouchedHandler}
+                />
                 <p className={`par ${isTouched ? "par-expanded" : ""}`}>
                   Izdavanje Knjiga
                 </p>
-              </li >
+              </li>
               <div className="bottomicons">
                 <li className="celija">
-                <span
-                  className={`line ${isTouched ? "line-expanded" : ""}`}
-                ></span>
-                <FiSettings className="icon2" onClick={isTouchedHandler}/>
-                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
-                  Settings
-                </p></li>
+                  <span
+                    className={`line ${isTouched ? "line-expanded" : ""}`}
+                  ></span>
+                  <FiSettings className="icon2" onClick={isTouchedHandler} />
+                  <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                    Settings
+                  </p>
+                </li>
               </div>
             </ul>
             <div className="all-lists"></div>

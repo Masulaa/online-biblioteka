@@ -72,12 +72,12 @@ ul, li {
 
 
 /*---------------------------------------------*/
-input {
+.input {
 	outline: none;
 	border: none;
 }
 
-textarea {
+.textarea {
   outline: none;
   border: none;
 }
@@ -179,7 +179,7 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 177px 130px 33px 95px;
+  padding: 33px 130px 33px 95px;
 }
 
 /*------------------------------------------------------------------
@@ -208,7 +208,7 @@ iframe {
 
   width: 100%;
   display: block;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 .signup-form-title2,.login-form-title2 {
   font-family: Poppins-Bold;
@@ -219,7 +219,7 @@ iframe {
 
   width: 100%;
   display: block;
- padding-bottom: 20px; 
+ padding-bottom: 10px; 
 }
 
 
