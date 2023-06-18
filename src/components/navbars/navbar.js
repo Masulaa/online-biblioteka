@@ -12,6 +12,7 @@ import { MdPeopleAlt } from "react-icons/md";
 import { HiDocumentDuplicate } from "react-icons/hi";
 import { TbArrowsLeftRight } from "react-icons/tb";
 import { FiSettings } from "react-icons/fi";
+import { BsFillXCircleFill } from "react-icons/bs";
 
 import { menuActions } from "../../store/menuStore";
 function NavBar() {
@@ -39,7 +40,6 @@ function NavBar() {
           <div class="profile-tab"></div>
         </div>
       </div>
-
       <div className="main-content">
         <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>
           <nav className="sidebar">
@@ -162,9 +162,13 @@ function NavBar() {
                 </li>
               </div>
             </ul>
+
             <div className="all-lists"></div>
           </nav>
         </aside>
+      </div>
+      <div className={`cancel10 ${isTouched ? "cancel11" : ""}`}>
+        <BsFillXCircleFill className={`iconx ${isTouched ? "iconx1" : ""}`} onClick={isTouchedHandler}></BsFillXCircleFill>
       </div>
     </div>
   );

@@ -69,7 +69,8 @@
 .submit {
   padding-left: 30px;
   padding-right: 30px;
-  margin-right: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
   background-color: #76a5af;
   color: white;
   border-radius: 25px;
@@ -81,6 +82,8 @@
 .cancel{
   padding-left: 30px;
   padding-right: 30px;
+  margin-right: 1rem;
+  margin-left: 1rem;
   border: 2px solid #76a5af;
   background-color: white;
   color: #76a5af;
@@ -233,4 +236,14 @@ select{
       .buttons{
         margin-bottom: 0px;
       }
+  }
+
+  .container3 {
+    margin-right: 14250px;
+  }
+
+  .link-p {
+    margin-left: 15px;
+    font-size: 20px;
+    color: #51737b;
   }

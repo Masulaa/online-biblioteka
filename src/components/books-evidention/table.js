@@ -165,7 +165,7 @@ const Table = () => {
                       <div>Obriši</div>
                       <div
                         onClick={() => {
-                          navigate("/EvidentionOfBooks/EditBook/BookDetails");
+                          navigate("/EvidentionOfBooks/EditBook");
                         }}
                       >
                         Izmijeni

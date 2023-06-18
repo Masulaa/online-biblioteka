@@ -36,46 +36,6 @@ function NewLibrarian() {
     console.log("Slika:", fileName);
   };
 
-  useEffect(() => {
-    const savedNameSurname = localStorage.getItem("nameSurname");
-    const savedUserType = localStorage.getItem("userType");
-    const savedJmbg = localStorage.getItem("jmbg");
-    const savedEmail = localStorage.getItem("email");
-    const savedUsername = localStorage.getItem("username");
-    const savedPassword = localStorage.getItem("password");
-    const savedConfirmPassword = localStorage.getItem("confirmPassword");
-    const savedFileName = localStorage.getItem("fileName");
-
-    if (savedNameSurname) setNameSurname(savedNameSurname);
-    if (savedUserType) setUserType(savedUserType);
-    if (savedJmbg) setJmbg(savedJmbg);
-    if (savedEmail) setEmail(savedEmail);
-    if (savedUsername) setUsername(savedUsername);
-    if (savedPassword) setPassword(savedPassword);
-    if (savedConfirmPassword) setConfirmPassword(savedConfirmPassword);
-    if (savedFileName) setFileName(savedFileName);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("nameSurname", nameSurname);
-    localStorage.setItem("userType", userType);
-    localStorage.setItem("jmbg", jmbg);
-    localStorage.setItem("email", email);
-    localStorage.setItem("username", username);
-    localStorage.setItem("password", password);
-    localStorage.setItem("confirmPassword", confirmPassword);
-    localStorage.setItem("fileName", fileName);
-  }, [
-    nameSurname,
-    userType,
-    jmbg,
-    email,
-    username,
-    password,
-    confirmPassword,
-    fileName,
-  ]);
-
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
   return (

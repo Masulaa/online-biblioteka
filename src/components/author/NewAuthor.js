@@ -22,18 +22,6 @@ function NewAuthor() {
     console.log("Opis:", description);
   };
 
-  useEffect(() => {
-    const savedNameSurname = localStorage.getItem("nameSurname");
-    const savedDescription = localStorage.getItem("description");
-
-    if (savedNameSurname) setNameSurname(savedNameSurname);
-    if (savedDescription) setDescription(savedDescription);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("nameSurname", nameSurname);
-    localStorage.setItem("description", description);
-  }, [nameSurname, description]);
 
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 

@@ -102,6 +102,43 @@
   border-radius: 20px;
 }
 
+.cancel10{
+  position: fixed;
+  overflow: hidden;
+  font-size: 30px;
+  color: #3a3a3a;
+  bottom: 0%;
+  left: 50%;
+  transition: all 0.4s ease-in;
+  cursor: pointer;
+}
+
+.cancel11{
+  position: fixed;
+  transition: all 0.4s ease-in;
+  bottom: 0%;
+  left: 50%;
+  color: #3a3a3a;
+}
+
+.cancel11:hover{
+  transition: all 0.1s ease-in;
+  color: #515151;
+}
+
+
+.iconx{
+  transform: translateY(-10000px);
+  transform: translateX(-40px);
+  transition: all 0.4s ease-in;
+}
+
+.iconx1{
+  transform: translateY(0px);
+  transform: translateX(0px);
+  transition: all 0.4s ease-in;
+}
+
 .aside {
   background-color: #3a3a3a;
   width: 50px;

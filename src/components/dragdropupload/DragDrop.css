@@ -90,13 +90,14 @@
 .browse-button {
   display: inline-block;
   padding: 8px 16px;
-  background-color: #4caf50;
+  background-color: #76a5af;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
 .browse-button:hover {
-  background-color: #45a049;
+  background-color: #51737b;
 }

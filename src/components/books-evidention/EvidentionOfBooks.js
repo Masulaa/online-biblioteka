@@ -25,7 +25,7 @@ function EvidentionOfBooks() {
           <button
             className="nova-knjiga"
             onClick={() => {
-              navigate("/EvidentionOfBooks/NewBook/BookDetails");
+              navigate("/EvidentionOfBooks/NewBook");
             }}
           >
             Nova Knjiga
