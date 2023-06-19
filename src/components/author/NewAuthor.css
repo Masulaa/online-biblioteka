@@ -40,24 +40,6 @@
     margin-left: -500px;
   }
   
-  .blur-showed{
-    filter: blur(10px);
-    opacity: 1;
-    pointer-events: none;
-  }
-  
-  .blur{ 
-   transition: all 0.4s ease-in-out;
-  }
-  
-  .naslov1 {
-    padding: 3rem 0rem 	0rem 	0rem;
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 0px;
-    width: 100%;
-  }
-  
   .buttons1{
     display: flex;
     flex-direction: row;
@@ -146,13 +128,6 @@
   
   select{
     width: 300px;
-  }
-  
-  .logo {
-    font-weight: bold;
-    font-size: 1rem;
-    padding: 15px;
-    font-size: 30px;
   }
   
   .profile {

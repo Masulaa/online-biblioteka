@@ -1,7 +1,10 @@
+@import '../../style/global.css';
+
 .lista {
   display: flex;
   flex-direction: column;
   margin-top: 55px;
+  padding-left: 0px;
 }
 
 .all-lists {
@@ -74,13 +77,6 @@
   background-color: #76a5af;
   padding: 0rem 0.625rem 0rem 0rem;
   z-index: 9999;
-}
-
-.logo {
-  padding: 15pxs;
-  font-weight: bold;
-  font-size: 1rem;
-  color: white;
 }
 
 .create-btn {

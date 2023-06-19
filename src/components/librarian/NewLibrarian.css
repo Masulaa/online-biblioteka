@@ -147,12 +147,6 @@ select{
   width: 300px;
 }
 
-.logo {
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 15px;
-  font-size: 30px;
-}
 
 .profile {
   display: flex;
