@@ -26,18 +26,8 @@
     position: absolute;
   }
   
-  .main-content{
-      overflow-y: scroll;
-  }
-  
   *{
     font-family: Poppins-Regular;
-  }
-  
-  .line2{
-    border-bottom: 1px solid black;
-    width: 1000rem;
-    margin-left: -500px;
   }
   
   .buttons1{

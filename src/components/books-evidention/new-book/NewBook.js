@@ -71,9 +71,9 @@ function NewBook() {
 
   return (
     <Fragment>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
-        <div className="main-content">
+        <div className="">
+        {/* <Headbar naslov="Nova Knjiga"> */}
           <div class="headbar">
             <h2 className="naslov">Nova Knjiga</h2>
             <p class="breadcrumbs">
@@ -84,8 +84,8 @@ function NewBook() {
             </p>
           </div>
 
-          <div className="Glavno">
-            <div className="Stranica">
+          <div>
+            <div>
               <Link>
                 <button
                   className={`toggle-button ${

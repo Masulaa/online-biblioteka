@@ -1,17 +1,5 @@
-@import "../../../style/global.css";
-
-.main-content {
-  overflow-y: scroll;
-}
-
 * {
   font-family: Poppins-Regular;
-}
-
-.line2 {
-  border-bottom: 1px solid black;
-  width: 1000rem;
-  margin-left: -500px;
 }
 
 .blur-showed {
@@ -75,13 +63,6 @@
 
 .paragraf:hover {
   color: #51737b;
-}
-
-.Stranica p {
-  margin-right: 0.5%;
-  display: inline-flex;
-  font-size: 1rem;
-  font-weight: 500;
 }
 
 label {
@@ -182,9 +163,6 @@ select {
     margin-left: 30px;
   }
   h1 {
-    margin-left: 30px;
-  }
-  .Stranica {
     margin-left: 30px;
   }
   body {

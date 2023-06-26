@@ -62,7 +62,6 @@ function EditBook() {
 
   return (
     <Fragment>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="main-content">
           <div className="Glavno">
