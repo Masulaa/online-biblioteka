@@ -7,6 +7,7 @@ import DragDrop from "../../dragdropupload/DragDrop";
 import "./NewBook.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { BookService } from "../../../api/api";
 
 function NewBook() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -24,6 +25,12 @@ function NewBook() {
   const [format, setFormat] = useState("");
   const [isbn, setIsbn] = useState("");
   const [fileName, setFileName] = useState("");
+
+  const createBook = () => {
+    BookService.CreateBook({
+      nazivKnjiga: bookName,
+    });
+  };
 
   const navigate = useNavigate();
 
@@ -52,6 +59,8 @@ function NewBook() {
     console.log("Format:", format);
     console.log("ISBN:", isbn);
     console.log("Ime fajla:", fileName);
+
+    createBook();
   };
 
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
@@ -62,51 +71,61 @@ function NewBook() {
 
   return (
     <Fragment>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
-        <div className="main-content">
-          <div className="Glavno">
-            <h1 className="naslov1">Nova Knjiga</h1>
-            <p>
+        <div className="">
+        {/* <Headbar naslov="Nova Knjiga"> */}
+          <div class="headbar">
+            <h2 className="naslov">Nova Knjiga</h2>
+            <p class="breadcrumbs">
               <Link to="/EvidentionOfBooks">
                 <span className="paragraf">Evidencija Knjiga</span>
               </Link>{" "}
               / Nova Knjiga
             </p>
-            <div className="line2"></div>
-            <div className="Stranica">
-              <Link className="link-p">
-              <button
-                className={currentStep === 1 ? "active" : ""}
-                onClick={() => handleLinkClick(1)}
-              >
-                Osnovni Detalji
-              </button>
+          </div>
+
+          <div>
+            <div>
+              <Link>
+                <button
+                  className={`toggle-button ${
+                    currentStep === 1 ? "active" : ""
+                  }`}
+                  onClick={() => handleLinkClick(1)}
+                >
+                  Osnovni Detalji
+                </button>
               </Link>
               <Link className="link-p">
-              <button
-                className={currentStep === 2 ? "active" : ""}
-                onClick={() => handleLinkClick(2)}
-              >
-                Specifikacija
-              </button>
+                <button
+                  className={`toggle-button ${
+                    currentStep === 2 ? "active" : ""
+                  }`}
+                  onClick={() => handleLinkClick(2)}
+                >
+                  Specifikacija
+                </button>
               </Link>
               <Link className="link-p">
-              <button
-                className={currentStep === 3 ? "active" : ""}
-                onClick={() => handleLinkClick(3)}
-              >
-                Multimedija
-              </button>
+                <button
+                  className={`toggle-button ${
+                    currentStep === 3 ? "active" : ""
+                  }`}
+                  onClick={() => handleLinkClick(3)}
+                >
+                  Multimedija
+                </button>
               </Link>
             </div>
+
             <div className="line2"></div>
+
             {currentStep === 1 && (
-              <div className="container1">
-                <div className="info">
+              <div className="flex-columns">
+                <div className="column">
                   <label>Naziv Knjige</label>
                   <input
-                    className="input0"
+                    className="default-input"
                     value={bookName}
                     onChange={(e) => setBookName(e.target.value)}
                   />
@@ -114,25 +133,25 @@ function NewBook() {
                   <ReactQuill
                     value={sadrzaj}
                     onChange={handleSadrzajChange}
-                    className="input0"
+                    className="default-input"
                   />
                   <label>Izaberite kategorije</label>
                   <input
-                    className="input0"
+                    className="default-input"
                     value={categories}
                     onChange={(e) => setCategories(e.target.value)}
                   />
                   <label>Izaberite Žanrove</label>
                   <input
-                    className="input0"
+                    className="default-input"
                     value={genres}
                     onChange={(e) => setGenres(e.target.value)}
                   />
                 </div>
-                <div className="info2">
+                <div className="column">
                   <label>Izaberite autore</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={authors}
                     onChange={(e) => setAuthors(e.target.value)}
                   >
@@ -144,7 +163,7 @@ function NewBook() {
                   </select>
                   <label>Izdavač</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={publisher}
                     onChange={(e) => setPublisher(e.target.value)}
                   >
@@ -156,7 +175,7 @@ function NewBook() {
                   </select>
                   <label>Godina Izdavanja</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
                   >
@@ -179,7 +198,7 @@ function NewBook() {
                   <label>Količina</label>
                   <input
                     type="number"
-                    className="input0"
+                    className="default-input"
                     min="1"
                     value={quantity}
                     onChange={(e) => setQuantity(parseInt(e.target.value))}
@@ -209,14 +228,14 @@ function NewBook() {
                   <label>Broj Stranica</label>
                   <input
                     type="number"
-                    className="input0"
+                    className="default-input"
                     min="1"
                     value={numOfPages}
                     onChange={(e) => setNumOfPages(parseInt(e.target.value))}
                   />
                   <label>Pismo</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={script}
                     onChange={(e) => setScript(e.target.value)}
                   >
@@ -226,7 +245,7 @@ function NewBook() {
                   </select>
                   <label>Povez</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={binding}
                     onChange={(e) => setBinding(e.target.value)}
                   >
@@ -236,7 +255,7 @@ function NewBook() {
                   </select>
                   <label>Format</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={format}
                     onChange={(e) => setFormat(e.target.value)}
                   >
@@ -246,11 +265,10 @@ function NewBook() {
                     <option>16:9</option>
                     <option>4:3</option>
                   </select>
-                
-                
+
                   <label>ISBN</label>
                   <input
-                    className="input0"
+                    className="default-input"
                     value={isbn}
                     onChange={(e) => setIsbn(e.target.value)}
                   />
@@ -297,13 +315,13 @@ function NewBook() {
                     Nazad
                   </button>
                   <button
-                      className="cancel"
-                      onClick={() => {
-                        navigate("/EvidentionOfBooks");
-                      }}
-                    >
-                      Poništi
-                    </button>
+                    className="cancel"
+                    onClick={() => {
+                      navigate("/EvidentionOfBooks");
+                    }}
+                  >
+                    Poništi
+                  </button>
                   <button className="submit" onClick={handleConfirm}>
                     Potvrdi
                   </button>

@@ -15,7 +15,7 @@ import { FiSettings } from "react-icons/fi";
 import { BsFillXCircleFill } from "react-icons/bs";
 
 import { menuActions } from "../../store/menuStore";
-function NavBar() {
+function NavBar({children}) {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ function NavBar() {
   };
 
   return (
-    <div>
+    <div class="page-wrapper">
       <div class="top-nav">
         <div class="logo">Biblioteka</div>
         <button class="create-btn">Kreiraj</button>
@@ -42,7 +42,7 @@ function NavBar() {
       </div>
       <div className="main-content">
         <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>
-          <nav className="sidebar">
+          <nav className="">
             <ul className="lista">
               <li className="celija an">
                 <GiHamburgerMenu className="icon2" onClick={isTouchedHandler} />
@@ -162,10 +162,13 @@ function NavBar() {
                 </li>
               </div>
             </ul>
-
-            <div className="all-lists"></div>
           </nav>
         </aside>
+
+        <div className="content-wrapper">
+          {children}
+        </div>
+
       </div>
       <div className={`cancel10 ${isTouched ? "cancel11" : ""}`}>
         <BsFillXCircleFill className={`iconx ${isTouched ? "iconx1" : ""}`} onClick={isTouchedHandler}></BsFillXCircleFill>
