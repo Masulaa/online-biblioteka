@@ -219,8 +219,8 @@ select{
     flex-direction: column;
   }
     .info2{ 
-      margin-left: 30px;
-      margin-top: 380px;
+      margin-left: 0px;
+      margin-top: -330px;
     }
     .text-text{
       margin-left: 30px;
