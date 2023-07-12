@@ -2,7 +2,6 @@ import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import NavBar from "../../navbars/navbar";
 import DragDrop from "../../dragdropupload/DragDrop";
 import "./EditBook.css";
 import ReactQuill from "react-quill";
@@ -62,7 +61,6 @@ function EditBook() {
 
   return (
     <Fragment>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="main-content">
           <div className="Glavno">

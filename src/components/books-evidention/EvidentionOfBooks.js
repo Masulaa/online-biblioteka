@@ -1,6 +1,5 @@
 import "./EvidentionOfBooks.css";
 import Table from "./table";
-import NavBar from "../navbars/navbar";
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,6 @@ function EvidentionOfBooks() {
 
   return (
     <React.Fragment>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="naslov">
           <h1>Knjige</h1>

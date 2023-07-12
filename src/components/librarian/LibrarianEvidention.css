@@ -19,18 +19,6 @@
     overflow-x: hidden;
   }
   
-  .naslov {
-    padding: 3.438rem 0.5rem 	0.5rem 	0.5rem;
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 60px;
-    width: 100%;
-  }
-  
-  .line2 {
-    border-bottom: 1px solid black;
-    margin-left: -500px;
-  }
   
   .novi-ucenik {
     padding-left: 30px;

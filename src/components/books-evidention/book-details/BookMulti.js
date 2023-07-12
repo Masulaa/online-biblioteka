@@ -7,7 +7,6 @@ import { HiOutlineArrowUturnUp, HiOutlineArrowPath } from 'react-icons/hi2';
 import { FaRegHandScissors } from 'react-icons/fa';
 import { BsThreeDotsVertical, BsCalendarCheck,BsArrowClockwise } from "react-icons/bs";
 import {MdDoubleArrow} from "react-icons/md"
-import NavBar from "../../navbars/navbar";
 import { GiBckwardTime } from "react-icons/gi";
 
 function BookMulti() {
@@ -15,7 +14,6 @@ function BookMulti() {
 
 return (
 <div>
-<NavBar />
 <div className="main-content">
     <div className="Glavno">
       <div className="header2">

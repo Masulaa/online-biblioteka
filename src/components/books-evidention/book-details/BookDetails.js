@@ -5,14 +5,11 @@ import { HiOutlineArrowUturnUp} from 'react-icons/hi2';
 import { FaRegHandScissors} from 'react-icons/fa';
 import { HiOutlineArrowPath} from 'react-icons/hi2';
 import { BsThreeDotsVertical} from "react-icons/bs";
-import NavBar from "../../navbars/navbar";
 
 
 function BookDetails() {
   return (
       <body>
-      <NavBar/>
-
           <main>
             <div className='abc'>
               <div className='dva'>

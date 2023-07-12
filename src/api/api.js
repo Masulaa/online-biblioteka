@@ -78,4 +78,7 @@ export const BookService = {
   ListBooks() {
     return client.get("books");
   },
+  CreateBook(bookData) {
+    return client.post('books/store', bookData)
+  }
 };

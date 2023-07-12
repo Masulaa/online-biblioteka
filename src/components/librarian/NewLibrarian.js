@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import NavBar from "../navbars/navbar";
 import "./NewLibrarian.css";
 import "react-quill/dist/quill.snow.css";
 import DragDrop from "../dragdropupload/DragDrop";
@@ -40,7 +39,6 @@ function NewLibrarian() {
 
   return (
     <Fragment>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="main-content">
           <div className="Glavno">

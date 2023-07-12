@@ -4,7 +4,6 @@ import LibrarianTable from "./LibrarianTable";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import NavBar from "../navbars/navbar";
 
 import { HiMagnifyingGlassCircle } from "react-icons/hi2";
 
@@ -15,7 +14,6 @@ function LibrarianEvidention() {
   const navigate = useNavigate();
   return (
     <body>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
       <div className="naslov">
         <h1>Bibliotekari</h1>

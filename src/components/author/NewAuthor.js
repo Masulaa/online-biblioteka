@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import NavBar from "../navbars/navbar";
 import "./NewAuthor.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -27,7 +26,6 @@ function NewAuthor() {
 
   return (
     <Fragment>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="main-content">
           <div className="Glavno">

@@ -1,38 +1,12 @@
-import React from "react";
-import { useState, Fragment } from "react";
-
+import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import NavBar from "../../navbars/navbar";
+
 import DragDrop from "../../dragdropupload/DragDrop";
 import "./NewBook.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
-const validationSchema = Yup.object().shape({
-  bookName: Yup.string().required("Naziv knjige je obavezan"),
-  shortSummary: Yup.string().required("Kratki sadržaj je obavezan"),
-  categories: Yup.string().required("Kategorije su obavezne"),
-  genres: Yup.string().required("Žanrovi su obavezni"),
-  authors: Yup.string().required("Autori su obavezni"),
-  publisher: Yup.string().required("Izdavač je obavezan"),
-  year: Yup.string().required("Godina izdavanja je obavezna"),
-  quantity: Yup.number()
-    .typeError("Količina mora biti broj")
-    .min(1, "Količina mora biti veća od 0")
-    .required("Količina je obavezna"),
-  numOfPages: Yup.number()
-    .typeError("Broj stranica mora biti broj")
-    .min(1, "Broj stranica mora biti veći od 0")
-    .required("Broj stranica je obavezan"),
-  script: Yup.string().required("Pismo je obavezno"),
-  binding: Yup.string().required("Povez je obavezan"),
-  format: Yup.string().required("Format je obavezan"),
-  isbn: Yup.string().required("ISBN je obavezan"),
-  fileName: Yup.string().required("Naziv fajla je obavezan"),
-});
+import { BookService } from "../../../api/api";
 
 function NewBook() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -50,6 +24,12 @@ function NewBook() {
   const [format, setFormat] = useState("");
   const [isbn, setIsbn] = useState("");
   const [fileName, setFileName] = useState("");
+
+  const createBook = () => {
+    BookService.CreateBook({
+      nazivKnjiga: bookName,
+    });
+  };
 
   const navigate = useNavigate();
 
@@ -78,6 +58,8 @@ function NewBook() {
     console.log("Format:", format);
     console.log("ISBN:", isbn);
     console.log("Ime fajla:", fileName);
+
+    createBook();
   };
 
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
@@ -88,22 +70,26 @@ function NewBook() {
 
   return (
     <Fragment>
-      <NavBar />
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
-        <div className="main-content">
-          <div className="Glavno">
-            <h1 className="naslov1">Nova Knjiga</h1>
-            <p>
+        <div className="">
+        {/* <Headbar naslov="Nova Knjiga"> */}
+          <div class="headbar">
+            <h2 className="naslov">Nova Knjiga</h2>
+            <p class="breadcrumbs">
               <Link to="/EvidentionOfBooks">
                 <span className="paragraf">Evidencija Knjiga</span>
               </Link>{" "}
               / Nova Knjiga
             </p>
-            <div className="line2"></div>
-            <div className="Stranica">
-              <Link className="link-p">
+          </div>
+
+          <div>
+            <div>
+              <Link>
                 <button
-                  className={currentStep === 1 ? "active" : ""}
+                  className={`toggle-button ${
+                    currentStep === 1 ? "active" : ""
+                  }`}
                   onClick={() => handleLinkClick(1)}
                 >
                   Osnovni Detalji
@@ -111,7 +97,9 @@ function NewBook() {
               </Link>
               <Link className="link-p">
                 <button
-                  className={currentStep === 2 ? "active" : ""}
+                  className={`toggle-button ${
+                    currentStep === 2 ? "active" : ""
+                  }`}
                   onClick={() => handleLinkClick(2)}
                 >
                   Specifikacija
@@ -119,148 +107,117 @@ function NewBook() {
               </Link>
               <Link className="link-p">
                 <button
-                  className={currentStep === 3 ? "active" : ""}
+                  className={`toggle-button ${
+                    currentStep === 3 ? "active" : ""
+                  }`}
                   onClick={() => handleLinkClick(3)}
                 >
                   Multimedija
                 </button>
               </Link>
             </div>
+
             <div className="line2"></div>
+
             {currentStep === 1 && (
-              <div className="container1">
-                <div className="info">
-                  <Formik
-                    initialValues={{
-                      bookName: "",
-                      shortSummary: "",
-                      categories: "",
-                      genres: "",
-                      authors: "",
-                      publisher: "",
-                      year: "",
-                      quantity: 0,
-                      numOfPages: 0,
-                      script: "",
-                      binding: "",
-                      format: "",
-                      isbn: "",
-                      fileName: "",
-                    }}
-                    validationSchema={validationSchema}
-                    onSubmit={handleConfirm}
+              <div className="flex-columns">
+                <div className="column">
+                  <label>Naziv Knjige</label>
+                  <input
+                    className="default-input"
+                    value={bookName}
+                    onChange={(e) => setBookName(e.target.value)}
+                  />
+                  <label>Kratki sadržaj</label>
+                  <ReactQuill
+                    value={sadrzaj}
+                    onChange={handleSadrzajChange}
+                    className="default-input"
+                  />
+                  <label>Izaberite kategorije</label>
+                  <input
+                    className="default-input"
+                    value={categories}
+                    onChange={(e) => setCategories(e.target.value)}
+                  />
+                  <label>Izaberite Žanrove</label>
+                  <input
+                    className="default-input"
+                    value={genres}
+                    onChange={(e) => setGenres(e.target.value)}
+                  />
+                </div>
+                <div className="column">
+                  <label>Izaberite autore</label>
+                  <select
+                    className="default-input"
+                    value={authors}
+                    onChange={(e) => setAuthors(e.target.value)}
                   >
-                    <Form>
-                      <label htmlFor="bookName">Naziv Knjige</label>
-                      <Field
-                        type="text"
-                        id="bookName"
-                        name="bookName"
-                        className="input0"
-                      />
-                      <ErrorMessage
-                        name="bookName"
-                        component="div"
-                        className="error"
-                      />
-
-                      <label htmlFor="categories">Kategorije</label>
-                      <Field
-                        type="text"
-                        id="categories"
-                        name="categories"
-                        className="input0"
-                      />
-                      <ErrorMessage
-                        name="categories"
-                        component="div"
-                        className="error"
-                      />
-
-                      <label htmlFor="genres">Žanrovi</label>
-                      <Field
-                        type="text"
-                        id="genres"
-                        name="genres"
-                        className="input0"
-                      />
-                      <ErrorMessage
-                        name="genres"
-                        component="div"
-                        className="error"
-                      />
-                      <div className="info2">
-                        <label htmlFor="authors">Autori</label>
-                        <Field
-                          type="text"
-                          id="authors"
-                          name="authors"
-                          className="input0"
-                        />
-                        <ErrorMessage
-                          name="authors"
-                          component="div"
-                          className="error"
-                        />
-
-                        <label htmlFor="publisher">Izdavač</label>
-                        <Field
-                          type="text"
-                          id="publisher"
-                          name="publisher"
-                          className="input0"
-                        />
-                        <ErrorMessage
-                          name="publisher"
-                          component="div"
-                          className="error"
-                        />
-
-                        <label htmlFor="year">Godina Izdavanja</label>
-                        <Field
-                          type="text"
-                          id="year"
-                          name="year"
-                          className="input0"
-                        />
-                        <ErrorMessage
-                          name="year"
-                          component="div"
-                          className="error"
-                        />
-
-                        <label htmlFor="quantity">Količina</label>
-                        <Field
-                          type="number"
-                          id="quantity"
-                          name="quantity"
-                          className="input0"
-                        />
-                        <ErrorMessage
-                          name="quantity"
-                          component="div"
-                          className="error"
-                        />
-
-                        <div className="buttons">
-                          <button
-                            className="cancel"
-                            onClick={() => {
-                              navigate("/EvidentionOfBooks");
-                            }}
-                        >
-                            Poništi
-                          </button>
-                          <button
-                            className="submit"
-                            onClick={() => handleLinkClick(2)}
-                          >
-                            Dalje
-                          </button>
-                        </div>
-                      </div>
-                    </Form>
-                  </Formik>
+                    <option> </option>
+                    <option>Ivo Andrić</option>
+                    <option>Petar II Petrović Njegoš</option>
+                    <option>Meša Selimović</option>
+                    <option>Ivan Mažuranić</option>
+                  </select>
+                  <label>Izdavač</label>
+                  <select
+                    className="default-input"
+                    value={publisher}
+                    onChange={(e) => setPublisher(e.target.value)}
+                  >
+                    <option></option>
+                    <option>Laguna</option>
+                    <option>Cid</option>
+                    <option>Arto</option>
+                    <option>Nova Knjiga</option>
+                  </select>
+                  <label>Godina Izdavanja</label>
+                  <select
+                    className="default-input"
+                    value={year}
+                    onChange={(e) => setYear(e.target.value)}
+                  >
+                    <option> </option>
+                    <option>2023</option>
+                    <option>2022</option>
+                    <option>2021</option>
+                    <option>2020</option>
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                    <option>2016</option>
+                    <option>2015</option>
+                    <option>2014</option>
+                    <option>2013</option>
+                    <option>2012</option>
+                    <option>2011</option>
+                    <option>2010</option>
+                  </select>
+                  <label>Količina</label>
+                  <input
+                    type="number"
+                    className="default-input"
+                    min="1"
+                    value={quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value))}
+                  />
+                  <div className="buttons">
+                    <button
+                      className="cancel"
+                      onClick={() => {
+                        navigate("/EvidentionOfBooks");
+                      }}
+                    >
+                      Poništi
+                    </button>
+                    <button
+                      className="submit"
+                      onClick={() => handleLinkClick(2)}
+                    >
+                      Dalje
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -270,14 +227,14 @@ function NewBook() {
                   <label>Broj Stranica</label>
                   <input
                     type="number"
-                    className="input0"
+                    className="default-input"
                     min="1"
                     value={numOfPages}
                     onChange={(e) => setNumOfPages(parseInt(e.target.value))}
                   />
                   <label>Pismo</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={script}
                     onChange={(e) => setScript(e.target.value)}
                   >
@@ -287,7 +244,7 @@ function NewBook() {
                   </select>
                   <label>Povez</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={binding}
                     onChange={(e) => setBinding(e.target.value)}
                   >
@@ -297,7 +254,7 @@ function NewBook() {
                   </select>
                   <label>Format</label>
                   <select
-                    className="input0"
+                    className="default-input"
                     value={format}
                     onChange={(e) => setFormat(e.target.value)}
                   >
@@ -310,7 +267,7 @@ function NewBook() {
 
                   <label>ISBN</label>
                   <input
-                    className="input0"
+                    className="default-input"
                     value={isbn}
                     onChange={(e) => setIsbn(e.target.value)}
                   />
