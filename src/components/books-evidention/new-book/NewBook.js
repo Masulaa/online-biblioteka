@@ -44,20 +44,24 @@ function NewBook() {
   };
 
   const handleConfirm = () => {
-    console.log("Naziv knjige:", bookName);
-    console.log("Kratki sadržaj:", sadrzaj);
-    console.log("Kategorija:", categories);
-    console.log("Žanr:", genres);
-    console.log("Autor:", authors);
-    console.log("Izdavač:", publisher);
-    console.log("Godina izdavanja:", year);
-    console.log("Količina:", quantity);
-    console.log("Broj stranica:", numOfPages);
-    console.log("Pismo:", script);
-    console.log("Povez:", binding);
-    console.log("Format:", format);
-    console.log("ISBN:", isbn);
-    console.log("Ime fajla:", fileName);
+
+    // console.log("Naziv knjige:", bookName);
+    // console.log("Kratki sadržaj:", sadrzaj);
+    // console.log("Kategorija:", categories);
+    // console.log("Žanr:", genres);
+    // console.log("Autor:", authors);
+    // console.log("Izdavač:", publisher);
+    // console.log("Godina izdavanja:", year);
+    // console.log("Količina:", quantity);
+    // console.log("Broj stranica:", numOfPages);
+    // console.log("Pismo:", script);
+    // console.log("Povez:", binding);
+    // console.log("Format:", format);
+    // console.log("ISBN:", isbn);
+    // console.log("Ime fajla:", fileName);
+
+    
+    console.log(this);
 
     createBook();
   };
