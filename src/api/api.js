@@ -23,6 +23,7 @@ client.interceptors.response.use(
       // FIXME: If we are receiving Unauthorized we can't visit this page, best is to show error to user and ask him to reauthenticate
       // for the moment i will only redirect to login page
       console.log(`Received ${HTTP_UNAUTHORIZED} status code`);
+      LocalStorage.remove('BearerToken')
 
       window.location.href = "/LogIn";
     }
@@ -34,11 +35,13 @@ client.interceptors.request.use(
   async (config) => {
     const token = LocalStorage.get("BearerToken");
 
-    console.log(`Is there Auth header alraedy ${config.headers.Authorization}`);
+    console.log("Token is", token)
 
-    if (!config.headers.Authorization) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    // console.log(`Is there Auth header alraedy ${config.headers.Authorization}`);
+
+    // if (!config.headers.Authorization) {
+    config.headers.Authorization = `Bearer ${token}`;
+    // }
 
     return config;
   },

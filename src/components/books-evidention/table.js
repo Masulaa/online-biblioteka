@@ -102,35 +102,34 @@ const Table = () => {
 
   return (
     <div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={selectedAll}
-                onChange={handleSelectAll}
-              />
-            </th>
-            <th>Naziv knjige</th>
-            <th>Autor</th>
-            <th>Kategorija</th>
-            <th>Na raspolaganju</th>
-            <th>Rezervisano</th>
-            <th>Izdate</th>
-            <th>U prekoračenju</th>
-            <th>Ukupna količina</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        {books.length === 0 ? (
-          <ul>
-            <li className="loading">
-              <LoadingSpinner></LoadingSpinner>
-            </li>
-          </ul>
-        ) : (
+      {books.length === 0 ? (
+        <div>
+          <div className="loading">
+            <LoadingSpinner></LoadingSpinner>
+          </div>
+        </div>
+      ) : (
+        <table className="table">
+          <thead>
+            <tr>
+              <th>
+                <input
+                  type="checkbox"
+                  checked={selectedAll}
+                  onChange={handleSelectAll}
+                />
+              </th>
+              <th>Naziv knjige</th>
+              <th>Autor</th>
+              <th>Kategorija</th>
+              <th>Na raspolaganju</th>
+              <th>Rezervisano</th>
+              <th>Izdate</th>
+              <th>U prekoračenju</th>
+              <th>Ukupna količina</th>
+              <th></th>
+            </tr>
+          </thead>
           <tbody>
             {currentItems.map((book) => (
               <tr key={book.id}>
@@ -177,8 +176,8 @@ const Table = () => {
               </tr>
             ))}
           </tbody>
-        )}
-      </table>
+        </table>
+      )}
       <div className="pagination">
         {renderLeftArrow()}
         {renderPageNumbers()}

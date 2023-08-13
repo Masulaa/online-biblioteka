@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 import "./navbar.css";
 
@@ -32,14 +32,14 @@ function NavBar({children}) {
   };
 
   return (
-    <div class="page-wrapper">
-      <div class="top-nav">
-        <div class="logo">Biblioteka</div>
-        <button class="create-btn" onClick={() => {
+    <div className="page-wrapper">
+      <div className="top-nav">
+        <div className="logo">Biblioteka</div>
+        <button className="create-btn" onClick={() => {
               navigate("/CreateAccount");
             }}>Kreiraj</button>
-        <div class="profile">
-          <div class="profile-tab"></div>
+        <div className="profile">
+          <div className="profile-tab"></div>
         </div>
       </div>
       <div className="main-content">
@@ -168,7 +168,7 @@ function NavBar({children}) {
         </aside>
 
         <div className="content-wrapper">
-          {children}
+          <Outlet/>
         </div>
 
       </div>

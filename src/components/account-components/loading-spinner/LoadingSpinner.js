@@ -3,8 +3,8 @@ import "./LoadingSpinner.css";
 
 const LoadingSpinner = () => {
   return (
-    <div className="Loading">
-      <span class="loader"></span>
+    <div className="loader">
+      <span className="loaderBar"></span>
     </div>
   );
 };

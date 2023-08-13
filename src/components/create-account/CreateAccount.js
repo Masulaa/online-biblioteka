@@ -2,11 +2,10 @@ import { Fragment, React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserService } from "../../api/api";
-import { useEffect } from "react";
 import "./CreateAccount.css";
 
 const CreateAccount = () => {
-  const [roleId, setRoleId] = useState();
+  const [roleId, setRoleId] = useState(1);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [jmbg, setJmbg] = useState("");
@@ -14,12 +13,11 @@ const CreateAccount = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [errors, setErrors] = useState({});
 
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
   const navigate = useNavigate();
-
-  // REQUEST TO API IS NOT WORKING
 
   const newUserData = {
     role_id: roleId,
@@ -32,14 +30,16 @@ const CreateAccount = () => {
     password_confirmation: passwordConfirmation,
   }
 
-
   const createAccounts = async () => {
     try {
       const response = await UserService.CreateUser(newUserData);
       console.log("API Response", response);
-      navigate("/EvidentionOfBooks");
+
+      // navigate("/EvidentionOfBooks");
     } catch (error) {
-      console.log("Error creating account:", error);
+
+      console.error("Error creating an account", error)
+      setErrors(error.response.data.data)
     }
   };
 
@@ -52,7 +52,7 @@ const CreateAccount = () => {
         <div className="line2"></div>
         <div className="flex-columns">
           <div className="column">
-            <label>Izaberite ROLE ID</label>
+            <label>Izaberite ulogu korisnika u sistemu</label>
             <select
               className="default-input"
               value={roleId}
@@ -62,18 +62,21 @@ const CreateAccount = () => {
               <option value={2}>Ucenik</option>
               <option value={3}>Admin</option>
             </select>
+            {errors.role_id ? <p className="error-text">{errors.role_id[0]}</p> : ''}
             <label>Ime korisnika</label>
             <input
               className="default-input"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
+            {errors.name ? <p className="error-text">{errors.name[0]}</p> : ''}
             <label>Prezime korisnika</label>
             <input
               className="default-input"
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
             />
+            {errors.surname ? <p className="error-text">{errors.surname[0]}</p> : ''}
             <label>Unesite JMBG korisnika</label>
             <input
               className="default-input"
@@ -81,6 +84,7 @@ const CreateAccount = () => {
               onChange={(e) => setJmbg(e.target.value)}
               maxLength={13}
             />
+            {errors.jmbg ? <p className="error-text">{errors.jmbg[0]}</p> : ''}
           </div>
           <div className="column">
             <label>Unesite e-mail koriniska</label>
@@ -89,20 +93,25 @@ const CreateAccount = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {errors.email ? <p className="error-text">{errors.email[0]}</p> : ''}
             <label>Unesite username koriniska</label>
             <input
               className="default-input"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
+            {errors.username ? <p className="error-text">{errors.username[0]}</p> : ''}
             <label>Unesite sifru koriniska</label>
             <input
+            type="password"
               className="default-input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {errors.password ? <p className="error-text">{errors.password[0]}</p> : ''}
                <label>Potvride sifru koriniska</label>
             <input
+            type="password"
               className="default-input"
               value={passwordConfirmation}
               onChange={(e) => setPasswordConfirmation(e.target.value)}
