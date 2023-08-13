@@ -15,6 +15,10 @@ import AppLayout from "./components/navbars/navbar";
 const LogIn = lazy(() => import("./components/account-components/LogIn"))
 const SignUp = lazy(() => import("./components/account-components/SignUp"))
 
+const CreateAccount = lazy(() =>
+  import("./components/create-account/CreateAccount")
+);
+
 const EvidentionOfBooks = lazy(() =>
   import("./components/books-evidention/EvidentionOfBooks")
 );
@@ -65,6 +69,14 @@ function App() {
           element={
             <Suspense fallback={ErrorHandlerPage}>
               <SignUp />
+            </Suspense>
+          }
+        />
+                <Route
+          path="/CreateAccount"
+          element={
+            <Suspense fallback={ErrorHandlerPage}>
+              <CreateAccount />
             </Suspense>
           }
         />

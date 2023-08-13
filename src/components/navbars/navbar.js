@@ -35,7 +35,9 @@ function NavBar({children}) {
     <div class="page-wrapper">
       <div class="top-nav">
         <div class="logo">Biblioteka</div>
-        <button class="create-btn">Kreiraj</button>
+        <button class="create-btn" onClick={() => {
+              navigate("/CreateAccount");
+            }}>Kreiraj</button>
         <div class="profile">
           <div class="profile-tab"></div>
         </div>

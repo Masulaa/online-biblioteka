@@ -78,12 +78,6 @@
   z-index: 9999;
 }
 
-.create-btn {
-  background-color: #51737b;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-}
 
 .profile {
   display: flex;

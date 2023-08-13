@@ -82,3 +82,9 @@ export const BookService = {
     return client.post('books/store', bookData)
   }
 };
+
+export const UserService = {
+  CreateUser(newUserData) {
+    return client.post('users/store', newUserData)
+  }
+}
