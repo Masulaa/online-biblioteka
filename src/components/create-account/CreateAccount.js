@@ -32,9 +32,6 @@ const CreateAccount = () => {
     password_confirmation: passwordConfirmation,
   }
 
-  useEffect(() => {
-    createAccounts();
-  }, []);
 
   const createAccounts = async () => {
     try {
