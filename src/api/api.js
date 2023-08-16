@@ -23,7 +23,7 @@ client.interceptors.response.use(
       // FIXME: If we are receiving Unauthorized we can't visit this page, best is to show error to user and ask him to reauthenticate
       // for the moment i will only redirect to login page
       console.log(`Received ${HTTP_UNAUTHORIZED} status code`);
-      LocalStorage.remove('BearerToken')
+      LocalStorage.remove("BearerToken");
 
       window.location.href = "/LogIn";
     }
@@ -35,13 +35,13 @@ client.interceptors.request.use(
   async (config) => {
     const token = LocalStorage.get("BearerToken");
 
-    console.log("Token is", token)
+    console.log("Token is", token);
 
     // console.log(`Is there Auth header alraedy ${config.headers.Authorization}`);
 
-    // if (!config.headers.Authorization) {
-    config.headers.Authorization = `Bearer ${token}`;
-    // }
+    if (!config.headers.Authorization) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
     return config;
   },
@@ -60,19 +60,28 @@ export const AuthService = {
     return client.post("register", userData);
   },
   async signup(userData) {
-    const response = await client.post("login", userData, {
-      // FIXME: For Login api we don't have token yet, but we need to inject one as per API specification
-      // so we will override default setting here and inject static token only for this reuqest
-      headers: {
-        Authorization: `Bearer ${STATIC_LOGIN_TOKEN}`,
-      },
-    });
-    if (response.status === HTTP_OK) {
-      // if we received OK status code, that means we successfully logged in, and we should take Token from response and use it later
-      // for all subsequent requests. We will save this Token inside LocalStorage (browser local storage)
-      // and use it later in axios request interceptor to set our token for all the api requests, to avoid setting it for each individiaul request
-      console.log(`Setting local token ${response.data.data.token}`, response.data);
-      LocalStorage.set("BearerToken", response.data.data.token);
+    try {
+      const response = await client.post("login", userData, {
+        // FIXME: For Login api we don't have token yet, but we need to inject one as per API specification
+        // so we will override default setting here and inject static token only for this reuqest
+        headers: {
+          Authorization: `Bearer ${STATIC_LOGIN_TOKEN}`,
+        },
+      });
+      if (response.status === HTTP_OK) {
+        // if we received OK status code, that means we successfully logged in, and we should take Token from response and use it later
+        // for all subsequent requests. We will save this Token inside LocalStorage (browser local storage)
+        // and use it later in axios request interceptor to set our token for all the api requests, to avoid setting it for each individiaul request
+        console.log(
+          `Setting local token ${response.data.data.token}`,
+          response.data
+        );
+        LocalStorage.set("BearerToken", response.data.data.token);
+        return true;
+      }
+    } catch (error) {
+      console.error("Error while logging in");
+      return false;
     }
   },
 };
@@ -82,12 +91,12 @@ export const BookService = {
     return client.get("books");
   },
   CreateBook(bookData) {
-    return client.post('books/store', bookData)
-  }
+    return client.post("books/store", bookData);
+  },
 };
 
 export const UserService = {
   CreateUser(newUserData) {
-    return client.post('users/store', newUserData)
-  }
-}
+    return client.post("users/store", newUserData);
+  },
+};

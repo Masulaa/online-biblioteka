@@ -14,21 +14,21 @@ const LogIn = () => {
 
   const navigate = useNavigate();
 
-  const showAccount = async(e) => {
+  const showAccount = async (e) => {
     e.preventDefault();
     if (userName && password) {
       if (password.length < 8) {
         return alert("Sifra mora da bude minimum 8 karaktera.");
       } else {
         console.log("Username: " + userName + "\nPassword: " + password);
-        navigate("/EvidentionOfBooks");
       }
     } else {
-      return alert("Molimo vas da unesete i username i sifru.");    }  
-      
+      return alert("Molimo vas da unesete i username i sifru.");
+    }
+
     // if we made it through all the checks let's call API to register
     // Build user data - request body/payload object here
-    
+
     const userData = {
       username: userName,
       password: password,
@@ -39,13 +39,11 @@ const LogIn = () => {
     try {
       const response = await AuthService.signup(userData);
       console.log("API Response", response);
+      navigate("/EvidentionOfBooks");
     } catch (error) {
       console.error("Error calling registration API", error);
     }
   };
-
-
-  
 
   return (
     <div className="limiter">
@@ -92,7 +90,11 @@ const LogIn = () => {
             </div>
 
             <div className="container-login-form-btn">
-              <button type="submit" className="login-form-btn" onClick={showAccount}>
+              <button
+                type="submit"
+                className="login-form-btn"
+                onClick={showAccount}
+              >
                 Login
               </button>
             </div>
