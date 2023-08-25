@@ -7,7 +7,7 @@ const HTTP_OK = 200;
 const STATIC_LOGIN_TOKEN = "b3Rvcmlub2xhcmluZ29sb2dpamE=";
 
 const client = axios.create({
-  baseURL: "https://petardev.live/api/",
+  baseURL: "https://tim5.petardev.live/api/",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
