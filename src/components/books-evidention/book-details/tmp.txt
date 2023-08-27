@@ -1,0 +1,31 @@
+<div className="container3">
+                <DragDrop
+                  handleFileNameChange={handleFileNameChange}
+                  fileName={fileName}
+                />
+                <div className="buttons">
+                  <button
+                    className="cancel"
+                    onClick={() => {
+                      setCurrentStep(2);
+                    }}
+                  >
+                    Nazad
+                  </button>
+                  <button
+                    className="cancel"
+                    onClick={() => {
+                      navigate("/EvidentionOfBooks");
+                    }}
+                  >
+                    Poništi
+                  </button>
+                  <button className="submit" onClick={handleConfirm}>
+                    Potvrdi
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>

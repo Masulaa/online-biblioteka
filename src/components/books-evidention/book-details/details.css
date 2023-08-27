@@ -1,0 +1,281 @@
+:root {
+  --main-color: #1b1b1b;
+  --link-color: #28A3F6;
+  --border-color:#E4DFDF;
+  --text-color:#374151;
+}
+/*  color: var(--text-color)*/
+* {
+  margin: 0;
+  overflow-y: hidden;
+  overflow: hidden;
+  font-family: "Ubuntu", sans-serif;
+}
+
+Header .header {
+  width: 100vw;
+  height: 10vh;
+  background-color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.8vh;
+  margin: 0 0 0 2vw;
+}
+
+.Title {
+  margin: 10vw;
+}
+.Title p {
+  margin-top: 1vh;
+  font-size: 1.5vh;
+}
+.Title p a{
+color: var(--link-color);
+}
+header .Book {
+  width: 50vw;
+}
+
+header .Book .icon {
+  width: 7.5vw;
+  height: 4vh;
+  font-size: 1.5vh;
+  outline: none;
+  border: none;
+  padding: 0;
+  letter-spacing: 0.2vh;
+  background-color: transparent;
+}
+
+#icon {
+  margin-right: 5px;
+}
+
+.vertical {
+  border: 0;
+  padding: 0;
+  border-left: 0.1vw solid var(--main-color);
+  top: 3vh;
+  height: 4vh;
+  margin: 0 0.5rem;
+  color: transparent;
+  background-color: transparent;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.v-dots {
+  margin: 0 0.6vw;
+  height: 4vh;
+  width: 2vw;
+  border: 0;
+  padding: 0;
+  display: inline-block;
+  position:relative;
+  background-color: transparent;
+  top: 0.3vw;
+
+}
+
+.v-dots .verical-dot {
+  font-size: 2.5vh;
+  padding: 0;
+  margin: 0;
+}
+
+/* 2nd layer */
+main {
+  display: flex;
+}
+
+.right-side{
+  background-color: white;
+  width: 18%;
+  height: 100vh;
+  border-left: 0.1vw solid var(--border-color);
+  border-top: 0.1vw solid var(--border-color);
+}
+
+.option-wrapper {
+  width: 80vw;
+  height: 4.5vh;
+  margin: 0 0 0 2vw;
+  background-color: white;
+  ;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 0.1vw solid var(--border-color);
+  border-left: 0.1vw solid var(--border-color);
+  border-bottom: 0.1vw solid var(--border-color);
+}
+
+.option-container {
+  display: flex;
+  align-items: center;
+  width: 95vw;
+}
+
+.top-half {
+  padding: 1vw;
+}
+
+.row {
+  margin: 2vh;
+  font-size: 1.5vh;
+}
+.row a{
+  color: var(--link-color);
+}
+
+.top-half {
+  border-bottom: 0.1vw solid var(--border-color);
+}
+
+
+/*  bottom  */
+.history {
+  margin: 1.5vw 1vw;
+}
+
+.history-title {
+  font-size: 2vh;
+  margin: 0.7vw 1vw;
+}
+
+.history-details,
+.history-more {
+  font-size: 1.5vh;
+  margin: 0.7vw 1vw;
+}
+.history-more i{
+  color: var(--link-color);
+}
+
+
+.history-details a,
+.history a {
+  color: var(--link-color);
+}
+
+.history-show-all{
+  margin: 2.5vw 2vw;
+  font-size: 1.5vh;
+  color: var(--link-color);
+}
+.history-show-all i,.history-more i{
+  color: var(--link-color);
+  position:relative; 
+  top:0.2vh;
+
+}
+#icon{
+  position:relative; 
+  top:0.2vh;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-book {
+  width: 20vw;
+  margin-left: 3vw;
+}
+
+.description {
+  width: 30vw;
+}
+
+.about {
+  margin: 2.3vw 0;
+}
+
+.about .title {
+  font-size: 0.8vw;
+  margin: 0.2vw 0;
+}
+
+.about .dummy {
+  font-size: 0.8vw;
+  font-weight: bold;
+}
+
+.description {
+  margin: 2.3vw 8vw;
+  text-wrap: wrap;
+  width: 20vw;
+  font-size: 0.8vw;
+}
+
+
+/*hover*/
+.option-container li {
+  margin: 0 1vw;
+  font-size: 0.7vw;
+}
+
+.option-wrapper ul li { 
+  display: table-cell; 
+  position: relative; 
+  padding: 0.8vh 0;
+}
+
+.option-wrapper ul li a {
+  color: #707480;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.8vh 1vh;
+  position: relative;
+}
+
+.option-wrapper ul li a:after {    
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 0.12vh;
+  position: absolute;
+  background: #28A3F6;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+
+.option-wrapper ul li.active a:after,
+.option-wrapper ul li a:hover:after { 
+  width: 100%; 
+  left: 0; 
+
+}
+.option-wrapper ul li.active a{
+  color: #28A3F6;
+
+}
+
+a {
+  text-decoration: none;
+
+}
+
+
+.main , .drag-drop-container{
+
+  width: 70vw;
+
+}
+.drop-area{
+  margin: 0;
+  width: 60vw;
+  max-width: none;
+}

@@ -1,112 +1,123 @@
 
-import "./BookDetails.css";
+import "./details.css";
 import "./table1.css"
 import { Link } from 'react-router-dom';
+import React, { useState, Fragment } from "react";
 import {useNavigate} from "react-router-dom";
 import { HiOutlineArrowUturnUp, HiOutlineArrowPath } from 'react-icons/hi2';
 import { FaRegHandScissors } from 'react-icons/fa';
 import { BsThreeDotsVertical, BsCalendarCheck,BsArrowClockwise } from "react-icons/bs";
 import {MdDoubleArrow} from "react-icons/md"
 import { GiBckwardTime } from "react-icons/gi";
+import DragDrop from "../../dragdropupload/DragDrop";
+
 
 function BookMulti() {
   const navigate = useNavigate();
+  const [currentStep, setCurrentStep] = useState(1);
+
+
 
 return (
-<div>
-<div className="main-content">
-    <div className="Glavno">
-      <div className="header2">
-        <div>
-          <h1>Nova Knjiga</h1>
-          <p>
-            <a href="/" className="tag">Evidencija Knjiga</a> &#160; / &#160; <a href="/" className="tag">Knjiga-467</a>
-          </p>
+<body>
+      <header>
+        <section class="header">
+          <div class="Title">
+            <h1>Nova Knjiga</h1>
+            <p>
+              <a href="/" className="tag">Evidencija Knjiga</a> &#160; / &#160; <a href="/" className="tag">Knjiga-467</a>
+            </p>
+          </div>
+          <section class="Book">
+            <button class="icon"><i class="fa-solid fa-arrow-turn-up" id="icon"></i>Otpisi knjigu</button>
+            <button class="icon"><i class="fa-solid fa-hand-scissors" id="icon"></i>Izdaj knjigu</button>
+            <button class="icon"><i class="fa-solid fa-arrows-rotate" id="icon"></i>Vrati knjigu</button>
+            <button class="icon"><i class="fa-regular fa-calendar-check" id="icon"></i>Rezervisi</button>
+            <span class="vertical">
+              <button class="v-dots" id="dots"><BsThreeDotsVertical className="verical-dot"/></button>
+            </span>
+          </section>
+        </section>
+      </header>
+      <main>
+        <div class="column">
+          <section class="option-wrapper">
+            <ul class="option-container">
+              <li class="option">
+                <a href="#">Osnovni Detalji</a>
+              </li>
+              <li class="option" onClick={() => {
+                  navigate("/EvidentionOfBooks/BookDetails/Specification");
+                }}>
+                <a href="">Specifikacije</a>
+              </li>
+              <li class="option"onClick={() => {
+                  navigate("/EvidentionOfBooks/BookDetails/Evidention");
+                }}>
+                <a href="">Evidencija</a>
+              </li>
+              <li class="active" onClick={() => {
+                  navigate("/EvidentionOfBooks/BookDetails/Multimedia");
+                }}>
+                <a href="">Multimedija</a>
+              </li>
+                </ul>
+          </section>
+
+          <section class="main">
+          <DragDrop class="media"/>
+      </section>
         </div>
-<Link></Link>
-        <div className="icons">
-          <button className="icon1"><HiOutlineArrowUturnUp />Otpisi knjigu</button>
-          <button className="icon1"><FaRegHandScissors />Izdaj knjigu</button>
-          <button className="icon1"><HiOutlineArrowPath />Vrati knjigu</button>
-          <button className="icon1"><BsCalendarCheck />Rezervisi knjigu</button>
-          
-          <button className="icon1" id="icon2"> <div className="vertical" /><BsThreeDotsVertical /></button>
-        </div>
-      </div>
-
-      <div className="options-container">
-        <div className="line-above" />
-        <div className="options">
-          <div className="option" onClick={() => {
-            navigate("/EvidentionOfBooks/BookDetails/");
-          }}>
-            Osnovni Detalji
-          </div>
-          <div className="option" onClick={() => {
-            navigate("/EvidentionOfBooks/BookDetails/S");
-      }}>
-            Specifikacije
-          </div>
-          <div className="option" onClick={() => {
-            navigate("/EvidentionOfBooks/BookDetails/E");
-          }}>
-            Evidencija Iznamljivanja
-          </div>
-          <div className="option1">
-            Multimedija
-          </div>
-        </div>
-      </div>
-      <div className="line-below" />
-
-      <div className="main-details">
-        <div className="vertical2">
-          <div className="status">
-          <div className="row"><p>Na raspolaganju:</p><a>2 primjeraka</a></div>
-          <div className="row"><p>Rezervisano:</p><a>2 primjeraka</a></div>
-          <div className="row"><p>Izdato:</p><a>2 primjeraka</a></div>
-          <div className="row"><p>U prekoracenju:</p><a>2 primjeraka</a></div>
-          <div className="row"><p>Ukupna kolicina:</p><a>2 primjeraka</a></div>
-          <div className="horizontal2">
-          </div>
 
 
-</div>  
+        <aside className="right-side">
+          <section class="top-half">
+            <div class="row" id="1">
+              <p>Na raspolaganju: <a>2 primjeraka</a></p>
+            </div>
+            <div class="row" id="2">
+              <p>Rezervisano: <a>2 primjeraka</a></p>
+            </div>
+            <div class="row" id="3">
+              <p>Izdato: <a>2 primjeraka</a></p>
+            </div>
+            <div class="row" id="4">
+              <p>U prekoracenju: <a>2 primjeraka</a></p>
+            </div>
+            <div class="row" id="5">
+              <p>Ukupna kolicina: <a>2 primjeraka</a></p>
+            </div>
+          </section>
 
-<div className="something">
-          <p className="history">IZDAVANJE KNJIGE - 4 days ago</p>
-        
-            <a className="bibliotekar" href="bibliotekar">Valentina K.</a> je izdala knjigu <a href="risbo">Risbu</a>
-            <p className="date">dana 13.10.2023</p>
-            <a>Pogledaj Detalje</a><MdDoubleArrow className="icon9"></MdDoubleArrow>
-          </div>   
-           <div className="something">
-          <p className="history">IZDAVANJE KNJIGE - 4 days ago</p>
-        
-            <a className="bibliotekar" href="bibliotekar">Valentina K.</a> je izdala knjigu <a href="risbo">Risbu</a>
-            <p className="date">dana 13.10.2023</p>
-            <a>Pogledaj Detalje</a><MdDoubleArrow className="icon9"></MdDoubleArrow>
-          </div>   
-           <div className="something">
-          <p className="history">IZDAVANJE KNJIGE - 4 days ago</p>
-        
-            <a className="bibliotekar" href="bibliotekar">Valentina K.</a> je izdala knjigu <a href="risbo">Risbu</a>
-            <p className="date">dana 13.10.2023</p>
-            <a>Pogledaj Detalje</a><MdDoubleArrow className="icon9"></MdDoubleArrow>
-          </div>
-           <a className="more2"> <BsArrowClockwise/>Prikazi&#160;Sve</a>
+          <section class="bot-half">
+            <div class="history">
+              <p class="history-title">Izdavanje Knjige - 4 days ago</p>
+              <p class="history-details"><a href="#">Valentina K.</a> je izdala knjigu <a href="#">Petru P.</a> dana
+                13.10.2023</p>
+              <a class="history-more">Pogledaj Detalje<i class="fa-solid fa-angles-right"></i></a>
+            </div>
 
-</div>
-<div>
- 
-</div>
-      </div>
-    </div>
+            <div class="history">
+              <p class="history-title">Izdavanje Knjige - 4 days ago</p>
+              <p class="history-details"><a href="#">Valentina K.</a> je izdala knjigu <a href="#">Petru P.</a> dana
+                13.10.2023</p>
+              <a class="history-more">Pogledaj Detalje<i class="fa-solid fa-angles-right"></i></a>
+            </div>
 
-    <main>
-    </main>
-  </div>
-</div>
+            <div class="history">
+              <p class="history-title">Izdavanje Knjige - 4 days ago</p>
+              <p class="history-details"><a href="#">Valentina K.</a> je izdala knjigu <a href="#">Petru P.</a> dana
+                13.10.2023</p>
+              <a class="history-more">Pogledaj Detalje<i class="fa-solid fa-angles-right"></i></a>
+            </div>
+
+            <a class="history-show-all">Prikazi Sve <i class="fa-solid fa-angles-right"></i></a>
+          </section>
+
+        </aside>
+
+      </main>
+    </body>
 );
 }
-export default BookMulti
+export default BookMulti;

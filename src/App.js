@@ -32,6 +32,7 @@ const BookDetails = lazy(() =>
 const BookEvid = lazy(() =>
   import("./components/books-evidention/book-details/BookEvid")
 );
+
 const BookMulti = lazy(() =>
   import("./components/books-evidention/book-details/BookMulti")
 );
@@ -134,6 +135,7 @@ function App() {
               </Suspense>
             }
           />
+              
           <Route
             path="/EvidentionOfBooks/BookDetails/Specification"
             element={
