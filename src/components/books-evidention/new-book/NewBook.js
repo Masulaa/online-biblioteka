@@ -44,6 +44,7 @@ function NewBook() {
   };
 
   const handleConfirm = () => {
+    
     console.log("Naziv knjige:", bookName);
     console.log("Kratki sadržaj:", sadrzaj);
     console.log("Kategorija:", categories);
@@ -57,7 +58,7 @@ function NewBook() {
     console.log("Povez:", binding);
     console.log("Format:", format);
     console.log("ISBN:", isbn);
-    console.log("Ime fajla:", fileName);
+    console.log("Ime fajla - :", fileName);
 
     createBook();
   };
