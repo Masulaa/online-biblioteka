@@ -106,7 +106,7 @@ const LogIn = () => {
             </div>
 
             <div className="signupbutton">
-              <Link to="/">
+              <Link to="/sign-up">
                 <span className="signup-button">
                   <FaLongArrowAltRight />
                   Create your account

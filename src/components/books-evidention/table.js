@@ -3,6 +3,7 @@ import "./table.css";
 import { useNavigate } from "react-router-dom";
 import { BookService } from "../../api/api";
 import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
+import BookItem from "./BookItem";
 
 const Table = () => {
   const navigate = useNavigate();
@@ -110,7 +111,7 @@ const Table = () => {
         </div>
       ) : (
         <table className="table">
-          <thead>
+          <thead className="thead">
             <tr>
               <th>
                 <input
@@ -131,49 +132,14 @@ const Table = () => {
             </tr>
           </thead>
           <tbody>
-            {currentItems.map((book) => (
-              <tr key={book.id}>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={selectedItems.includes(book.id)}
-                    onChange={() => handleSelectItem(book.id)}
-                  />
-                </td>
-                <td>{book.title}</td>
-                <td>
-                  {book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}
-                </td>
-                <td>{book.categories.map((c) => c.name).join(", ")}</td>
-                <td>{book.ableToBorrow ? "Da" : "Ne"}</td>
-                <td>{book.rezervisano}</td>
-                <td>{book.rSamples}</td>
-                <td>{book.uPrekoracenju}</td>
-                <td>{book.samples}</td>
-                <td className="options">
-                  <div className="dropdown">
-                    <div className="dots">&#x2026;</div>
-                    <div className="dropdown-content">
-                      <div
-                        onClick={() => {
-                          navigate("/EvidentionOfBooks/BookDetails");
-                        }}
-                      >
-                        Pogledaj detalje
-                      </div>
-                      <div>Obriši</div>
-                      <div
-                        onClick={() => {
-                          navigate("/EvidentionOfBooks/EditBook");
-                        }}
-                      >
-                        Izmijeni
-                      </div>
-                      <div>Izdaj knjigu</div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+          {currentItems.map((book) => (
+              <BookItem
+                key={book.id}
+                item={book}
+                selectedItems={selectedItems}
+                handleSelectItem={handleSelectItem}
+                fetchBooks={fetchBooks}
+              />
             ))}
           </tbody>
         </table>

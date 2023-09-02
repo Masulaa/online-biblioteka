@@ -32,7 +32,6 @@ const BookDetails = lazy(() =>
 const BookEvid = lazy(() =>
   import("./components/books-evidention/book-details/BookEvid")
 );
-
 const BookMulti = lazy(() =>
   import("./components/books-evidention/book-details/BookMulti")
 );
@@ -120,7 +119,7 @@ function App() {
             }
           />
           <Route
-            path="/EvidentionOfBooks/BookDetails"
+            path="/EvidentionOfBooks/BookDetails/:id"
             element={
               <Suspense fallback={<ErrorHandlerPage/>}>
                 <BookDetails />
@@ -135,7 +134,6 @@ function App() {
               </Suspense>
             }
           />
-              
           <Route
             path="/EvidentionOfBooks/BookDetails/Specification"
             element={

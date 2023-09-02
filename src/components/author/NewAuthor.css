@@ -118,22 +118,8 @@ select {
   width: 300px;
 }
 
-.profile {
-  display: flex;
-  align-items: center;
-}
 
-.profile1 {
-  background-color: rgb(88, 124, 131);
-  padding: 0.6rem;
-}
 
-.profile-tab {
-  width: 32px;
-  height: 32px;
-  background-color: #ccc;
-  border-radius: 20px;
-}
 
 .icon {
   padding-left: 2px;

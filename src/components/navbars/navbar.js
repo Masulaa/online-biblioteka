@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
+import { UserService } from "../../api/api";
+
 import "./navbar.css";
 
 import { useDispatch } from "react-redux";
@@ -13,14 +15,29 @@ import { HiDocumentDuplicate } from "react-icons/hi";
 import { TbArrowsLeftRight } from "react-icons/tb";
 import { FiSettings } from "react-icons/fi";
 import { BsFillXCircleFill } from "react-icons/bs";
+import { BiUserCircle } from "react-icons/bi";
+import {MdLocalLibrary} from "react-icons/md";
 
 import { menuActions } from "../../store/menuStore";
-function NavBar({children}) {
+function NavBar({ children }) {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const [isTouched, setIsTouched] = useState(false);
+  const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
+
+  const LogOut = async () => {
+    try {
+      const response = await UserService.LogOut(true);
+      console.log("API Response", response);
+
+      // navigate("/EvidentionOfBooks");
+    } catch (error) {
+
+      console.error("Couldn't logout", error)
+    }
+  };
 
   const isTouchedHandler = () => {
     setIsTouched(!isTouched);
@@ -31,15 +48,38 @@ function NavBar({children}) {
     }
   };
 
+ const isOpennedUserIconMenu = () =>{
+  setUserIconMenuOpen(!userIconMenuOpen);
+  if(userIconMenuOpen === false){
+    setUserIconMenuOpen(!userIconMenuOpen)
+  }
+ }
+
   return (
     <div className="page-wrapper">
       <div className="top-nav">
-        <div className="logo">Biblioteka</div>
-        <button className="create-btn" onClick={() => {
-              navigate("/CreateAccount");
-            }}>Kreiraj</button>
+        <div className="logo"><MdLocalLibrary className="logo-icon"/>Biblioteka</div>
+        <button
+          className="create-btn"
+          onClick={() => {
+            navigate("/CreateAccount");
+          }}
+        >
+          Kreiraj
+        </button>
         <div className="profile">
-          <div className="profile-tab"></div>
+          <div className="profile-tab">
+            <BiUserCircle className="user-icon" onClick={isOpennedUserIconMenu} />
+          </div>
+          {userIconMenuOpen && (
+            <div className="user-menu">
+              <ul>
+                <li onClick={isOpennedUserIconMenu}>Profile</li>
+                <li onClick={()=>{isOpennedUserIconMenu();
+                LogOut();}}>Logout</li>
+              </ul>
+            </div>
+          )}
         </div>
       </div>
       <div className="main-content">
@@ -168,12 +208,14 @@ function NavBar({children}) {
         </aside>
 
         <div className="content-wrapper">
-          <Outlet/>
+          <Outlet />
         </div>
-
       </div>
       <div className={`cancel10 ${isTouched ? "cancel11" : ""}`}>
-        <BsFillXCircleFill className={`iconx ${isTouched ? "iconx1" : ""}`} onClick={isTouchedHandler}></BsFillXCircleFill>
+        <BsFillXCircleFill
+          className={`iconx ${isTouched ? "iconx1" : ""}`}
+          onClick={isTouchedHandler}
+        ></BsFillXCircleFill>
       </div>
     </div>
   );

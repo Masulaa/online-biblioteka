@@ -93,10 +93,24 @@ export const BookService = {
   CreateBook(bookData) {
     return client.post("books/store", bookData);
   },
+  DeleteBooks(bookIds) {
+    return client.delete(`books/${bookIds}/destroy`, {
+      ids: bookIds
+    })
+  },
+
+  BulkDeleteBooks(bookIds) {
+    return client.delete("books/bulkdelete", {
+      ids : bookIds
+    })
+  },
 };
 
 export const UserService = {
   CreateUser(newUserData) {
     return client.post("users/store", newUserData);
   },
+  LogOut(confirmData){
+    return client.post("logout", confirmData)
+  }
 };
