@@ -100,13 +100,13 @@ const LogIn = () => {
             </div>
 
             <div>
-              <Link to="">
+              <Link to="" className="a">
                 <p className="forgot">Forgot Username / Password?</p>
               </Link>
             </div>
 
             <div className="signupbutton">
-              <Link to="/sign-up">
+              <Link to="/sign-up" className="a">
                 <span className="signup-button">
                   <FaLongArrowAltRight />
                   Create your account

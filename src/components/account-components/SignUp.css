@@ -31,7 +31,7 @@ body, html {
 }
 
 /*---------------------------------------------*/
-a {
+.a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
@@ -43,11 +43,11 @@ a {
   -moz-transition: all 0.4s;
 }
 
-a:focus {
+.a:focus {
 	outline: none !important;
 }
 
-a:hover {
+.a:hover {
 	text-decoration: none;
   color: #57b846;
 }

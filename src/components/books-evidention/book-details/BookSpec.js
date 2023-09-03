@@ -1,6 +1,5 @@
 
 import "./BookDetails.css";
-import "./table1.css"
 import { Link } from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 import { HiOutlineArrowUturnUp, HiOutlineArrowPath } from 'react-icons/hi2';

@@ -1,0 +1,41 @@
+.slika {
+  display: relative;
+  margin-left: 0;
+  margin-right: auto;
+  width: 50px;
+  align-items: center;
+  text-align: center;
+}
+.book-details {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.book-image img {
+  padding-right: 1rem;
+  max-width: 100%;
+}
+
+.wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.h1 {
+  margin-bottom: 0;
+  margin-left: 0;
+  padding-bottom:1.5rem ;
+}
+
+.links {
+  font-size: 16px;
+  font-weight: initial;
+}
+
+.links2 {
+    font-size: 16px;
+    text-align: left;
+  }

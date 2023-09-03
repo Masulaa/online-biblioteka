@@ -121,7 +121,7 @@ const SignUp = () => {
             </div>
 
             <div className="loginbutton">
-              <Link to="/Login"><span className="login-button"><FaLongArrowAltRight/>Login instead</span></Link>
+              <Link to="/Login" className="a"><span className="login-button"><FaLongArrowAltRight/>Login instead</span></Link>
             </div>
           </form>
         </div>

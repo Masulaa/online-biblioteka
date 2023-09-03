@@ -95,14 +95,16 @@ export const BookService = {
   },
   DeleteBooks(bookIds) {
     return client.delete(`books/${bookIds}/destroy`, {
-      ids: bookIds
-    })
+      ids: bookIds,
+    });
   },
-
+  GetBook(bookId) {
+    return client.get(`books/${bookId}`);
+  },
   BulkDeleteBooks(bookIds) {
     return client.delete("books/bulkdelete", {
-      ids : bookIds
-    })
+      ids: bookIds,
+    });
   },
 };
 
@@ -110,7 +112,7 @@ export const UserService = {
   CreateUser(newUserData) {
     return client.post("users/store", newUserData);
   },
-  LogOut(confirmData){
-    return client.post("logout", confirmData)
-  }
+  LogOut(confirmData) {
+    return client.post("logout", confirmData);
+  },
 };

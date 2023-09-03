@@ -19,9 +19,6 @@ const BookItem = (props) => {
         }
       };
    
-   
-
-
 return (
 <div>
 <tr key={book.id}>

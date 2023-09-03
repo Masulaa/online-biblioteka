@@ -76,7 +76,8 @@ function NavBar({ children }) {
               <ul>
                 <li onClick={isOpennedUserIconMenu}>Profile</li>
                 <li onClick={()=>{isOpennedUserIconMenu();
-                LogOut();}}>Logout</li>
+                LogOut();
+                navigate("LogIn")}}>Logout</li>
               </ul>
             </div>
           )}
