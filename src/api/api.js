@@ -116,3 +116,14 @@ export const UserService = {
     return client.post("logout", confirmData);
   },
 };
+
+export const AuthorService = {
+  ListAuthors() {
+    return client.get("authors");
+  },
+  DeleteAuthors(authorIds) {
+    return client.delete(`authors/${authorIds}`, {
+      ids: authorIds,
+    });
+  },
+};

@@ -105,23 +105,27 @@
 .user-menu {
   position: absolute;
   top: 50px; /* Podešavanje visine ispod top navigacije */
-  right: 0;
+  right: 2rem;
+  text-align: left;
+  width: 10rem;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   display: block;
   z-index: 1000;
+  border-radius:5px;
 }
 
 .user-menu ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .user-menu ul li {
   padding: 10px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .user-menu ul li:hover {

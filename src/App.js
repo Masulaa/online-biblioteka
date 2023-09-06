@@ -111,7 +111,7 @@ function App() {
             }
           />
           <Route
-            path="/EvidentionOfBooks/EditBook"
+            path="/EvidentionOfBooks/EditBook/:id"
             element={
               <Suspense fallback={<ErrorHandlerPage/>}>
                 <EditBook />

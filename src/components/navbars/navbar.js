@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import { UserService } from "../../api/api";
@@ -26,6 +26,22 @@ function NavBar({ children }) {
 
   const [isTouched, setIsTouched] = useState(false);
   const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
+
+  const profilRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profilRef.current && !profilRef.current.contains(event.target)) {
+        setUserIconMenuOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
 
   const LogOut = async () => {
     try {
@@ -56,7 +72,7 @@ function NavBar({ children }) {
  }
 
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper" >
       <div className="top-nav">
         <div className="logo"><MdLocalLibrary className="logo-icon"/>Biblioteka</div>
         <button
@@ -67,7 +83,7 @@ function NavBar({ children }) {
         >
           Kreiraj
         </button>
-        <div className="profile">
+        <div className="profile" ref={profilRef}>
           <div className="profile-tab">
             <BiUserCircle className="user-icon" onClick={isOpennedUserIconMenu} />
           </div>

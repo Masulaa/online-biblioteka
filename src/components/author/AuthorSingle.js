@@ -1,18 +1,18 @@
-import "./table.css";
+import "./AuthorTable.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookService } from "../../api/api";
+import { AuthorService } from "../../api/api";
 
-const BookItem = (props) => {
+const AuthorSingle = (props) => {
 
-    const book = props.item;
+    const author = props.item;
     const navigate = useNavigate();
 
-    const deleteBooks = async () => {
+    const deleteAuthors = async () => {
         try {
-          const response = await BookService.DeleteBooks(book.id);
+          const response = await AuthorService.DeleteAuthors(author.id);
           console.log("API Response", response);
-          props.fetchBooks();
+          props.fetchAuthors();
         } catch (error) {
    
           console.error("Error deleting book:", error)
@@ -21,7 +21,7 @@ const BookItem = (props) => {
    
 return (
 
-<tr key={book.id}>
+<tr key={author.id}>
 <td>
   <input
     type="checkbox"
@@ -29,31 +29,23 @@ return (
   onChange={() => props.handleSelectItem(props.item.id)}
   />
 </td>
-<td>{book.title}</td>
-<td>
-  {book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}
-</td>
-<td>{book.categories.map((c) => c.name).join(", ")}</td>
-<td>{book.ableToBorrow ? "Da" : "Ne"}</td>
-<td>{book.rezervisano}</td>
-<td>{book.rSamples}</td>
-<td>{book.uPrekoracenju}</td>
-<td>{book.samples}</td>
+<td>{author.name}</td>
+<td>{author.surname}</td>
 <td className="options">
   <div className="dropdown">
     <div className="dots" >&#x2026;</div>
     <div className="dropdown-content">
       <div
         onClick={() => {
-          navigate(`/EvidentionOfBooks/BookDetails/${book.id}`);
+          navigate();
         }}
       >
         Pogledaj detalje
       </div>
-      <div onClick={deleteBooks}>Obriši</div>
+      <div onClick={deleteAuthors}>Obriši</div>
       <div
         onClick={() => {
-          navigate(`/EvidentionOfBooks/EditBook/${book.id}`);
+          navigate();
         }}
       >
         Izmijeni
@@ -67,4 +59,4 @@ return (
 
 }
 
-export default BookItem;
+export default AuthorSingle;
