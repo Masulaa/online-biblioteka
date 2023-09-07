@@ -106,6 +106,9 @@ export const BookService = {
       ids: bookIds,
     });
   },
+  ReserveBook(bookData) {
+    return client.post("books/store", bookData);
+  },
 };
 
 export const UserService = {
@@ -115,6 +118,12 @@ export const UserService = {
   LogOut(confirmData) {
     return client.post("logout", confirmData);
   },
+  ListUsers(){
+    return client.get("users");
+  },
+  DeleteUsers(userIds){
+    return client.delete(`authors/${userIds}`)
+  }
 };
 
 export const AuthorService = {

@@ -1,27 +1,28 @@
-import "./table.css";
+import "./StudentTable.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BookService } from "../../api/api";
+import { UserService } from "../../api/api";
 
 const BookItem = (props) => {
 
-    const book = props.item;
+    const user = props.item;
     const navigate = useNavigate();
 
-    const deleteBooks = async () => {
+    const deleteUsers = async () => {
         try {
-          const response = await BookService.DeleteBooks(book.id);
+          const response = await UserService.DeleteUsers(user.id);
           console.log("API Response", response);
-          props.fetchBooks();
+          props.fetchUsers();
         } catch (error) {
    
           console.error("Error deleting book:", error)
         }
       };
+
    
 return (
 
-<tr key={book.id}>
+<tr key={user.id}>
 <td>
   <input
     type="checkbox"
@@ -29,31 +30,24 @@ return (
   onChange={() => props.handleSelectItem(props.item.id)}
   />
 </td>
-<td>{book.title}</td>
-<td>
-  {book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}
-</td>
-<td>{book.categories.map((c) => c.name).join(", ")}</td>
-<td>{book.ableToBorrow ? "Da" : "Ne"}</td>
-<td>{book.rSamples}</td>
-<td>{book.bSamples}</td>
-<td>{book.fSamples}</td>
-<td>{book.samples}</td>
+{ <td>{user.name}&nbsp;{user.surname}</td> }
+<td>{user.email}</td>
+<td>{user.role}</td>
 <td className="options">
   <div className="dropdown">
     <div className="dots" >&#x2026;</div>
     <div className="dropdown-content">
       <div
         onClick={() => {
-          navigate(`/EvidentionOfBooks/BookDetails/${book.id}`);
+          navigate(`/EvidentionOfBooks/BookDetails/${user.id}`);
         }}
       >
         Pogledaj detalje
       </div>
-      <div onClick={deleteBooks}>Obriši</div>
+      <div onClick={deleteUsers}>Obriši</div>
       <div
         onClick={() => {
-          navigate(`/EvidentionOfBooks/EditBook/${book.id}`);
+          navigate(`/EvidentionOfBooks/EditBook/${user.id}`);
         }}
       >
         Izmijeni

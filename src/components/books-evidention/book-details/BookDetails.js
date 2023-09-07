@@ -36,6 +36,17 @@ function BookDetails() {
     };
   }, []);
 
+  const deleteBooks = async () => {
+    try {
+      const response = await BookService.DeleteBooks(book.id);
+      console.log("API Response", response);
+      navigate("/StudentEvidention")
+    } catch (error) {
+
+      console.error("Error deleting book:", error)
+    }
+  };
+
   const isOpennedUserIconMenu = () => {
     setUserIconMenuOpen(!userIconMenuOpen);
     if (userIconMenuOpen === false) {
@@ -106,14 +117,14 @@ function BookDetails() {
             <BsThreeDotsVertical
               className="more-options"
               onClick={isOpennedUserIconMenu}
-            />
+            /></Link>
             {userIconMenuOpen && (
               <div className="option-menu01">
                 <ul>
                   <li
                     onClick={() => {
                       isOpennedUserIconMenu();
-                      navigate("LogIn");
+                      navigate(`/EvidentionOfBooks/EditBook/${book.id}`);
                     }}
                   >
                     Izmjeni Knjigu
@@ -121,6 +132,8 @@ function BookDetails() {
                   <li
                     onClick={() => {
                       isOpennedUserIconMenu();
+                      deleteBooks();
+                      navigate("/EvidentionOfBooks")
                     }}
                   >
                     Obriši Knjigu
@@ -128,7 +141,7 @@ function BookDetails() {
                 </ul>
               </div>
             )}
-          </Link>
+          
         </div>
       </div>
 
@@ -173,7 +186,7 @@ function BookDetails() {
               <h3 className="detail-info">
                 {book.categories &&
                   book.categories.map((kategorija) => (
-                    <li key={kategorija.id}>{kategorija.name}</li>
+                    <li className="li" key={kategorija.id}>{kategorija.name}</li>
                   ))}
               </h3>
             </div>
@@ -181,7 +194,7 @@ function BookDetails() {
               <p className="category-info">Žanr/ovi</p>
               <h3 className="detail-info">
                 {book.genres &&
-                  book.genres.map((zanr) => <li key={zanr.id}>{zanr.name}</li>)}
+                  book.genres.map((zanr) => <li className="li" key={zanr.id}>{zanr.name}</li>)}
               </h3>
             </div>
             <div className="book-details-01">
@@ -189,7 +202,7 @@ function BookDetails() {
               <h3 className="detail-info">
                 {book.authors &&
                   book.authors.map((autor) => (
-                    <li key={autor.id}>{autor.name}</li>
+                    <li className="li" key={autor.id}>{autor.name}</li>
                   ))}
               </h3>
             </div>
