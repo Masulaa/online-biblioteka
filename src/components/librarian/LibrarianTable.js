@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import './LibrarianTable.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { UserService } from "../../api/api";
+import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
+import SingleLibrarian from "./SingleLibrarian";
 
-const data = [
-  { id: 1, imeprezime: 'Valentina Kascelan', email: 'valentina.kascelan@domain.net', tipKorisnika: 'Bibliotekar', zadnjiPristup: 'Prije 10 sati' },
-  { id: 2, imeprezime: 'Tarik Zaimovic', email: 'tarik.zaimovic@domain.net', tipKorisnika: 'Bibliotekar', zadnjiPristup: 'Prije 2 dana' },
-];
-
-const LibrarianTable = () => {
-
+const Table = () => {
   const navigate = useNavigate();
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await UserService.ListUsers();
+      setUsers(response.data.data);
+    } catch (error) {
+      console.log("Error fetching users:", error);
+    }
+  };
 
   const [selectedAll, setSelectedAll] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -17,7 +29,7 @@ const LibrarianTable = () => {
   const handleSelectAll = (event) => {
     setSelectedAll(event.target.checked);
     if (event.target.checked) {
-      setSelectedItems(data.map(item => item.id));
+      setSelectedItems(users.map((user) => user.id));
     } else {
       setSelectedItems([]);
     }
@@ -25,7 +37,7 @@ const LibrarianTable = () => {
 
   const handleSelectItem = (id) => {
     if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter(itemId => itemId !== id));
+      setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
     } else {
       setSelectedItems([...selectedItems, id]);
     }
@@ -37,9 +49,10 @@ const LibrarianTable = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  console.log("Books is", users);
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const totalPages = Math.ceil(users.length / itemsPerPage);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -71,6 +84,7 @@ const LibrarianTable = () => {
     }
     return null;
   };
+
   const renderRightArrow = () => {
     if (currentPage !== totalPages) {
       return (
@@ -84,13 +98,20 @@ const LibrarianTable = () => {
 
   const handleItemsPerPageChange = (event) => {
     setItemsPerPage(parseInt(event.target.value));
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   return (
     <div>
-      <table className="table">
-        <thead>
+      {users.length === 0 ? (
+        <div>
+          <div className="loading">
+            <LoadingSpinner></LoadingSpinner>
+          </div>
+        </div>
+      ) : (
+        <table className="table">
+         <thead>
           <tr>
             <th>
               <input type="checkbox" checked={selectedAll} onChange={handleSelectAll} />
@@ -98,39 +119,27 @@ const LibrarianTable = () => {
             <th>Ime i Prezime</th>
             <th>E mail</th>
             <th>Tip korisnika</th>
-            <th>Zadnji pristup sistemu</th>
             <th></th>
           </tr>
         </thead>
-
-        <tbody>
-          {currentItems.map((item) => (
-            <tr key={item.id}>
-              <td>
-                <input
-                  type="checkbox"
-                  checked={selectedItems.includes(item.id)}
-                  onChange={() => handleSelectItem(item.id)}
-                />
-              </td>
-              <td>{item.imeprezime}</td>
-              <td>{item.email}</td>
-              <td>{item.tipKorisnika}</td>
-              <td>{item.zadnjiPristup}</td>
-              <td className="options">
-                <div className="dropdown">
-                  <div className="dots">&#x2026;</div>
-                  <div className="dropdown-content">
-                    <div>Obriši</div>
-                    <div onClick={()=>{navigate('/EvidentionOfBooks/EditBook/BookDetails')}}>Izmijeni</div>
-                    <div>Izdaj knjigu</div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+          <tbody>
+          {currentItems.map((user) => {
+  if (user.role === 'Bibliotekar') {
+    return (
+      <SingleLibrarian
+        key={user.id}
+        item={user}
+        selectedItems={selectedItems}
+        handleSelectItem={handleSelectItem}
+        fetchUsers={fetchUsers}
+      />
+    );
+  }
+  return null;
+})}
+          </tbody>
+        </table>
+      )}
       <div className="pagination">
         {renderLeftArrow()}
         {renderPageNumbers()}
@@ -138,7 +147,11 @@ const LibrarianTable = () => {
       </div>
       <div className="rows-per-page">
         <span>Rows per page:</span>
-        <select className='inputs' value={itemsPerPage} onChange={handleItemsPerPageChange}>
+        <select
+          className="inputs"
+          value={itemsPerPage}
+          onChange={handleItemsPerPageChange}
+        >
           <option value={1}>1</option>
           <option value={5}>5</option>
           <option value={10}>10</option>
@@ -151,4 +164,4 @@ const LibrarianTable = () => {
   );
 };
 
-export default LibrarianTable;
+export default Table;
