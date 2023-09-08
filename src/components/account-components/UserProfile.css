@@ -17,6 +17,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #ccc;
   }
 
   .slika1 {
@@ -26,4 +27,12 @@
     width: 50px;
     align-items: center;
     text-align: center;
+  }
+
+  .second-column01 .slika-user{
+    width: 64%;
+  }
+  
+  .desno{
+    margin-left: 60%;
   }
