@@ -226,6 +226,7 @@ function BookDetails() {
         </div>
 
         <div className="side-info-book-details">
+         <div className="category-info">
           <div className="side-category00">
             <span className="side-category01">Na raspolaganju:</span>
             <span className="side-category01">Rezervisano:</span>
@@ -239,6 +240,7 @@ function BookDetails() {
             <span className="side-info01">{book.bSamples} primjeraka</span>
             <span className="side-info01">{book.fSamples} primjeraka</span>
             <span className="side-info01">{book.samples + book.rSamples + book.bSamples + book.fSamples} primjeraka</span>
+           </div>
           </div>
           <div className="side-evidention-info00">
             <span>Izdavanje Knjiga - 4days ago</span>
