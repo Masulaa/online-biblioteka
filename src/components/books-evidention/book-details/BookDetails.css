@@ -12,13 +12,7 @@
   align-items: center;
 }
 
-.second-column01{
- margin-left: 4rem;
-}
 
-.naslov {
-  align-items: center;
-}
 
 .wrapper30 {
   display: flex;
@@ -39,28 +33,12 @@
   justify-content: space-between;
 }
 
-.h1 {
-  margin-bottom: 0;
-  margin-left: 0;
-}
-
-.links {
-  font-size: 16px;
-  font-weight: initial;
-}
-
 .links2 {
   font-size: 16px;
   margin-left: 1rem;
   color: black;
   padding-bottom: 1rem;
 }
-
-.columns {
-  display: flex;
-  flex-direction: row;
-}
-
 .detail-icons {
   margin-right: 0.2rem;
 }
@@ -75,21 +53,6 @@
 
 .more-options:hover {
   color: #51737b;
-}
-
-.detail-info {
-  margin: 0;
-  font-size: 15px;
-}
-.category-info {
-  color: #8b8b8b;
-  margin: 0;
-  font-size: 17px;
-}
-
-.book-details-01 {
-  margin-left: 1rem;
-  margin-top: 2rem;
 }
 
 .li {
@@ -185,10 +148,6 @@
 
 p{
   margin: 0;
-}
-
-.category-info{
-  display: flex;
 }
 
 .side-info-book-details{

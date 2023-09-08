@@ -23,6 +23,7 @@ body {
   font-size: 14px;
 }
 
+
 .buttons-spec {
   margin-top: 7px;
 }
@@ -100,6 +101,43 @@ h2 {
   display: flex;
   justify-content: flex-start;
   width: 100%;
+  align-items: center;
+}
+
+.h1 {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.columns {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.second-column01{
+  margin-left: 4rem;
+ }
+
+.detail-info {
+  margin: 0;
+  font-size: 15px;
+}
+.category-info {
+  color: #8b8b8b;
+  margin: 0;
+  font-size: 17px;
+  display: flex;
+}
+
+.book-details-01 {
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+
+.links {
+  font-size: 16px;
+  font-weight: initial;
 }
 
 .default-input {
