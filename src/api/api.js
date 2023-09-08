@@ -123,6 +123,9 @@ export const UserService = {
   },
   DeleteUsers(userIds){
     return client.delete(`authors/${userIds}`)
+  },
+  GetMeInfo(){
+    return client.post("users/me")
   }
 };
 

@@ -1,0 +1,29 @@
+.profile-image{
+    text-align:center ;
+}
+
+.profile-image{
+    padding-right: 1rem;
+    max-width: 100%;
+  }
+
+  .profile-details {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .wrapper10 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .slika1 {
+    display: relative;
+    margin-left: 0;
+    margin-right: auto;
+    width: 50px;
+    align-items: center;
+    text-align: center;
+  }

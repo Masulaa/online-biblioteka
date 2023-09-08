@@ -29,6 +29,7 @@ const EditBook = lazy(() =>
 const BookDetails = lazy(() =>
   import("./components/books-evidention/book-details/BookDetails")
 );
+const UserProfile = lazy(() => import ("./components/account-components/UserProfile"));
 const BookEvid = lazy(() =>
   import("./components/books-evidention/book-details/BookEvid")
 );
@@ -86,6 +87,12 @@ function App() {
               </Suspense>
             }
           />
+          <Route path="/UserProfile"
+          element={
+            <Suspense fallback={<ErrorHandlerPage/>}>
+              <UserProfile/>
+            </Suspense>
+          }/>
           <Route
             path="/test"
             element={

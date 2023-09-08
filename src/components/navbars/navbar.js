@@ -85,12 +85,13 @@ function NavBar({ children }) {
         </button>
         <div className="profile" ref={profilRef}>
           <div className="profile-tab">
-            <BiUserCircle className="user-icon" onClick={isOpennedUserIconMenu} />
+            <BiUserCircle className="user-icon" onClick={()=>{isOpennedUserIconMenu();}} />
           </div>
           {userIconMenuOpen && (
             <div className="user-menu">
               <ul>
-                <li onClick={isOpennedUserIconMenu}>Profile</li>
+                <li onClick={()=>{isOpennedUserIconMenu();
+                navigate("/UserProfile");}}>Profile</li>
                 <li onClick={()=>{isOpennedUserIconMenu();
                 LogOut();
                 navigate("LogIn")}}>Logout</li>
