@@ -52,11 +52,12 @@ input[type='checkbox'] {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 120px;
+  min-width: 180px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   right: 0;
   margin-top: -100px;
+  text-align: left;
 }
 
 .dropdown-content div {
@@ -85,6 +86,10 @@ input[type='checkbox'] {
   margin: 0 5px;
   border: none;
   font-size: 20px;
+}
+
+.detail-icons {
+  margin-right: 0.5rem;
 }
 
 .pagination button:hover{

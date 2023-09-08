@@ -2,6 +2,13 @@ import "./table.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookService } from "../../api/api";
+import { AiFillDelete } from  "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai"
+import { TbListDetails } from "react-icons/tb"
+import { FaRegHandScissors } from "react-icons/fa";
+import { HiOutlineArrowUturnUp } from "react-icons/hi2"
+import { IoIosRefresh } from "react-icons/io"
+import { FaNotesMedical } from "react-icons/fa"
 
 const BookItem = (props) => {
 
@@ -48,17 +55,38 @@ return (
           navigate(`/EvidentionOfBooks/BookDetails/${book.id}`);
         }}
       >
+        <TbListDetails className="detail-icons"/>
         Pogledaj detalje
       </div>
-      <div onClick={deleteBooks}>Obriši</div>
+      <div onClick={deleteBooks}>
+        <AiFillDelete className="detail-icons"/>
+        Obriši
+        </div>
       <div
         onClick={() => {
           navigate(`/EvidentionOfBooks/EditBook/${book.id}`);
         }}
       >
+        <AiFillEdit className="detail-icons"/>
         Izmijeni
       </div>
-      <div>Izdaj knjigu</div>
+      <div onClick={() => {
+          navigate(`/IzdajKnjigu/${book.id}`);
+        }}>
+        <FaRegHandScissors className="detail-icons"/>
+        Izdaj knjigu</div>
+        <div>
+        <HiOutlineArrowUturnUp className="detail-icons"/>
+        Otpisi Knjigu
+      </div>
+      <div>
+        <IoIosRefresh className="detail-icons"/>
+        Vrati Knjigu
+      </div>
+      <div>
+        <FaNotesMedical className="detail-icons"/>
+        Rezervisi Knjigu
+      </div>
     </div>
   </div>
 </td>

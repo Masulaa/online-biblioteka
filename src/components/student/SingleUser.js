@@ -2,6 +2,9 @@ import "./StudentTable.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserService } from "../../api/api";
+import { AiFillDelete } from  "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai"
+import { TbListDetails } from "react-icons/tb"
 
 const BookItem = (props) => {
 
@@ -42,17 +45,21 @@ return (
           navigate(`/EvidentionOfBooks/BookDetails/${user.id}`);
         }}
       >
+        <TbListDetails className="detail-icons"/>
         Pogledaj detalje
       </div>
-      <div onClick={deleteUsers}>Obriši</div>
+      <div onClick={deleteUsers}>
+        <AiFillDelete className="detail-icons"/>
+        Obriši
+        </div>
       <div
         onClick={() => {
           navigate(`/EvidentionOfBooks/EditBook/${user.id}`);
         }}
       >
+        <AiFillEdit className="detail-icons"/>
         Izmijeni
       </div>
-      <div>Izdaj knjigu</div>
     </div>
   </div>
 </td>

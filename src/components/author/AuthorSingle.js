@@ -2,6 +2,9 @@ import "./AuthorTable.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthorService } from "../../api/api";
+import { AiFillDelete } from  "react-icons/ai";
+import { AiFillEdit } from "react-icons/ai"
+import { TbListDetails } from "react-icons/tb"
 
 const AuthorSingle = (props) => {
 
@@ -40,17 +43,21 @@ return (
           navigate();
         }}
       >
+        <TbListDetails className="detail-icons"/>
         Pogledaj detalje
       </div>
-      <div onClick={deleteAuthors}>Obriši</div>
+      <div onClick={deleteAuthors}>
+        <AiFillDelete className="detail-icons"/>
+        Obriši
+        </div>
       <div
         onClick={() => {
           navigate();
         }}
       >
+        <AiFillEdit className="detail-icons"/>
         Izmijeni
       </div>
-      <div>Izdaj knjigu</div>
     </div>
   </div>
 </td>

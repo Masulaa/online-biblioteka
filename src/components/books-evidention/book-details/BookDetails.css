@@ -1,16 +1,4 @@
-.slika {
-  display: relative;
-  margin-left: 0;
-  margin-right: auto;
-  width: 50px;
-  align-items: center;
-  text-align: center;
-}
-.book-details {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
+
 
 
 
@@ -21,11 +9,6 @@
   border-bottom: 1px solid #ccc;
 }
 
-.book-image img {
-  padding-right: 1rem;
-  max-width: 100%;
-}
-
 .wrapper {
   display: flex;
   align-items: center;
@@ -33,26 +16,9 @@
   justify-content: space-between;
 }
 
-.links2 {
-  font-size: 16px;
-  margin-left: 1rem;
-  color: black;
-  padding-bottom: 1rem;
-}
+
 .detail-icons {
   margin-right: 0.2rem;
-}
-
-.more-options {
-  font-size: 3rem;
-  border-left: 1px solid #ccc;
-  align-items: center;
-  color: #76a5af;
-  transition: all 0.2s ease-in-out;
-}
-
-.more-options:hover {
-  color: #51737b;
 }
 
 .li {
@@ -60,34 +26,7 @@
 }
 
 
-.option-menu01 {
-  position: absolute;
-  right: 2rem;
-  text-align: left;
-  width: 13rem;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  display: block;
-  z-index: 1000;
-  border-radius:5px;
-}
 
-.option-menu01 ul {
-  list-style: none;
-  padding: 0;
-  margin: 5px;
-}
-
-.option-menu01 ul li {
-  padding: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.option-menu01 ul li:hover {
-  background-color: #f2f2f2;
-}
 
 .side-info-book-details{
   margin-top: 2rem;

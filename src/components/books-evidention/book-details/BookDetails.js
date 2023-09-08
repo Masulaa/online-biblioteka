@@ -1,5 +1,7 @@
 import "./BookDetails.css";
 import { Link } from "react-router-dom";
+import { AiFillDelete } from "react-icons/ai"
+import { AiFillEdit } from "react-icons/ai"
 import { HiOutlineArrowUturnUp } from "react-icons/hi2";
 import { FaRegHandScissors } from "react-icons/fa";
 import { HiOutlineArrowPath } from "react-icons/hi2";
@@ -127,6 +129,7 @@ function BookDetails() {
                       navigate(`/EvidentionOfBooks/EditBook/${book.id}`);
                     }}
                   >
+                    <AiFillEdit className="detail-icons"/>
                     Izmjeni Knjigu
                   </li>
                   <li
@@ -136,6 +139,7 @@ function BookDetails() {
                       navigate("/EvidentionOfBooks")
                     }}
                   >
+                    <AiFillDelete className="detail-icons"/>
                     Obriši Knjigu
                   </li>
                 </ul>

@@ -17,6 +17,8 @@ import { FiSettings } from "react-icons/fi";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
 import {MdLocalLibrary} from "react-icons/md";
+import { ImProfile } from "react-icons/im";
+import { BiLogOut } from "react-icons/bi";
 
 import { menuActions } from "../../store/menuStore";
 function NavBar({ children }) {
@@ -91,10 +93,16 @@ function NavBar({ children }) {
             <div className="user-menu">
               <ul>
                 <li onClick={()=>{isOpennedUserIconMenu();
-                navigate("/UserProfile");}}>Profile</li>
+                navigate("/UserProfile");}}>
+                  <ImProfile className="detail-icons" />
+                  Profile
+                  </li>
                 <li onClick={()=>{isOpennedUserIconMenu();
                 LogOut();
-                navigate("LogIn")}}>Logout</li>
+                navigate("LogIn")}}>
+                   <BiLogOut className="detail-icons" />
+                  Logout
+                  </li>
               </ul>
             </div>
           )}

@@ -29,7 +29,12 @@ const EditBook = lazy(() =>
 const BookDetails = lazy(() =>
   import("./components/books-evidention/book-details/BookDetails")
 );
-const UserProfile = lazy(() => import ("./components/account-components/UserProfile"));
+const UserProfile = lazy(() =>
+  import("./components/account-components/UserProfile")
+);
+const IzdajBook = lazy(() =>
+  import("./components/books-evidention/izdaj-book/IzdajBook")
+);
 const BookEvid = lazy(() =>
   import("./components/books-evidention/book-details/BookEvid")
 );
@@ -65,7 +70,7 @@ function App() {
         <Route
           path="sign-up"
           element={
-            <Suspense fallback={<ErrorHandlerPage/>}>
+            <Suspense fallback={<ErrorHandlerPage />}>
               <SignUp />
             </Suspense>
           }
@@ -73,7 +78,7 @@ function App() {
         <Route
           path="LogIn"
           element={
-            <Suspense fallback={<ErrorHandlerPage/>}>
+            <Suspense fallback={<ErrorHandlerPage />}>
               <LogIn />
             </Suspense>
           }
@@ -82,21 +87,23 @@ function App() {
           <Route
             path="/CreateAccount"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <CreateAccount />
               </Suspense>
             }
           />
-          <Route path="/UserProfile"
-          element={
-            <Suspense fallback={<ErrorHandlerPage/>}>
-              <UserProfile/>
-            </Suspense>
-          }/>
+          <Route
+            path="/UserProfile"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <UserProfile />
+              </Suspense>
+            }
+          />
           <Route
             path="/test"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <LoadingSpinner />
               </Suspense>
             }
@@ -104,8 +111,16 @@ function App() {
           <Route
             path="/EvidentionOfBooks"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <EvidentionOfBooks />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/IzdajKnjigu/:id"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <IzdajBook />
               </Suspense>
             }
           />
@@ -120,7 +135,7 @@ function App() {
           <Route
             path="/EvidentionOfBooks/EditBook/:id"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <EditBook />
               </Suspense>
             }
@@ -128,7 +143,7 @@ function App() {
           <Route
             path="/EvidentionOfBooks/BookDetails/:id"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <BookDetails />
               </Suspense>
             }
@@ -136,7 +151,7 @@ function App() {
           <Route
             path="/EvidentionOfBooks/BookDetails/Evidention"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <BookEvid />
               </Suspense>
             }
@@ -144,7 +159,7 @@ function App() {
           <Route
             path="/EvidentionOfBooks/BookDetails/Specification"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <BookSpec />
               </Suspense>
             }
@@ -152,7 +167,7 @@ function App() {
           <Route
             path="/EvidentionOfBooks/BookDetails/Multimedia"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <BookMulti />
               </Suspense>
             }
@@ -160,7 +175,7 @@ function App() {
           <Route
             path="/StudentEvidention"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <StudentEvidention />
               </Suspense>
             }
@@ -168,7 +183,7 @@ function App() {
           <Route
             path="/StudentEvidention/NewStudent"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <NewStudent />
               </Suspense>
             }
@@ -176,7 +191,7 @@ function App() {
           <Route
             path="/LibrarianEvidention"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <LibrarianEvidention />
               </Suspense>
             }
@@ -184,7 +199,7 @@ function App() {
           <Route
             path="/LibrarianEvidention/NewLibrarian"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <NewLibrarian />
               </Suspense>
             }
@@ -192,7 +207,7 @@ function App() {
           <Route
             path="/AuthorEvidention"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <AuthorEvidention />
               </Suspense>
             }
@@ -200,7 +215,7 @@ function App() {
           <Route
             path="/AuthorEvidention/NewAuthor"
             element={
-              <Suspense fallback={<ErrorHandlerPage/>}>
+              <Suspense fallback={<ErrorHandlerPage />}>
                 <NewAuthor />
               </Suspense>
             }
