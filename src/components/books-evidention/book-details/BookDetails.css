@@ -132,7 +132,7 @@
   border-bottom: 1px solid #ccc;
   padding-left: 2rem;
   padding-bottom: 2rem;
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: flex-start;
 }
@@ -168,7 +168,8 @@
 .side-evidention-info00{
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: start;
+  border-top: 1px solid #ccc;
 }
 
 .side-info01{
@@ -184,4 +185,12 @@
 
 p{
   margin: 0;
+}
+
+.category-info{
+  display: flex;
+}
+
+.side-info-book-details{
+  display: block;
 }

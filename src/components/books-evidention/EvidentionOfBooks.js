@@ -4,6 +4,7 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 import illustration1 from "../../images/undraw_bookshelves_re_lxoy.svg"
 

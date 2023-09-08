@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import "./table.css";
 import { useNavigate } from "react-router-dom";
 import { BookService } from "../../api/api";
@@ -6,6 +6,9 @@ import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner
 import BookItem from "./BookItem";
 
 const Table = () => {
+
+ 
+
   const navigate = useNavigate();
 
   const [books, setBooks] = useState([]);
@@ -102,7 +105,7 @@ const Table = () => {
   };
 
   return (
-    <div>
+    <div className="book-tabla">
       {books.length === 0 ? (
         <div>
           <div className="loading">
@@ -167,5 +170,6 @@ const Table = () => {
     </div>
   );
 };
+
 
 export default Table;
