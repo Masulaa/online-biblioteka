@@ -75,13 +75,12 @@ return(
               <h1 className="h1">
                 {me.name}
                 <div className="links">
-                  <Link to="/EvidentionOfBooks">
-                    Evidencija Knjiga &nbsp;
-                  </Link>
-                   / 
-                  <Link to="/userprofile">
-                &nbsp; ID-{me.id}&nbsp;
-                  </Link>
+                  <p class="breadcrumbs">
+             Korisnički Profil
+              /  <Link to="/UserProfile">
+                <span className="paragraf">ID-{me.id}</span>
+              </Link>{" "}
+            </p>
                 </div>
               </h1>
               
@@ -91,15 +90,7 @@ return(
           <div>
         <Link to="#" className="links2 side-stuff">
           <HiOutlineArrowUturnUp className="detail-icons" />
-          Otpisi Knjigu
-        </Link>
-        <Link to="#" className="links2 side-stuff">
-          <FaRegHandScissors className="detail-icons" />
-          Izdaj Knjigu
-        </Link>
-        <Link to="#" className="links2 side-stuff">
-          <HiOutlineArrowPath className="detail-icons" />
-          Vrati Knjigu
+          Izmjeni Podatke
         </Link>
         <Link to="#" className="links2" ref={profilRef}>
           <BsThreeDotsVertical

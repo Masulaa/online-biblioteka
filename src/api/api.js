@@ -109,6 +109,9 @@ export const BookService = {
   ReserveBook(bookData) {
     return client.post("books/store", bookData);
   },
+  IzdajBook(izdajKnjiguData, id){
+    return client.post(`books/${id}/izdaj`, izdajKnjiguData)
+  }
 };
 
 export const UserService = {
@@ -122,7 +125,7 @@ export const UserService = {
     return client.get("users");
   },
   DeleteUsers(userIds){
-    return client.delete(`authors/${userIds}`)
+    return client.delete(`users/${userIds}`)
   },
   GetMeInfo(){
     return client.post("users/me")

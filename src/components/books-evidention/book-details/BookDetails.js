@@ -87,16 +87,12 @@ function BookDetails() {
               <h1 className="h1">
                 {book.title}
                 <div className="links">
-                  <Link className="evidention" to="/EvidentionOfBooks">
-                    Evidencija Knjiga&nbsp;
-                  </Link>
-                  /
-                  <Link
-                    className="book"
-                    to={`/EvidentionOfBooks/BookDetails/${id}`}
-                  >
-                    &nbsp;{book.isbn}
-                  </Link>
+                <p class="breadcrumbs">
+              <Link to="/EvidentionOfBooks">
+                <span className="paragraf">Evidencija Knjiga</span>
+              </Link>{" "}
+              / ID-{book.id}
+            </p>
                 </div>
               </h1>
             </div>

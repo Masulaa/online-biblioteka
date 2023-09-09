@@ -9,12 +9,6 @@
   border-bottom: 1px solid #ccc;
 }
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
 
 
 .detail-icons {
@@ -31,7 +25,6 @@
 .side-info-book-details{
   margin-top: 2rem;
   border-left: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
   padding-left: 2rem;
   padding-bottom: 2rem;
   display: block;
@@ -45,44 +38,11 @@
   align-items: flex-start;
 }
 
-.side-category00{
-  margin: 0;
-  color: #8b8b8b;
-  font-size: 15px;
-  margin-bottom: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding-right: 1rem;
-
-}
-
-.side-category01{
-  margin-top: 0.34rem;
-  margin-bottom: 0.34rem;
-}
-
-.side-info00{
-  display: flex;
-  flex-direction: column;
-}
-
 .side-evidention-info00{
   display: flex;
   flex-direction: column;
   align-items: start;
   border-top: 1px solid #ccc;
-}
-
-.side-info01{
-  margin-bottom: 0.2rem;
-  font-size: 14px;
-  background-color: #76a5af;
-  border-radius: 10px;
-  border: 2px #a8e4f3 solid;
-  padding: 0.2rem;
-  color: #a8e4f3;
-  text-align: center;
 }
 
 p{

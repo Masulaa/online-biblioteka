@@ -1,125 +1,103 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import "./NewStudent.css";
-import "react-quill/dist/quill.snow.css";
 import DragDrop from "../dragdropupload/DragDrop";
+import "./NewStudent.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function NewStudent() {
-  const [nameSurname, setNameSurname] = useState("");
-  const [userType, setUserType] = useState("");
-  const [jmbg, setJmbg] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [JMBG, setJMBG] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [fileName, setFileName] = useState("");
 
   const navigate = useNavigate();
 
-  const [sadrzaj, setSadrzaj] = useState("");
-
-  const handleSadrzajChange = (value) => {
-    setSadrzaj(value);
-  };
-
-  const handleConfirm = () => {
-    console.log("Ime i prezime:", nameSurname);
-    console.log("Tip korisnika:", userType);
-    console.log("JMBG:", jmbg);
-    console.log("E-mail:", email);
-    console.log("Korisničko ime:", username);
-    console.log("Lozinka:", password);
-    console.log("Potvrda lozinke:", confirmPassword);
-    console.log("Slika:", fileName);
-  };
 
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
+
 
   return (
     <Fragment>
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
-        <div className="main-content">
-          <div className="Glavno">
-            <h1 className="naslov1">Novi Ucenik</h1>
-            <p>
+        <div className="">
+          <div class="headbar">
+            <h2 className="naslov">Novi Učenik</h2>
+            <p class="breadcrumbs">
               <Link to="/StudentEvidention">
-                <span className="paragraf">Svi Ucenici</span>
+                <span className="paragraf">Evidencija Učenika</span>
               </Link>{" "}
-              / Novi Ucenik
+              / Nova Knjiga
             </p>
+          </div>
+
+          <div>
+
             <div className="line2"></div>
-            <div className="info">
-              <label>Ime i Prezime</label>
-              <input
-                className="input0"
-                value={nameSurname}
-                onChange={(e) => setNameSurname(e.target.value)}
-              />
-              <label>Tip korisnika</label>
-              <select
-                className="input0"
-                value={userType}
-                onChange={(e) => setUserType(e.target.value)}
-              >
-                <option> </option>
-                <option>Ucenik</option>
-                <option>Nastavnik</option>
-                <option>Roditelj</option>
-              </select>
-              <label>JMBG</label>
-              <input
-                type="number"
-                minLength="13"
-                className="input0"
-                value={jmbg}
-                onChange={(e) => setJmbg(e.target.value)}
-              />
-              <label>E-mail</label>
-              <input
-                type="email"
-                className="input0"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label>Korisničko ime</label>
-              <input
-                className="input0"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <label>Lozinka</label>
-              <input
-                type="password"
-                className="input0"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <label>Potvrdi lozinku</label>
-              <input
-                type="password"
-                className="input0"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
-            <div className="info2">
-              <DragDrop />
-              <div className="buttons">
-                <button className="submit" onClick={handleConfirm}>
-                  Potvrdi
-                </button>
-                <button
-                  className="cancel"
-                  onClick={() => {
-                    navigate("/StudentEvidention");
-                  }}
-                >
-                  Poništi
-                </button>
+
+              <div className="flex-columns">
+                <div className="column">
+                  <label>Ime</label>
+                  <input
+                    className="default-input"
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <label>Prezime</label>
+                  <input
+                    className="default-input"
+                    onChange={(e) => setSurname(e.target.value)}
+                  />
+                  <label>JMBG</label>
+                  <input
+                    className="default-input"
+                    onChange={(e) => setJMBG(e.target.value)}
+                  />
+                  <label>E-mail</label>
+                  <input
+                    className="default-input"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                   <label>Korisničko Ime</label>
+                  <input
+                    className="default-input"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                  <label>Šifra</label>
+                  <input
+                    className="default-input"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <label>Potvrdi Šifru</label>
+                  <input
+                    className="default-input"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div className="buttons">
+                    <button
+                      className="cancel"
+                      onClick={() => {
+                        navigate("/AuthorEvidention");
+                      }}
+                    >
+                      Poništi
+                    </button>
+                    <button
+                      className="submit"
+                    >
+                      Dalje
+                    </button>
+                  </div>
+                </div>
+                <div className="column">
+                  <DragDrop></DragDrop>
+                </div>
               </div>
-            </div>
+
           </div>
         </div>
       </div>

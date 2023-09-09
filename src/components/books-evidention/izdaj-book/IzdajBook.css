@@ -1,6 +1,69 @@
 .wrapper10 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.category-info22 {
+  color: #8b8b8b;
+  margin: 0;
+  font-size: 1px;
+  display: flex;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+.izdaj-book-side-naslov {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+}
+
+.detail-icons {
+  margin-right: 0.2rem;
+}
+.i3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.form1234 {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5%;
+}
+.form123 {
+  display: flex;
+  flex-direction: column;
+  padding-right: 5%;
+}
+
+.raspored-izdaj-knjige {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0% 30%;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.i10 {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  font-size: 15px;
+}
+.i0 {
+  display: flex;
+  justify-content: flex-start;
+}
+.i4 {
+  display: flex;
+  flex-direction: column;
+}
+
+.naslov-mini-ispod {
+  margin: 0;
+  padding-bottom: 1rem;
+}
