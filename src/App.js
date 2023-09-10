@@ -32,8 +32,14 @@ const BookDetails = lazy(() =>
 const UserProfile = lazy(() =>
   import("./components/account-components/UserProfile")
 );
+const EditUserProfile = lazy(() =>
+  import("./components/account-components/EditUserProfile")
+);
 const IzdajBook = lazy(() =>
   import("./components/books-evidention/izdaj-book/IzdajBook")
+);
+const ReserveBook = lazy(() =>
+  import("./components/books-evidention/reserve-book/ReserveBook")
 );
 const BookEvid = lazy(() =>
   import("./components/books-evidention/book-details/BookEvid")
@@ -101,6 +107,14 @@ function App() {
             }
           />
           <Route
+            path="/EditUserProfile"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <EditUserProfile />
+              </Suspense>
+            }
+          />
+          <Route
             path="/test"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
@@ -121,6 +135,14 @@ function App() {
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
                 <IzdajBook />
+              </Suspense>
+            }
+          />
+                  <Route
+            path="/ReserveBook/:id"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <ReserveBook />
               </Suspense>
             }
           />

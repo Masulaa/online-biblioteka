@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "./DragDrop.css";
-
 import { ImBin } from "react-icons/im";
 
-const DragDrop = () => {
+const DragDrop = ({ handleFileNameChange }) => {
   const [imageSrc, setImageSrc] = useState("");
-  const [fileName, setFileName] = useState("");
   const [isFileSelected, setIsFileSelected] = useState(false);
 
   const handleDrop = (event) => {
@@ -18,12 +16,12 @@ const DragDrop = () => {
       reader.onload = (event) => {
         const contents = event.target.result;
         setImageSrc(contents);
-        setFileName(file.name);
+        handleFileNameChange(file.name); // Call the callback function with the file name
       };
       reader.readAsDataURL(file);
     } else {
       setImageSrc(event.dataTransfer.getData("text"));
-      setFileName("");
+      handleFileNameChange(""); // Clear the file name
     }
 
     setIsFileSelected(true);
@@ -35,12 +33,13 @@ const DragDrop = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    console.log("Selected file name:", file.name); // Display the file name in the console
     const reader = new FileReader();
 
     reader.onload = (event) => {
       const contents = event.target.result;
       setImageSrc(contents);
-      setFileName(file.name);
+      handleFileNameChange(file.name); // Call the callback function with the file name
     };
 
     reader.readAsDataURL(file);
@@ -49,7 +48,7 @@ const DragDrop = () => {
 
   const handleDeleteImage = () => {
     setImageSrc("");
-    setFileName("");
+    handleFileNameChange(""); // Clear the file name
     setIsFileSelected(false);
   };
 
@@ -64,9 +63,8 @@ const DragDrop = () => {
           <div className="image-container">
             <img className="uploaded-image" src={imageSrc} alt="" />
             <button className="delete-button" onClick={handleDeleteImage}>
-              <ImBin/>
+              <ImBin />
             </button>
-            <p className="image-name">{fileName}</p>
           </div>
         ) : (
           <React.Fragment>

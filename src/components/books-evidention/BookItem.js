@@ -83,7 +83,9 @@ return (
         <IoIosRefresh className="detail-icons"/>
         Vrati Knjigu
       </div>
-      <div>
+      <div onClick={() => {
+          navigate(`/ReserveBook/${book.id}`);
+        }}>
         <FaNotesMedical className="detail-icons"/>
         Rezervisi Knjigu
       </div>

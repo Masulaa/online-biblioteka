@@ -106,8 +106,8 @@ export const BookService = {
       ids: bookIds,
     });
   },
-  ReserveBook(bookData) {
-    return client.post("books/store", bookData);
+  ReserveBook(reserveBookData, id) {
+    return client.post(`books/${id}/reserve`, reserveBookData);
   },
   IzdajBook(izdajKnjiguData, id){
     return client.post(`books/${id}/izdaj`, izdajKnjiguData)
@@ -129,6 +129,9 @@ export const UserService = {
   },
   GetMeInfo(){
     return client.post("users/me")
+  },
+  UpdateMeInfo(){
+    return client.put("users/me")
   }
 };
 

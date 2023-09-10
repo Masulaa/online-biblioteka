@@ -103,9 +103,13 @@ function BookDetails() {
             <HiOutlineArrowUturnUp className="detail-icons" />
             Otpisi Knjigu
           </Link>
-          <Link to="#" className="links2 side-stuff">
-            <FaRegHandScissors className="detail-icons" />
+          <Link to={`/IzdajKnjigu/${book.id}`} className="links2 side-stuff">
+            <FaRegHandScissors className="detail-icons"/>
             Izdaj Knjigu
+          </Link>
+          <Link to={`/ReserveBook/${book.id}`} className="links2 side-stuff">
+            <FaRegHandScissors className="detail-icons"/>
+            Rezerviši Knjigu
           </Link>
           <Link to="#" className="links2 side-stuff">
             <HiOutlineArrowPath className="detail-icons" />
@@ -235,11 +239,11 @@ function BookDetails() {
             <span className="side-category01">Ukupna količina:</span>
           </div>
           <div className="side-info00">
-            <span className="side-info01">{book.samples} primjeraka</span>
+            <span className="side-info01">{book.samples - book.rSamples - book.bSamples - book.fSamples} primjeraka</span>
             <span className="side-info01">{book.rSamples} primjeraka</span>
             <span className="side-info01">{book.bSamples} primjeraka</span>
             <span className="side-info01">{book.fSamples} primjeraka</span>
-            <span className="side-info01">{book.samples + book.rSamples + book.bSamples + book.fSamples} primjeraka</span>
+            <span className="side-info01">{book.samples} primjeraka</span>
            </div>
           </div>
           <div className="side-evidention-info00">

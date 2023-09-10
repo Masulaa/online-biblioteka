@@ -88,7 +88,7 @@ return(
             
           </div></div>
           <div>
-        <Link to="#" className="links2 side-stuff">
+        <Link to="/EditUserProfile" className="links2 side-stuff">
           <HiOutlineArrowUturnUp className="detail-icons" />
           Izmjeni Podatke
         </Link>
