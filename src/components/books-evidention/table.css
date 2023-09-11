@@ -3,7 +3,7 @@
   margin-top: 50px;
   display: block;
   grid-template-columns: auto repeat(8, minmax(0, 1fr));
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
   margin-bottom: 20px;
   text-align: center;
