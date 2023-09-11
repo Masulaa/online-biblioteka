@@ -113,14 +113,3 @@ border-radius: 10px;
 width: 20%;
 }
 
-@media screen and (max-width: 1440px) {
-  .table{
-      width: 70%;
-  }
-}
-@media screen and (max-width: 1240px) {
-  .table{
-      width: 20%;
-      font-size: 11px;
-  }
-}
