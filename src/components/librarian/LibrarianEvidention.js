@@ -4,6 +4,7 @@ import LibrarianTable from "./LibrarianTable";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import ill from "../../images/undraw_education_f8ru.svg"
 
 import { HiMagnifyingGlassCircle } from "react-icons/hi2";
 
@@ -15,9 +16,10 @@ function LibrarianEvidention() {
   return (
     <body>
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
-      <div className="naslov">
-        <h1>Bibliotekari</h1>
-      </div>
+      <div className="naslov"><div className="illustrations">
+        <img src={ill} className="illustration" /> 
+          <h1>Bibliotekari</h1></div>
+         </div> 
       <div className="line2"></div>
       <div className="new-student">
         <button
