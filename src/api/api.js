@@ -144,4 +144,7 @@ export const AuthorService = {
       ids: authorIds,
     });
   },
+  ShowAuthor(authorId) {
+    return client.get(`authors/${authorId}`);
+  },
 };

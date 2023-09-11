@@ -33,11 +33,12 @@ return (
   onChange={() => props.handleSelectItem(props.item.id)}
   />
 </td>
-{ <td className="usrslk">
+{ <td>
+  <div className="usrslk">
     <img src={user.photoPath}></img>
   <div className="u1k">
     {user.name}&nbsp;{user.surname}
-  </div>
+  </div></div>
    </td> }
 <td>{user.email}</td>
 <td>{user.role}</td>

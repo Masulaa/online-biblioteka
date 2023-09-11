@@ -11,6 +11,7 @@ import ErrorHandlerPage from "./components/error/ErrorHandlerPage";
 
 import AppLayout from "./components/navbars/navbar";
 
+
 const LogIn = lazy(() => import("./components/account-components/LogIn"));
 const SignUp = lazy(() => import("./components/account-components/SignUp"));
 
@@ -62,6 +63,8 @@ const NewLibrarian = lazy(() => import("./components/librarian/NewLibrarian"));
 const AuthorEvidention = lazy(() =>
   import("./components/author/AuthorEvidention")
 );
+const AuthorDetails = lazy(() =>
+import("./components/author/author-details/AuthorDetails"));
 const NewAuthor = lazy(() => import("./components/author/NewAuthor"));
 
 const NewBook = lazy(() =>
@@ -231,6 +234,14 @@ function App() {
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
                 <AuthorEvidention />
+              </Suspense>
+            }
+          />
+                    <Route
+            path="/AuthorEvidention/AuthorDetails/:id"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <AuthorDetails />
               </Suspense>
             }
           />

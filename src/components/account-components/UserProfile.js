@@ -5,6 +5,8 @@ import { FaRegHandScissors } from "react-icons/fa";
 import { HiOutlineArrowPath } from "react-icons/hi2";
 import { HiOutlineArrowUturnUp } from "react-icons/hi2";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { TbArrowsExchange } from "react-icons/tb"
+import { TbPassword } from "react-icons/tb"
 
 import { useSelector } from "react-redux";
 
@@ -89,7 +91,7 @@ return(
           </div></div>
           <div>
         <Link to="/EditUserProfile" className="links2 side-stuff">
-          <HiOutlineArrowUturnUp className="detail-icons" />
+          <TbArrowsExchange className="detail-icons" />
           Izmjeni Podatke
         </Link>
         <Link to="#" className="links2" ref={profilRef}>
@@ -106,8 +108,8 @@ return(
                     navigate();
                   }}
                 >
-                  <HiOutlineArrowPath className="detail-icons"/>
-                  Izmjeni Knjigu
+                  <TbPassword className="detail-icons"/>
+                  Izmjeni Šifru
                 </li>
               </ul>
             </div>

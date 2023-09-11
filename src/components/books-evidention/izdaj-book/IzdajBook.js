@@ -11,6 +11,7 @@ import { HiOutlineArrowUturnUp } from "react-icons/hi2";
 import { FaRegHandScissors } from "react-icons/fa";
 import { HiOutlineArrowPath } from "react-icons/hi2";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { RiReservedFill } from "react-icons/ri"
 
 import "./IzdajBook.css";
 
@@ -124,10 +125,10 @@ const IzdajBook = () => {
             <HiOutlineArrowUturnUp className="detail-icons" />
             Otpisi Knjigu
           </Link>
-          <Link to="#" className="links2 side-stuff">
-            <FaRegHandScissors className="detail-icons" />
+          <Link to={`/ReserveBook/${book.id}`} className="links2 side-stuff">
+            <RiReservedFill className="detail-icons" />
            Rezerviši Knjigu
-          </Link>
+           </Link>
           <Link to="#" className="links2 side-stuff">
             <HiOutlineArrowPath className="detail-icons" />
             Vrati Knjigu
