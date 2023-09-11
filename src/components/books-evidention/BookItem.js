@@ -36,7 +36,13 @@ return (
   onChange={() => props.handleSelectItem(props.item.id)}
   />
 </td>
-<td>{book.title}</td>
+<td className="usrslk">
+    <img src={book.photo}></img>
+  <div className="u2">
+    {book.title}
+  </div>
+   
+   </td>
 <td>
   {book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}
 </td>
