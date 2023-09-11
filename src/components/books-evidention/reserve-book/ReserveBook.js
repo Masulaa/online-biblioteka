@@ -122,10 +122,10 @@ const ReserveBook = () => {
             <HiOutlineArrowUturnUp className="detail-icons" />
             Otpisi Knjigu
           </Link>
-          <Link to="#" className="links2 side-stuff">
+          <Link to={`/IzdajKnjigu/${book.id}`} className="links2 side-stuff">
             <FaRegHandScissors className="detail-icons" />
-           Rezerviši Knjigu
-          </Link>
+           Izdaj Knjigu
+           </Link>
           <Link to="#" className="links2 side-stuff">
             <HiOutlineArrowPath className="detail-icons" />
             Vrati Knjigu

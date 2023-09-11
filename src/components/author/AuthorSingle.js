@@ -40,7 +40,7 @@ return (
     <div className="dropdown-content">
       <div
         onClick={() => {
-          navigate();
+          navigate(`/AuthorEvidention/AuthorDetails/${author.id}`);
         }}
       >
         <TbListDetails className="detail-icons"/>
