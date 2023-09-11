@@ -36,7 +36,7 @@ return (
 { <td>
   <div className="usrslk">
     <img src={user.photoPath}></img>
-  <div className="u1">
+  <div className="u2">
     {user.name}&nbsp;{user.surname}
   </div></div>
    </td> }
