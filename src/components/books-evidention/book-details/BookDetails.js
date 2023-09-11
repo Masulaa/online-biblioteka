@@ -178,6 +178,7 @@ function BookDetails() {
         <div className="line2"></div>
       </div>
 
+      {currentStep === 1 && (
       <div className="details-content">
         <div className="columns">
           <div>
@@ -252,7 +253,107 @@ function BookDetails() {
             <span>Pogledaj detaljnije</span>
           </div>
         </div>
-      </div>
+      </div>)}
+      {currentStep === 2 && (
+             <div className="details-content">
+             <div className="columns">
+               <div>
+                 <div className="book-details-01">
+                   <p className="category-info">Broj strana</p>
+                   <h3 className="detail-info">{book.pages}</h3>
+                 </div>
+                 <div className="book-details-01">
+                   <p className="category-info">Pismo</p>
+                   <h3 className="detail-info">
+                   {book.script && book.script.name}
+                   </h3>
+                 </div>
+                 <div className="book-details-01">
+                   <p className="category-info">Jezik</p>
+                   <h3 className="detail-info">
+                   {book.language && book.language.name}
+                   </h3>
+                 </div>
+                 <div className="book-details-01">
+                   <p className="category-info">Povez</p>
+                   <h3 className="detail-info">
+                   {book.bookbind && book.bookbind.name}
+                   </h3>
+                 </div>
+                 <div className="book-details-01">
+                   <p className="category-info">Format</p>
+                   <h3 className="detail-info">
+                   {book.format && book.format.name}
+                   </h3>
+                 </div>
+                 <div className="book-details-01">
+                   <p className="category-info">International Standard Book Number (ISBN)</p>
+                   <h3 className="detail-info">{book.isbn}</h3>
+                 </div>
+               </div>
+             </div>
+     
+             <div className="side-info-book-details">
+              <div className="category-info">
+               <div className="side-category00">
+                 <span className="side-category01">Na raspolaganju:</span>
+                 <span className="side-category01">Rezervisano:</span>
+                 <span className="side-category01">Izdato:</span>
+                 <span className="side-category01">U prekoračenju:</span>
+                 <span className="side-category01">Ukupna količina:</span>
+               </div>
+               <div className="side-info00">
+                 <span className="side-info01">{book.samples - book.rSamples - book.bSamples - book.fSamples} primjeraka</span>
+                 <span className="side-info01">{book.rSamples} primjeraka</span>
+                 <span className="side-info01">{book.bSamples} primjeraka</span>
+                 <span className="side-info01">{book.fSamples} primjeraka</span>
+                 <span className="side-info01">{book.samples} primjeraka</span>
+                </div>
+               </div>
+               <div className="side-evidention-info00">
+                 <span>Izdavanje Knjiga - 4days ago</span>
+                 <span>Valentina.K je izdala knjigu Borisu Bojicicu dana 21.09.2023.</span>
+                 <span>Pogledaj detaljnije</span>
+               </div>
+             </div>
+           </div>
+      )}
+            {currentStep === 3 && (
+             <div className="details-content">
+             <div className="columns">
+               <div>
+                 <div className="book-details-01">
+                   <p className="category-info">Multimedija</p>
+                   <h3 className="detail-info"><img className="slika-user" src={book.photo}/></h3>
+                 </div>
+               </div>
+             </div>
+     
+             <div className="side-info-book-details">
+              <div className="category-info">
+               <div className="side-category00">
+                 <span className="side-category01">Na raspolaganju:</span>
+                 <span className="side-category01">Rezervisano:</span>
+                 <span className="side-category01">Izdato:</span>
+                 <span className="side-category01">U prekoračenju:</span>
+                 <span className="side-category01">Ukupna količina:</span>
+               </div>
+               <div className="side-info00">
+                 <span className="side-info01">{book.samples - book.rSamples - book.bSamples - book.fSamples} primjeraka</span>
+                 <span className="side-info01">{book.rSamples} primjeraka</span>
+                 <span className="side-info01">{book.bSamples} primjeraka</span>
+                 <span className="side-info01">{book.fSamples} primjeraka</span>
+                 <span className="side-info01">{book.samples} primjeraka</span>
+                </div>
+               </div>
+               <div className="side-evidention-info00">
+                 <span>Izdavanje Knjiga - 4days ago</span>
+                 <span>Valentina.K je izdala knjigu Borisu Bojicicu dana 21.09.2023.</span>
+                 <span>Pogledaj detaljnije</span>
+               </div>
+             </div>
+           </div>
+      )}
     </div>
   );
 }
