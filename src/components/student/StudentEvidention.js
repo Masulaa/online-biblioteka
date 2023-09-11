@@ -4,6 +4,7 @@ import StudentTable from "./StudentTable";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import ill3 from "../../images/undraw_typewriter_re_u9i2.svg"
 
 import { HiMagnifyingGlassCircle } from "react-icons/hi2";
 
@@ -15,9 +16,10 @@ function StudentEvidention() {
   return (
     <body>
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
-      <div className="naslov">
-        <h1>Ucenici</h1>
-      </div>
+      <div className="naslov"><div className="illustrations">
+        <img src={ill3} className="illustration" /> 
+          <h1>Ucenici</h1></div>
+         </div> 
       <div className="line2"></div>
       <div className="new-student">
         <button
