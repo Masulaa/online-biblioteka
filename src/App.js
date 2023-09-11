@@ -42,15 +42,6 @@ const IzdajBook = lazy(() =>
 const ReserveBook = lazy(() =>
   import("./components/books-evidention/reserve-book/ReserveBook")
 );
-const BookEvid = lazy(() =>
-  import("./components/books-evidention/book-details/BookEvid")
-);
-const BookMulti = lazy(() =>
-  import("./components/books-evidention/book-details/BookMulti")
-);
-const BookSpec = lazy(() =>
-  import("./components/books-evidention/book-details/BookSpec")
-);
 
 const StudentEvidention = lazy(() =>
   import("./components/student/StudentEvidention")
@@ -170,30 +161,6 @@ function App() {
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
                 <BookDetails />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/EvidentionOfBooks/BookDetails/Evidention"
-            element={
-              <Suspense fallback={<ErrorHandlerPage />}>
-                <BookEvid />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/EvidentionOfBooks/BookDetails/Specification"
-            element={
-              <Suspense fallback={<ErrorHandlerPage />}>
-                <BookSpec />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/EvidentionOfBooks/BookDetails/Multimedia"
-            element={
-              <Suspense fallback={<ErrorHandlerPage />}>
-                <BookMulti />
               </Suspense>
             }
           />
