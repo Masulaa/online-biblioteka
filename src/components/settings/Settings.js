@@ -25,10 +25,13 @@ const Settings = () =>{
 
     return (
         <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
-         <div className="naslov"><div className="illustrations">
+          <div className="naslooov">
+          <div className="naslov"><div className="illustrations">
            <img src={settigsIcon} className="illustration"></img> 
            <h1>Podesavanja</h1></div>
          </div> 
+          </div>
+         
          <Link>
           <button
             className={`toggle-button ${currentStep === 1 ? "active" : ""}`}

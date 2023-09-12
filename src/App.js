@@ -61,6 +61,10 @@ const AuthorEvidention = lazy(() =>
 const AuthorDetails = lazy(() =>
 import("./components/author/author-details/AuthorDetails"));
 
+const EditAuthor = lazy(() =>
+  import("./components/author/EditAuthor")
+);
+
 const LibrarianDetails = lazy(() =>
 import("./components/librarian/librarian-details/LibrarianDetails"));
 
@@ -252,6 +256,14 @@ function App() {
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
                 <NewAuthor />
+              </Suspense>
+            }
+          />
+                    <Route
+            path="/AuthorEvidention/EditAuthor/:id"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <EditAuthor />
               </Suspense>
             }
           />

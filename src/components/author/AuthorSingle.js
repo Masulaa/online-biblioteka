@@ -52,7 +52,7 @@ return (
         </div>
       <div
         onClick={() => {
-          navigate();
+          navigate(`/AuthorEvidention/EditAuthor/${author.id}`);
         }}
       >
         <AiFillEdit className="detail-icons"/>

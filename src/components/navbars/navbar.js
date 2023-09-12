@@ -6,7 +6,6 @@ import { UserService } from "../../api/api";
 import "./navbar.css";
 
 import { useDispatch } from "react-redux";
-
 import { GiHamburgerMenu } from "react-icons/gi";
 import { TbDashboard } from "react-icons/tb";
 import { AiOutlineProfile } from "react-icons/ai";
