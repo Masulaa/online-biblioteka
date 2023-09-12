@@ -33,7 +33,6 @@ const SignUp = () => {
       }
       else if (userName && lastName && firstName && email && password){
         console.log("Username:" + userName + "\nFirst name:" + firstName + "\nLast name:" + lastName + "\nEmail: " + email + "\nPassword: " + password);
-        navigate("/EvidentionOfBooks")
       }
 
     // if we made it through all the checks let's call API to register

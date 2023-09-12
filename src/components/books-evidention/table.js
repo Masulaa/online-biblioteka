@@ -7,11 +7,25 @@ import BookItem from "./BookItem";
 
 const Table = () => {
 
- 
+   const [selectedAll, setSelectedAll] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   const navigate = useNavigate();
 
   const [books, setBooks] = useState([]);
+  
+  const bulkDeleteBooks = async () => {
+    try {
+      // const response = await BookService.BulkDeleteBooks(selectedItems);
+      // console.log("API Response", response);
+      console.log(selectedItems)
+      fetchBooks();
+    } catch (error) {
+
+      console.error("Error deleting book:", error)
+    }
+  };
+
 
   useEffect(() => {
     fetchBooks();
@@ -26,9 +40,8 @@ const Table = () => {
     }
   };
 
-  const [selectedAll, setSelectedAll] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
 
+// console.log("ID is", books.map((book) => book.id))
   const handleSelectAll = (event) => {
     setSelectedAll(event.target.checked);
     if (event.target.checked) {
@@ -37,12 +50,13 @@ const Table = () => {
       setSelectedItems([]);
     }
   };
-
+// console.log("ID is",selectedItems)
   const handleSelectItem = (id) => {
     if (selectedItems.includes(id)) {
       setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
     } else {
-      setSelectedItems([...selectedItems, id]);
+      setSelectedItems([...selectedItems, id]
+        );
     }
   };
 
@@ -167,6 +181,7 @@ const Table = () => {
           <option value={100}>100</option>
         </select>
       </div>
+      <button className="submit" onClick={bulkDeleteBooks}>Obrisi</button>
     </div>
   );
 };
