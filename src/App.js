@@ -67,8 +67,16 @@ const LibrarianDetails = lazy(() =>
   import("./components/librarian/librarian-details/LibrarianDetails")
 );
 
+const EditLibrarian = lazy(() =>
+  import("./components/librarian/EditLibrarian")
+);
+
 const StudentDetails = lazy(() =>
   import("./components/student/student-details/StudentDetails")
+);
+
+const EditStudent = lazy(() =>
+  import("./components/student/EditStudent")
 );
 
 const NewAuthor = lazy(() => import("./components/author/NewAuthor"));
@@ -204,6 +212,14 @@ function App() {
             }
           />
           <Route
+            path="/LibrarianEvidention/EditLibrarian/:id"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <EditLibrarian />
+              </Suspense>
+            }
+          />
+          <Route
             path="/StudentEvidention"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
@@ -216,6 +232,15 @@ function App() {
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
                 <NewStudent />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="/StudentEvidention/EditStudent/:id"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <EditStudent />
               </Suspense>
             }
           />
@@ -259,7 +284,7 @@ function App() {
               </Suspense>
             }
           />
-                    <Route
+          <Route
             path="/AuthorEvidention/EditAuthor/:id"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>

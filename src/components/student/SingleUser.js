@@ -18,7 +18,7 @@ const BookItem = (props) => {
           props.fetchUsers();
         } catch (error) {
    
-          console.error("Error deleting book:", error)
+          console.error("Error deleting user:", error)
         }
       };
 
@@ -60,7 +60,7 @@ return (
         </div>
       <div
         onClick={() => {
-          navigate(`/StudentEvidention/EditBook/${user.id}`);
+          navigate(`/StudentEvidention/EditStudent/${user.id}`);
         }}
       >
         <AiFillEdit className="detail-icons"/>
