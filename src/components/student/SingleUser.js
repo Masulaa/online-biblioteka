@@ -48,7 +48,7 @@ return (
     <div className="dropdown-content">
       <div
         onClick={() => {
-          navigate(`/EvidentionOfBooks/BookDetails/${user.id}`);
+          navigate(`/StudentEvidention/StudentDetails/${user.id}`);
         }}
       >
         <TbListDetails className="detail-icons"/>
@@ -60,7 +60,7 @@ return (
         </div>
       <div
         onClick={() => {
-          navigate(`/EvidentionOfBooks/EditBook/${user.id}`);
+          navigate(`/StudentEvidention/EditBook/${user.id}`);
         }}
       >
         <AiFillEdit className="detail-icons"/>

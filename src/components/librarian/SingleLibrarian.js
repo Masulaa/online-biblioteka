@@ -48,7 +48,7 @@ return (
     <div className="dropdown-content">
       <div
         onClick={() => {
-          navigate(`/EvidentionOfBooks/BookDetails/${user.id}`);
+          navigate(`/LibrarianEvidention/LibrarianDetails/${user.id}`);
         }}
       >
         <TbListDetails className="detail-icons"/>

@@ -132,7 +132,10 @@ export const UserService = {
   },
   UpdateMeInfo(){
     return client.put("users/me")
-  }
+  },
+  ShowSingleUser(userIds){
+    return client.get(`users/${userIds}`);
+  },
 };
 
 export const AuthorService = {
