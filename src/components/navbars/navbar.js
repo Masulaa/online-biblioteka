@@ -16,7 +16,7 @@ import { TbArrowsLeftRight } from "react-icons/tb";
 import { FiSettings } from "react-icons/fi";
 import { BsFillXCircleFill } from "react-icons/bs";
 import { BiUserCircle } from "react-icons/bi";
-import {MdLocalLibrary} from "react-icons/md";
+import { MdLocalLibrary } from "react-icons/md";
 import { ImProfile } from "react-icons/im";
 import { BiLogOut } from "react-icons/bi";
 
@@ -37,13 +37,12 @@ function NavBar({ children }) {
         setUserIconMenuOpen(false);
       }
     };
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
 
   const LogOut = async () => {
     try {
@@ -52,8 +51,7 @@ function NavBar({ children }) {
 
       // navigate("/EvidentionOfBooks");
     } catch (error) {
-
-      console.error("Couldn't logout", error)
+      console.error("Couldn't logout", error);
     }
   };
 
@@ -66,17 +64,20 @@ function NavBar({ children }) {
     }
   };
 
- const isOpennedUserIconMenu = () =>{
-  setUserIconMenuOpen(!userIconMenuOpen);
-  if(userIconMenuOpen === false){
-    setUserIconMenuOpen(!userIconMenuOpen)
-  }
- }
+  const isOpennedUserIconMenu = () => {
+    setUserIconMenuOpen(!userIconMenuOpen);
+    if (userIconMenuOpen === false) {
+      setUserIconMenuOpen(!userIconMenuOpen);
+    }
+  };
 
   return (
-    <div className="page-wrapper" >
+    <div className="page-wrapper">
       <div className="top-nav">
-        <div className="logo"><MdLocalLibrary className="logo-icon"/>Biblioteka</div>
+        <div className="logo">
+          <MdLocalLibrary className="logo-icon" />
+          Biblioteka
+        </div>
         <button
           className="create-btn"
           onClick={() => {
@@ -87,22 +88,35 @@ function NavBar({ children }) {
         </button>
         <div className="profile" ref={profilRef}>
           <div className="profile-tab">
-            <BiUserCircle className="user-icon" onClick={()=>{isOpennedUserIconMenu();}} />
+            <BiUserCircle
+              className="user-icon"
+              onClick={() => {
+                isOpennedUserIconMenu();
+              }}
+            />
           </div>
           {userIconMenuOpen && (
             <div className="user-menu">
               <ul>
-                <li onClick={()=>{isOpennedUserIconMenu();
-                navigate("/UserProfile");}}>
+                <li
+                  onClick={() => {
+                    isOpennedUserIconMenu();
+                    navigate("/UserProfile");
+                  }}
+                >
                   <ImProfile className="detail-icons" />
                   Profile
-                  </li>
-                <li onClick={()=>{isOpennedUserIconMenu();
-                LogOut();
-                navigate("LogIn")}}>
-                   <BiLogOut className="detail-icons" />
+                </li>
+                <li
+                  onClick={() => {
+                    isOpennedUserIconMenu();
+                    LogOut();
+                    navigate("LogIn");
+                  }}
+                >
+                  <BiLogOut className="detail-icons" />
                   Logout
-                  </li>
+                </li>
               </ul>
             </div>
           )}
@@ -223,8 +237,24 @@ function NavBar({ children }) {
                   <span
                     className={`line ${isTouched ? "line-expanded" : ""}`}
                   ></span>
-                  <FiSettings className="icon2" onClick={isTouchedHandler} />
-                  <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                  <FiSettings
+                    className="icon2"
+                    onClick={() => {
+                      if (isTouched) {
+                        isTouchedHandler();
+                      }
+                      navigate("/Settings");
+                    }}
+                  />
+                  <p
+                    className={`par ${isTouched ? "par-expanded" : ""}`}
+                    onClick={() => {
+                      if (isTouched) {
+                        isTouchedHandler();
+                      }
+                      navigate("/Settings");
+                    }}
+                  >
                     Settings
                   </p>
                 </li>

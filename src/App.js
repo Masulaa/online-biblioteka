@@ -11,7 +11,6 @@ import ErrorHandlerPage from "./components/error/ErrorHandlerPage";
 
 import AppLayout from "./components/navbars/navbar";
 
-
 const LogIn = lazy(() => import("./components/account-components/LogIn"));
 const SignUp = lazy(() => import("./components/account-components/SignUp"));
 
@@ -23,9 +22,7 @@ const EvidentionOfBooks = lazy(() =>
   import("./components/books-evidention/EvidentionOfBooks")
 );
 
-const Settings = lazy(() =>
-  import("./components/settings/Settings")
-);
+const Settings = lazy(() => import("./components/settings/Settings"));
 
 const EditBook = lazy(() =>
   import("./components/books-evidention/edit-book/EditBook")
@@ -59,13 +56,16 @@ const AuthorEvidention = lazy(() =>
   import("./components/author/AuthorEvidention")
 );
 const AuthorDetails = lazy(() =>
-import("./components/author/author-details/AuthorDetails"));
+  import("./components/author/author-details/AuthorDetails")
+);
 
 const LibrarianDetails = lazy(() =>
-import("./components/librarian/librarian-details/LibrarianDetails"));
+  import("./components/librarian/librarian-details/LibrarianDetails")
+);
 
 const StudentDetails = lazy(() =>
-import("./components/student/student-details/StudentDetails"));
+  import("./components/student/student-details/StudentDetails")
+);
 
 const NewAuthor = lazy(() => import("./components/author/NewAuthor"));
 
@@ -127,7 +127,7 @@ function App() {
               </Suspense>
             }
           />
-                    <Route
+          <Route
             path="/Settings"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
@@ -151,7 +151,7 @@ function App() {
               </Suspense>
             }
           />
-                  <Route
+          <Route
             path="/ReserveBook/:id"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
@@ -183,7 +183,7 @@ function App() {
               </Suspense>
             }
           />
-                    <Route
+          <Route
             path="/StudentEvidention/StudentDetails/:id"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
@@ -191,7 +191,7 @@ function App() {
               </Suspense>
             }
           />
-                    <Route
+          <Route
             path="/LibrarianEvidention/LibrarianDetails/:id"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
@@ -239,7 +239,7 @@ function App() {
               </Suspense>
             }
           />
-                    <Route
+          <Route
             path="/AuthorEvidention/AuthorDetails/:id"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
