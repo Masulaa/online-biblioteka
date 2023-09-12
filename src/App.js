@@ -23,6 +23,10 @@ const EvidentionOfBooks = lazy(() =>
   import("./components/books-evidention/EvidentionOfBooks")
 );
 
+const Settings = lazy(() =>
+  import("./components/settings/Settings")
+);
+
 const EditBook = lazy(() =>
   import("./components/books-evidention/edit-book/EditBook")
 );
@@ -113,6 +117,14 @@ function App() {
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
                 <LoadingSpinner />
+              </Suspense>
+            }
+          />
+                    <Route
+            path="/Settings"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <Settings />
               </Suspense>
             }
           />
