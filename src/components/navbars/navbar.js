@@ -227,7 +227,15 @@ function NavBar({ children }) {
                   className="icon2"
                   onClick={isTouchedHandler}
                 />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
+                <p
+                  className={`par ${isTouched ? "par-expanded" : ""}`}
+                  onClick={() => {
+                    if (isTouched) {
+                      isTouchedHandler();
+                    }
+                    navigate("/Evidention");
+                  }}
+                >
                   Izdavanje Knjiga
                 </p>
               </li>

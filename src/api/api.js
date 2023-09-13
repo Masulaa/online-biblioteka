@@ -103,15 +103,17 @@ export const BookService = {
   },
   BulkDeleteBooks(bookIds) {
     return client.delete("books/bulkdelete", {
-      ids: bookIds,
+      data: {
+        ids: bookIds,
+      },
     });
   },
   ReserveBook(reserveBookData, id) {
     return client.post(`books/${id}/reserve`, reserveBookData);
   },
-  IzdajBook(izdajKnjiguData, id){
-    return client.post(`books/${id}/izdaj`, izdajKnjiguData)
-  }
+  IzdajBook(izdajKnjiguData, id) {
+    return client.post(`books/${id}/izdaj`, izdajKnjiguData);
+  },
 };
 
 export const UserService = {
@@ -121,19 +123,19 @@ export const UserService = {
   LogOut(confirmData) {
     return client.post("logout", confirmData);
   },
-  ListUsers(){
+  ListUsers() {
     return client.get("users");
   },
-  DeleteUsers(userIds){
-    return client.delete(`users/${userIds}`)
+  DeleteUsers(userIds) {
+    return client.delete(`users/${userIds}`);
   },
-  GetMeInfo(){
-    return client.post("users/me")
+  GetMeInfo() {
+    return client.post("users/me");
   },
-  UpdateMeInfo(){
-    return client.put("users/me")
+  UpdateMeInfo() {
+    return client.put("users/me");
   },
-  ShowSingleUser(userIds){
+  ShowSingleUser(userIds) {
     return client.get(`users/${userIds}`);
   },
 };
@@ -143,9 +145,7 @@ export const AuthorService = {
     return client.get("authors");
   },
   DeleteAuthors(authorIds) {
-    return client.delete(`authors/${authorIds}`, {
-      ids: authorIds,
-    });
+    return client.delete(`authors/${authorIds}`);
   },
   ShowAuthor(authorId) {
     return client.get(`authors/${authorId}`);

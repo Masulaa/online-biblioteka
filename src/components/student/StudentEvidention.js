@@ -21,9 +21,9 @@ function StudentEvidention() {
           <h1>Ucenici</h1></div>
          </div> 
       <div className="line2"></div>
-      <div className="new-student">
+      <div className="table-header">
         <button
-          className='novi-ucenik'
+          className='default-button'
           onClick={() => {
             navigate("/StudentEvidention/NewStudent");
           }}

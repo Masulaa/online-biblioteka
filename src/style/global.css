@@ -419,3 +419,40 @@ label {
       font-size: 11px;
   }
 }
+
+.table-header {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.default-button {
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #76a5af;
+  color: white;
+  border-radius: 25px;
+  font-size: 15px;
+  line-height: 32px;
+  transition:background-color 0.4s ease;
+  border: none;
+  margin-left: auto;
+}
+
+.default-button:hover {
+  background-color: #51737b;
+}
+
+.pull-right {
+  margin-left: auto;
+}
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  
+}

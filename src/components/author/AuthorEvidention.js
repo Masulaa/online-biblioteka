@@ -22,23 +22,15 @@ function AuthorEvidention() {
           <h1>Autori</h1></div>
          </div> 
       <div className="line2"></div>
-      <div className="new-student">
+      <div className="table-header">
         <button
-          className='novi-ucenik'
+          className='default-button'
           onClick={() => {
             navigate("/AuthorEvidention/NewAuthor");
           }}
         >
           Novi Autor
         </button>
-        <span className="search-span">
-          <HiMagnifyingGlassCircle className="search-bar-icon" />
-          <input
-            type="text"
-            placeholder="   search..."
-            className="search"
-          ></input>
-        </span>
       </div>
       <AuthorTable/>
       </div>

@@ -16,8 +16,9 @@ const Table = () => {
   
   const bulkDeleteBooks = async () => {
     try {
-      // const response = await BookService.BulkDeleteBooks(selectedItems);
-      // console.log("API Response", response);
+      console.log("Book ids", selectedItems)
+      const response = await BookService.BulkDeleteBooks(selectedItems);
+      console.log("API Response", response);
       console.log(selectedItems)
       fetchBooks();
     } catch (error) {

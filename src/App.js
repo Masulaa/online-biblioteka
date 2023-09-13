@@ -10,6 +10,7 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import ErrorHandlerPage from "./components/error/ErrorHandlerPage";
 
 import AppLayout from "./components/navbars/navbar";
+import Evidention from "./components/books-evidention/evidention/Evidention";
 
 const LogIn = lazy(() => import("./components/account-components/LogIn"));
 const SignUp = lazy(() => import("./components/account-components/SignUp"));
@@ -292,6 +293,15 @@ function App() {
               </Suspense>
             }
           />
+          <Route
+            path="/Evidention"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <Evidention />
+              </Suspense>
+            }
+          />
+
         </Route>
       </Routes>
       {/* </AppLayout> */}

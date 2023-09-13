@@ -2,17 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./AuthorTable.css";
 import { useNavigate } from "react-router-dom";
 import { AuthorService } from "../../api/api";
-import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
-import AuthorSingle from "./AuthorSingle";
+// import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
+// import AuthorSingle from "./AuthorSingle";
+import {
+  EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined
+} from '@ant-design/icons';
+
+import { Table, Dropdown, Menu, Modal } from "antd";
 
 const AuthorTable = () => {
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
   const [authors, setAuthors] = useState([]);
 
-  useEffect(() => {
-    fetchAuthors();
-  }, []);
+  const withLoading = async (method) => {
+    setLoading(true)
+    await method()
+    setLoading(false)
+  }
+
 
   const fetchAuthors = async () => {
     try {
@@ -23,138 +32,160 @@ const AuthorTable = () => {
     }
   };
 
-  const [selectedAll, setSelectedAll] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const confirm = (id) => {
+    Modal.confirm({
+      title: 'Potvrdi',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Da li ste sigurni da zelite obrisati autora?',
+      okText: 'Da, Obrisi',
+      cancelText: 'Ne',
+      onOk: () => deleteAuthor(id)
+    });
+  };
 
-  const handleSelectAll = (event) => {
-    setSelectedAll(event.target.checked);
-    if (event.target.checked) {
-      setSelectedItems(authors.map((author) => author.id));
-    } else {
-      setSelectedItems([]);
+  // confirm(1);
+
+  useEffect(() => {
+    withLoading(fetchAuthors)
+  }, []);
+
+  const compareStrings = function (a, b) {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const renderFirstLastName = (text, author) => {
+    return (
+      <span>
+        {author.name} {author.surname}
+      </span>
+    );
+  };
+
+  const Item = Menu.Item
+
+  const navigateToDetails = (authorId) => navigate(`/AuthorEvidention/AuthorDetails/${authorId}`);
+  const navigateToEdit = (authorId) => navigate(`/AuthorEvidention/EditAuthor/${authorId}`);
+
+  const deleteAuthor = async (authorId) => {
+    try {
+      setLoading(true)
+      await AuthorService.DeleteAuthors(authorId);
+      setLoading(false)
+      fetchAuthors();
+    } catch (error) {
+
+      console.error("Error deleting book:", error)
     }
   };
 
-  const handleSelectItem = (id) => {
-    if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
-    } else {
-      setSelectedItems([...selectedItems, id]);
+  const menu = (recordId) =>
+  <Menu>
+    <Item onClick={() => navigateToDetails(recordId)}>Detalji</Item>
+    <Item onClick={() => navigateToEdit(recordId)}>Izmijeni</Item>
+    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obrisi</Item>
+  </Menu>
+
+
+  const columns = [
+    {
+      title: "Naziv Autora",
+      dataIndex: "name",
+      render: renderFirstLastName,
+      sorter: (a, b) => compareStrings(a.name, b.name),
+      filters: authors.map((author) => {
+        return {
+          text: author.name + " " + author.surname,
+          value: author.name + " " + author.surname,
+        };
+      }),
+      onFilter: (value, record) =>
+        `${record.name} ${record.surname}`.startsWith(value),
+    },
+    {
+      title: "Opis",
+      dataIndex: "opis",
+    },
+    {
+      title: "",
+      dataIndex: "action",
+      fixed: "right",
+      render: (text, record) => (
+        <Dropdown overlay={menu(record.id)} trigger={[`click`]}>
+        <EllipsisOutlined />
+      </Dropdown>
+    
+      ),
+    },
+  ];
+
+  const handleMenuClick = (e) => {
+    console.log(e)
+    const author = {
+      id: 0
+    }
+    switch (e.key) {
+      case 1:
+        navigate(`/AuthorEvidention/AuthorDetails/${author.id}`);
+        break;
+      case 2:
+        navigate(`/AuthorEvidention/EditAuthor/${author.id}`);
+        break;
+
+      case 3:
+        break;
+
+        default:
+          console.error("No default case");
+    }
+    if (e.key == 2) {
+      navigate("/EvidentionOfBooks/EditBook/BookDetails");
     }
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-  console.log("Books is", authors);
-  const currentItems = authors.slice(indexOfFirstItem, indexOfLastItem);
-
-  const totalPages = Math.ceil(authors.length / itemsPerPage);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
   };
 
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(
-        <button
-          key={i}
-          onClick={() => handlePageChange(i)}
-          className={currentPage === i ? "active" : ""}
-        >
-          {i}
-        </button>
-      );
-    }
-    return pageNumbers;
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
   };
 
-  const renderLeftArrow = () => {
-    if (currentPage !== 1) {
-      return (
-        <button onClick={() => handlePageChange(currentPage - 1)}>
-          &larr;
-        </button>
-      );
-    }
-    return null;
+  const [pageSize, setPageSize] = useState(10);
+
+  const handlePageSizeChange = (current, newSize) => {
+    setLoading(true);
+    setPageSize(newSize);
+    setLoading(false);
   };
 
-  const renderRightArrow = () => {
-    if (currentPage !== totalPages) {
-      return (
-        <button onClick={() => handlePageChange(currentPage + 1)}>
-          &rarr;
-        </button>
-      );
-    }
-    return null;
-  };
-
-  const handleItemsPerPageChange = (event) => {
-    setItemsPerPage(parseInt(event.target.value));
-    setCurrentPage(1);
+  const pagination = {
+    pageSize: pageSize,
+    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+    pageSizeOptions: ["1", "10", "20", "50"],
+    showSizeChanger: true,
+    onShowSizeChange: handlePageSizeChange,
   };
 
   return (
-    <div>
-      {authors.length === 0 ? (
-        <div>
-          <div className="loading">
-            <LoadingSpinner></LoadingSpinner>
-          </div>
-        </div>
-      ) : (
-        <table className="table">
-          <thead>
-          <tr>
-            <th>
-              <input type="checkbox" checked={selectedAll} onChange={handleSelectAll} />
-            </th>
-            <th>Ime Autora</th>
-            <th>Prezime Autora</th>
-            <th></th>
-          </tr>
-        </thead>
-          <tbody>
-          {currentItems.map((author) => (
-              <AuthorSingle
-                key={author.id}
-                item={author}
-                selectedItems={selectedItems}
-                handleSelectItem={handleSelectItem}
-                fetchAuthors={fetchAuthors}
-              />
-            ))}
-          </tbody>
-        </table>
-      )}
-      <div className="pagination">
-        {renderLeftArrow()}
-        {renderPageNumbers()}
-        {renderRightArrow()}
-      </div>
-      <div className="rows-per-page">
-        <span>Rows per page:</span>
-        <select
-          className="inputs"
-          value={itemsPerPage}
-          onChange={handleItemsPerPageChange}
-        >
-          <option value={1}>1</option>
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-          <option value={100}>100</option>
-        </select>
-      </div>
-    </div>
+    <Table
+      className="tabela"
+      rowSelection={rowSelection}
+      columns={columns}
+      dataSource={authors}
+      rowKey="id"
+      pagination={pagination}
+      loading={loading}
+    />
   );
 };
 

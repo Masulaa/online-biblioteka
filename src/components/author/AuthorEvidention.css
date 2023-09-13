@@ -1,19 +1,4 @@
-
-  .novi-ucenik {
-    padding-left: 30px;
-    padding-right: 30px;
-    margin-left: 80px;
-    background-color: #76a5af;
-    color: white;
-    border-radius: 25px;
-    font-size: 15px;
-    transition:background-color 0.4s ease;
-    border: none;
-    z-index:0;
-    opacity: 1;
-  }
-  
-  .blur-showed{
+    .blur-showed{
     filter: blur(10px);
     opacity: 1;
     pointer-events: none;
@@ -23,16 +8,7 @@
    transition: all 0.4s ease-in-out;
   }
   
-  .novi-ucenik:hover {
-    background-color: #51737b;
-  }
-  
-  .new-student {
-    height: auto;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-  }
+ 
   .search-bar-icon {
     color: #76a5af;
     font-size: 35px;
