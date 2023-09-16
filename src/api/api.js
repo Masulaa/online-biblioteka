@@ -90,8 +90,11 @@ export const BookService = {
   ListBooks() {
     return client.get("books");
   },
-  CreateBook(bookData) {
-    return client.post("books/store", bookData);
+  CreateBookInfo() {
+    return client.get("books/create");
+  },
+  CreateBook(newBookData) {
+    return client.post("books/store", newBookData);
   },
   DeleteBooks(bookIds) {
     return client.delete(`books/${bookIds}/destroy`, {

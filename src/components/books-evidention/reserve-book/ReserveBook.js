@@ -163,7 +163,7 @@ const ReserveBook = () => {
             <h2 className="naslov-mini-ispod">Rezerviši Knjigu</h2>
             <label>Izaberite učenika koji rezerviše knjigu</label>
             <select
-              type="password"
+              type="text"
               className="default-input"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}

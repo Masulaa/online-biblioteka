@@ -61,6 +61,16 @@ const UserProfile = () =>{
         }
       };
 
+      const [showModal, setShowModal] = useState(false);
+
+      const openModal = () => {
+        setShowModal(true);
+      };
+    
+      const closeModal = () => {
+        setShowModal(false);
+      };
+
 return(
     <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="wrapper10">
@@ -108,7 +118,7 @@ return(
                     navigate();
                   }}
                 >
-                  <TbPassword className="detail-icons"/>
+                  <TbPassword className="detail-icons" onClick={openModal}/>
                   Izmjeni Šifru
                 </li>
               </ul>
@@ -132,8 +142,19 @@ return(
               <p>{me.username}</p> */}
     
     <div className="details-content">
-      
-    <div className="columns">
+   
+    <div className="columns"> {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <h2>Modal Naslov</h2>
+            <input type="text" placeholder="Unesite nešto" />
+            <input type="text" placeholder="Unesite nešto" />
+            <button>Potvrdi</button>
+            <button onClick={closeModal}>Poništi</button>
+          </div>
+        </div>
+      )}
       <div>
         <div className="book-details-01">
           <p className="category-info">Ime i prezime</p>

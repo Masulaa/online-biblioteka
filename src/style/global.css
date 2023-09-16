@@ -262,14 +262,6 @@ h2 {
   font-weight: initial;
 }
 
-.default-input {
-  width: 100%;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 2px solid rgba(0, 0, 0, 0.4);
-  box-sizing: border-box;
-}
-
 .quill-default-input{
   width: 100%;
   max-width: 100%;
@@ -316,7 +308,7 @@ label {
 
 input,
 .line2 {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ccc;
 }
 
 .stranica p {

@@ -26,26 +26,17 @@ function EvidentionOfBooks() {
           <h1>Knjige</h1></div>
          </div> 
         <div className="line2"></div>
-        <div className="new-book">
-          <button
-            className="nova-knjiga"
-            onClick={() => {
-              navigate("/EvidentionOfBooks/NewBook");
-            }}
-          >
-            Nova Knjiga
-          </button>
-          <span className="search-span">
-            <HiMagnifyingGlassCircle className="search-bar-icon" />
-            <input
-              type="text"
-              placeholder="  search..."
-              className="search"
-            ></input>
-          </span>
-        </div>
-        
-        {<Table />}
+        <div className="table-header">
+        <button
+          className='default-button'
+          onClick={() => {
+            navigate("/EvidentionOfBooks/NewBook");
+          }}
+        >
+          Nova Knjiga
+        </button>
+      </div>
+      <Table/>
       </div>
     </React.Fragment>
   );
