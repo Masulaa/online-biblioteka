@@ -153,4 +153,7 @@ export const AuthorService = {
   ShowAuthor(authorId) {
     return client.get(`authors/${authorId}`);
   },
+  CreateAuthor(authorData) {
+    return client.post("authors/store", authorData);
+  },
 };

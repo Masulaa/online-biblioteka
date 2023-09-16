@@ -1,11 +1,11 @@
 import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-import DragDrop from "../dragdropupload/DragDrop";
 import "./NewAuthor.css";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
+import { Tabs, Steps, Input, Select, Space } from "antd";
+import { AuthorService } from "../../api/api";
 
 function NewAuthor() {
   const [name, setName] = useState("");
@@ -15,8 +15,24 @@ function NewAuthor() {
 
   const [sadrzaj, setSadrzaj] = useState("");
 
-  const handleSadrzajChange = (value) => {
-    setSadrzaj(value);
+  const { TextArea } = Input;
+
+  const authorData = {
+    name: name,
+    surname: surname,
+    biography: sadrzaj,
+  }
+
+  const createAuthors = async () => {
+    try {
+      const response = await AuthorService.CreateAuthor(authorData);
+      console.log("API Response", response);
+
+      // navigate("/EvidentionOfBooks");
+    } catch (error) {
+
+      console.error("Error creating an authors", error)
+    }
   };
 
 
@@ -44,20 +60,18 @@ function NewAuthor() {
               <div className="flex-columns">
                 <div className="column">
                   <label>Ime Autora</label>
-                  <input
-                    className="default-input"
+                  <Input
                     onChange={(e) => setName(e.target.value)}
                   />
                    <label>Prezime Autora</label>
-                  <input
-                    className="default-input"
+                  <Input
                     onChange={(e) => setSurname(e.target.value)}
                   />
-                  <label>Kratki sadržaj</label>
-                  <ReactQuill
+                  <label>Biografija</label>
+                  <TextArea
+                  rows={4}
                     value={sadrzaj}
-                    onChange={handleSadrzajChange}
-                    className="quill-default-input"
+                    onChange={(e)=>setSadrzaj(e.target.value)}
                   />
                   <div className="buttons">
                     <button
@@ -69,14 +83,12 @@ function NewAuthor() {
                       Poništi
                     </button>
                     <button
+                    onClick={createAuthors}
                       className="submit"
                     >
                       Dalje
                     </button>
                   </div>
-                </div>
-                <div className="column">
-                  <DragDrop></DragDrop>
                 </div>
               </div>
 
