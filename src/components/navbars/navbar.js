@@ -1,3 +1,4 @@
+import { UserService } from '../../api/api';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, PlusCircleOutlined, ReadOutlined, DashboardOutlined, TeamOutlined, UsergroupAddOutlined, BookOutlined, SolutionOutlined, AccountBookOutlined, SettingOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, Avatar, Dropdown, theme } from 'antd';
 import React, { useState } from 'react';
@@ -54,16 +55,7 @@ const items2 = [
   },
 ];
 
-const profileMenu = (
-  <Menu>
-    <Menu.Item key="profile">
-      <Link to="/profile">Profile</Link>
-    </Menu.Item>
-    <Menu.Item key="logout">
-      <Link to="/logout">Logout</Link>
-    </Menu.Item>
-  </Menu>
-);
+
 
 const App = () => {
   const {
@@ -75,6 +67,28 @@ const App = () => {
   const toggleProfileMenu = () => {
     setProfileMenuVisible(!profileMenuVisible);
   };
+  
+  const LogOut = async () => {
+    try {
+      const response = await UserService.LogOut(true);
+      console.log("API Response", response);
+
+      // navigate("/EvidentionOfBooks");
+    } catch (error) {
+      console.error("Couldn't logout", error);
+    }
+  };
+  
+  const profileMenu = (
+  <Menu>
+    <Menu.Item key="profile">
+      <Link to="/profile">Profile</Link>
+    </Menu.Item>
+    <Menu.Item key="logout">
+      <Link to="/LogIn" onClick={LogOut}>Logout</Link>
+    </Menu.Item>
+  </Menu>
+);
 
   return (
     <Layout>
@@ -148,7 +162,8 @@ const App = () => {
               </Menu>
             </div>
           </Sider>
-          <Outlet/>
+          <div style={{ flex: 1, padding: '24px 12px', background: colorBgContainer}}>
+          <Outlet/></div>
         </Layout>
       </Content>
       <Footer

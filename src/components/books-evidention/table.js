@@ -296,6 +296,7 @@ const BookTable = () => {
       rowKey="id"
       pagination={pagination}
       loading={loading}
+      responsive={true}
     />
   );
 };
