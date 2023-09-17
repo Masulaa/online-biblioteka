@@ -10,7 +10,7 @@ import { BookService } from "../../../api/api";
 
 import { Tabs, Steps, Input, Select, Space } from "antd";
 
-import { RetweetOutlined } from "@ant-design/icons";
+import { DatabaseOutlined, RetweetOutlined, ProfileOutlined } from "@ant-design/icons";
 
 function NewBook() {
   const [bookName, setBookName] = useState("");
@@ -110,7 +110,7 @@ function NewBook() {
       key: "1",
       label: (
         <div>
-          <RetweetOutlined />
+          <DatabaseOutlined/>
           <span>Osnovni Detalji</span>
         </div>
       ),
@@ -250,7 +250,7 @@ function NewBook() {
       key: "2",
       label: (
         <div>
-          <RetweetOutlined />
+          <ProfileOutlined />
           <span>Specifikacije</span>
         </div>
       ),

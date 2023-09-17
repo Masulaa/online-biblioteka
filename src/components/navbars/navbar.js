@@ -1,48 +1,73 @@
-import { useState, useRef, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { UserService } from '../../api/api';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, PlusCircleOutlined, ReadOutlined, DashboardOutlined, TeamOutlined, UsergroupAddOutlined, BookOutlined, SolutionOutlined, AccountBookOutlined, SettingOutlined } from '@ant-design/icons';
+import { Breadcrumb, Layout, Menu, Avatar, Dropdown, theme } from 'antd';
+import React, { useState } from 'react';
+import { Outlet, Link } from 'react-router-dom';
+const { Header, Content, Footer, Sider } = Layout;
 
-import { UserService } from "../../api/api";
+const items1 = ['1', '2', '3'].map((key) => ({
+  key,
+  label: `nav ${key}`,
+}));
 
-import "./navbar.css";
+const items2 = [
+  {
+    key: 'dashboard',
+    icon: React.createElement(DashboardOutlined),
+    label: 'Dashboard',
+    path: '/dashboard',
+  },
+  {
+    key: 'bibliotekari',
+    icon: React.createElement(TeamOutlined),
+    label: 'Bibliotekari',
+    path: '/LibrarianEvidention',
+  },
+  {
+    key: 'ucenici',
+    icon: React.createElement(UsergroupAddOutlined),
+    label: 'Ucenici',
+    path: '/StudentEvidention',
+  },
+  {
+    key: 'knjige',
+    icon: React.createElement(BookOutlined),
+    label: 'Knjige',
+    path: '/EvidentionOfBooks',
+  },
+  {
+    key: 'autori',
+    icon: React.createElement(SolutionOutlined),
+    label: 'Autori',
+    path: '/AuthorEvidention',
+  },
+  {
+    key: 'izdavanje-knjiga',
+    icon: React.createElement(AccountBookOutlined),
+    label: 'Izdavanje Knjiga',
+    path: '/Evidention',
+  },
+  {
+    key: 'settings',
+    icon: React.createElement(SettingOutlined),
+    label: 'Settings',
+    path: '/Settings',
+  },
+];
 
-import { useDispatch } from "react-redux";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { TbDashboard } from "react-icons/tb";
-import { AiOutlineProfile } from "react-icons/ai";
-import { MdPeopleAlt } from "react-icons/md";
-import { HiDocumentDuplicate } from "react-icons/hi";
-import { TbArrowsLeftRight } from "react-icons/tb";
-import { FiSettings } from "react-icons/fi";
-import { BsFillXCircleFill } from "react-icons/bs";
-import { BiUserCircle } from "react-icons/bi";
-import { MdLocalLibrary } from "react-icons/md";
-import { ImProfile } from "react-icons/im";
-import { BiLogOut } from "react-icons/bi";
 
-import { menuActions } from "../../store/menuStore";
-function NavBar({ children }) {
-  const navigate = useNavigate();
 
-  const dispatch = useDispatch();
+const App = () => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
 
-  const [isTouched, setIsTouched] = useState(false);
-  const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
+  const [profileMenuVisible, setProfileMenuVisible] = useState(false);
 
-  const profilRef = useRef(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profilRef.current && !profilRef.current.contains(event.target)) {
-        setUserIconMenuOpen(false);
-      }
-    };
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
+  const toggleProfileMenu = () => {
+    setProfileMenuVisible(!profileMenuVisible);
+  };
+  
   const LogOut = async () => {
     try {
       const response = await UserService.LogOut(true);
@@ -53,235 +78,108 @@ function NavBar({ children }) {
       console.error("Couldn't logout", error);
     }
   };
-
-  const isTouchedHandler = () => {
-    setIsTouched(!isTouched);
-    if (!isTouched) {
-      dispatch(menuActions.openMenu());
-    } else {
-      dispatch(menuActions.closeMenu());
-    }
-  };
-
-  const isOpennedUserIconMenu = () => {
-    setUserIconMenuOpen(!userIconMenuOpen);
-    if (userIconMenuOpen === false) {
-      setUserIconMenuOpen(!userIconMenuOpen);
-    }
-  };
+  
+  const profileMenu = (
+  <Menu>
+    <Menu.Item key="profile">
+      <Link to="/profile">Profile</Link>
+    </Menu.Item>
+    <Menu.Item key="logout">
+      <Link to="/LogIn" onClick={LogOut}>Logout</Link>
+    </Menu.Item>
+  </Menu>
+);
 
   return (
-    <div className="page-wrapper">
-      <div className="top-nav">
-        <div className="logo">
-          <MdLocalLibrary className="logo-icon" />
-          Biblioteka
+    <Layout>
+      <Header
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: '#76a5af', // Postavite željenu boju
+        }}
+      >
+        <div className="demo-logo">
+          <Avatar icon={<ReadOutlined />} style={{ backgroundColor: 'transparent', color: 'white', fontSize: '25px' }} />
         </div>
-        <button
-          className="create-btn"
-          onClick={() => {
-            navigate("/CreateAccount");
+        <h1 style={{ color: 'white', fontSize: '25px', margin: '0', padding: '0', lineHeight: '1' }}>
+          Online Biblioteka
+        </h1>
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
+          <PlusCircleOutlined style={{ color: "white", fontSize: '25px', marginRight: '16px', backgroundColor: '#51737b', borderRadius: '50%', padding: '4px', cursor: 'pointer' }} />
+          <Avatar icon={<UserOutlined />} onClick={toggleProfileMenu} style={{ marginRight: '16px', cursor: 'pointer' }} />
+          <Dropdown overlay={profileMenu} visible={profileMenuVisible} trigger={['click']} onClick={toggleProfileMenu} placement="bottom">
+            <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()} style={{ color: 'white', fontSize: '18px' }}>
+              {/* Tekst "Profile" je uklonjen */}
+            </a>
+          </Dropdown>
+        </div>
+      </Header>
+      <Content
+        style={{
+          padding: '0 50px',
+        }}
+      >
+        <Breadcrumb
+          style={{
+            margin: '16px 0',
           }}
         >
-          Kreiraj
-        </button>
-        <div className="profile" ref={profilRef}>
-          <div className="profile-tab">
-            <BiUserCircle
-              className="user-icon"
-              onClick={() => {
-                isOpennedUserIconMenu();
-              }}
-            />
-          </div>
-          {userIconMenuOpen && (
-            <div className="user-menu">
-              <ul>
-                <li
-                  onClick={() => {
-                    isOpennedUserIconMenu();
-                    navigate("/UserProfile");
-                  }}
-                >
-                  <ImProfile className="detail-icons" />
-                  Profile
-                </li>
-                <li
-                  onClick={() => {
-                    isOpennedUserIconMenu();
-                    LogOut();
-                    navigate("LogIn");
-                  }}
-                >
-                  <BiLogOut className="detail-icons" />
-                  Logout
-                </li>
-              </ul>
+          <Breadcrumb.Item>Home</Breadcrumb.Item>
+          <Breadcrumb.Item>List</Breadcrumb.Item>
+          <Breadcrumb.Item>App</Breadcrumb.Item>
+        </Breadcrumb>
+        <Layout
+          style={{
+            padding: '24px 12px',
+            background: colorBgContainer,
+          }}
+        >
+          <Sider
+            style={{
+              background: colorBgContainer,
+            }}
+            width={200}
+          >
+            <div className='content-wrapper'>
+              <Menu
+                mode="inline"
+                defaultSelectedKeys={['dashboard']} // Opciono postavite početno selektovanu opciju
+                defaultOpenKeys={['sub1']}
+                style={{
+                  height: '100%',
+                }}
+              >
+                {items2.map((item) => (
+                  <Menu.Item key={item.key}>
+                    <Link to={item.path} style={{ fontSize: '16px' }}>{item.icon} {item.label}</Link>
+                  </Menu.Item>
+                ))}
+              </Menu>
             </div>
-          )}
+          </Sider>
+          <div style={{ flex: 1, padding: '24px 12px', background: colorBgContainer}}>
+          <Outlet/></div>
+        </Layout>
+      </Content>
+      <Footer
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        <div className="demo-logo">
+          <Avatar icon={<ReadOutlined />} style={{ backgroundColor: 'transparent', color: '#76a5af', fontSize: '25px' }} />
         </div>
-      </div>
-      <div className="main-content">
-        <aside className={`aside ${isTouched ? "aside-expanded" : ""}`}>
-          <nav className="">
-            <ul className="lista">
-              <li className="celija an">
-                <GiHamburgerMenu className="icon2" onClick={isTouchedHandler} />
-              </li>
-              <li className="celija">
-                <TbDashboard className="icon2" />
-                <p className={`par ${isTouched ? "par-expanded" : ""}`}>
-                  Dashboard
-                </p>
-              </li>
-              <li className="celija">
-                <AiOutlineProfile
-                  className="icon2"
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/LibrarianEvidention");
-                  }}
-                />
-                <p
-                  className={`par ${isTouched ? "par-expanded" : ""}`}
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/LibrarianEvidention");
-                  }}
-                >
-                  Bibliotekari
-                </p>
-              </li>
-              <li className="celija">
-                <MdPeopleAlt
-                  className="icon2"
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/StudentEvidention");
-                  }}
-                />
-                <p
-                  className={`par ${isTouched ? "par-expanded" : ""}`}
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/StudentEvidention");
-                  }}
-                >
-                  Učenici
-                </p>
-              </li>
-              <li className="celija">
-                <HiDocumentDuplicate
-                  className="icon2"
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/EvidentionOfBooks");
-                  }}
-                />
-                <p
-                  className={`par ${isTouched ? "par-expanded" : ""}`}
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/EvidentionOfBooks");
-                  }}
-                >
-                  Knjige
-                </p>
-              </li>
-              <li className="celija">
-                <AiOutlineProfile
-                  className="icon2"
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/AuthorEvidention");
-                  }}
-                />
-                <p
-                  className={`par ${isTouched ? "par-expanded" : ""}`}
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/AuthorEvidention");
-                  }}
-                >
-                  Autori
-                </p>
-              </li>
-              <li className="celija">
-                <TbArrowsLeftRight
-                  className="icon2"
-                  onClick={isTouchedHandler}
-                />
-                <p
-                  className={`par ${isTouched ? "par-expanded" : ""}`}
-                  onClick={() => {
-                    if (isTouched) {
-                      isTouchedHandler();
-                    }
-                    navigate("/Evidention");
-                  }}
-                >
-                  Izdavanje Knjiga
-                </p>
-              </li>
-              <div className="bottomicons">
-                <li className="celija">
-                  <span
-                    className={`line ${isTouched ? "line-expanded" : ""}`}
-                  ></span>
-                  <FiSettings
-                    className="icon2"
-                    onClick={() => {
-                      if (isTouched) {
-                        isTouchedHandler();
-                      }
-                      navigate("/Settings");
-                    }}
-                  />
-                  <p
-                    className={`par ${isTouched ? "par-expanded" : ""}`}
-                    onClick={() => {
-                      if (isTouched) {
-                        isTouchedHandler();
-                      }
-                      navigate("/Settings");
-                    }}
-                  >
-                    Settings
-                  </p>
-                </li>
-              </div>
-            </ul>
-          </nav>
-        </aside>
-
-        <div className="content-wrapper">
-          <Outlet />
-        </div>
-      </div>
-      <div className={`cancel10 ${isTouched ? "cancel11" : ""}`}>
-        <BsFillXCircleFill
-          className={`iconx ${isTouched ? "iconx1" : ""}`}
-          onClick={isTouchedHandler}
-        ></BsFillXCircleFill>
-      </div>
-    </div>
+        <h1 style={{ color: '#76a5af', fontSize: '25px', margin: '0', padding: '0', lineHeight: '1' }}>
+          Online Biblioteka
+        </h1>
+        React Cortex Team Niksic | Elektroskola Niksic
+      </Footer>
+    </Layout>
   );
-}
-
-export default NavBar;
+};
+export default App;

@@ -93,9 +93,8 @@ h2 {
 
 .content-wrapper {
   flex: 1;
-  overflow-y: scroll;
   padding: 15px;
-  overflow-x: hidden;
+  padding-left: 15px;
   /* height: calc(100vh - 60px) */
 }
 
