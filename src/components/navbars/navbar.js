@@ -133,11 +133,7 @@ const App = () => {
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
-        <Layout
-          style={{
-            padding: '24px 12px',
-            background: colorBgContainer,
-          }}
+        <Layout style={{ flex: 1, padding: '24px 12px', background: colorBgContainer}}
         >
           <Sider
             style={{
@@ -162,7 +158,7 @@ const App = () => {
               </Menu>
             </div>
           </Sider>
-          <div style={{ flex: 1, padding: '24px 12px', background: colorBgContainer}}>
+          <div >
           <Outlet/></div>
         </Layout>
       </Content>
