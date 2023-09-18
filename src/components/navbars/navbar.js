@@ -2,7 +2,7 @@ import { UserService } from '../../api/api';
 import { UserOutlined, LaptopOutlined, NotificationOutlined, PlusCircleOutlined, ReadOutlined, DashboardOutlined, TeamOutlined, UsergroupAddOutlined, BookOutlined, SolutionOutlined, AccountBookOutlined, SettingOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, Avatar, Dropdown, theme } from 'antd';
 import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
 
 const items1 = ['1', '2', '3'].map((key) => ({
@@ -78,6 +78,8 @@ const App = () => {
       console.error("Couldn't logout", error);
     }
   };
+
+  const navigate = useNavigate();
   
   const profileMenu = (
   <Menu>
@@ -110,7 +112,7 @@ const App = () => {
           Online Biblioteka
         </h1>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
-          <PlusCircleOutlined style={{ color: "white", fontSize: '25px', marginRight: '16px', backgroundColor: '#51737b', borderRadius: '50%', padding: '4px', cursor: 'pointer' }} />
+          <PlusCircleOutlined onClick={()=>{navigate("/CreateAccount")}} style={{ color: "white", fontSize: '25px', marginRight: '16px', backgroundColor: '#51737b', borderRadius: '50%', padding: '4px', cursor: 'pointer' }} />
           <Avatar icon={<UserOutlined />} onClick={toggleProfileMenu} style={{ marginRight: '16px', cursor: 'pointer' }} />
           <Dropdown overlay={profileMenu} visible={profileMenuVisible} trigger={['click']} onClick={toggleProfileMenu} placement="bottom">
             <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()} style={{ color: 'white', fontSize: '18px' }}>

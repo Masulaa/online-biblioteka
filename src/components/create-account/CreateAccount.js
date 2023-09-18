@@ -2,6 +2,7 @@ import { Fragment, React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserService } from "../../api/api";
+import { Input, Select, message, Button, Space } from "antd";
 import "./CreateAccount.css";
 
 const CreateAccount = () => {
@@ -34,13 +35,38 @@ const CreateAccount = () => {
     try {
       const response = await UserService.CreateUser(newUserData);
       console.log("API Response", response);
+      navigate("/StudentEvidention");
+      success();
 
       // navigate("/EvidentionOfBooks");
     } catch (error) {
 
       console.error("Error creating an account", error)
       setErrors(error.response.data.data)
+      error();
     }
+  };
+
+  const { Option } = Select;
+
+  const [messageApi, contextHolder] = message.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: 'Uspješno',
+      content: 'Uspješno ste kreirali nalog',
+    });
+  };
+  const error = () => {
+    messageApi.open({
+      type: 'Neuspješno',
+      content: 'Nalog nije kreiran',
+    });
+  };
+  const warning = () => {
+    messageApi.open({
+      type: 'warning',
+      content: 'This is a warning message',
+    });
   };
 
   return (
@@ -53,32 +79,37 @@ const CreateAccount = () => {
         <div className="flex-columns">
           <div className="column">
             <label>Izaberite ulogu korisnika u sistemu</label>
-            <select
+            <Select
               className="default-input"
+              onChange={(SelectedRole) => setRoleId(SelectedRole)}
+              style={{
+                width: "100%",
+              }}
+              placeholder="Odaberite ulogu korisnika"
+              optionLabelProp="label"
               value={roleId}
-              onChange={(e) => setRoleId(e.target.value)}
             >
-              <option value={1}>Bibliotekar</option>
-              <option value={2}>Ucenik</option>
-              <option value={3}>Admin</option>
-            </select>
-            {errors.role_id ? <p className="error-text">{errors.role_id[0]}</p> : ''}
+              <Option value={1} label="Bibliotekar">Bibliotekar</Option>
+              <Option value={2} label="Ucenik">Ucenik</Option>
+              <Option value={3} label="Admin">Admin</Option>
+            </Select>
+            {errors.role_id ? <p className="error-text">{errors.role_id[0]}</p>  : ''}
             <label>Ime korisnika</label>
-            <input
+            <Input
               className="default-input"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             {errors.name ? <p className="error-text">{errors.name[0]}</p> : ''}
             <label>Prezime korisnika</label>
-            <input
+            <Input
               className="default-input"
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
             />
             {errors.surname ? <p className="error-text">{errors.surname[0]}</p> : ''}
             <label>Unesite JMBG korisnika</label>
-            <input
+            <Input
               className="default-input"
               value={jmbg}
               onChange={(e) => setJmbg(e.target.value)}
@@ -88,21 +119,21 @@ const CreateAccount = () => {
           </div>
           <div className="column">
             <label>Unesite e-mail koriniska</label>
-            <input
+            <Input
               className="default-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             {errors.email ? <p className="error-text">{errors.email[0]}</p> : ''}
             <label>Unesite username koriniska</label>
-            <input
+            <Input
               className="default-input"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             {errors.username ? <p className="error-text">{errors.username[0]}</p> : ''}
             <label>Unesite sifru koriniska</label>
-            <input
+            <Input
             type="password"
               className="default-input"
               value={password}
@@ -110,7 +141,7 @@ const CreateAccount = () => {
             />
             {errors.password ? <p className="error-text">{errors.password[0]}</p> : ''}
                <label>Potvride sifru koriniska</label>
-            <input
+            <Input
             type="password"
               className="default-input"
               value={passwordConfirmation}
@@ -126,7 +157,9 @@ const CreateAccount = () => {
               >
                 Poništi
               </button>
-              <button className="submit" onClick={createAccounts}>
+              {contextHolder}
+              <button className="submit" onClick={createAccounts
+              }>
                 Potvrdi
               </button>
             </div>

@@ -347,7 +347,8 @@ function NewBook() {
               <button className="cancel" onClick>
                 Nazad
               </button>
-              <button className="submit" onClick={CreateBook}>
+              <button className="submit" onClick={()=>{CreateBook();
+              navigate("/EvidentionOfBooks")}}>
                 Sačuvaj
               </button>{" "}
               <Steps
