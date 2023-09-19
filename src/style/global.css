@@ -370,24 +370,12 @@ label {
 
 .usrslk{
   display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .usrslk img{
-  margin-top: -0.1rem;
-  margin-right: 0.4rem;
   width: 40px;
-}
-
-.usrslk .u1{
-  margin-top: 0.5rem;
-}
-
-.usrslk .u2{
-  margin-top: 0.6rem;
-}
-
-.usrslk .u3{
-  margin-top: 0.6rem;
 }
 
 @media screen and (max-width: 1440px) {

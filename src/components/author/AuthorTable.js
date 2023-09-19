@@ -108,10 +108,6 @@ const AuthorTable = () => {
         `${record.name} ${record.surname}`.startsWith(value),
     },
     {
-      title: "Opis",
-      dataIndex: "opis",
-    },
-    {
       title: "",
       dataIndex: "action",
       fixed: "right",

@@ -30,6 +30,7 @@ function NewBook() {
 
   const [activeKey, setActiveKey] = useState("1");
   const onKeyChange = (key) => setActiveKey(key);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const { Option } = Select;
   const { TextArea } = Input;
@@ -81,6 +82,7 @@ function NewBook() {
   };
 
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
+
 
   const description = "Procesuiranje";
   const description1 = "Završeno";
@@ -232,7 +234,7 @@ function NewBook() {
               >
                 Poništi
               </button>
-              <button className="submit" onChange={onKeyChange}>
+              <button className="submit" >
                 Dalje
               </button>
             </div>
@@ -382,9 +384,9 @@ function NewBook() {
           <div>
             <div>
               <Tabs
-                defaultActiveKey="1"
+                defaultActiveKey={currentStep.toString()}
                 items={items}
-                onChange={onKeyChange}
+                onChange={(key) => setCurrentStep(parseInt(key))}
                 tabPosition="top"
               ></Tabs>
             </div>

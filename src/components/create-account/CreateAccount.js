@@ -1,5 +1,5 @@
 import { Fragment, React, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { UserService } from "../../api/api";
 import { Input, Select, message, Button, Space } from "antd";
@@ -35,15 +35,15 @@ const CreateAccount = () => {
     try {
       const response = await UserService.CreateUser(newUserData);
       console.log("API Response", response);
-      navigate("/StudentEvidention");
-      success();
+      message.success('Učenik uspješno napravljen');
+      navigate('/StudentEvidention');
 
       // navigate("/EvidentionOfBooks");
     } catch (error) {
 
       console.error("Error creating an account", error)
+      message.error('Učenik nije napravljen');
       setErrors(error.response.data.data)
-      error();
     }
   };
 

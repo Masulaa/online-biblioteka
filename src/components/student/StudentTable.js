@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from "react";
-import './StudentTable.css';
+import "./StudentTable.css";
 import { useNavigate } from "react-router-dom";
 import { UserService } from "../../api/api";
-import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
-import SingleUser from "./SingleUser";
+// import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
+// import AuthorSingle from "./AuthorSingle";
+import {
+  EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined
+} from '@ant-design/icons';
 
-const Table = () => {
+import { Table, Dropdown, Menu, Modal } from "antd";
+
+const StudentTable = () => {
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
+
+  const withLoading = async (method) => {
+    setLoading(true)
+    await method()
+    setLoading(false)
+  }
+
 
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   const fetchUsers = async () => {
     try {
@@ -23,145 +34,182 @@ const Table = () => {
     }
   };
 
-  const [selectedAll, setSelectedAll] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const confirm = (id) => {
+    Modal.confirm({
+      title: 'Potvrdi',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Da li ste sigurni da zelite obrisati učenika?',
+      okText: 'Da, Obrisi',
+      cancelText: 'Ne',
+      onOk: () => deleteUser(id)
+    });
+  };
 
-  const handleSelectAll = (event) => {
-    setSelectedAll(event.target.checked);
-    if (event.target.checked) {
-      setSelectedItems(users.map((user) => user.id));
-    } else {
-      setSelectedItems([]);
+  // confirm(1);
+
+  useEffect(() => {
+    withLoading(fetchUsers)
+  }, []);
+
+  const compareStrings = function (a, b) {
+    if (a < b) {
+      return -1;
+    }
+    if (a > b) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const renderFirstLastName = (text, user) => {
+    return (
+      <span>
+         <div className="usrslk">
+    <img src={user.photoPath}></img>
+  
+        {user.name} {user.surname}  </div>
+      </span>
+    );
+  };
+
+  const renderEmail = (text, user) => {
+    return (
+      <span>
+        {user.email}
+      </span>
+    );
+  };
+
+  const Item = Menu.Item
+
+  const navigateToDetails = (userId) => navigate(`/StudentEvidention/StudentDetails/${userId}`);
+  const navigateToEdit = (userId) => navigate(`/StudentEvidention/EditStudent/${userId}`);
+
+  const deleteUser = async (userId) => {
+    try {
+      setLoading(true)
+      await UserService.DeleteUsers(userId);
+      setLoading(false)
+      fetchUsers();
+    } catch (error) {
+
+      console.error("Error deleting book:", error)
     }
   };
 
-  const handleSelectItem = (id) => {
-    if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter((itemId) => itemId !== id));
-    } else {
-      setSelectedItems([...selectedItems, id]);
+  const menu = (recordId) =>
+  <Menu>
+    <Item onClick={() => navigateToDetails(recordId)}>Detalji</Item>
+    <Item onClick={() => navigateToEdit(recordId)}>Izmijeni</Item>
+    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obriši</Item>
+  </Menu>
+
+
+  const columns = [
+    {
+      title: "Naziv Učenika",
+      dataIndex: "name",
+      render: renderFirstLastName,
+      sorter: (a, b) => compareStrings(a.name, b.name),
+      filters: users.map((user) => {
+        return {
+          text: user.name + " " + user.surname,
+          value: user.name + " " + user.surname,
+        };
+      }),
+      onFilter: (value, record) =>
+        `${record.name} ${record.surname}`.startsWith(value),
+    },
+    {
+      title: "Email Učenika",
+      dataIndex: "email",
+      render: renderEmail,
+      sorter: (a, b) => compareStrings(a.email, b.email),
+      filters: users.map((user) => {
+        return {
+          text: user.email,
+          value: user.email,
+        };
+      }),
+      onFilter: (value, record) =>
+        `${record.email}`.startsWith(value),
+    },
+    {
+      title: "",
+      dataIndex: "action",
+      fixed: "right",
+      render: (text, record) => (
+        <Dropdown overlay={menu(record.id)} trigger={[`click`]}>
+        <EllipsisOutlined />
+      </Dropdown>
+    
+      ),
+    },
+  ];
+
+  const handleMenuClick = (e) => {
+    console.log(e)
+    const user = {
+      id: 0
+    }
+    switch (e.key) {
+      case 1:
+        navigate(`/StudentEvidention/StudentDetails/${user.id}`);
+        break;
+      case 2:
+        navigate(`/StudentEvidention/EditStudent/${user.id}`);
+        break;
+
+      case 3:
+        break;
+
+        default:
+          console.error("No default case");
+    }
+    if (e.key == 2) {
+      navigate("/EvidentionOfBooks/EditBook/BookDetails");
     }
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-  console.log("Books is", users);
-  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
-
-  const totalPages = Math.ceil(users.length / itemsPerPage);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selectedRowKeys changed: ", newSelectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
   };
 
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pageNumbers.push(
-        <button
-          key={i}
-          onClick={() => handlePageChange(i)}
-          className={currentPage === i ? "active" : ""}
-        >
-          {i}
-        </button>
-      );
-    }
-    return pageNumbers;
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
   };
 
-  const renderLeftArrow = () => {
-    if (currentPage !== 1) {
-      return (
-        <button onClick={() => handlePageChange(currentPage - 1)}>
-          &larr;
-        </button>
-      );
-    }
-    return null;
+  const [pageSize, setPageSize] = useState(10);
+
+  const handlePageSizeChange = (current, newSize) => {
+    setLoading(true);
+    setPageSize(newSize);
+    setLoading(false);
   };
 
-  const renderRightArrow = () => {
-    if (currentPage !== totalPages) {
-      return (
-        <button onClick={() => handlePageChange(currentPage + 1)}>
-          &rarr;
-        </button>
-      );
-    }
-    return null;
-  };
-
-  const handleItemsPerPageChange = (event) => {
-    setItemsPerPage(parseInt(event.target.value));
-    setCurrentPage(1);
+  const pagination = {
+    pageSize: pageSize,
+    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+    pageSizeOptions: ["1", "10", "20", "50"],
+    showSizeChanger: true,
+    onShowSizeChange: handlePageSizeChange,
   };
 
   return (
-    <div>
-      {users.length === 0 ? (
-        <div>
-          <div className="loading">
-            <LoadingSpinner></LoadingSpinner>
-          </div>
-        </div>
-      ) : (
-        <table className="table">
-         <thead>
-          <tr>
-            <th>
-              <input type="checkbox" checked={selectedAll} onChange={handleSelectAll} />
-            </th>
-            <th>Ime i Prezime</th>
-            <th>E mail</th>
-            <th>Tip korisnika</th>
-            <th></th>
-          </tr>
-        </thead>
-          <tbody>
-          {currentItems.map((user) => {
-  if (user.role === 'Učenik') {
-    return (
-      <SingleUser
-        key={user.id}
-        item={user}
-        selectedItems={selectedItems}
-        handleSelectItem={handleSelectItem}
-        fetchUsers={fetchUsers}
-      />
-    );
-  }
-  return null;
-})}
-          </tbody>
-        </table>
-      )}
-      <div className="pagination">
-        {renderLeftArrow()}
-        {renderPageNumbers()}
-        {renderRightArrow()}
-      </div>
-      <div className="rows-per-page">
-        <span>Rows per page:</span>
-        <select
-          className="inputs"
-          value={itemsPerPage}
-          onChange={handleItemsPerPageChange}
-        >
-          <option value={1}>1</option>
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-          <option value={100}>100</option>
-        </select>
-      </div>
-    </div>
+    <Table
+      className="tabela"
+      rowSelection={rowSelection}
+      columns={columns}
+      dataSource={users}
+      rowKey="id"
+      pagination={pagination}
+      loading={loading}
+    />
   );
 };
 
-export default Table;
+export default StudentTable;

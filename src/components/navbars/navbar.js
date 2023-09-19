@@ -137,8 +137,7 @@ const App = () => {
         </Breadcrumb>
         <Layout
           style={{
-            padding: '24px 12px',
-            background: colorBgContainer,
+         
           }}
         >
           <Sider

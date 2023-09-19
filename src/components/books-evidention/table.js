@@ -8,13 +8,33 @@ import {
   EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined
 } from '@ant-design/icons';
 
-import { Table, Dropdown, Menu, Modal } from "antd";
+import { Table, Dropdown, Menu, Modal, Button } from "antd";
 
 const BookTable = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
+ const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  const [selectAll, setSelectAll] = useState(false);
+
+  const onSelectAllChange = (e) => {
+    const selectedKeys = e.target.checked ? books.map((book) => book.id) : [];
+    setSelectedRowKeys(selectedKeys);
+    setSelectAll(e.target.checked);
+  };
+
+  const handleDeleteSelected = () => {
+    try {
+      const response = BookService.BulkDeleteBooks(selectedRowKeys);
+      console.log("API Response", response);
+      fetchBooks();
+    } catch (error) {
+
+      console.error("Error deleting book:", error)
+    }
+  };
 
   const withLoading = async (method) => {
     setLoading(true)
@@ -134,6 +154,7 @@ const BookTable = () => {
       await BookService.DeleteBooks(bookId);
       setLoading(false)
       fetchBooks();
+      setSelectedRowKeys([]);
     } catch (error) {
 
       console.error("Error deleting book:", error)
@@ -148,92 +169,128 @@ const BookTable = () => {
   </Menu>
 
 
-  const columns = [
-    {
-      title: "Naziv Knjige",
-      dataIndex: "name",
-      render: renderTitleAndImage,
-      sorter: (a, b) => compareStrings(a.name, b.name),
-      filters: books.map((book) => {
-        return {
-          text: book.title,
-          value: book.title,
-        };
-      }),
-      onFilter: (value, record) =>
-        `${record.title}`.startsWith(value),
-    },
-    {
-      title: "Autori",
-      dataIndex: "autori",
-      render: renderAuthors,
-      sorter: (a, b) => compareStrings(a.name, b.name),
-      filters: books.map((book)=>{
-        return {
-          text: `${book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}`,
-          value: `${book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}`,
-        }
-      }),
-      onFilter: (value, record) =>
+const columns = [
+  {
+    title: "Naziv Knjige",
+    dataIndex: "knjiga",
+    render: renderTitleAndImage,
+    sorter: (a, b) => compareStrings(a.title, b.title),
+    filters: books.map((book) => {
+      return {
+        text: book.title,
+        value: book.title,
+      };
+    }),
+    onFilter: (value, record) =>
+      `${record.title}`.startsWith(value),
+  },  {
+    title: "Autori",
+    dataIndex: "autor",
+    render: renderAuthors,
+    sorter: (a, b) => compareStrings(a.authors, b.authors),
+    responsive: ["sm"],
+    filters: books.map((book) => {
+      return {
+        text: `${book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}`,
+        value: `${book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}`,
+      };
+    }),
+    onFilter: (value, record) =>
       `${record.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}`.startsWith(value),
-    },
-    {
-      title: "Kategorije",
-      dataIndex: "name",
-      render: renderCategories,
-      sorter: (a, b) => compareStrings(a.name, b.name),
-      filters: books.map((book) => {
-        return {
-          text: `${book.categories.map((c) => c.name).join(", ")}`,
-          value: `${book.categories.map((c) => c.name).join(", ")}`,
-        };
-      }),
-      onFilter: (value, record) =>
-        `${record.categories.map((c) => c.name).join(", ")}`.startsWith(value),
-    },
-    {
-      title: "Na raspolaganju",
-      dataIndex: "name",
-      render: renderAbleToBorrow,
-      sorter: (a, b) => compareStrings(a.name, b.name),
-    },
-    {
-      title: "Rezervisano",
-      dataIndex: "name",
-      render: renderReserved,
-      sorter: (a, b) => a.rSamples - b.rSamples,
-    },
-    {
-      title: "Izdato",
-      dataIndex: "name",
-      render: renderBorrowed,
-      sorter: (a, b) => a.bSamples - b.bSamples,
-    },  
-    {
-      title: "U preokoračenju",
-      dataIndex: "name",
-      render: renderFSamples,
-      sorter: (a, b) => a.fSamples - b.fSamples,
-      
-    },  
-    {
-      title: "Ukupna količina",
-      dataIndex: "name",
-      render: renderAllSamples,
-      sorter: (a, b) => a.samples - b.samples,
-    },  
-    {
-      title: "",
-      dataIndex: "action",
-      fixed: "right",
-      render: (text, record) => (
-        <Dropdown overlay={menu(record.id)} trigger={[`click`]}>
-        <EllipsisOutlined />
-      </Dropdown>
-    
-      ),
-    },
-  ];
+  },
+  {
+    title: "Kategorije",
+    dataIndex: "kategorija",
+    render: renderCategories,
+    sorter: (a, b) => compareStrings(a.categories, b.categories),
+    filters: books.map((book) => {
+      return {
+        text: `${book.categories.map((c) => c.name).join(", ")}`,
+        value: `${book.categories.map((c) => c.name).join(", ")}`,
+      };
+    }),
+    onFilter: (value, record) =>
+      `${record.categories.map((c) => c.name).join(", ")}`.startsWith(value),
+  },
+
+  {
+    title:"Na raspolaganju",
+    dataIndex: "able",
+    render: renderAbleToBorrow,
+    sorter: (a, b) => compareStrings(a.able, b.able),
+  },
+  {
+    title:"Rezervisano",
+    dataIndex: "name",
+    render: renderReserved,
+    sorter: (a, b) => a.rSamples - b.rSamples,
+    responsive: ["sm"],
+  },
+  {
+    title: "Izdato",
+    dataIndex: "name",
+    render: renderBorrowed,
+    sorter: (a, b) => a.bSamples - b.bSamples,
+    responsive: ["sm"],
+  },  
+  {
+    title:"U prekoračenju",
+    dataIndex: "name",
+    render: renderFSamples,
+    sorter: (a, b) => a.fSamples - b.fSamples,
+    responsive: ["sm"],
+  },  
+  {
+    title:"Ukupna količina",
+    dataIndex: "name",
+    render: renderAllSamples,
+    sorter: (a, b) => a.samples - b.samples,
+  },
+  {
+    title: "Autor i kategorija",
+    render: (record) => (
+      <React.Fragment>
+        {record.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}
+        <br />
+        {record.categories.map((c) => c.name).join(", ")}
+      </React.Fragment>
+    ),
+    responsive: ["xs"],
+  },
+  {
+    title: "Rezervisano, izdato, u prekoračenju",
+    render: (record) => (
+      <React.Fragment>
+        {record.rSamples} /
+        <br />
+        {record.bSamples} /
+        <br />
+        {record.fSamples}
+      </React.Fragment>
+    ),
+    responsive: ["xs"],
+  },
+  {
+    title: selectedRowKeys.length > 0 ? (
+      <Button
+        type="primary"
+        danger
+        onClick={handleDeleteSelected}
+      >
+        Obriši selektovane
+      </Button>
+    ) : "Akcije",
+    dataIndex: "actions",
+    render: (_, record) => (
+      <div>
+        <Dropdown overlay={menu(record.id)} trigger={["click"]}>
+          <EllipsisOutlined />
+        </Dropdown>
+      </div>
+    ),
+  },
+];
+
 
   const handleMenuClick = (e) => {
     console.log(e)
@@ -259,7 +316,7 @@ const BookTable = () => {
     }
   };
 
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+ 
 
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", newSelectedRowKeys);
@@ -288,16 +345,18 @@ const BookTable = () => {
   };
 
   return (
-    <Table
-      className="tabela"
-      rowSelection={rowSelection}
-      columns={columns}
-      dataSource={books}
-      rowKey="id"
-      pagination={pagination}
-      loading={loading}
-      responsive={true}
-    />
+<>
+      <Table
+        className="tabela"
+        rowSelection={rowSelection}
+        columns={columns}
+        dataSource={books}
+        rowKey="id"
+        pagination={pagination}
+        loading={loading}
+        responsive={true}
+      />
+    </>
   );
 };
 

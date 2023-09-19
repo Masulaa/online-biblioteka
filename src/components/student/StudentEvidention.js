@@ -30,14 +30,6 @@ function StudentEvidention() {
         >
           Novi Ucenik
         </button>
-        <span className="search-span">
-          <HiMagnifyingGlassCircle className="search-bar-icon" />
-          <input
-            type="text"
-            placeholder="   search..."
-            className="search"
-          ></input>
-        </span>
       </div>
       <StudentTable/>
       </div>
