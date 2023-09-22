@@ -10,7 +10,11 @@ import { BookService } from "../../../api/api";
 
 import { Tabs, Steps, Input, Select, Space } from "antd";
 
-import { DatabaseOutlined, RetweetOutlined, ProfileOutlined } from "@ant-design/icons";
+import {
+  DatabaseOutlined,
+  RetweetOutlined,
+  ProfileOutlined,
+} from "@ant-design/icons";
 
 function NewBook() {
   const [bookName, setBookName] = useState("");
@@ -31,6 +35,16 @@ function NewBook() {
   const [activeKey, setActiveKey] = useState("1");
   const onKeyChange = (key) => setActiveKey(key);
   const [currentStep, setCurrentStep] = useState(1);
+  const [currentStepperId, setStepId] = useState(0);
+
+  useEffect(() => {
+    console.log("On current step change", currentStep);
+    if (currentStep == 1) {
+      setStepId(0);
+    } else {
+      setStepId(1);
+    }
+  }, [currentStep]);
 
   const { Option } = Select;
   const { TextArea } = Input;
@@ -83,7 +97,6 @@ function NewBook() {
 
   const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
-
   const description = "Procesuiranje";
   const description1 = "Završeno";
   const description2 = "Sledi";
@@ -107,264 +120,30 @@ function NewBook() {
       description,
     },
   ];
-  const items = [
-    {
-      key: "1",
-      label: (
-        <div>
-          <DatabaseOutlined/>
-          <span>Osnovni Detalji</span>
-        </div>
-      ),
-      children: (
-        <div className="flex-columns">
-          <div className="column">
-            <label>Naziv Knjige</label>
-            <Input
-              value={bookName}
-              onChange={(e) => setBookName(e.target.value)}
-              
-            />
-            <label>Kratki sadržaj</label>
-            <TextArea showCount maxLength={100} rows={3}
-              onChange={(e)=>setSadrzaj(e.target.value)}
-              className="default-input"
-              mode
-            />
-            <label>Izaberite kategorije</label>
-            <Select
-           onChange={(selectedCategories) => setCategories(selectedCategories)}
-           mode="multiple"
-           style={{
-             width: "100%",
-           }}
-           placeholder="Odaberite kategorije"
-           optionLabelProp="label"
-            >
-              {book.categories &&
-                book.categories.map((category) => (
-                  <Option key={category.id} value={category.id} label={category.name}>
-                    <Space>
-                      {category.name}
-                    </Space>
-                  </Option>
-                ))}
-            </Select>
-            <label>Izaberite žanrove</label>
-            <Select
-           onChange={(selectedGenres) => setGenres(selectedGenres)}
-           mode="multiple"
-           style={{
-             width: "100%",
-           }}
-           placeholder="Odaberite zanrove"
-           optionLabelProp="label"
-            >
-              {book.genres &&
-                book.genres.map((zanr) => (
-                  <Option key={zanr.id} value={zanr.id} label={zanr.name}>
-                    <Space>
-                      {zanr.name}
-                    </Space>
-                  </Option>
-                ))}
-            </Select>
-          </div>
-          <div className="column">
-            <label>Izaberite autore</label>
-            <Select
-           onChange={(selectedAuthors) => setAuthors(selectedAuthors)}
-           mode="multiple"
-           style={{
-             width: "100%",
-           }}
-           placeholder="Odaberite autore"
-           optionLabelProp="label"
-            >
-              {book.authors &&
-                book.authors.map((autor) => (
-                  <Option key={autor.id} value={autor.id} label={autor.name + " " + autor.surname}>
-                    <Space>
-                      {autor.name}{autor.surname}
-                    </Space>
-                  </Option>
-                ))}
-            </Select>
-            <label>Izdavač</label>
-            <Select
-           onChange={(selectedPublishers) => setPublisher(selectedPublishers)}
-           style={{
-             width: "100%",
-           }}
-           placeholder="Odaberite izdavač"
-           optionLabelProp="label"
-            >
-              {book.publishers &&
-                book.publishers.map((izdavac) => (
-                  <Option key={izdavac.id} value={izdavac.id} label={izdavac.name}>
-                    <Space>
-                      {izdavac.name}
-                    </Space>
-                  </Option>
-                ))}
-            </Select>
-            <label>Godina Izdavanja</label>
-            <Input
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              min="1980"
-              max="2024"
-              maxLength="4"
-            />
-
-            <label>Količina</label>
-            <Input
-              type="number"
-              className="default-input"
-              min="1"
-              value={quantity}
-              onChange={(e) => setQuantity(parseInt(e.target.value))}
-            />
-            <div className="buttons">
-              <button
-                className="cancel"
-                onClick={() => {
-                  navigate("/EvidentionOfBooks");
-                }}
-              >
-                Poništi
-              </button>
-              <button className="submit" >
-                Dalje
-              </button>
-            </div>
-          </div>
-          <Steps
-            current={0}
-            percent={50}
-            labelPlacement="vertical"
-            items={step1}
-          />
-        </div>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <div>
-          <ProfileOutlined />
-          <span>Specifikacije</span>
-        </div>
-      ),
-      children: (
-        <div className="container2">
-          <div className="info">
-            <label>Broj Stranica</label>
-            <Input
-              type="number"
-              className="default-input"
-              min="1"
-              value={numOfPages}
-              onChange={(e) => setNumOfPages(parseInt(e.target.value))}
-            />
-            <label>Pismo</label>
-            <Select
-           onChange={(selectedScripts) => setScript(selectedScripts)}
-           style={{
-             width: "100%",
-           }}
-           placeholder="Odaberite pismo"
-           optionLabelProp="label"
-            >
-              {book.scripts &&
-                book.scripts.map((pismo) => (
-                  <Option key={pismo.id} value={pismo.id} label={pismo.name}>
-                    <Space>
-                      {pismo.name}
-                    </Space>
-                  </Option>
-                ))}
-            </Select>
-            <label>Jezici</label>
-            <Select
-           onChange={(selectedLanguages) => setLanguage(selectedLanguages)}
-           style={{
-             width: "100%",
-           }}
-           placeholder="Odaberite jezik"
-           optionLabelProp="label"
-            >
-              {book.languages &&
-                book.languages.map((jezik) => (
-                  <Option key={jezik.id} value={jezik.id} label={jezik.name}>
-                    <Space>
-                      {jezik.name}
-                    </Space>
-                  </Option>
-                ))}
-            </Select>
-            <label>Povez</label>
-            <Select
-           onChange={(selectedBookBind) => setBinding(selectedBookBind)}
-           style={{
-             width: "100%",
-           }}
-           placeholder="Odaberite povez"
-           optionLabelProp="label"
-            >
-              {book.bookbinds &&
-                book.bookbinds.map((povez) => (
-                  <Option key={povez.id} value={povez.id} label={povez.name}>
-                    <Space>
-                      {povez.name}
-                    </Space>
-                  </Option>
-                ))}
-            </Select>
-            <label>Format</label>
-            <Select
-           onChange={(selectedFormat) => setFormat(selectedFormat)}
-           style={{
-             width: "100%",
-           }}
-           placeholder="Odaberite format"
-           optionLabelProp="label"
-            >
-              {book.formats &&
-                book.formats.map((format) => (
-                  <Option key={format.id} value={format.id} label={format.name}>
-                    <Space>
-                      {format.name}
-                    </Space>
-                  </Option>
-                ))}
-            </Select>
-            <label>ISBN</label>
-            <Input
-              className="default-input"
-              maxLength={13}
-              onChange={(e) => setIsbn(e.target.value)}
-            />
-            <div className="buttons-spec">
-              <button className="cancel" onClick>
-                Nazad
-              </button>
-              <button className="submit" onClick={()=>{CreateBook();
-              navigate("/EvidentionOfBooks")}}>
-                Sačuvaj
-              </button>{" "}
-              <Steps
-                current={1}
-                percent={50}
-                labelPlacement="vertical"
-                items={step2}
-              />
-            </div>
-          </div>
-        </div>
-      ),
-    },
-  ];
+  // const items = [
+  //   {
+  //     key: 1,
+  //     label: (
+  //       <div>
+  //         <DatabaseOutlined />
+  //         <span>Osnovni Detalji</span>
+  //       </div>
+  //     ),
+  //     children: (
+  //     ),
+  //   },
+  //   {
+  //     key: 2,
+  //     label: (
+  //       <div>
+  //         <ProfileOutlined />
+  //         <span>Specifikacije</span>
+  //       </div>
+  //     ),
+  //     children: (
+  //     ),
+  //   },
+  // ];
 
   return (
     <Fragment>
@@ -383,12 +162,285 @@ function NewBook() {
 
           <div>
             <div>
-              <Tabs
+              <Steps
+                current={currentStepperId}
+                percent={50}
+                labelPlacement="vertical"
+                items={step1}
+              />
+              {/* <Tabs
                 defaultActiveKey={currentStep.toString()}
+                activeKey={currentStep}
                 items={items}
-                onChange={(key) => setCurrentStep(parseInt(key))}
+                onChange={(key) => setCurrentStep(key)}
                 tabPosition="top"
-              ></Tabs>
+              ></Tabs> */}
+              {currentStep == 1 && (
+                <div className="flex-columns">
+                  <div className="column">
+                    <label>Naziv Knjige</label>
+                    <Input
+                      value={bookName}
+                      onChange={(e) => setBookName(e.target.value)}
+                    />
+                    <label>Kratki sadržaj</label>
+                    <TextArea
+                      showCount
+                      maxLength={100}
+                      rows={3}
+                      onChange={(e) => setSadrzaj(e.target.value)}
+                      className="default-input"
+                      mode
+                    />
+                    <label>Izaberite kategorije</label>
+                    <Select
+                      onChange={(selectedCategories) =>
+                        setCategories(selectedCategories)
+                      }
+                      mode="multiple"
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Odaberite kategorije"
+                      optionLabelProp="label"
+                    >
+                      {book.categories &&
+                        book.categories.map((category) => (
+                          <Option
+                            key={category.id}
+                            value={category.id}
+                            label={category.name}
+                          >
+                            <Space>{category.name}</Space>
+                          </Option>
+                        ))}
+                    </Select>
+                    <label>Izaberite žanrove</label>
+                    <Select
+                      onChange={(selectedGenres) => setGenres(selectedGenres)}
+                      mode="multiple"
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Odaberite zanrove"
+                      optionLabelProp="label"
+                    >
+                      {book.genres &&
+                        book.genres.map((zanr) => (
+                          <Option
+                            key={zanr.id}
+                            value={zanr.id}
+                            label={zanr.name}
+                          >
+                            <Space>{zanr.name}</Space>
+                          </Option>
+                        ))}
+                    </Select>
+                  </div>
+                  <div className="column">
+                    <label>Izaberite autore</label>
+                    <Select
+                      onChange={(selectedAuthors) =>
+                        setAuthors(selectedAuthors)
+                      }
+                      mode="multiple"
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Odaberite autore"
+                      optionLabelProp="label"
+                    >
+                      {book.authors &&
+                        book.authors.map((autor) => (
+                          <Option
+                            key={autor.id}
+                            value={autor.id}
+                            label={autor.name + " " + autor.surname}
+                          >
+                            <Space>
+                              {autor.name}
+                              {autor.surname}
+                            </Space>
+                          </Option>
+                        ))}
+                    </Select>
+                    <label>Izdavač</label>
+                    <Select
+                      onChange={(selectedPublishers) =>
+                        setPublisher(selectedPublishers)
+                      }
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Odaberite izdavač"
+                      optionLabelProp="label"
+                    >
+                      {book.publishers &&
+                        book.publishers.map((izdavac) => (
+                          <Option
+                            key={izdavac.id}
+                            value={izdavac.id}
+                            label={izdavac.name}
+                          >
+                            <Space>{izdavac.name}</Space>
+                          </Option>
+                        ))}
+                    </Select>
+                    <label>Godina Izdavanja</label>
+                    <Input
+                      value={year}
+                      onChange={(e) => setYear(e.target.value)}
+                      min="1980"
+                      max="2024"
+                      maxLength="4"
+                    />
+
+                    <label>Količina</label>
+                    <Input
+                      type="number"
+                      className="default-input"
+                      min="1"
+                      value={quantity}
+                      onChange={(e) => setQuantity(parseInt(e.target.value))}
+                    />
+                    <div className="buttons">
+                      <button
+                        className="cancel"
+                        onClick={() => {
+                          navigate("/EvidentionOfBooks");
+                        }}
+                      >
+                        Poništi
+                      </button>
+                      <button
+                        onClick={() => setCurrentStep(2)}
+                        className="submit"
+                      >
+                        Dalje
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {currentStep == 2 && (
+                <div className="container2">
+                  <div className="info">
+                    <label>Broj Stranica</label>
+                    <Input
+                      type="number"
+                      className="default-input"
+                      min="1"
+                      value={numOfPages}
+                      onChange={(e) => setNumOfPages(parseInt(e.target.value))}
+                    />
+                    <label>Pismo</label>
+                    <Select
+                      onChange={(selectedScripts) => setScript(selectedScripts)}
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Odaberite pismo"
+                      optionLabelProp="label"
+                    >
+                      {book.scripts &&
+                        book.scripts.map((pismo) => (
+                          <Option
+                            key={pismo.id}
+                            value={pismo.id}
+                            label={pismo.name}
+                          >
+                            <Space>{pismo.name}</Space>
+                          </Option>
+                        ))}
+                    </Select>
+                    <label>Jezici</label>
+                    <Select
+                      onChange={(selectedLanguages) =>
+                        setLanguage(selectedLanguages)
+                      }
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Odaberite jezik"
+                      optionLabelProp="label"
+                    >
+                      {book.languages &&
+                        book.languages.map((jezik) => (
+                          <Option
+                            key={jezik.id}
+                            value={jezik.id}
+                            label={jezik.name}
+                          >
+                            <Space>{jezik.name}</Space>
+                          </Option>
+                        ))}
+                    </Select>
+                    <label>Povez</label>
+                    <Select
+                      onChange={(selectedBookBind) =>
+                        setBinding(selectedBookBind)
+                      }
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Odaberite povez"
+                      optionLabelProp="label"
+                    >
+                      {book.bookbinds &&
+                        book.bookbinds.map((povez) => (
+                          <Option
+                            key={povez.id}
+                            value={povez.id}
+                            label={povez.name}
+                          >
+                            <Space>{povez.name}</Space>
+                          </Option>
+                        ))}
+                    </Select>
+                    <label>Format</label>
+                    <Select
+                      onChange={(selectedFormat) => setFormat(selectedFormat)}
+                      style={{
+                        width: "100%",
+                      }}
+                      placeholder="Odaberite format"
+                      optionLabelProp="label"
+                    >
+                      {book.formats &&
+                        book.formats.map((format) => (
+                          <Option
+                            key={format.id}
+                            value={format.id}
+                            label={format.name}
+                          >
+                            <Space>{format.name}</Space>
+                          </Option>
+                        ))}
+                    </Select>
+                    <label>ISBN</label>
+                    <Input
+                      className="default-input"
+                      maxLength={13}
+                      onChange={(e) => setIsbn(e.target.value)}
+                    />
+                    <div className="buttons-spec">
+                      <button className="cancel" onClick>
+                        Nazad
+                      </button>
+                      <button
+                        className="submit"
+                        onClick={() => {
+                          CreateBook();
+                          navigate("/EvidentionOfBooks");
+                        }}
+                      >
+                        Sačuvaj
+                      </button>{" "}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* {currentStep === 3 && (
