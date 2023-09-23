@@ -108,7 +108,7 @@ const StudentTable = () => {
 
   const columns = [
     {
-      title: "Naziv Učenika",
+      title: "Naziv učenika",
       dataIndex: "name",
       render: renderFirstLastName,
       sorter: (a, b) => compareStrings(a.name, b.name),
@@ -122,7 +122,7 @@ const StudentTable = () => {
         `${record.name} ${record.surname}`.startsWith(value),
     },
     {
-      title: "Email Učenika",
+      title: "Email učenika",
       dataIndex: "email",
       render: renderEmail,
       sorter: (a, b) => compareStrings(a.email, b.email),

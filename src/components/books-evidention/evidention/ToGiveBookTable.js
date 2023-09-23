@@ -66,6 +66,30 @@ const IzdajTable = () => {
     );
   };
 
+  const renderStudentName = (text, izdate) => {
+    return (
+      <span>
+        {izdate.student.name} {izdate.student.surname}
+      </span>
+    );
+  };
+
+  const renderDate = (text, izdate) => {
+    return (
+      <span>
+        {izdate.action_date}
+      </span>
+    );
+  };
+
+  const renderLibrarianWhoGave = (text, izdate) => {
+    return (
+      <span>
+        {izdate.bibliotekar0.name} {izdate.bibliotekar0.surname}
+      </span>
+    );
+  };
+
 
   const Item = Menu.Item
 
@@ -73,17 +97,59 @@ const IzdajTable = () => {
 
   const menu = (recordId) =>
   <Menu>
-    <Item onClick={() => navigateToDetails(recordId)}>Detalji</Item>
+    <Item onClick={() =>(recordId)}>Otpiši knjigu</Item>
+    <Item onClick={() =>(recordId)}>Vrati knjigu</Item>
   </Menu>
 
 
   const columns = [
     {
-      title: "Naziv Knjige",
+      title: "Naziv knjige",
       dataIndex: "name",
       render: renderBookName,
       sorter: (a, b) => compareStrings(a.name, b.name),
     },
+    {
+        title: "Izdato učeniku",
+        dataIndex: "name",
+        render: renderStudentName,
+        sorter: (a, b) => compareStrings(a.name, b.name),
+        filters:  izdate.map((student) => {
+            return {
+                text: student.student.name + " " + student.student.surname,
+                value: student.student.name + " " + student.student.surname,
+            };
+          }),
+          onFilter: (value, record) =>
+          `${record.student.name} ${record.student.surname}`.startsWith(value),
+      },
+      {
+        title: "Datum izdavanja",
+        dataIndex: "name",
+        render: renderDate,
+        sorter: (a, b) => compareStrings(a.name, b.name),
+        filters:  izdate.map((date) => {
+            return {
+                text: date.action_date,
+                value: date.action_date,
+            };
+          }),
+          onFilter: (value, record) =>
+          `${record.action_date} `.startsWith(value),
+      },
+      {
+        title: "Knjigu izdao",
+        dataIndex: "name",
+        render: renderLibrarianWhoGave,
+        sorter: (a, b) => compareStrings(a.name, b.name),
+        filters:  izdate.map((librarian) => {
+            return {
+                text: librarian.bibliotekar0.name,
+                value: librarian.bibliotekar0.surname,}
+          }),
+          onFilter: (value, record) =>
+          `${record.bibliotekar0.name} ${record.bibliotekar0.surname} `.startsWith(value),
+      },
     {
       title: "",
       dataIndex: "action",

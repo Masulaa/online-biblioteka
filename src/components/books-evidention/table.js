@@ -171,7 +171,7 @@ const BookTable = () => {
 
   const columns = [
     {
-      title: "Naziv Knjige",
+      title: "Naziv knjige",
       dataIndex: "knjiga",
       render: renderTitleAndImage,
       sorter: (a, b) => compareStrings(a.title, b.title),

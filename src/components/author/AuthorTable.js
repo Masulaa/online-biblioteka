@@ -94,7 +94,7 @@ const AuthorTable = () => {
 
   const columns = [
     {
-      title: "Naziv Autora",
+      title: "Naziv autora",
       dataIndex: "name",
       render: renderFirstLastName,
       sorter: (a, b) => compareStrings(a.name, b.name),

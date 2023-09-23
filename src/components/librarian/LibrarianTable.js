@@ -106,7 +106,7 @@ const LibrarianTable = () => {
 
   const columns = [
     {
-      title: "Naziv Bibliotekara",
+      title: "Naziv bibliotekara",
       dataIndex: "name",
       render: renderFirstLastName,
       sorter: (a, b) => compareStrings(a.name, b.name),
@@ -120,7 +120,7 @@ const LibrarianTable = () => {
         `${record.name} ${record.surname}`.startsWith(value),
     },
     {
-      title: "Email Bibliotekara",
+      title: "Email bibliotekara",
       dataIndex: "email",
       render: renderEmail,
       sorter: (a, b) => compareStrings(a.email, b.email),

@@ -1,10 +1,9 @@
-import { react, useState, useEffect, useRef } from "react";
+import { react, useState, useEffect, useRef, Fragment } from "react";
 import { BookService } from "../../../api/api";
 import { UserService } from "../../../api/api";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import "./IzdajBook.css";
 import { AiFillDelete } from "react-icons/ai";
 import { AiFillEdit } from "react-icons/ai";
 import { HiOutlineArrowUturnUp } from "react-icons/hi2";
@@ -13,35 +12,37 @@ import { HiOutlineArrowPath } from "react-icons/hi2";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { RiReservedFill } from "react-icons/ri"
 
-import "./IzdajBook.css";
+import { Input, Select, Space, Card  } from "antd";
+const { Meta } = Card;
+
+
 
 const IzdajBook = () => {
   const navigate = useNavigate();
 
   const [book, setBook] = useState([]);
   const [users, setUsers] = useState([]);
-  const [userId, setUserId] = useState();
-  const [datumIzdavanja, setDatumIzdavanja] = useState(null);
-  const [datumVracanja, setDdatumVracanja] = useState(null);
+  const [userId, setUserId] = useState([]);
+  const [datumIzdavanja, setDatumIzdavanja] = useState();
+  const [datumVracanja, setDatumVracanja] = useState();
 
-  const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
-
-  const profilRef = useRef(null);
 
   const { id } = useParams();
 
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
   const izdajKnjiguData = {
-    student_id: userId,
+    student_id: userId[0],
     datumIzdavanja: datumIzdavanja,
     datumVracanja: datumVracanja,
   };
 
+  const { Option } = Select;
+
+
   const izdajKnjigu = async () => {
     try {
-      const response = await BookService.IzdajBook(izdajKnjiguData, id);
-      console.log("API Response", response);
+       const response = await BookService.IzdajBook(izdajKnjiguData, id);
+       console.log("API Response", response);
 
       // navigate("/EvidentionOfBooks");
     } catch (error) {
@@ -75,29 +76,9 @@ const IzdajBook = () => {
     }
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profilRef.current && !profilRef.current.contains(event.target)) {
-        setUserIconMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  const isOpennedUserIconMenu = () => {
-    setUserIconMenuOpen(!userIconMenuOpen);
-    if (userIconMenuOpen === false) {
-      setUserIconMenuOpen(!userIconMenuOpen);
-    }
-  };
 
   return (
-    <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
+    <Fragment>
       <div className="wrapper10">
         <div className="book-details">
           <div className="book-image">
@@ -133,31 +114,11 @@ const IzdajBook = () => {
             <HiOutlineArrowPath className="detail-icons" />
             Vrati Knjigu
           </Link>
-          <Link to="#" className="links2" ref={profilRef}>
+          <Link to="#" className="links2">
             <BsThreeDotsVertical
               className="more-options"
-              onClick={isOpennedUserIconMenu}
             />
           </Link>
-          {userIconMenuOpen && (
-            <div className="option-menu01">
-              <ul>
-                <li
-                  onClick={() => {
-                    isOpennedUserIconMenu();
-                    navigate(`/EvidentionOfBooks/EditBook/${book.id}`);
-                  }}
-                >
-                  <AiFillEdit className="detail-icons" />
-                  Izmjeni Knjigu
-                </li>
-                <li onClick={() => {}}>
-                  <AiFillDelete className="detail-icons" />
-                  Vrati Knjigu
-                </li>
-              </ul>
-            </div>
-          )}
         </div>
       </div>
       <div className="raspored-izdaj-knjige">
@@ -165,29 +126,37 @@ const IzdajBook = () => {
           <div className="i2">
             <h2 className="naslov-mini-ispod">Izdaj Knjigu</h2>
             <label>Izaberite učenika koji zadužuje knjigu</label>
-            <select
+            <Select
               type="password"
+              mode="multiple"
+              style={{
+                width: "100%",
+              }}
+              placeholder="Odaberite kategorije"
               
               value={userId}
-              onChange={(e) => setUserId(e.target.value)}
+              onChange={(selectedUserId) => setUserId(selectedUserId)}
             >
               {users.map((user) => {
                 if (user.role === "Učenik") {
                   return (
-                    <option value={user.id}>
-                      {user.name}&nbsp;{user.surname}
-                    </option>
+                    <Option
+                    key={user.id}
+                    value={user.id}
+                  >
+                    <Space>{user.name}{user.surname}</Space>
+                  </Option>
                   );
                 }
                 return null;
               })}
-            </select>
+            </Select>
           </div>{" "}
           <div className="i0">
             <div className="i3">
               <div className="form123">
                 <label>Datum Izdavanja</label>
-                <input
+                <Input
                   type="date"
                   
                   onChange={(e) => {
@@ -197,11 +166,10 @@ const IzdajBook = () => {
               </div>
               <div className="form1234">
                 <label>Datum Vraćanja</label>
-                <input
+                <Input
                   type="date"
-                  
                   onChange={(e) => {
-                    setDdatumVracanja(e.target.value);
+                    setDatumVracanja(e.target.value);
                   }}
                 />
               </div>
@@ -227,9 +195,16 @@ const IzdajBook = () => {
             </button>
           </div>
         </div>
-        <div className="i4">
+       
+            
+            <Card
+      style={{
+        width: 300      }}
+      type="inner"
+      title="Informacije"
+    > <div className="i4">
           <div className="category-info22">
-            <div className="side-category00">
+     <div className="side-category00">
               <span className="side-category01">Na raspolaganju:</span>
               <span className="side-category01">Rezervisano:</span>
               <span className="side-category01">Izdato:</span>
@@ -250,11 +225,12 @@ const IzdajBook = () => {
                   primjeraka
                 </span>
               </div>
-            </div>
-          </div>
+            </div></div>
         </div>
+    </Card>
+          
       </div>
-    </div>
+      </Fragment>
   );
 };
 

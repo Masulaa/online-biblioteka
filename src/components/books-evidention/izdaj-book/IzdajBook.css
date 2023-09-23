@@ -10,8 +10,6 @@
   margin: 0;
   font-size: 1px;
   display: flex;
-  border: 1px solid #ccc;
-  padding: 2rem;
   border-radius: 5px;
 }
 
@@ -66,4 +64,32 @@
 .naslov-mini-ispod {
   margin: 0;
   padding-bottom: 1rem;
+}
+
+@media (max-width: 1300px) {
+  .raspored-izdaj-knjige  {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0% 20%;
+    align-items: flex-start;
+    flex-direction: row;
+  }
+}
+@media (max-width: 1140px) {
+  .raspored-izdaj-knjige  {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0% 10%;
+    align-items: flex-start;
+    flex-direction: row;
+  }
+}
+@media (max-width: 1025px) {
+  .raspored-izdaj-knjige  {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0% 5%;
+    align-items: flex-start;
+    flex-direction: row;
+  }
 }
