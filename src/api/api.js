@@ -114,11 +114,20 @@ export const BookService = {
   ReserveBook(reserveBookData, id) {
     return client.post(`books/${id}/reserve`, reserveBookData);
   },
+  CancelReservation(id) {
+    return client.post(`books/reservations/cancel`, id);
+  },
   IzdajBook(izdajKnjiguData, id) {
     return client.post(`books/${id}/izdaj`, izdajKnjiguData);
   },
   GetAllIzdajBook(){
     return client.get("books/borrows");
+  },
+  ToReturnBook(id){
+    return client.post("books/vrati", id)
+  },
+  ToWriteOff(id){
+    return client.post("books/otpisi", id)
   }
 };
 

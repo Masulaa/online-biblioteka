@@ -1,5 +1,5 @@
 import ToGiveBookTable from "./ToGiveBookTable"
-
+import ToReturnBookTable from "./ToReturnBookTable";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -14,6 +14,7 @@ import {
     CarryOutFilled,
     CalendarFilled
   } from '@ant-design/icons';
+
 
 // import illustration2 from "../../images/undraw_bibliophile_re_xarc.svg"
 
@@ -32,7 +33,7 @@ function Evidention() {
     {
       key: "2",
       label: <div><SnippetsFilled /><span>Vraćene knjige</span></div>,
-      children: "Content of Tab Pane 2",
+      children: <ToReturnBookTable/>,
     },
     {
       key: "3",
