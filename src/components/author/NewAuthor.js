@@ -4,44 +4,43 @@ import { useSelector } from "react-redux";
 import "./NewAuthor.css";
 import "react-quill/dist/quill.snow.css";
 
-import { Tabs, Steps, Input, Select, Space } from "antd";
+import { Input, message} from "antd";
 import { AuthorService } from "../../api/api";
 
 function NewAuthor() {
   const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const [surname, setSurname] = useState("");  
+  const [biography, setBiography] = useState("");
+  const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
-
-  const [sadrzaj, setSadrzaj] = useState("");
 
   const { TextArea } = Input;
 
   const authorData = {
     name: name,
     surname: surname,
-    biography: sadrzaj,
+    biography: biography
   }
 
   const createAuthors = async () => {
     try {
+      message.destroy();
       const response = await AuthorService.CreateAuthor(authorData);
       console.log("API Response", response);
-
+      message.success('Autor uspješno kreiran');
       // navigate("/EvidentionOfBooks");
     } catch (error) {
-
       console.error("Error creating an authors", error)
+      setErrors(error.response.data.data)
+      message.error('Autor nije kreiran');
     }
   };
 
 
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
-
 
   return (
     <Fragment>
-      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="">
           <div class="headbar">
             <h2 className="naslov">Novi Autor</h2>
@@ -49,7 +48,7 @@ function NewAuthor() {
               <Link to="/AuthorEvidention">
                 <span className="paragraf">Evidencija Autora</span>
               </Link>{" "}
-              / Nova Knjiga
+              / Novi Autor
             </p>
           </div>
 
@@ -63,15 +62,17 @@ function NewAuthor() {
                   <Input
                     onChange={(e) => setName(e.target.value)}
                   />
+                  {errors.name ? <p className="error-text">{errors.name[0]}</p> : ''}
                    <label>Prezime Autora</label>
                   <Input
                     onChange={(e) => setSurname(e.target.value)}
                   />
+                  {errors.surname ? <p className="error-text">{errors.surname[0]}</p> : ''}
                   <label>Biografija</label>
                   <TextArea
                   rows={4}
-                    value={sadrzaj}
-                    onChange={(e)=>setSadrzaj(e.target.value)}
+                    value={biography}
+                    onChange={(e)=>setBiography(e.target.value)}
                   />
                   <div className="buttons">
                     <button
@@ -86,7 +87,7 @@ function NewAuthor() {
                     onClick={createAuthors}
                       className="submit"
                     >
-                      Dalje
+                      Potvrdi
                     </button>
                   </div>
                 </div>
@@ -94,7 +95,6 @@ function NewAuthor() {
 
           </div>
         </div>
-      </div>
     </Fragment>
   );
 }

@@ -1,13 +1,24 @@
-
+import { Button, Result } from "antd";
+import { useNavigate } from "react-router-dom";
 const ErrorHandlerPage = () => {
-
+  const navigate = useNavigate();
   return (
-    <div className="">
-      <div className="">
-        <h2>Nešto nije u redu. Pokušajte ponovo.</h2>
-      </div>
-    </div>
+    <Result
+      status="404"
+      title="404"
+      subTitle="Žao nam je, stranica koju ste posjetili ne postoji"
+      extra={
+        <Button
+          type="primary"
+          onClick={() => {
+            navigate("/EvidentionOfBooks");
+          }}
+        >
+          Idite nazad
+        </Button>
+      }
+    />
   );
-}
+};
 
 export default ErrorHandlerPage;

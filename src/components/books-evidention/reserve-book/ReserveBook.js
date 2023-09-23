@@ -164,7 +164,7 @@ const ReserveBook = () => {
             <label>Izaberite učenika koji rezerviše knjigu</label>
             <select
               type="text"
-              className="default-input"
+              
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
             >
@@ -186,7 +186,7 @@ const ReserveBook = () => {
                 <label>Datum Izdavanja</label>
                 <input
                   type="date"
-                  className="default-input"
+                  
                   onChange={(e) => {
                     setDatumRezervisanja(e.target.value);
                   }}

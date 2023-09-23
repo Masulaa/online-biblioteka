@@ -100,7 +100,7 @@ const Settings = () =>{
                 </p>
                 </div>
                 <div className="miniflexcont">
-                    <input placeholder="..." className="default-input"></input>
+                    <input placeholder="..." ></input>
                     <label>Dana</label>
                 </div>
             </div>
@@ -114,7 +114,7 @@ const Settings = () =>{
                 </p>
                 </div>
                 <div className="miniflexcont">
-                    <input placeholder="..." className="default-input"></input>
+                    <input placeholder="..." ></input>
                     <label>Dana</label>
                 </div>
             </div>
@@ -128,7 +128,7 @@ const Settings = () =>{
                 </p>
                 </div>
                 <div className="miniflexcont">
-                    <input placeholder="..." className="default-input"></input>
+                    <input placeholder="..." ></input>
                     <label>Dana</label>
                 </div>
             </div>

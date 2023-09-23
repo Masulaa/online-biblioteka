@@ -103,11 +103,9 @@ function NewBook() {
   const step1 = [
     {
       title: "Detalji",
-      description,
     },
     {
       title: "Specifikacije",
-      description2,
     },
   ];
   const step2 = [
@@ -167,6 +165,7 @@ function NewBook() {
                 percent={50}
                 labelPlacement="vertical"
                 items={step1}
+                style={{margin:'1rem 0rem'}}
               />
               {/* <Tabs
                 defaultActiveKey={currentStep.toString()}
@@ -189,7 +188,7 @@ function NewBook() {
                       maxLength={100}
                       rows={3}
                       onChange={(e) => setSadrzaj(e.target.value)}
-                      className="default-input"
+                      
                       mode
                     />
                     <label>Izaberite kategorije</label>
@@ -298,7 +297,7 @@ function NewBook() {
                     <label>Količina</label>
                     <Input
                       type="number"
-                      className="default-input"
+                      
                       min="1"
                       value={quantity}
                       onChange={(e) => setQuantity(parseInt(e.target.value))}
@@ -329,7 +328,7 @@ function NewBook() {
                     <label>Broj Stranica</label>
                     <Input
                       type="number"
-                      className="default-input"
+                      
                       min="1"
                       value={numOfPages}
                       onChange={(e) => setNumOfPages(parseInt(e.target.value))}
@@ -420,12 +419,12 @@ function NewBook() {
                     </Select>
                     <label>ISBN</label>
                     <Input
-                      className="default-input"
+                      
                       maxLength={13}
                       onChange={(e) => setIsbn(e.target.value)}
                     />
                     <div className="buttons-spec">
-                      <button className="cancel" onClick>
+                      <button className="cancel" onClick={() => setCurrentStep(1)}>
                         Nazad
                       </button>
                       <button

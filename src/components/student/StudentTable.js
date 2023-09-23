@@ -28,7 +28,8 @@ const StudentTable = () => {
   const fetchUsers = async () => {
     try {
       const response = await UserService.ListUsers();
-      setUsers(response.data.data);
+      const ucenici = response.data.data.filter(user => user.role === "Učenik");
+      setUsers(ucenici);
     } catch (error) {
       console.log("Error fetching users:", error);
     }
@@ -166,7 +167,7 @@ const StudentTable = () => {
         default:
           console.error("No default case");
     }
-    if (e.key == 2) {
+    if (e.key === 2) {
       navigate("/EvidentionOfBooks/EditBook/BookDetails");
     }
   };

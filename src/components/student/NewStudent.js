@@ -2,6 +2,9 @@ import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+
+import {Input} from "antd";
+
 import DragDrop from "../dragdropupload/DragDrop";
 import "./NewStudent.css";
 import ReactQuill from "react-quill";
@@ -43,38 +46,38 @@ function NewStudent() {
               <div className="flex-columns">
                 <div className="column">
                   <label>Ime</label>
-                  <input
-                    className="default-input"
+                  <Input
+                    
                     onChange={(e) => setName(e.target.value)}
                   />
                   <label>Prezime</label>
-                  <input
-                    className="default-input"
+                  <Input
+                    
                     onChange={(e) => setSurname(e.target.value)}
                   />
                   <label>JMBG</label>
-                  <input
-                    className="default-input"
+                  <Input
+                    
                     onChange={(e) => setJMBG(e.target.value)}
                   />
                   <label>E-mail</label>
-                  <input
-                    className="default-input"
+                  <Input
+                    
                     onChange={(e) => setEmail(e.target.value)}
                   />
                    <label>Korisničko Ime</label>
-                  <input
-                    className="default-input"
+                  <Input
+                    
                     onChange={(e) => setUsername(e.target.value)}
                   />
                   <label>Šifra</label>
-                  <input
-                    className="default-input"
+                  <Input
+                    
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <label>Potvrdi Šifru</label>
-                  <input
-                    className="default-input"
+                  <Input
+                    
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <div className="buttons">
@@ -92,9 +95,6 @@ function NewStudent() {
                       Dalje
                     </button>
                   </div>
-                </div>
-                <div className="column">
-                  <DragDrop></DragDrop>
                 </div>
               </div>
 

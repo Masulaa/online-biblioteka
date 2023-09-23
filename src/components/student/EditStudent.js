@@ -2,7 +2,8 @@ import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import DragDrop from "../dragdropupload/DragDrop";
+import {Input} from "antd";
+
 import "./NewStudent.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -27,7 +28,7 @@ function EditStudent() {
       <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="">
           <div class="headbar">
-            <h2 className="naslov">Izmjeni Učenik</h2>
+            <h2 className="naslov">Izmjeni Učenika</h2>
             <p class="breadcrumbs">
               <Link to="/StudentEvidention">
                 <span className="paragraf">Evidencija Učenika</span>
@@ -43,38 +44,31 @@ function EditStudent() {
               <div className="flex-columns">
                 <div className="column">
                   <label>Ime</label>
-                  <input
-                    className="default-input"
+                  <Input                    
                     onChange={(e) => setName(e.target.value)}
                   />
                   <label>Prezime</label>
-                  <input
-                    className="default-input"
+                  <Input
                     onChange={(e) => setSurname(e.target.value)}
                   />
                   <label>JMBG</label>
-                  <input
-                    className="default-input"
+                  <Input
                     onChange={(e) => setJMBG(e.target.value)}
                   />
                   <label>E-mail</label>
-                  <input
-                    className="default-input"
+                  <Input
                     onChange={(e) => setEmail(e.target.value)}
                   />
                    <label>Korisničko Ime</label>
-                  <input
-                    className="default-input"
+                  <Input
                     onChange={(e) => setUsername(e.target.value)}
                   />
                   <label>Šifra</label>
-                  <input
-                    className="default-input"
+                  <Input 
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <label>Potvrdi Šifru</label>
-                  <input
-                    className="default-input"
+                  <Input
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <div className="buttons">
@@ -92,9 +86,6 @@ function EditStudent() {
                       Dalje
                     </button>
                   </div>
-                </div>
-                <div className="column">
-                  <DragDrop></DragDrop>
                 </div>
               </div>
 

@@ -60,9 +60,7 @@ const AuthorDetails = lazy(() =>
   import("./components/author/author-details/AuthorDetails")
 );
 
-const EditAuthor = lazy(() =>
-  import("./components/author/EditAuthor")
-);
+const EditAuthor = lazy(() => import("./components/author/EditAuthor"));
 
 const LibrarianDetails = lazy(() =>
   import("./components/librarian/librarian-details/LibrarianDetails")
@@ -76,9 +74,7 @@ const StudentDetails = lazy(() =>
   import("./components/student/student-details/StudentDetails")
 );
 
-const EditStudent = lazy(() =>
-  import("./components/student/EditStudent")
-);
+const EditStudent = lazy(() => import("./components/student/EditStudent"));
 
 const NewAuthor = lazy(() => import("./components/author/NewAuthor"));
 
@@ -108,6 +104,13 @@ function App() {
           }
         />
         <Route path="/" element={<AppLayout />}>
+        <Route
+            path="/Dashboard"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+              </Suspense>
+            }
+          />
           <Route
             path="/CreateAccount"
             element={
@@ -157,7 +160,7 @@ function App() {
             }
           />
           <Route
-            path="/IzdajKnjigu/:id"
+            path="/GiveBook/:id"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
                 <IzdajBook />
@@ -301,7 +304,6 @@ function App() {
               </Suspense>
             }
           />
-
         </Route>
       </Routes>
       {/* </AppLayout> */}

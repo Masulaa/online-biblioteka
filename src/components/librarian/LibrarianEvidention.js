@@ -30,14 +30,6 @@ function LibrarianEvidention() {
         >
           Novi Bibliotekar
         </button>
-        <span className="search-span">
-          <HiMagnifyingGlassCircle className="search-bar-icon" />
-          <input
-            type="text"
-            placeholder="   search..."
-            className="search"
-          ></input>
-        </span>
       </div>
       <LibrarianTable/>
       </div>

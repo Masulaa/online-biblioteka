@@ -167,7 +167,7 @@ const IzdajBook = () => {
             <label>Izaberite učenika koji zadužuje knjigu</label>
             <select
               type="password"
-              className="default-input"
+              
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
             >
@@ -189,7 +189,7 @@ const IzdajBook = () => {
                 <label>Datum Izdavanja</label>
                 <input
                   type="date"
-                  className="default-input"
+                  
                   onChange={(e) => {
                     setDatumIzdavanja(e.target.value);
                   }}
@@ -199,7 +199,7 @@ const IzdajBook = () => {
                 <label>Datum Vraćanja</label>
                 <input
                   type="date"
-                  className="default-input"
+                  
                   onChange={(e) => {
                     setDdatumVracanja(e.target.value);
                   }}

@@ -117,6 +117,9 @@ export const BookService = {
   IzdajBook(izdajKnjiguData, id) {
     return client.post(`books/${id}/izdaj`, izdajKnjiguData);
   },
+  GetAllIzdajBook(){
+    return client.get("books/borrows");
+  }
 };
 
 export const UserService = {
@@ -126,8 +129,8 @@ export const UserService = {
   LogOut(confirmData) {
     return client.post("logout", confirmData);
   },
-  ListUsers() {
-    return client.get("users");
+  ListUsers(roleID) {
+    return client.get("users", roleID);
   },
   DeleteUsers(userIds) {
     return client.delete(`users/${userIds}`);
@@ -156,4 +159,7 @@ export const AuthorService = {
   CreateAuthor(authorData) {
     return client.post("authors/store", authorData);
   },
+  EditAuthor(authorData, authorId){
+    return client.put(`authors/${authorId}`, authorData)
+  }
 };

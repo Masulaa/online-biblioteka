@@ -5,8 +5,16 @@ import { BookService } from "../../api/api";
 // import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
 // import AuthorSingle from "./AuthorSingle";
 import {
-  EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined
-} from '@ant-design/icons';
+  EllipsisOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  InfoCircleOutlined,
+  EditOutlined,
+  EnterOutlined,
+  SendOutlined,
+  RollbackOutlined,
+  FileOutlined,
+} from "@ant-design/icons";
 
 import { Table, Dropdown, Menu, Modal, Button } from "antd";
 
@@ -15,7 +23,7 @@ const BookTable = () => {
 
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
- const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const [selectAll, setSelectAll] = useState(false);
 
@@ -31,17 +39,15 @@ const BookTable = () => {
       console.log("API Response", response);
       fetchBooks();
     } catch (error) {
-
-      console.error("Error deleting book:", error)
+      console.error("Error deleting book:", error);
     }
   };
 
   const withLoading = async (method) => {
-    setLoading(true)
-    await method()
-    setLoading(false)
-  }
-
+    setLoading(true);
+    await method();
+    setLoading(false);
+  };
 
   const fetchBooks = async () => {
     try {
@@ -54,19 +60,19 @@ const BookTable = () => {
 
   const confirm = (id) => {
     Modal.confirm({
-      title: 'Potvrdi',
+      title: "Potvrdi",
       icon: <ExclamationCircleOutlined />,
-      content: 'Da li ste sigurni da zelite obrisati autora?',
-      okText: 'Da, Obrisi',
-      cancelText: 'Ne',
-      onOk: () => deleteBook(id)
+      content: "Da li ste sigurni da zelite obrisati knjigu?",
+      okText: "Da, Obrisi",
+      cancelText: "Ne",
+      onOk: () => deleteBook(id),
     });
   };
 
   // confirm(1);
 
   useEffect(() => {
-    withLoading(fetchBooks)
+    withLoading(fetchBooks);
   }, []);
 
   const compareStrings = function (a, b) {
@@ -80,11 +86,7 @@ const BookTable = () => {
   };
 
   const renderTitleAndImage = (text, book) => {
-    return (
-      <span>
-        {book.title}
-      </span>
-    );
+    return <span>{book.title}</span>;
   };
 
   const renderAuthors = (text, book) => {
@@ -96,207 +98,209 @@ const BookTable = () => {
   };
 
   const renderCategories = (text, book) => {
-    return (
-      <span>
-        {book.categories.map((c) => c.name).join(", ")}
-      </span>
-    )
-  }
+    return <span>{book.categories.map((c) => c.name).join(", ")}</span>;
+  };
 
   const renderAbleToBorrow = (text, book) => {
-    return (
-      <span>
-        {book.ableToBorrow ? "Da" : "Ne"}
-      </span>
-    )
-  }
+    return <span>{book.ableToBorrow ? "Da" : "Ne"}</span>;
+  };
 
-  const renderReserved = (text, book) =>{
-    return (
-      <span>
-        {book.rSamples}
-      </span>
-    )
-  }
+  const renderReserved = (text, book) => {
+    return <span>{book.rSamples}</span>;
+  };
 
-  const renderBorrowed = (text, book) =>{
-    return (
-      <span>
-        {book.bSamples}
-      </span>
-    )
-  }
+  const renderBorrowed = (text, book) => {
+    return <span>{book.bSamples}</span>;
+  };
 
-  const renderFSamples = (text, book) =>{
-    return (
-      <span>
-        {book.fSamples}
-      </span>
-    )
-  }
+  const renderFSamples = (text, book) => {
+    return <span>{book.fSamples}</span>;
+  };
 
-  const renderAllSamples = (text, book) =>{
-    return (
-      <span>
-        {book.samples}
-      </span>
-    )
-  }
+  const renderAllSamples = (text, book) => {
+    return <span>{book.samples}</span>;
+  };
 
-  const Item = Menu.Item
-
-  const navigateToDetails = (bookId) => navigate(`/EvidentionOfBooks/BookDetails/${bookId}`);
-  const navigateToEdit = (bookId) => navigate(`/EvidentionOfBooks/EditBook/${bookId}`);
+  const Item = Menu.Item;
 
   const deleteBook = async (bookId) => {
     try {
-      setLoading(true)
+      setLoading(true);
       await BookService.DeleteBooks(bookId);
-      setLoading(false)
+      setLoading(false);
       fetchBooks();
       setSelectedRowKeys([]);
     } catch (error) {
-
-      console.error("Error deleting book:", error)
+      console.error("Error deleting book:", error);
     }
   };
 
-  const menu = (recordId) =>
-  <Menu>
-    <Item onClick={() => navigateToDetails(recordId)}>Detalji</Item>
-    <Item onClick={() => navigateToEdit(recordId)}>Izmijeni</Item>
-    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obrisi</Item>
-  </Menu>
+  const navigateToDetails = (bookId) =>
+    navigate(`/EvidentionOfBooks/BookDetails/${bookId}`);
+  const navigateToEdit = (bookId) =>
+    navigate(`/EvidentionOfBooks/EditBook/${bookId}`);
+  const navigateToGiveBook = (bookId) => navigate(`/GiveBook/${bookId}`);
+  const navigateToReserveBook = (bookId) => navigate(`/ReserveBook/${bookId}`);
 
+  const menu = (recordId) => (
+    <Menu>
+      <Item onClick={() => navigateToDetails(recordId)}>
+        <InfoCircleOutlined /> Detalji
+      </Item>
+      <Item onClick={() => navigateToEdit(recordId)}>
+        <EditOutlined /> Izmijeni knjigu
+      </Item>
 
-const columns = [
-  {
-    title: "Naziv Knjige",
-    dataIndex: "knjiga",
-    render: renderTitleAndImage,
-    sorter: (a, b) => compareStrings(a.title, b.title),
-    filters: books.map((book) => {
-      return {
-        text: book.title,
-        value: book.title,
-      };
-    }),
-    onFilter: (value, record) =>
-      `${record.title}`.startsWith(value),
-  },  {
-    title: "Autori",
-    dataIndex: "autor",
-    render: renderAuthors,
-    sorter: (a, b) => compareStrings(a.authors, b.authors),
-    responsive: ["sm"],
-    filters: books.map((book) => {
-      return {
-        text: `${book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}`,
-        value: `${book.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}`,
-      };
-    }),
-    onFilter: (value, record) =>
-      `${record.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}`.startsWith(value),
-  },
-  {
-    title: "Kategorije",
-    dataIndex: "kategorija",
-    render: renderCategories,
-    sorter: (a, b) => compareStrings(a.categories, b.categories),
-    filters: books.map((book) => {
-      return {
-        text: `${book.categories.map((c) => c.name).join(", ")}`,
-        value: `${book.categories.map((c) => c.name).join(", ")}`,
-      };
-    }),
-    onFilter: (value, record) =>
-      `${record.categories.map((c) => c.name).join(", ")}`.startsWith(value),
-  },
+      <Item onClick={() => recordId}>
+        <EnterOutlined /> Otpiši knjigu
+      </Item>
+      <Item onClick={() => navigateToGiveBook(recordId)}>
+        <SendOutlined /> Izdaj knjigu
+      </Item>
+      <Item onClick={() => recordId}>
+        <RollbackOutlined /> Vrati knjigu
+      </Item>
+      <Item onClick={() => navigateToReserveBook(recordId)}>
+        <FileOutlined /> Rezerviši knjigu
+      </Item>
+      <Item onClick={() => confirm(recordId)} danger="true">
+        <DeleteOutlined /> Obriši knjigu
+      </Item>
+    </Menu>
+  );
 
-  {
-    title:"Na raspolaganju",
-    dataIndex: "able",
-    render: renderAbleToBorrow,
-    sorter: (a, b) => compareStrings(a.able, b.able),
-  },
-  {
-    title:"Rezervisano",
-    dataIndex: "name",
-    render: renderReserved,
-    sorter: (a, b) => a.rSamples - b.rSamples,
-    responsive: ["sm"],
-  },
-  {
-    title: "Izdato",
-    dataIndex: "name",
-    render: renderBorrowed,
-    sorter: (a, b) => a.bSamples - b.bSamples,
-    responsive: ["sm"],
-  },  
-  {
-    title:"U prekoračenju",
-    dataIndex: "name",
-    render: renderFSamples,
-    sorter: (a, b) => a.fSamples - b.fSamples,
-    responsive: ["sm"],
-  },  
-  {
-    title:"Ukupna količina",
-    dataIndex: "name",
-    render: renderAllSamples,
-    sorter: (a, b) => a.samples - b.samples,
-  },
-  {
-    title: "Autor i kategorija",
-    render: (record) => (
-      <React.Fragment>
-        {record.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}
-        <br />
-        {record.categories.map((c) => c.name).join(", ")}
-      </React.Fragment>
-    ),
-    responsive: ["xs"],
-  },
-  {
-    title: "Rezervisano, izdato, u prekoračenju",
-    render: (record) => (
-      <React.Fragment>
-        {record.rSamples} /
-        <br />
-        {record.bSamples} /
-        <br />
-        {record.fSamples}
-      </React.Fragment>
-    ),
-    responsive: ["xs"],
-  },
-  {
-    title: selectedRowKeys.length > 0 ? (
-      <Button
-        type="primary"
-        danger
-        onClick={handleDeleteSelected}
-      >
-        Obriši selektovane
-      </Button>
-    ) : "Akcije",
-    dataIndex: "actions",
-    render: (_, record) => (
-      <div>
-        <Dropdown overlay={menu(record.id)} trigger={["click"]}>
-          <EllipsisOutlined />
-        </Dropdown>
-      </div>
-    ),
-  },
-];
+  const columns = [
+    {
+      title: "Naziv Knjige",
+      dataIndex: "knjiga",
+      render: renderTitleAndImage,
+      sorter: (a, b) => compareStrings(a.title, b.title),
+      filters: books.map((book) => {
+        return {
+          text: book.title,
+          value: book.title,
+        };
+      }),
+      onFilter: (value, record) => `${record.title}`.startsWith(value),
+    },
+    {
+      title: "Autori",
+      dataIndex: "autor",
+      render: renderAuthors,
+      sorter: (a, b) => compareStrings(a.authors, b.authors),
+      responsive: ["sm"],
+      filters: books.map((book) => {
+        return {
+          text: `${book.authors
+            .map((a) => `${a.name} ${a.surname}`)
+            .join(", ")}`,
+          value: `${book.authors
+            .map((a) => `${a.name} ${a.surname}`)
+            .join(", ")}`,
+        };
+      }),
+      onFilter: (value, record) =>
+        `${record.authors
+          .map((a) => `${a.name} ${a.surname}`)
+          .join(", ")}`.startsWith(value),
+    },
+    {
+      title: "Kategorije",
+      dataIndex: "kategorija",
+      render: renderCategories,
+      sorter: (a, b) => compareStrings(a.categories, b.categories),
+      filters: books.map((book) => {
+        return {
+          text: `${book.categories.map((c) => c.name).join(", ")}`,
+          value: `${book.categories.map((c) => c.name).join(", ")}`,
+        };
+      }),
+      onFilter: (value, record) =>
+        `${record.categories.map((c) => c.name).join(", ")}`.startsWith(value),
+    },
 
+    {
+      title: "Na raspolaganju",
+      dataIndex: "able",
+      render: renderAbleToBorrow,
+      sorter: (a, b) => compareStrings(a.able, b.able),
+    },
+    {
+      title: "Rezervisano",
+      dataIndex: "name",
+      render: renderReserved,
+      sorter: (a, b) => a.rSamples - b.rSamples,
+      responsive: ["sm"],
+    },
+    {
+      title: "Izdato",
+      dataIndex: "name",
+      render: renderBorrowed,
+      sorter: (a, b) => a.bSamples - b.bSamples,
+      responsive: ["sm"],
+    },
+    {
+      title: "U prekoračenju",
+      dataIndex: "name",
+      render: renderFSamples,
+      sorter: (a, b) => a.fSamples - b.fSamples,
+      responsive: ["sm"],
+    },
+    {
+      title: "Ukupna količina",
+      dataIndex: "name",
+      render: renderAllSamples,
+      sorter: (a, b) => a.samples - b.samples,
+    },
+    {
+      title: "Autor i kategorija",
+      render: (record) => (
+        <React.Fragment>
+          {record.authors.map((a) => `${a.name} ${a.surname}`).join(", ")}
+          <br />
+          {record.categories.map((c) => c.name).join(", ")}
+        </React.Fragment>
+      ),
+      responsive: ["xs"],
+    },
+    {
+      title: "Rezervisano, izdato, u prekoračenju",
+      render: (record) => (
+        <React.Fragment>
+          {record.rSamples} /
+          <br />
+          {record.bSamples} /
+          <br />
+          {record.fSamples}
+        </React.Fragment>
+      ),
+      responsive: ["xs"],
+    },
+    {
+      title:
+        selectedRowKeys.length > 0 ? (
+          <Button type="primary" danger onClick={handleDeleteSelected}>
+            Obriši selektovane
+          </Button>
+        ) : (
+          "Akcije"
+        ),
+      dataIndex: "actions",
+      render: (_, record) => (
+        <div>
+          <Dropdown overlay={menu(record.id)} trigger={["click"]}>
+            <EllipsisOutlined />
+          </Dropdown>
+        </div>
+      ),
+    },
+  ];
 
   const handleMenuClick = (e) => {
-    console.log(e)
+    console.log(e);
     const book = {
-      id: 0
-    }
+      id: 0,
+    };
     switch (e.key) {
       case 1:
         navigate(`/EvidentionOfBooks/BookDetails/${book.id}`);
@@ -308,15 +312,13 @@ const columns = [
       case 3:
         break;
 
-        default:
-          console.error("No default case");
+      default:
+        console.error("No default case");
     }
     if (e.key == 2) {
       navigate("/EvidentionOfBooks/EditBook/BookDetails");
     }
   };
-
- 
 
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", newSelectedRowKeys);
@@ -345,7 +347,7 @@ const columns = [
   };
 
   return (
-<>
+    <>
       <Table
         className="tabela"
         rowSelection={rowSelection}

@@ -1,8 +1,7 @@
 import { Fragment, React, useState } from "react";
-import { useNavigate, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { UserService } from "../../api/api";
-import { Input, Select, message, Button, Space } from "antd";
+import { Input, Select, message } from "antd";
 import "./CreateAccount.css";
 
 const CreateAccount = () => {
@@ -16,7 +15,6 @@ const CreateAccount = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState({});
 
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
   const navigate = useNavigate();
 
@@ -33,16 +31,17 @@ const CreateAccount = () => {
 
   const createAccounts = async () => {
     try {
+      message.destroy();
       const response = await UserService.CreateUser(newUserData);
       console.log("API Response", response);
-      message.success('Učenik uspješno napravljen');
-      navigate('/StudentEvidention');
+      message.success('Učenik uspješno kreiran');
+      navigate('/EvidentionOfBooks');
 
       // navigate("/EvidentionOfBooks");
     } catch (error) {
 
       console.error("Error creating an account", error)
-      message.error('Učenik nije napravljen');
+      message.error('Učenik nije kreiran');
       setErrors(error.response.data.data)
     }
   };
@@ -71,7 +70,6 @@ const CreateAccount = () => {
 
   return (
     <Fragment>
-      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="naslov">
           <h1>Kreiraj nalog</h1>
         </div>
@@ -80,7 +78,7 @@ const CreateAccount = () => {
           <div className="column">
             <label>Izaberite ulogu korisnika u sistemu</label>
             <Select
-              className="default-input"
+              
               onChange={(SelectedRole) => setRoleId(SelectedRole)}
               style={{
                 width: "100%",
@@ -96,21 +94,21 @@ const CreateAccount = () => {
             {errors.role_id ? <p className="error-text">{errors.role_id[0]}</p>  : ''}
             <label>Ime korisnika</label>
             <Input
-              className="default-input"
+              
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             {errors.name ? <p className="error-text">{errors.name[0]}</p> : ''}
             <label>Prezime korisnika</label>
             <Input
-              className="default-input"
+              
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
             />
             {errors.surname ? <p className="error-text">{errors.surname[0]}</p> : ''}
             <label>Unesite JMBG korisnika</label>
             <Input
-              className="default-input"
+              
               value={jmbg}
               onChange={(e) => setJmbg(e.target.value)}
               maxLength={13}
@@ -120,14 +118,12 @@ const CreateAccount = () => {
           <div className="column">
             <label>Unesite e-mail koriniska</label>
             <Input
-              className="default-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             {errors.email ? <p className="error-text">{errors.email[0]}</p> : ''}
             <label>Unesite username koriniska</label>
             <Input
-              className="default-input"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -135,15 +131,13 @@ const CreateAccount = () => {
             <label>Unesite sifru koriniska</label>
             <Input
             type="password"
-              className="default-input"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
             {errors.password ? <p className="error-text">{errors.password[0]}</p> : ''}
-               <label>Potvride sifru koriniska</label>
+               <label>Potvrdite sifru koriniska</label>
             <Input
             type="password"
-              className="default-input"
               value={passwordConfirmation}
               onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
@@ -165,7 +159,6 @@ const CreateAccount = () => {
             </div>
           </div>
         </div>
-      </div>
     </Fragment>
   );
 };

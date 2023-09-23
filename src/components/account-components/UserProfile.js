@@ -1,18 +1,16 @@
+import "./UserProfile.css"
 import {useState, useEffect, useRef} from "react"
 import { UserService } from "../../api/api";
 
-import { FaRegHandScissors } from "react-icons/fa";
-import { HiOutlineArrowPath } from "react-icons/hi2";
-import { HiOutlineArrowUturnUp } from "react-icons/hi2";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { TbArrowsExchange } from "react-icons/tb"
-import { TbPassword } from "react-icons/tb"
 
-import { useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import "./UserProfile.css"
+import { EditOutlined, EllipsisOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { Avatar, Card, Space, Col, Row } from 'antd';
+const { Meta } = Card;
+
+
 
 const UserProfile = () =>{
 
@@ -20,26 +18,10 @@ const UserProfile = () =>{
 
     const[me, setMe]=useState([]);
 
-    const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
-    const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
+ 
 
-    const profilRef = useRef(null);
-  
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-          if (profilRef.current && !profilRef.current.contains(event.target)) {
-            setUserIconMenuOpen(false);
-          }
-        };
-    
-        document.addEventListener("click", handleClickOutside);
-    
-        return () => {
-          document.removeEventListener("click", handleClickOutside);
-        };
-      }, []);
 
     useEffect(() => {
         const fetchMe = async () => {
@@ -54,12 +36,7 @@ const UserProfile = () =>{
         fetchMe();
       }, []);
 
-      const isOpennedUserIconMenu = () => {
-        setUserIconMenuOpen(!userIconMenuOpen);
-        if (userIconMenuOpen === false) {
-          setUserIconMenuOpen(!userIconMenuOpen);
-        }
-      };
+ 
 
       const [showModal, setShowModal] = useState(false);
 
@@ -71,14 +48,13 @@ const UserProfile = () =>{
         setShowModal(false);
       };
 
-return(
-    <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
+return(<>
         <div className="wrapper10">
       
         <div className="book-details">
           {/* <div className="book-image">
             <img src={me.photoPath} alt="book img" className="slika" />
-          </div> */}
+          </div> */}   
 
           <div className="book-info">
             
@@ -99,93 +75,77 @@ return(
             </div>
             
           </div></div>
-          <div>
-        <Link to="/EditUserProfile" className="links2 side-stuff">
-          <TbArrowsExchange className="detail-icons" />
-          Izmjeni Podatke
-        </Link>
-        <Link to="#" className="links2" ref={profilRef}>
-          <BsThreeDotsVertical
-            className="more-options"
-            onClick={isOpennedUserIconMenu}
-          /></Link>
-          {userIconMenuOpen && (
-            <div className="option-menu01">
-              <ul>
-                <li
-                  onClick={() => {
-                    isOpennedUserIconMenu();
-                    navigate();
-                  }}
-                >
-                  <TbPassword className="detail-icons" onClick={openModal}/>
-                  Izmjeni Šifru
-                </li>
-              </ul>
-            </div>
-          )}
-        
-      </div>
         </div>
         
         
-      <div className="line2"></div>
-              {/* <h4 className="category-info">Ime i prezime</h4>
-              <p>{me.name} {me.surname}</p>
-              <h4>Tip korisnika</h4>
-              <p>{me.role}</p>
-              <h4>JMBG</h4>
-              <p>{me.id}</p>
-              <h4>Email</h4>
-              <p>{me.email}</p>
-              <h4>Korisnicko ime</h4>
-              <p>{me.username}</p> */}
+
     
     <div className="details-content">
    
-    <div className="columns"> {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <h2>Modal Naslov</h2>
-            <input type="text" placeholder="Unesite nešto" />
-            <input type="text" placeholder="Unesite nešto" />
-            <button>Potvrdi</button>
-            <button onClick={closeModal}>Poništi</button>
-          </div>
-        </div>
-      )}
-      <div>
-        <div className="book-details-01">
-          <p className="category-info">Ime i prezime</p>
-          <h3 className="detail-info">{me.name} {me.surname}</h3>
-        </div>
-        <div className="book-details-01">
-          <p className="category-info">Tip korisnika</p>
-          <h3 className="detail-info">{me.role}</h3>
-        </div>
-        <div className="book-details-01">
-          <p className="category-info">JMBG</p>
-          <h3 className="detail-info">{me.jmbg}</h3>
-        </div>
-        <div className="book-details-01">
-          <p className="category-info">Email</p>
-          <h3 className="detail-info">{me.email}</h3>
-        </div>
-        <div className="book-details-01">
-          <p className="category-info">Korisnicko ime</p>
-          <h3 className="detail-info">{me.username}</h3>
-        </div>
-      </div>
-      <div className="second-column01">     
-         <img src={me.photoPath} className="slika-user"/>
-      </div>
-      
-    </div>
-    
-    </div>
 
-    </div>
+    <div className="columns">
+    <Card
+    style={{
+      width: 300,
+    }}
+    cover={
+      <img
+        alt="example"
+        src={me.photoPath}
+        style={{
+          border: "1px solid #f0f0f0"
+        }}
+      />
+    }
+    actions={[
+      <SettingOutlined key="setting" onClick={()=>{navigate("/Settings")}} />,
+      <EditOutlined key="edit" onClick={()=>{navigate("/EditUserProfile")}}/>,
+      <EllipsisOutlined key="ellipsis" />,
+    ]}
+  >
+    <Meta
+      avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
+      title="Ime i prezime"
+      description={`${me.name} ${me.surname}`}
+    />
+  </Card>
+
+  
+   <div className="second-column01">
+    <Card type="inner" title="Tip korisnika">
+      {me.role}
+    </Card>
+    <Card
+      style={{
+        marginTop: 16,
+        width: 200      }}
+      type="inner"
+      title="JMBG"
+    >
+     {me.jmbg}
+    </Card>
+    <Card
+      style={{
+        marginTop: 16,
+      }}
+      type="inner"
+      title="Email"
+    >
+     {me.email}
+    </Card>
+    <Card
+      style={{
+        marginTop: 16,
+      }}
+      type="inner"
+      title="Korisničko ime"
+    >
+     {me.username}
+    </Card>
+  </div>
+    
+    </div></div>
+</>
 
 );
 }
