@@ -1,0 +1,103 @@
+.drag-drop-container {
+  position: relative;
+  text-align: center;
+  padding: 20px;
+}
+
+.drag-drop-container p {
+  margin: 0;
+}
+
+.file-input {
+  display: none;
+}
+
+.drop-area {
+  border: 2px dashed #bbb;
+  padding: 20px;
+  margin-top: 20px;
+  min-height: 200px;
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 70%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-container.selected {
+  border: 2px solid #333;
+}
+
+.image-container:hover {
+  cursor: pointer;
+}
+
+.uploaded-image {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.image-name {
+  margin: 5px 0;
+}
+
+.image-check {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-size: 14px;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 43px;
+  background-color: #76a5af;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.delete-button:hover{
+  background-color: #51737b;
+}
+
+.drop-text {
+  margin: 0;
+  color: #999;
+  font-size: 14px;
+}
+
+.browse-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #76a5af;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.browse-button:hover {
+  background-color: #51737b;
+}

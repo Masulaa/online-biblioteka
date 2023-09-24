@@ -1,0 +1,39 @@
+
+
+
+
+.ks {
+  height: 200px;
+}
+
+
+
+select {
+  width: 300px;
+}
+
+
+
+
+
+.icon {
+  padding-left: 2px;
+  color: white;
+  margin: 5px;
+  font-size: 35px;
+}
+
+.prav {
+  height: 20px;
+  width: 20px;
+  background-color: white;
+}
+
+.settings {
+  position: fixed;
+  color: white;
+  font-size: 35px;
+  padding-left: 6px;
+  margin-top: 340px;
+}
+

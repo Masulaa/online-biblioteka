@@ -1,0 +1,72 @@
+@font-face {
+  font-family: Poppins-Regular;
+  src: url("./../../fonts/poppins/Poppins-Regular.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url("./../../fonts/poppins/Poppins-Bold.ttf");
+}
+
+
+
+
+
+.blur-showed {
+  filter: blur(10px);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.blur {
+  transition: all 0.4s ease-in-out;
+}
+
+.futer {
+  position: fixed;
+  left: 0;
+  bottom: -20px;
+  width: 100%;
+}
+
+.nova-knjiga {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: 80px;
+  background-color: #76a5af;
+  color: white;
+  border-radius: 25px;
+  font-size: 15px;
+  transition: background-color 0.4s ease;
+  border: none;
+  z-index: 0;
+  opacity: 1;
+}
+
+.nova-knjiga:hover {
+  background-color: #51737b;
+}
+
+.new-book {
+  height: auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-bar-icon {
+  color: #76a5af;
+  font-size: 35px;
+}
+
+.search {
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 70%;
+}
+
+.search-span {
+  display: flex;
+  flex-direction: row;
+}

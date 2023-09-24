@@ -1,0 +1,25 @@
+.blur-showed {
+  filter: blur(10px);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.blur {
+  transition: all 0.4s ease-in-out;
+}
+
+.search-bar-icon {
+  color: #76a5af;
+  font-size: 35px;
+}
+
+.search {
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 70%;
+}
+.search-span {
+  display: flex;
+  flex-direction: row;
+}
