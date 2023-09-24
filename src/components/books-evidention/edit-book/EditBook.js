@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import "./EditBook.css";
@@ -36,6 +36,8 @@ function EditBook() {
   const [currentStep, setCurrentStep] = useState(1);
   const [currentStepperId, setStepId] = useState(0);
 
+  const { id } = useParams();
+
   useEffect(() => {
     console.log("On current step change", currentStep);
     if (currentStep == 1) {
@@ -51,7 +53,7 @@ function EditBook() {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await BookService.CreateBookInfo();
+        const response = await BookService.EditBookInfo(id);
         setBook(response.data.data);
       } catch (error) {
         console.log("Error fetching book:", error);
@@ -64,15 +66,13 @@ function EditBook() {
   const [book, setBook] = useState([]);
 
   const navigate = useNavigate();
-  const CreateBook = async () => {
+  const EditBook = async () => {
     try {
-      const response = await BookService.CreateBook(newBookData);
+      const response = await BookService.EditBook(newBookData, id);
       console.log("API Response", response);
-      // console.log(newBookData)
-
-      // navigate("/EvidentionOfBooks");
+      navigate("/EvidentionOfBooks");
     } catch (error) {
-      console.error("Error creating an book", error);
+      console.error("Error editing an book", error);
     }
   };
 
@@ -429,8 +429,7 @@ function EditBook() {
                       <button
                         className="submit"
                         onClick={() => {
-                          CreateBook();
-                          navigate("/EvidentionOfBooks");
+                          EditBook();
                         }}
                       >
                         Sačuvaj

@@ -29,7 +29,7 @@ function NewAuthor() {
       const response = await AuthorService.CreateAuthor(authorData);
       console.log("API Response", response);
       message.success('Autor uspješno kreiran');
-      // navigate("/EvidentionOfBooks");
+      navigate("/AuthorEvidention");
     } catch (error) {
       console.error("Error creating an authors", error)
       setErrors(error.response.data.data)

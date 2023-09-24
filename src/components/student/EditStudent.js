@@ -1,6 +1,8 @@
 import React, { useState, Fragment } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+
+import { UserService } from "../../api/api";
 
 import {Input} from "antd";
 
@@ -17,15 +19,34 @@ function EditStudent() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const { id } = useParams();
+
+  const UpdateStudent = async () => {
+    try {
+      const response = await UserService.UpdateUser(newUserData, id);
+      console.log("API Response", response);
+      navigate("/LibrarianEvidention")
+    } catch (error) {
+      console.error("Error updating an student", error);
+    }
+  };
+
+  const newUserData = {
+    name: name,
+    surname: surname,
+    jmbg: JMBG,
+    email: email,
+    username: username,
+    password: password,
+    password_confirmation: confirmPassword,
+  }
+
+
   const navigate = useNavigate();
-
-
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
 
   return (
     <Fragment>
-      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="">
           <div class="headbar">
             <h2 className="naslov">Izmjeni Učenika</h2>
@@ -57,6 +78,7 @@ function EditStudent() {
                   />
                   <label>E-mail</label>
                   <Input
+                  type="email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                    <label>Korisničko Ime</label>
@@ -65,11 +87,13 @@ function EditStudent() {
                   />
                   <label>Šifra</label>
                   <Input 
+                  type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <label>Potvrdi Šifru</label>
                   <Input
-                    onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <div className="buttons">
                     <button
@@ -91,7 +115,6 @@ function EditStudent() {
 
           </div>
         </div>
-      </div>
     </Fragment>
   );
 }

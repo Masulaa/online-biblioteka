@@ -1,13 +1,12 @@
 import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-
 import {Input} from "antd";
 
 import DragDrop from "../dragdropupload/DragDrop";
 import "./NewLibrarian.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { UserService } from "../../api/api";
 
 function NewLibrarian() {
   const [name, setName] = useState("");
@@ -20,13 +19,29 @@ function NewLibrarian() {
 
   const navigate = useNavigate();
 
+  const CreateLibrarian = async () => {
+    try {
+      const response = await UserService.CreateUser(newUserData);
+      console.log("API Response", response);
+      navigate("/LibrarianEvidention")
+    } catch (error) {
+      console.error("Error creating an librarian", error);
+    }
+  };
 
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
-
+  const newUserData = {
+    role_id: 1,
+    name: name,
+    surname: surname,
+    jmbg: JMBG,
+    email: email,
+    username: username,
+    password: password,
+    password_confirmation: confirmPassword,
+  }
 
   return (
     <Fragment>
-      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="">
           <div class="headbar">
             <h2 className="naslov">Novi Bibliotekar</h2>
@@ -61,7 +76,7 @@ function NewLibrarian() {
                   />
                   <label>E-mail</label>
                   <Input
-                    
+                    type="email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                    <label>Korisničko Ime</label>
@@ -71,25 +86,26 @@ function NewLibrarian() {
                   />
                   <label>Šifra</label>
                   <Input
-                    
+                    type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <label>Potvrdi Šifru</label>
                   <Input
-                    
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <div className="buttons">
                     <button
                       className="cancel"
                       onClick={() => {
-                        navigate("/AuthorEvidention");
+                        navigate("/LibrarianEvidention");
                       }}
                     >
                       Poništi
                     </button>
                     <button
                       className="submit"
+                      onClick={CreateLibrarian}
                     >
                       Dalje
                     </button>
@@ -98,7 +114,6 @@ function NewLibrarian() {
               </div>
           </div>
         </div>
-      </div>
     </Fragment>
   );
 }

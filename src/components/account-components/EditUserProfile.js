@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "./EditUserProfile.css";
 
-import DragDrop from "../../components/dragdropupload/DragDrop";
 
 const EditUserProfile = () => {
   const navigate = useNavigate();
@@ -21,7 +20,6 @@ const EditUserProfile = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-  const [fileName, setFileName] = useState("");
 
   const newUserData = {
     name: name,
@@ -31,18 +29,29 @@ const EditUserProfile = () => {
     jmbg: JMBG,
     password: password,
     password_confirmation: confirmPassword,
-    photoPath: fileName,
   };
 
-  const updateAccount = async () => {
-    try {
-      const response = await UserService.UpdateMeInfo(newUserData);
-    // console.log(newUserData)
-      console.log("API Response", response);
+  // const updateAccount = async () => {
+  //   try {
+  //     const response = await UserService.UpdateMeInfo(newUserData);
+  //   // console.log(newUserData)
+  //     console.log("API Response", response);
 
-      // navigate("/EvidentionOfBooks");
+  //     // navigate("/EvidentionOfBooks");
+  //   } catch (error) {
+  //     console.error("Error updating an account", error);
+  //   }
+  // };
+
+const id = me.id
+
+  const UpdateMe = async () => {
+    try {
+      const response = await UserService.UpdateUser(newUserData, id);
+      console.log("API Response", response);
+      navigate("/UserProfile")
     } catch (error) {
-      console.error("Error updating an account", error);
+      console.error("Error updating my account", error);
     }
   };
 
@@ -146,8 +155,7 @@ const EditUserProfile = () => {
               Poništi
             </button>
             <button className="submit" onClick={()=>{
-                updateAccount();
-                navigate("/UserProfile")
+                UpdateMe();
             }}>
               Potvrdi
             </button></div>
