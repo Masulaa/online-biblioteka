@@ -20,6 +20,7 @@ function EditAuthor() {
       const response = await AuthorService.EditAuthor(authorData, id);
       console.log("API Response", response);
       message.success("Autor uspješno izmjenjen");
+      navigate("/AuthorEvidention")
     } catch (error) {
       console.error("Error editing an authors", error);
       setErrors(error.response.data.data);
@@ -81,8 +82,7 @@ function EditAuthor() {
               >
                 Poništi
               </button>
-              <button className="submit" onClick={()=>{EditAuthor();
-              navigate("/AuthorEvidention")}}>
+              <button className="submit" onClick={()=>{EditAuthor();}}>
                 Potvrdi
               </button>
             </div>

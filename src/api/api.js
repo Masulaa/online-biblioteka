@@ -96,6 +96,12 @@ export const BookService = {
   CreateBook(newBookData) {
     return client.post("books/store", newBookData);
   },
+  EditBook(newBookData, bookIds){
+    return client.post(`books/${bookIds}/update`, newBookData)
+  },
+  EditBookInfo(bookIds) {
+    return client.get(`books/${bookIds}/edit`);
+  },
   DeleteBooks(bookIds) {
     return client.delete(`books/${bookIds}/destroy`, {
       ids: bookIds,
@@ -153,6 +159,9 @@ export const UserService = {
   ShowSingleUser(userIds) {
     return client.get(`users/${userIds}`);
   },
+  UpdateUser(userData, userId ){
+    return client.put(`users/${userId}`, userData)
+  }
 };
 
 export const AuthorService = {

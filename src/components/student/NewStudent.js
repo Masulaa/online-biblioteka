@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
+import { UserService
+ } from "../../api/api";
 
 import {Input} from "antd";
 
@@ -19,15 +20,32 @@ function NewStudent() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const CreateStudent = async () => {
+    try {
+      const response = await UserService.CreateUser(newUserData);
+      console.log("API Response", response);
+      navigate("/StudentEvidention")
+    } catch (error) {
+      console.error("Error creating an student", error);
+    }
+  };
+
+  const newUserData = {
+    role_id: 2,
+    name: name,
+    surname: surname,
+    jmbg: JMBG,
+    email: email,
+    username: username,
+    password: password,
+    password_confirmation: confirmPassword,
+  }
+
   const navigate = useNavigate();
-
-
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
 
 
   return (
     <Fragment>
-      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="">
           <div class="headbar">
             <h2 className="naslov">Novi Učenik</h2>
@@ -62,7 +80,7 @@ function NewStudent() {
                   />
                   <label>E-mail</label>
                   <Input
-                    
+                    type="email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                    <label>Korisničko Ime</label>
@@ -72,25 +90,26 @@ function NewStudent() {
                   />
                   <label>Šifra</label>
                   <Input
-                    
+                    type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <label>Potvrdi Šifru</label>
                   <Input
-                    
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <div className="buttons">
                     <button
                       className="cancel"
                       onClick={() => {
-                        navigate("/AuthorEvidention");
+                        navigate("/StudentEvidention");
                       }}
                     >
                       Poništi
                     </button>
                     <button
                       className="submit"
+                      onClick={CreateStudent}
                     >
                       Dalje
                     </button>
@@ -100,7 +119,6 @@ function NewStudent() {
 
           </div>
         </div>
-      </div>
     </Fragment>
   );
 }

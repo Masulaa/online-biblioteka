@@ -1,13 +1,11 @@
 import React, { useState, Fragment } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import {Input} from "antd";
 
-import DragDrop from "../dragdropupload/DragDrop";
 import "./NewLibrarian.css";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+
+import { UserService } from "../../api/api";
 
 function EditLibrarian() {
   const [name, setName] = useState("");
@@ -20,13 +18,32 @@ function EditLibrarian() {
 
   const navigate = useNavigate();
 
+  const { id } = useParams();
 
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
+  const UpdateLibrarian = async () => {
+    try {
+      const response = await UserService.UpdateUser(newUserData, id);
+      console.log("API Response", response);
+      navigate("/LibrarianEvidention")
+    } catch (error) {
+      console.error("Error updating an librarian", error);
+    }
+  };
+
+  const newUserData = {
+    name: name,
+    surname: surname,
+    jmbg: JMBG,
+    email: email,
+    username: username,
+    password: password,
+    password_confirmation: confirmPassword,
+  }
+
 
 
   return (
     <Fragment>
-      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
         <div className="">
           <div class="headbar">
             <h2 className="naslov">Izmjeni Bibliotekar</h2>
@@ -61,7 +78,7 @@ function EditLibrarian() {
                   />
                   <label>E-mail</label>
                   <Input
-                    
+                    type="email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                    <label>Korisničko Ime</label>
@@ -71,13 +88,13 @@ function EditLibrarian() {
                   />
                   <label>Šifra</label>
                   <Input
-                    
+                    type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <label>Potvrdi Šifru</label>
                   <Input
-                    
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                   <div className="buttons">
                     <button
@@ -90,6 +107,7 @@ function EditLibrarian() {
                     </button>
                     <button
                       className="submit"
+                      onClick={UpdateLibrarian}
                     >
                       Dalje
                   </button>
@@ -98,7 +116,6 @@ function EditLibrarian() {
             </div>
           </div>
         </div>
-      </div>
     </Fragment>
   );
 }

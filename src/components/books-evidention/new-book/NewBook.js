@@ -71,7 +71,7 @@ function NewBook() {
       console.log("API Response", response);
       // console.log(newBookData)
 
-      // navigate("/EvidentionOfBooks");
+      navigate("/EvidentionOfBooks");
     } catch (error) {
       console.error("Error creating an book", error);
     }
@@ -431,7 +431,6 @@ function NewBook() {
                         className="submit"
                         onClick={() => {
                           CreateBook();
-                          navigate("/EvidentionOfBooks");
                         }}
                       >
                         Sačuvaj
