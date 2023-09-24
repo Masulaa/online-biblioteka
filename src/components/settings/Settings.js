@@ -1,9 +1,15 @@
-import {react, useState} from "react"
+import {react, useState, useEffect} from "react"
 import "./Settings.css";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { BookService } from "../../api/api";
 
 import settigsIcon from "../../images/undraw_typewriter_re_u9i2.svg"
+
+import { Tabs, Table, } from "antd";
+
+import { DatabaseOutlined, ProfileOutlined } from "@ant-design/icons";
+
 
 const Settings = () =>{
 
@@ -15,126 +21,148 @@ const Settings = () =>{
      ea voluptatum commodi tempora unde, dolorum
       debitis quia id dicta vitae. `
 
-    const [currentStep, setCurrentStep] = useState(1);
+      const [currentStep, setCurrentStep] = useState(1);
 
-    const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
+      const [book, setBook] = useState([]);
 
-    const handleLinkClick = (step) => {
-        setCurrentStep(step);
+      useEffect(() => {
+        const fetchBookCategories = async () => {
+          try {
+            const response = await BookService.CreateBookInfo();
+            setBook(response.data.data.categories);
+          } catch (error) {
+            console.log("Error fetching book:", error);
+          }
+        };
+    
+        fetchBookCategories();
+      }, []);
+
+      const [loading, setLoading] = useState(false);
+
+      const withLoading = async (method) => {
+        setLoading(true)
+        await method()
+        setLoading(false)
+      }
+
+      const compareStrings = function (a, b) {
+        if (a < b) {
+          return -1;
+        }
+        if (a > b) {
+          return 1;
+        }
+        return 0;
+      };
+    
+      const renderCategories = (text, book) => {
+        return (
+          <span>
+  {  book.name}
+          </span>
+        );
+      };
+    
+    
+      const columns = [
+        {
+          title: "Naziv bibliotekara",
+          dataIndex: "name",
+          render: renderCategories,
+          sorter: (a, b) => compareStrings(a.name, b.name),
+          filters: book.map((kategorije) => {
+            return {
+              text: kategorije.name,
+              value: kategorije.name,
+            };
+          }),
+          onFilter: (value, record) =>
+            `${record.name}`.startsWith(value),
+        }
+      ];
+
+      const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+      const onSelectChange = (newSelectedRowKeys) => {
+        console.log("selectedRowKeys changed: ", newSelectedRowKeys);
+        setSelectedRowKeys(newSelectedRowKeys);
+      };
+    
+      const rowSelection = {
+        selectedRowKeys,
+        onChange: onSelectChange,
+      };
+    
+      const [pageSize, setPageSize] = useState(10);
+    
+      const handlePageSizeChange = (current, newSize) => {
+        setLoading(true);
+        setPageSize(newSize);
+        setLoading(false);
+      };
+    
+      const pagination = {
+        pageSize: pageSize,
+        showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`,
+        pageSizeOptions: ["1", "10", "20", "50"],
+        showSizeChanger: true,
+        onShowSizeChange: handlePageSizeChange,
       };
 
+
+
+      const items = [
+        {
+          key: "1",
+          label: (
+            <div>
+              <DatabaseOutlined/>
+              <span>Kategorije</span>
+            </div>
+          ),
+          children: (
+             <Table
+            className="tabela"
+            rowSelection={rowSelection}
+            columns={columns}
+            dataSource={book}
+            rowKey="id"
+            pagination={pagination}
+            loading={loading}
+          />
+          ),
+        },
+        {
+          key: "2",
+          label: (
+            <div>
+              <ProfileOutlined />
+              <span>Žanrovi</span>
+            </div>
+          ),
+          children: (<div></div>
+          ),
+        },
+      ];
+
     return (
-        <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
+      <>
           <div className="naslooov">
           <div className="naslov"><div className="illustrations">
            <img src={settigsIcon} className="illustration"></img> 
-           <h1>Podesavanja</h1></div>
+           <h1>Podešavanja</h1></div>
          </div> 
           </div>
-         
-         <Link>
-          <button
-            className={`toggle-button ${currentStep === 1 ? "active" : ""}`}
-            onClick={() => handleLinkClick(1)}
-          >
-            Polisa
-          </button>
-        </Link>
-        <Link className="link-p">
-          <button
-            className={`toggle-button ${currentStep === 2 ? "active" : ""}`}
-            onClick={() => handleLinkClick(2)}
-          >
-           Kategorije
-          </button>
-        </Link>
-        <Link className="link-p">
-          <button
-            className={`toggle-button ${currentStep === 3 ? "active" : ""}`}
-            onClick={() => handleLinkClick(3)}
-          >
-            Zanrovi
-          </button>
-        </Link>
-        <Link className="link-p">
-          <button
-            className={`toggle-button ${currentStep === 4 ? "active" : ""}`}
-            onClick={() => handleLinkClick(4)}
-          >
-            Izdavac
-          </button>
-        </Link>
-        <Link className="link-p">
-          <button
-            className={`toggle-button ${currentStep === 5 ? "active" : ""}`}
-            onClick={() => handleLinkClick(5)}
-          >
-            Povez
-          </button>
-        </Link>
-        <Link className="link-p">
-          <button
-            className={`toggle-button ${currentStep === 6 ? "active" : ""}`}
-            onClick={() => handleLinkClick(6)}
-          >
-            Format
-          </button>
-        </Link>
-        <Link className="link-p">
-          <button
-            className={`toggle-button ${currentStep === 7 ? "active" : ""}`}
-            onClick={() => handleLinkClick(7)}
-          >
-            Pismo
-          </button>
-        </Link>
-        <div className="line2"></div>
-         <div>
-         <div className="flexcont">
-                <div className="bigflexcont">
-                <h1>
-                Rok vracanja 
-                </h1>
-                <p>
-               {Lorem}
-                </p>
-                </div>
-                <div className="miniflexcont">
-                    <input placeholder="..." ></input>
-                    <label>Dana</label>
-                </div>
-            </div>
-            <div className="flexcont">
-                <div className="bigflexcont">
-                <h1>
-                Rok vracanja 
-                </h1>
-                <p>
-                {Lorem}
-                </p>
-                </div>
-                <div className="miniflexcont">
-                    <input placeholder="..." ></input>
-                    <label>Dana</label>
-                </div>
-            </div>
-            <div className="flexcont">
-                <div className="bigflexcont">
-                <h1>
-                Rok vracanja 
-                </h1>
-                <p>
-                {Lorem}
-                </p>
-                </div>
-                <div className="miniflexcont">
-                    <input placeholder="..." ></input>
-                    <label>Dana</label>
-                </div>
-            </div>
-    
-         </div>
-        </div>
+
+        <Tabs
+                defaultActiveKey={currentStep.toString()}
+                items={items}
+                onChange={(key) => setCurrentStep(parseInt(key))}
+                tabPosition="top"
+              ></Tabs>
+        
+         </>
     )
 }
 

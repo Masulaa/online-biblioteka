@@ -20,7 +20,7 @@ const ReserveBook = () => {
   const [book, setBook] = useState([]);
   const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState();
-  const [datumRezervisanja, setDatumRezervisanja] = useState(null);
+  const [datumRezervisanja, setDatumRezervisanja] = useState();
 
   const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
 
@@ -37,10 +37,11 @@ const ReserveBook = () => {
 
   const rezervisiKnjigu = async () => {
     try {
-      const response = await BookService.ReserveBook(rezervisiKnjiguData, id);
-      console.log("API Response", response);
+       const response = await BookService.ReserveBook(rezervisiKnjiguData, id);
+       console.log("API Response", response);
 
-      // navigate("/EvidentionOfBooks");
+        navigate("/EvidentionOfBooks");
+      // console.log(rezervisiKnjiguData, id)
     } catch (error) {
       console.error("Error izdaj a book", error);
     }
@@ -207,7 +208,6 @@ const ReserveBook = () => {
               className="submit"
               onClick={() => {
                 rezervisiKnjigu();
-                navigate("/EvidentionOfBooks")
               }}
             >
               Potvrdi

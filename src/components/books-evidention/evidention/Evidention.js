@@ -1,5 +1,8 @@
 import ToGiveBookTable from "./ToGiveBookTable"
 import ToReturnBookTable from "./ToReturnBookTable";
+import OverDateTable from "./OverDateTable";
+import ActiveReservationBooksTable from "./ActiveReservationBooksTable";
+import ArchivedReservationTable from "./ArchivedReservationBooksTable";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -38,17 +41,17 @@ function Evidention() {
     {
       key: "3",
       label: <div><WarningFilled /><span>Knjige u prekoračenju</span></div>,
-      children: "Content of Tab Pane 3",
+      children: <OverDateTable/>,
     },
     {
       key: "4",
       label: <div><CarryOutFilled /><span>Aktivne rezervacije</span></div>,
-      children: "Content of Tab Pane 4",
+      children: <ActiveReservationBooksTable/>,
     },
     {
       key: "5",
       label: <div><CalendarFilled /><span>Arhivirane rezervacije</span></div>,
-      children: "Content of Tab Pane 5",
+      children: <ArchivedReservationTable/>,
     },
   ];
 
@@ -64,14 +67,6 @@ function Evidention() {
         </div>
         <div className="line2"></div>
         <div className="table-header">
-          <button
-            className="default-button"
-            onClick={() => {
-              navigate("/AuthorEvidention/NewAuthor");
-            }}
-          >
-            Novi Autor
-          </button>
         </div>
             <Tabs defaultActiveKey="1" items={items} onChange={onKeyChange} tabPosition="left"></Tabs>
       </div>

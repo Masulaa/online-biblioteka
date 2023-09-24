@@ -129,6 +129,9 @@ export const BookService = {
   GetAllIzdajBook(){
     return client.get("books/borrows");
   },
+  GetAllReserveBook(){
+    return client.get("books/reservations");
+  },
   ToReturnBook(id){
     return client.post("books/vrati", id)
   },
