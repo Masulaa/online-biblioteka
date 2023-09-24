@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 
 import ill from "../../images/undraw_education_f8ru.svg"
 
+import { PlusOutlined } from '@ant-design/icons';
+
 import { HiMagnifyingGlassCircle } from "react-icons/hi2";
 
 function LibrarianEvidention() {
@@ -28,7 +30,7 @@ function LibrarianEvidention() {
             navigate("/LibrarianEvidention/NewLibrarian");
           }}
         >
-          Novi Bibliotekar
+          <PlusOutlined /> Novi Bibliotekar
         </button>
       </div>
       <LibrarianTable/>

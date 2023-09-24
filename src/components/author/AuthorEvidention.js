@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 
 import illustration2 from "../../images/undraw_bibliophile_re_xarc.svg"
 
+import { PlusOutlined } from '@ant-design/icons';
+
 import { HiMagnifyingGlassCircle } from "react-icons/hi2";
 
 function AuthorEvidention() {
@@ -29,7 +31,7 @@ function AuthorEvidention() {
             navigate("/AuthorEvidention/NewAuthor");
           }}
         >
-          Novi Autor
+         <PlusOutlined /> Novi Autor
         </button>
       </div>
       <AuthorTable/>

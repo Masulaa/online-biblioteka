@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 
 import ill3 from "../../images/undraw_typewriter_re_u9i2.svg"
 
+import { PlusOutlined } from '@ant-design/icons';
+
 import { HiMagnifyingGlassCircle } from "react-icons/hi2";
 
 function StudentEvidention() {
@@ -28,7 +30,7 @@ function StudentEvidention() {
             navigate("/StudentEvidention/NewStudent");
           }}
         >
-          Novi Ucenik
+         <PlusOutlined/> Novi Ucenik
         </button>
       </div>
       <StudentTable/>

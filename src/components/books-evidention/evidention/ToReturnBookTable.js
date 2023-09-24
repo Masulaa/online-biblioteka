@@ -4,14 +4,14 @@ import { BookService } from "../../../api/api"
 import {
   EllipsisOutlined,
   DeleteOutlined,
-  ExclamationCircleOutlined,
+  ExclamationCircleOutlined, 
   EnterOutlined,
   RollbackOutlined,
 } from '@ant-design/icons';
 
 import { Table, Dropdown, Menu, Modal } from "antd";
 
-const IzdajTable = () => {
+const ToReturnBookTable = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -23,13 +23,13 @@ const IzdajTable = () => {
   }
 
 
-  const [izdate, setIzdate] = useState([]);
+  const [vracene, setVracene] = useState([]);
 
 
-  const fetchBooksIzdavanja = async () => {
+  const fetchBooksVracene = async () => {
     try {
       const response = await BookService.GetAllIzdajBook();
-      setIzdate(response.data.data.izdate);
+      setVracene(response.data.data.vracene);
     } catch (error) {
       console.log("Error fetching to give info:", error);
     }
@@ -49,7 +49,7 @@ const IzdajTable = () => {
   // confirm(1);
 
   useEffect(() => {
-    withLoading(fetchBooksIzdavanja)
+    withLoading(fetchBooksVracene)
   }, []);
 
   const compareStrings = function (a, b) {
@@ -62,34 +62,50 @@ const IzdajTable = () => {
     return 0;
   };
 
-  const renderBookName = (text, record) => {
+  const renderBookName = (text, vracene) => {
     return (
       <span>
-        {record.knjiga.title}
+        {vracene.knjiga.title}
       </span>
     );
   };
 
-  const renderStudentName = (text, izdate) => {
+  const renderStudentName = (text, vracene) => {
     return (
       <span>
-        {izdate.student.name} {izdate.student.surname}
+        {vracene.student.name} {vracene.student.surname}
       </span>
     );
   };
 
-  const renderDate = (text, izdate) => {
+  const renderBorrowDate = (text, vracene) => {
     return (
       <span>
-        {izdate.borrow_date}
+        {vracene.borrow_date}
       </span>
     );
   };
 
-  const renderLibrarianWhoGave = (text, izdate) => {
+  const renderReturnDate = (text, vracene) => {
     return (
       <span>
-        {izdate.bibliotekar0.name} {izdate.bibliotekar0.surname}
+        {vracene.return_date}
+      </span>
+    );
+  };
+
+  const renderStatus = (text, vracene) => {
+    return (
+      <span>
+        {vracene.status} 
+      </span>
+    );
+  };
+
+  const renderLibrarianWhoGot = (text, vracene) => {
+    return (
+      <span>
+        {vracene.bibliotekar1.name} {vracene.bibliotekar1.surname}
       </span>
     );
   };
@@ -118,7 +134,7 @@ const IzdajTable = () => {
         dataIndex: "name",
         render: renderStudentName,
         sorter: (a, b) => compareStrings(a.name, b.name),
-        filters:  izdate.map((student) => {
+        filters:  vracene.map((student) => {
             return {
                 text: student.student.name + " " + student.student.surname,
                 value: student.student.name + " " + student.student.surname,
@@ -130,9 +146,9 @@ const IzdajTable = () => {
       {
         title: "Datum izdavanja",
         dataIndex: "name",
-        render: renderDate,
+        render: renderBorrowDate,
         sorter: (a, b) => compareStrings(a.name, b.name),
-        filters:  izdate.map((date) => {
+        filters:  vracene.map((date) => {
             return {
                 text: date.borrow_date,
                 value: date.borrow_date,
@@ -142,17 +158,45 @@ const IzdajTable = () => {
           `${record.borrow_date} `.startsWith(value),
       },
       {
-        title: "Knjigu izdao",
+        title: "Datum vraćanja",
         dataIndex: "name",
-        render: renderLibrarianWhoGave,
+        render: renderReturnDate,
         sorter: (a, b) => compareStrings(a.name, b.name),
-        filters:  izdate.map((librarian) => {
+        filters:  vracene.map((date) => {
             return {
-                text: librarian.bibliotekar0.name,
-                value: librarian.bibliotekar0.surname,}
+                text: date.return_date,
+                value: date.return_date,
+            };
           }),
           onFilter: (value, record) =>
-          `${record.bibliotekar0.name} ${record.bibliotekar0.surname} `.startsWith(value),
+          `${record.return_date} `.startsWith(value),
+      },
+      {
+        title: "Status",
+        dataIndex: "name",
+        render: renderStatus,
+        sorter: (a, b) => compareStrings(a.name, b.name),
+        filters:  vracene.map((date) => {
+            return {
+                text: date.status,
+                value: date.status,
+            };
+          }),
+          onFilter: (value, record) =>
+          `${record.status} `.startsWith(value),
+      },
+      {
+        title: "Knjigu primio",
+        dataIndex: "name",
+        render: renderLibrarianWhoGot,
+        sorter: (a, b) => compareStrings(a.name, b.name),
+        filters:  vracene.map((librarian) => {
+            return {
+                text: librarian.bibliotekar1.name,
+                value: librarian.bibliotekar1.surname,}
+          }),
+          onFilter: (value, record) =>
+          `${record.bibliotekar1.name} ${record.bibliotekar1.surname} `.startsWith(value),
       },
     {
       title: "",
@@ -202,7 +246,7 @@ const IzdajTable = () => {
       className="tabela"
       rowSelection={rowSelection}
       columns={columns}
-      dataSource={izdate}
+      dataSource={vracene}
       rowKey="id"
       pagination={pagination}
       loading={loading}
@@ -210,4 +254,4 @@ const IzdajTable = () => {
   );
 };
 
-export default IzdajTable;
+export default ToReturnBookTable;

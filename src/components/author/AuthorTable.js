@@ -5,7 +5,11 @@ import { AuthorService } from "../../api/api";
 // import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
 // import AuthorSingle from "./AuthorSingle";
 import {
-  EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined
+  EllipsisOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  EditOutlined,
+  InfoCircleOutlined,
 } from '@ant-design/icons';
 
 import { Table, Dropdown, Menu, Modal } from "antd";
@@ -86,9 +90,9 @@ const AuthorTable = () => {
 
   const menu = (recordId) =>
   <Menu>
-    <Item onClick={() => navigateToDetails(recordId)}>Detalji</Item>
-    <Item onClick={() => navigateToEdit(recordId)}>Izmijeni</Item>
-    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obrisi</Item>
+    <Item onClick={() => navigateToDetails(recordId)}><InfoCircleOutlined /> Detalji autora</Item>
+    <Item onClick={() => navigateToEdit(recordId)}><EditOutlined /> Izmijeni autora</Item>
+    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obrisi autora</Item>
   </Menu>
 
 

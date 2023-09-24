@@ -3,7 +3,11 @@ import "./LibrarianTable.css";
 import { useNavigate } from "react-router-dom";
 import { UserService } from "../../api/api";
 import {
-  EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined
+  EllipsisOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  EditOutlined,
+  InfoCircleOutlined,
 } from '@ant-design/icons';
 
 import { Table, Dropdown, Menu, Modal } from "antd";
@@ -98,9 +102,9 @@ const LibrarianTable = () => {
 
   const menu = (recordId) =>
   <Menu>
-    <Item onClick={() => navigateToDetails(recordId)}>Detalji</Item>
-    <Item onClick={() => navigateToEdit(recordId)}>Izmijeni</Item>
-    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obriši</Item>
+    <Item onClick={() => navigateToDetails(recordId)}><InfoCircleOutlined /> Detalji bibliotekara</Item>
+    <Item onClick={() => navigateToEdit(recordId)}><EditOutlined /> Izmijeni bibliotekara</Item>
+    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obriši bibliotekara</Item>
   </Menu>
 
 

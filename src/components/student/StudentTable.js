@@ -5,7 +5,11 @@ import { UserService } from "../../api/api";
 // import LoadingSpinner from "../account-components/loading-spinner/LoadingSpinner";
 // import AuthorSingle from "./AuthorSingle";
 import {
-  EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined
+  EllipsisOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  EditOutlined,
+  InfoCircleOutlined,
 } from '@ant-design/icons';
 
 import { Table, Dropdown, Menu, Modal } from "antd";
@@ -100,9 +104,9 @@ const StudentTable = () => {
 
   const menu = (recordId) =>
   <Menu>
-    <Item onClick={() => navigateToDetails(recordId)}>Detalji</Item>
-    <Item onClick={() => navigateToEdit(recordId)}>Izmijeni</Item>
-    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obriši</Item>
+    <Item onClick={() => navigateToDetails(recordId)}><InfoCircleOutlined /> Detalji ucenika</Item>
+    <Item onClick={() => navigateToEdit(recordId)}><EditOutlined /> Izmijeni ucenika</Item>
+    <Item onClick={() => confirm(recordId)}><DeleteOutlined /> Obriši ucenika</Item>
   </Menu>
 
 
