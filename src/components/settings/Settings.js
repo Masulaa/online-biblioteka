@@ -8,7 +8,7 @@ import settigsIcon from "../../images/undraw_typewriter_re_u9i2.svg"
 
 import { Tabs, Table, } from "antd";
 
-import { ProfileOutlined, AppstoreAddOutlined, FileOutlined, SnippetsOutlined, BookOutlined, CompassOutlined } from "@ant-design/icons";
+import { ProfileOutlined, AppstoreAddOutlined, FileOutlined, SnippetsOutlined, BookOutlined, CompassOutlined, AuditOutlined  } from "@ant-design/icons";
 
 
 const Settings = () => {
@@ -21,7 +21,7 @@ const Settings = () => {
   const [publishers, setPublishers] = useState([]);
   const [languages, setLanguages] = useState([]);
   const [bookbind, setBookbind] = useState([]);
-  const [letter, setLetter] = useState([]);
+  const [script, setScript] = useState([]);
 
 
   useEffect(() => {
@@ -100,6 +100,19 @@ const Settings = () => {
     };
 
     fetchBookBindings();
+  }, []);
+
+  useEffect(() => {
+    const fetchScripts = async () => {
+      try {
+        const response = await BookService.CreateBookInfo();
+        setScript(response.data.data.scripts);
+      } catch (error) {
+        console.log("Error fetching scripts:", error);
+      }
+    };
+
+    fetchScripts();
   }, []);
 
   const [loading, setLoading] = useState(false);
@@ -224,6 +237,23 @@ const Settings = () => {
         return {
           text: korice.name,
           value: korice.name,
+        };
+      }),
+      onFilter: (value, record) =>
+        `${record.name}`.startsWith(value),
+    }
+  ];
+
+  const columns7 = [
+    {
+      title: "Povez",
+      dataIndex: "name",
+      render: renderTitles,
+      sorter: (a, b) => compareStrings(a.name, b.name),
+      filters: script.map((pismo) => {
+        return {
+          text: pismo.name,
+          value: pismo.name,
         };
       }),
       onFilter: (value, record) =>
@@ -373,6 +403,25 @@ const Settings = () => {
         rowSelection={rowSelection}
         columns={columns6}
         dataSource={bookbind}
+        rowKey="id"
+        pagination={pagination}
+        loading={loading}
+      />
+      ),
+    },
+    {
+      key: "7",
+      label: (
+        <div>
+          <AuditOutlined/>
+          <span>Pismo</span>
+        </div>
+      ),
+      children: (<Table
+        className="tabela"
+        rowSelection={rowSelection}
+        columns={columns7}
+        dataSource={script}
         rowKey="id"
         pagination={pagination}
         loading={loading}
