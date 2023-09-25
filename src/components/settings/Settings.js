@@ -34,7 +34,7 @@ const Settings = () => {
       }
     };
 
-    fetchBookCategories();
+   withLoading(fetchBookCategories);
   }, []);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Settings = () => {
       }
     };
 
-    fetchBookGenres();
+    withLoading(fetchBookGenres);
   }, []);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Settings = () => {
       }
     };
 
-    fetchBookFormats();
+    withLoading(fetchBookFormats);
   }, []);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const Settings = () => {
       }
     };
 
-    fetchBookPublishers();
+    withLoading(fetchBookPublishers);
   }, []);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const Settings = () => {
       }
     };
 
-    fetchBookLanguages();
+    withLoading(fetchBookLanguages);
   }, []);
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const Settings = () => {
       }
     };
 
-    fetchBookBindings();
+    withLoading(fetchBookBindings);
   }, []);
 
   useEffect(() => {
@@ -112,8 +112,8 @@ const Settings = () => {
       }
     };
 
-    fetchScripts();
-  }, []);
+    withLoading(fetchScripts);
+  }, [])
 
   const [loading, setLoading] = useState(false);
 
@@ -152,7 +152,7 @@ const Settings = () => {
         return {
           text: kategorije.name,
           value: kategorije.name,
-        };
+        };  
       }),
       onFilter: (value, record) =>
         `${record.name}`.startsWith(value),
@@ -290,7 +290,6 @@ const Settings = () => {
     showSizeChanger: true,
     onShowSizeChange: handlePageSizeChange,
   };
-
 
 
   const items = [
