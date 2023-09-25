@@ -6,6 +6,8 @@ import ArchivedReservationTable from "./ArchivedReservationBooksTable";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import "./evidention.css";
+
 import {useState} from 'react'
 
 import { Tabs } from "antd";

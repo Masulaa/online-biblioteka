@@ -9,7 +9,12 @@
     border: 0px;
     padding: 10px;
 }
-
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  padding: 20px;
+}
 .miniflexcont{
     display: flex;
     margin-top: 5rem;

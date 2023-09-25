@@ -5,6 +5,8 @@ import {
   EllipsisOutlined, DeleteOutlined, ExclamationCircleOutlined
 } from '@ant-design/icons';
 
+import "./evidention.css";
+
 import { Table, Dropdown, Menu, Modal } from "antd";
 
 const ArchivedReservationTable = () => {
