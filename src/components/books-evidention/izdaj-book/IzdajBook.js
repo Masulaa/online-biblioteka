@@ -1,4 +1,4 @@
-import { react, useState, useEffect, useRef, Fragment } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { BookService } from "../../../api/api";
 import { UserService } from "../../../api/api";
 import { useParams, useNavigate } from "react-router-dom";
@@ -10,12 +10,9 @@ import { HiOutlineArrowUturnUp } from "react-icons/hi2";
 import { FaRegHandScissors } from "react-icons/fa";
 import { HiOutlineArrowPath } from "react-icons/hi2";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { RiReservedFill } from "react-icons/ri"
-
-import { Input, Select, Space, Card  } from "antd";
+import { RiReservedFill } from "react-icons/ri";
+import { Input, Select, Space, Card, message } from "antd";
 const { Meta } = Card;
-
-
 
 const IzdajBook = () => {
   const navigate = useNavigate();
@@ -25,10 +22,12 @@ const IzdajBook = () => {
   const [userId, setUserId] = useState([]);
   const [datumIzdavanja, setDatumIzdavanja] = useState();
   const [datumVracanja, setDatumVracanja] = useState();
-
+  const [errors, setErrors] = useState({});
 
   const { id } = useParams();
 
+  // Dohvati trenutni datum
+  const danasnjiDatum = new Date().toISOString().split("T")[0];
 
   const izdajKnjiguData = {
     student_id: userId[0],
@@ -38,15 +37,23 @@ const IzdajBook = () => {
 
   const { Option } = Select;
 
-
   const izdajKnjigu = async () => {
     try {
-       const response = await BookService.IzdajBook(izdajKnjiguData, id);
-       console.log("API Response", response);
+      message.destroy();
+      if (!userId[0] || !datumIzdavanja || !datumVracanja) {
+        setErrors({ allFieldsRequired: true });
+        message.error("Sva polja su obavezna");
+        return;
+      }
 
-      // navigate("/EvidentionOfBooks");
+      const response = await BookService.IzdajBook(izdajKnjiguData, id);
+      console.log("API Response", response);
+      message.success("Knjiga je uspješno izdata");
+      navigate("/EvidentionOfBooks");
     } catch (error) {
       console.error("Error izdaj a book", error);
+      setErrors(error.response.data);
+      message.error("Knjiga nije izdata");
     }
   };
 
@@ -75,7 +82,6 @@ const IzdajBook = () => {
       console.log("Error fetching users:", error);
     }
   };
-
 
   return (
     <Fragment>
@@ -106,18 +112,19 @@ const IzdajBook = () => {
             <HiOutlineArrowUturnUp className="detail-icons" />
             Otpisi Knjigu
           </Link>
-          <Link to={`/ReserveBook/${book.id}`} className="links2 side-stuff">
+          <Link
+            to={`/ReserveBook/${book.id}`}
+            className="links2 side-stuff"
+          >
             <RiReservedFill className="detail-icons" />
-           Rezerviši Knjigu
-           </Link>
+            Rezerviši Knjigu
+          </Link>
           <Link to="#" className="links2 side-stuff">
             <HiOutlineArrowPath className="detail-icons" />
             Vrati Knjigu
           </Link>
           <Link to="#" className="links2">
-            <BsThreeDotsVertical
-              className="more-options"
-            />
+            <BsThreeDotsVertical className="more-options" />
           </Link>
         </div>
       </div>
@@ -132,25 +139,29 @@ const IzdajBook = () => {
               style={{
                 width: "100%",
               }}
-              placeholder="Odaberite kategorije"
-              
+              placeholder="Odaberite ucenika"
               value={userId}
               onChange={(selectedUserId) => setUserId(selectedUserId)}
             >
               {users.map((user) => {
                 if (user.role === "Učenik") {
                   return (
-                    <Option
-                    key={user.id}
-                    value={user.id}
-                  >
-                    <Space>{user.name}{user.surname}</Space>
-                  </Option>
+                    <Option key={user.id} value={user.id}>
+                      <Space>
+                        {user.name}
+                        {user.surname}
+                      </Space>
+                    </Option>
                   );
                 }
                 return null;
               })}
             </Select>
+            {errors.student_id || errors.allFieldsRequired ? (
+              <p className="error-text">Polje student je obavezno.</p>
+            ) : (
+              ""
+            )}
           </div>{" "}
           <div className="i0">
             <div className="i3">
@@ -158,20 +169,35 @@ const IzdajBook = () => {
                 <label>Datum Izdavanja</label>
                 <Input
                   type="date"
-                  
+                  value={datumIzdavanja}
+                  min={danasnjiDatum}
+                  max="2024-10-01"
                   onChange={(e) => {
                     setDatumIzdavanja(e.target.value);
                   }}
                 />
+                {errors.datumIzdavanja || errors.allFieldsRequired ? (
+                  <p className="error-text">Polje datum izdavanja je obavezno.</p>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="form1234">
                 <label>Datum Vraćanja</label>
                 <Input
                   type="date"
+                  value={datumVracanja}
+                  min={danasnjiDatum} // Dodajemo ovdje danasnjiDatum kao minimum
+                  max="2024-10-01"
                   onChange={(e) => {
                     setDatumVracanja(e.target.value);
                   }}
                 />
+                {errors.datumVracanja || errors.allFieldsRequired ? (
+                  <p className="error-text">Polje datum vracanja je obavezno.</p>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
@@ -184,53 +210,48 @@ const IzdajBook = () => {
             >
               Poništi
             </button>
-            <button
-              className="submit"
-              onClick={() => {
-                izdajKnjigu();
-                navigate("/EvidentionOfBooks")
-              }}
-            >
+            <button className="submit" onClick={izdajKnjigu}>
               Potvrdi
             </button>
           </div>
         </div>
-       
-            
-            <Card
-      style={{
-        width: 300      }}
-      type="inner"
-      title="Informacije"
-    > <div className="i4">
-          <div className="category-info22">
-     <div className="side-category00">
-              <span className="side-category01">Na raspolaganju:</span>
-              <span className="side-category01">Rezervisano:</span>
-              <span className="side-category01">Izdato:</span>
-              <span className="side-category01">U prekoračenju:</span>
-              <span className="side-category01">Ukupna količina:</span>
-            </div>
-            <div>
-              <div className="side-info00">
-                <span className="side-info01">
-                  {book.samples - book.rSamples - book.bSamples - book.fSamples}
-                  primjeraka
-                </span>
-                <span className="side-info01">{book.rSamples} primjeraka</span>
-                <span className="side-info01">{book.bSamples} primjeraka</span>
-                <span className="side-info01">{book.fSamples} primjeraka</span>
-                <span className="side-info01">
-                  {book.samples}
-                  primjeraka
-                </span>
+
+        <Card
+          style={{
+            width: 300,
+          }}
+          type="inner"
+          title="Informacije"
+        >
+          <div className="i4">
+            <div className="category-info22">
+              <div className="side-category00">
+                <span className="side-category01">Na raspolaganju:</span>
+                <span className="side-category01">Rezervisano:</span>
+                <span className="side-category01">Izdato:</span>
+                <span className="side-category01">U prekoračenju:</span>
+                <span className="side-category01">Ukupna količina:</span>
               </div>
-            </div></div>
-        </div>
-    </Card>
-          
+              <div>
+                <div className="side-info00">
+                  <span className="side-info01">
+                    {book.samples - book.rSamples - book.bSamples - book.fSamples}
+                    primjeraka
+                  </span>
+                  <span className="side-info01">{book.rSamples} primjeraka</span>
+                  <span className="side-info01">{book.bSamples} primjeraka</span>
+                  <span className="side-info01">{book.fSamples} primjeraka</span>
+                  <span className="side-info01">
+                    {book.samples}
+                    primjeraka
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
       </div>
-      </Fragment>
+    </Fragment>
   );
 };
 

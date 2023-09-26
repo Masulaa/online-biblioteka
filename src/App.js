@@ -25,6 +25,8 @@ const EvidentionOfBooks = lazy(() =>
 
 const Settings = lazy(() => import("./components/settings/Settings"));
 
+const Dashboard = lazy(() => import("./components/dashboard/Dashboard"));
+
 const EditBook = lazy(() =>
   import("./components/books-evidention/edit-book/EditBook")
 );
@@ -108,6 +110,7 @@ function App() {
             path="/Dashboard"
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
+                <Dashboard/>
               </Suspense>
             }
           />

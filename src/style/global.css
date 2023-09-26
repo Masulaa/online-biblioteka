@@ -366,6 +366,10 @@ label {
   color: #fc9999;
 }
 
+p .error-text {
+  margin-top: 0px;
+}
+
 .usrslk{
   display: flex;
   flex-direction: row;
