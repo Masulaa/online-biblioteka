@@ -1,0 +1,10 @@
+.slika-user{
+    width: 80%;
+  }
+
+  .wrapper10 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+  }

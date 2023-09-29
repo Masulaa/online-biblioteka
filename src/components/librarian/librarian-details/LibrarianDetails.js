@@ -8,34 +8,26 @@ import { HiOutlineArrowPath } from "react-icons/hi2";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { UserService } from "../../../api/api";
+
+import {
+  MoreOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
+
+import { Card, Tabs, Dropdown, Menu, Modal } from "antd";
+const { Meta } = Card;
 
 function LibrarianDetails() {
   const [librarian, setLibrarian] = useState([]);
-  const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
 
   const profilRef = useRef(null);
 
   const navigate = useNavigate();
 
   const { id } = useParams();
-
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profilRef.current && !profilRef.current.contains(event.target)) {
-        setUserIconMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   const deleteLibrarian = async () => {
     try {
@@ -47,11 +39,15 @@ function LibrarianDetails() {
     }
   };
 
-  const isOpennedUserIconMenu = () => {
-    setUserIconMenuOpen(!userIconMenuOpen);
-    if (userIconMenuOpen === false) {
-      setUserIconMenuOpen(!userIconMenuOpen);
-    }
+  const confirm = (id) => {
+    Modal.confirm({
+      title: "Potvrdi",
+      icon: <ExclamationCircleOutlined />,
+      content: "Da li ste sigurni da zelite obrisati bibliotekara?",
+      okText: "Da, Obrisi",
+      cancelText: "Ne",
+      onOk: () => deleteLibrarian(id),
+    });
   };
 
   useEffect(() => {
@@ -67,24 +63,38 @@ function LibrarianDetails() {
     fetchLibrarian();
   }, []);
 
+  const menu = (
+    <Menu>
+      <Menu.Item key="1">
+        <Link to={`/LibrarianEvidention/EditLibrarian/${id}`}>
+          <EditOutlined className="detail-icons" />
+          Izmjeni Podatke
+        </Link>
+      </Menu.Item>
+      <Menu.Item onClick={() => confirm(id)} key="6" danger="true">
+        <DeleteOutlined className="detail-icons" />
+        Obriši Korisnika
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
-    <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
+    <>
       <div className="wrapper10">
         <div className="book-details">
-           <div className="book-image">
-          <img src={librarian.photoPath} alt="book img" className="slika" />
-        </div> 
-
+          <div className="book-image">
+            <img src={librarian.photoPath} alt="book img" className="slika" />
+          </div>
           <div className="book-info">
             <div className="naslov">
               <h1 className="h1">
-               {librarian.name} {librarian.surname}
+                {librarian.name} {librarian.surname}
                 <div className="links">
                   <p class="breadcrumbs">
                     <Link to="/LibrarianEvidention">
-                      <span className="paragraf">Evidencija Bibliotekara </span>
-                    </Link>
-                    <Link to="/UserProfile" >/ ID-{librarian.id}</Link>{" "}
+                      <span className="paragraf">Evidencija Bibliotekara</span>
+                    </Link>{" "}
+                    / ID-{librarian.id}
                   </p>
                 </div>
               </h1>
@@ -92,71 +102,69 @@ function LibrarianDetails() {
           </div>
         </div>
         <div>
-        <Link to="#" className="links2 side-stuff">
-            <FaRegHandScissors className="detail-icons"/>
-            Resetuj šifru
-          </Link>
-          <Link to="#" className="links2 side-stuff">
-            <HiOutlineArrowPath className="detail-icons" />
-            Izmjeni podatke
-          </Link>
-          <Link to="#" className="links2" ref={profilRef}>
-            <BsThreeDotsVertical
-              className="more-options"
-              onClick={isOpennedUserIconMenu}
-            />
-          </Link>
-          {userIconMenuOpen && (
-            <div className="option-menu01">
-              <ul>
-                <li
-                  onClick={() => {
-                    isOpennedUserIconMenu();
-                    navigate();
-                  }}
-                >
-                  <AiFillDelete className="detail-icons" />
-                  Obriši Korisnika
-                </li>
-              </ul>
-            </div>
-          )}
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              <MoreOutlined
+                className="detail-icons"
+                style={{
+                  fontSize: "40px",
+                  color: "#76a5af",
+                  cursor: "pointer",
+                  borderLeft: "1px solid #ccc",
+                }}
+              />
+            </a>
+          </Dropdown>
         </div>
       </div>
-      <div className="line2"></div>
+
       <div className="details-content">
-      
-      <div className="columns">
-        <div>
-          <div className="book-details-01">
-            <p className="category-info">Ime i prezime</p>
-            <h3 className="detail-info">{librarian.name} {librarian.surname}</h3>
+        <div className="columns">
+          <div>
+            <Card type="inner" title="Ime i prezime" style={{ width: 150 }}>
+              {librarian.name} {librarian.surname}
+            </Card>
+            <Card
+              type="inner"
+              title="Tip korisnika"
+              style={{ marginTop: 16, width: 150 }}
+            >
+              {librarian.role}
+            </Card>
+            <Card
+              type="inner"
+              title="JMBG"
+              style={{ marginTop: 16, width: 150 }}
+            >
+              {librarian.jmbg}
+            </Card>
+            <Card
+              type="inner"
+              title="Email"
+              style={{ marginTop: 16, width: 150 }}
+            >
+              {librarian.email}
+            </Card>
+            <Card
+              type="inner"
+              title="Korisničko ime"
+              style={{ marginTop: 16, width: 150 }}
+            >
+              {librarian.username}
+            </Card>
+            
           </div>
-          <div className="book-details-01">
-            <p className="category-info">Tip korisnika</p>
-            <h3 className="detail-info">{librarian.role}</h3>
-          </div>
-          <div className="book-details-01">
-            <p className="category-info">JMBG</p>
-            <h3 className="detail-info">{librarian.jmbg}</h3>
-          </div>
-          <div className="book-details-01">
-            <p className="category-info">Email</p>
-            <h3 className="detail-info">{librarian.email}</h3>
-          </div>
-          <div className="book-details-01">
-            <p className="category-info">Korisnicko ime</p>
-            <h3 className="detail-info">{librarian.username}</h3>
+          <div className="second-column01">
+          <Card type="inner" title="Slika korisnika" style={{ width: 400 }}>
+              <img src={librarian.photoPath} className="slika-user" />
+            </Card>
           </div>
         </div>
-        <div className="second-column01">     
-           <img src={librarian.photoPath} className="slika-user"/>
-        </div>
-        
       </div>
-      
-      </div>
-    </div>
+    </>
   );
 }
 
