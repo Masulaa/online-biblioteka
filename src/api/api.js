@@ -127,7 +127,10 @@ export const BookService = {
     return client.post(`books/${id}/izdaj`, izdajKnjiguData);
   },
   GetAllIzdajBook(){
-    return client.get("books/borrows");
+    return client.get("books/borrows", );
+  },
+  GetSingleIzdajBook(bookId) {
+    return client.get(`books/borrows?book_id=${bookId}`);
   },
   GetAllReserveBook(){
     return client.get("books/reservations");
@@ -136,7 +139,10 @@ export const BookService = {
     return client.post("books/vrati", id)
   },
   ToWriteOff(id){
-    return client.post("books/otpisi", id)
+    const requestBody = {
+      toWriteoff: id
+    };
+    return client.post("books/otpisi", requestBody)
   }
 };
 

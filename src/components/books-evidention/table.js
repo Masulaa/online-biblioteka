@@ -141,6 +141,7 @@ const BookTable = () => {
     navigate(`/EvidentionOfBooks/EditBook/${bookId}`);
   const navigateToGiveBook = (bookId) => navigate(`/GiveBook/${bookId}`);
   const navigateToReserveBook = (bookId) => navigate(`/ReserveBook/${bookId}`);
+  const navigateToWriteOffBook = (bookId) => navigate(`/WriteOffBook/${bookId}`);
 
   const menu = (recordId) => (
     <Menu>
@@ -151,7 +152,7 @@ const BookTable = () => {
         <EditOutlined /> Izmijeni knjigu
       </Item>
 
-      <Item onClick={() => recordId}>
+      <Item onClick={() => navigateToWriteOffBook(recordId)}>
         <EnterOutlined /> Otpiši knjigu
       </Item>
       <Item onClick={() => navigateToGiveBook(recordId)}>

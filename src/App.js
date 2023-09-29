@@ -47,6 +47,11 @@ const ReserveBook = lazy(() =>
   import("./components/books-evidention/reserve-book/ReserveBook")
 );
 
+const WriteOffBooks = lazy(() =>
+  import("./components/books-evidention/writeoff-book/WriteOffBook")
+);
+
+
 const StudentEvidention = lazy(() =>
   import("./components/student/StudentEvidention")
 );
@@ -175,6 +180,14 @@ function App() {
             element={
               <Suspense fallback={<ErrorHandlerPage />}>
                 <ReserveBook />
+              </Suspense>
+            }
+          />
+                    <Route
+            path="/WriteOffBook/:id"
+            element={
+              <Suspense fallback={<ErrorHandlerPage />}>
+                <WriteOffBooks />
               </Suspense>
             }
           />

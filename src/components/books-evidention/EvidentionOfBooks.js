@@ -20,7 +20,6 @@ function EvidentionOfBooks() {
 
   return (
     <React.Fragment>
-      <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
          <div className="naslov"><div className="illustrations">
         <img src={ill1} className="illustration" /> 
           <h1>Knjige</h1></div>
@@ -37,7 +36,6 @@ function EvidentionOfBooks() {
         </button>
       </div>
       <Table/>
-      </div>
     </React.Fragment>
   );
 }

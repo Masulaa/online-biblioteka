@@ -235,7 +235,7 @@ const IzdajBook = () => {
               <div>
                 <div className="side-info00">
                   <span className="side-info01">
-                    {book.samples - book.rSamples - book.bSamples - book.fSamples}
+                    {book.samples - book.rSamples - book.bSamples}
                     primjeraka
                   </span>
                   <span className="side-info01">{book.rSamples} primjeraka</span>

@@ -1,0 +1,53 @@
+.details-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  
+.wrapper30 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .buttons1 {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .submit1 {
+    opacity: 0.5; /* Smanjuje providnost dugmeta kada je onemogućeno */
+  cursor: not-allowed;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    background-color: #76a5af;
+    color: white;
+    border-radius: 25px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    border: none;
+  }
+  
+  .submit1.enabled1 {
+    opacity: 1; /* Vraća providnost na 1 kada je omogućeno */
+  cursor: pointer; /* Vraća kursor na pointer kada je omogućeno */
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    background-color: #76a5af;
+    color: white;
+    border-radius: 25px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    border: none;
+  }
+
+  .submit1.enabled1:hover {
+    background-color: #51737b;
+  }

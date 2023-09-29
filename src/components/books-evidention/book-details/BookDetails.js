@@ -1,60 +1,44 @@
 import "./BookDetails.css";
 import { Link } from "react-router-dom";
-import { AiFillDelete } from "react-icons/ai"
-import { AiFillEdit } from "react-icons/ai"
-import { HiOutlineArrowUturnUp } from "react-icons/hi2";
-import { FaRegHandScissors } from "react-icons/fa";
-import { HiOutlineArrowPath } from "react-icons/hi2";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import React from "react";
+
+import {
+  MoreOutlined,
+  SendOutlined,
+  EnterOutlined,
+  FileOutlined,
+  RollbackOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined
+} from "@ant-design/icons";
+
 import { BookService } from "../../../api/api";
+
+import { Card, Tabs, Dropdown, Menu, Modal } from "antd";
+const { Meta } = Card;
 
 function BookDetails() {
   const [book, setBook] = useState([]);
   const [currentStep, setCurrentStep] = useState(1);
-  const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
-
-  const profilRef = useRef(null);
 
   const navigate = useNavigate();
 
   const { id } = useParams();
 
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profilRef.current && !profilRef.current.contains(event.target)) {
-        setUserIconMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   const deleteBooks = async () => {
     try {
       const response = await BookService.DeleteBooks(book.id);
       console.log("API Response", response);
-      navigate("/StudentEvidention")
+      navigate("/EvidentionOfBooks");
     } catch (error) {
-
-      console.error("Error deleting book:", error)
+      console.error("Error deleting book:", error);
     }
   };
 
-  const isOpennedUserIconMenu = () => {
-    setUserIconMenuOpen(!userIconMenuOpen);
-    if (userIconMenuOpen === false) {
-      setUserIconMenuOpen(!userIconMenuOpen);
-    }
-  };
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -69,13 +53,299 @@ function BookDetails() {
     fetchBook();
   }, []);
 
-  const handleLinkClick = (step) => {
-    setCurrentStep(step);
-  };
 
+  const menu = (
+    <Menu>
+      <Menu.Item key="1">
+        <Link to="#">
+          <EnterOutlined className="detail-icons" />
+          Otpisi Knjigu
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <Link to={`/GiveBook/${book.id}`}>
+          <SendOutlined className="detail-icons" />
+          Izdaj Knjigu
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="3">
+        <Link to={`/ReserveBook/${book.id}`}>
+          <FileOutlined className="detail-icons" />
+          Rezerviši Knjigu
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="4">
+        <Link to="#">
+          <RollbackOutlined className="detail-icons" />
+          Vrati Knjigu
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="5">
+        <Link to={`/EvidentionOfBooks/EditBook/${id}`}>
+          <EditOutlined className="detail-icons" />
+          Izmjeni Knjigu
+        </Link>
+      </Menu.Item>
+      <Menu.Item onClick={() => confirm(id)} key="6" danger="true">
+          <DeleteOutlined className="detail-icons" />
+          Obriši Knjigu
+      </Menu.Item>
+    </Menu>
+  );
+
+  const confirm = (id) => {
+    Modal.confirm({
+      title: "Potvrdi",
+      icon: <ExclamationCircleOutlined />,
+      content: "Da li ste sigurni da zelite obrisati knjigu?",
+      okText: "Da, Obrisi",
+      cancelText: "Ne",
+      onOk: () => deleteBooks(id),
+    });
+  };
+  const items = [
+    {
+      key: "1",
+      label: (
+        <div>
+          <span>Osnovni detalji</span>
+        </div>
+      ),
+      children: (
+        <>
+          <div className="details-content">
+            <div className="columns">
+              <div>
+                <Card type="inner" title="Naziv knjige">
+                  {book.title}
+                </Card>
+                <Card
+                  type="inner"
+                  title="Kategorija/e"
+                  style={{ marginTop: 16, width: 150 }}
+                >
+                  {book.categories &&
+                    book.categories.map((kategorija) => (
+                      <li className="li" key={kategorija.id}>
+                        {kategorija.name}
+                      </li>
+                    ))}
+                </Card>
+                <Card
+                  type="inner"
+                  title="Žanr/ovi"
+                  style={{ marginTop: 16, width: 150 }}
+                >
+                  {book.genres &&
+                    book.genres.map((zanr) => (
+                      <li className="li" key={zanr.id}>
+                        {zanr.name}
+                      </li>
+                    ))}
+                </Card>
+                <Card
+                  type="inner"
+                  title="Žanr/ovi"
+                  style={{ marginTop: 16, width: 150 }}
+                >
+                  {book.authors &&
+                    book.authors.map((autor) => (
+                      <li className="li" key={autor.id}>
+                        {autor.name}
+                      </li>
+                    ))}
+                </Card>
+
+                <Card
+                  type="inner"
+                  title="Izdavač/či"
+                  style={{ marginTop: 16, width: 150 }}
+                >
+                  {book.publisher && book.publisher.name}
+                </Card>
+                <Card
+                  type="inner"
+                  title="Godina izdavanja"
+                  style={{ marginTop: 16, width: 150 }}
+                >
+                  {book.pDate}
+                </Card>
+              </div>
+              <div className="second-column01">
+                <Card type="inner" title="Storyline (Kratki sadržaj)">
+                  {book.description}
+                </Card>
+              </div>
+            </div>
+            <Card
+              style={{
+                width: 300,
+              }}
+              type="inner"
+              title="Informacije"
+            >
+              <div className="category-info">
+                <div className="side-category00">
+                  <span className="side-category01">Na raspolaganju:</span>
+                  <span className="side-category01">Rezervisano:</span>
+                  <span className="side-category01">Izdato:</span>
+                  <span className="side-category01">U prekoračenju:</span>
+                  <span className="side-category01">Ukupna količina:</span>
+                </div>
+                <div className="side-info00">
+                  <span className="side-info01">
+                    {book.samples -
+                      book.rSamples -
+                      book.bSamples -
+                      book.fSamples}{" "}
+                    primjeraka
+                  </span>
+                  <span className="side-info01">
+                    {book.rSamples} primjeraka
+                  </span>
+                  <span className="side-info01">
+                    {book.bSamples} primjeraka
+                  </span>
+                  <span className="side-info01">
+                    {book.fSamples} primjeraka
+                  </span>
+                  <span className="side-info01">{book.samples} primjeraka</span>
+                </div>
+              </div>{" "}
+            </Card>
+          </div>
+        </>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <div>
+          <span>Specifikacija</span>
+        </div>
+      ),
+      children: (
+        <div className="details-content">
+          <div className="columns">
+            <div>
+              <Card type="inner" title="Broj strana">
+                {book.pages}
+              </Card>
+              <Card
+                type="inner"
+                title="Pismo"
+                style={{ marginTop: 16, width: 150 }}
+              >
+                {book.script && book.script.name}
+              </Card>
+              <Card
+                type="inner"
+                title="Jezik"
+                style={{ marginTop: 16, width: 150 }}
+              >
+                {book.language && book.language.name}
+              </Card>
+            </div>
+            <div className="second-column01">
+              <Card type="inner" title="Povez" style={{ width: 150 }}>
+                {book.bookbind && book.bookbind.name}
+              </Card>
+              <Card
+                type="inner"
+                title="Format"
+                style={{ marginTop: 16, width: 150 }}
+              >
+                {book.format && book.format.name}
+              </Card>
+              <Card
+                type="inner"
+                title="International Standard Book Number (ISBN)"
+                style={{ marginTop: 16, width: 150 }}
+              >
+                {book.isbn}
+              </Card>
+            </div>
+          </div>
+          <Card
+            style={{
+              width: 300,
+            }}
+            type="inner"
+            title="Informacije"
+          >
+            <div className="category-info">
+              <div className="side-category00">
+                <span className="side-category01">Na raspolaganju:</span>
+                <span className="side-category01">Rezervisano:</span>
+                <span className="side-category01">Izdato:</span>
+                <span className="side-category01">U prekoračenju:</span>
+                <span className="side-category01">Ukupna količina:</span>
+              </div>
+              <div className="side-info00">
+                <span className="side-info01">
+                  {book.samples - book.rSamples - book.bSamples - book.fSamples}{" "}
+                  primjeraka
+                </span>
+                <span className="side-info01">{book.rSamples} primjeraka</span>
+                <span className="side-info01">{book.bSamples} primjeraka</span>
+                <span className="side-info01">{book.fSamples} primjeraka</span>
+                <span className="side-info01">{book.samples} primjeraka</span>
+              </div>
+            </div>
+          </Card>
+        </div>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <div>
+          <span>Multimedija</span>
+        </div>
+      ),
+      children: (
+        <div className="details-content">
+          <div className="columns">
+            <div>
+              <Card type="inner" title="Multimedija" style={{ width: 200 }}>
+                <img className="slika-user" src={book.photo} />
+              </Card>
+            </div>
+          </div>
+          <Card
+            style={{
+              width: 300,
+            }}
+            type="inner"
+            title="Informacije"
+          >
+            <div className="category-info">
+              <div className="side-category00">
+                <span className="side-category01">Na raspolaganju:</span>
+                <span className="side-category01">Rezervisano:</span>
+                <span className="side-category01">Izdato:</span>
+                <span className="side-category01">U prekoračenju:</span>
+                <span className="side-category01">Ukupna količina:</span>
+              </div>
+              <div className="side-info00">
+                <span className="side-info01">
+                  {book.samples - book.rSamples - book.bSamples - book.fSamples}{" "}
+                  primjeraka
+                </span>
+                <span className="side-info01">{book.rSamples} primjeraka</span>
+                <span className="side-info01">{book.bSamples} primjeraka</span>
+                <span className="side-info01">{book.fSamples} primjeraka</span>
+                <span className="side-info01">{book.samples} primjeraka</span>
+              </div>
+            </div>
+          </Card>
+        </div>
+      ),
+    },
+  ];
 
   return (
-    <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
+    <>
       <div className="wrapper30">
         <div className="book-details">
           <div className="book-image">
@@ -87,274 +357,43 @@ function BookDetails() {
               <h1 className="h1">
                 {book.title}
                 <div className="links">
-                <p class="breadcrumbs">
-              <Link to="/EvidentionOfBooks">
-                <span className="paragraf">Evidencija Knjiga</span>
-              </Link>{" "}
-              / ID-{book.id}
-            </p>
+                  <p class="breadcrumbs">
+                    <Link to="/EvidentionOfBooks">
+                      <span className="paragraf">Evidencija Knjiga</span>
+                    </Link>{" "}
+                    / ID-{book.id}
+                  </p>
                 </div>
               </h1>
             </div>
           </div>
         </div>
         <div>
-          <Link to="#" className="links2 side-stuff">
-            <HiOutlineArrowUturnUp className="detail-icons" />
-            Otpisi Knjigu
-          </Link>
-          <Link to={`/IzdajKnjigu/${book.id}`} className="links2 side-stuff">
-            <FaRegHandScissors className="detail-icons"/>
-            Izdaj Knjigu
-          </Link>
-          <Link to={`/ReserveBook/${book.id}`} className="links2 side-stuff">
-            <FaRegHandScissors className="detail-icons"/>
-            Rezerviši Knjigu
-          </Link>
-          <Link to="#" className="links2 side-stuff">
-            <HiOutlineArrowPath className="detail-icons" />
-            Vrati Knjigu
-          </Link>
-          <Link to="#" className="links2" ref={profilRef}>
-            <BsThreeDotsVertical
-              className="more-options"
-              onClick={isOpennedUserIconMenu}
-            /></Link>
-            {userIconMenuOpen && (
-              <div className="option-menu01">
-                <ul>
-                  <li
-                    onClick={() => {
-                      isOpennedUserIconMenu();
-                      navigate(`/EvidentionOfBooks/EditBook/${book.id}`);
-                    }}
-                  >
-                    <AiFillEdit className="detail-icons"/>
-                    Izmjeni Knjigu
-                  </li>
-                  <li
-                    onClick={() => {
-                      isOpennedUserIconMenu();
-                      deleteBooks();
-                      navigate("/EvidentionOfBooks")
-                    }}
-                  >
-                    <AiFillDelete className="detail-icons"/>
-                    Obriši Knjigu
-                  </li>
-                </ul>
-              </div>
-            )}
-          
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              <MoreOutlined
+                className="detail-icons"
+                style={{
+                  fontSize: "40px",
+                  color: "#76a5af",
+                  cursor: "pointer",
+                  borderLeft: "1px solid #ccc",
+                }}
+              />
+            </a>
+          </Dropdown>
         </div>
       </div>
-
-      <div>
-        <Link>
-          <button
-            className={`toggle-button ${currentStep === 1 ? "active" : ""}`}
-            onClick={() => handleLinkClick(1)}
-          >
-            Osnovni Detalji
-          </button>
-        </Link>
-        <Link className="link-p">
-          <button
-            className={`toggle-button ${currentStep === 2 ? "active" : ""}`}
-            onClick={() => handleLinkClick(2)}
-          >
-            Specifikacija
-          </button>
-        </Link>
-        <Link className="link-p">
-          <button
-            className={`toggle-button ${currentStep === 3 ? "active" : ""}`}
-            onClick={() => handleLinkClick(3)}
-          >
-            Multimedija
-          </button>
-        </Link>
-
-        <div className="line2"></div>
-      </div>
-
-      {currentStep === 1 && (
-      <div className="details-content">
-        <div className="columns">
-          <div>
-            <div className="book-details-01">
-              <p className="category-info">Naziv Knjige</p>
-              <h3 className="detail-info">{book.title}</h3>
-            </div>
-            <div className="book-details-01">
-              <p className="category-info">Kategorija/e</p>
-              <h3 className="detail-info">
-                {book.categories &&
-                  book.categories.map((kategorija) => (
-                    <li className="li" key={kategorija.id}>{kategorija.name}</li>
-                  ))}
-              </h3>
-            </div>
-            <div className="book-details-01">
-              <p className="category-info">Žanr/ovi</p>
-              <h3 className="detail-info">
-                {book.genres &&
-                  book.genres.map((zanr) => <li className="li" key={zanr.id}>{zanr.name}</li>)}
-              </h3>
-            </div>
-            <div className="book-details-01">
-              <p className="category-info">Autor/ri</p>
-              <h3 className="detail-info">
-                {book.authors &&
-                  book.authors.map((autor) => (
-                    <li className="li" key={autor.id}>{autor.name}</li>
-                  ))}
-              </h3>
-            </div>
-            <div className="book-details-01">
-              <p className="category-info">Izdavač/či</p>
-              <h3 className="detail-info">
-                {book.publisher && book.publisher.name}
-              </h3>
-            </div>
-            <div className="book-details-01">
-              <p className="category-info">Godina Izdavanja</p>
-              <h3 className="detail-info">{book.pDate}</h3>
-            </div>
-          </div>
-          <div className="second-column01">
-            <div className="book-details-01">
-              <p className="category-info">Storyline (Kratki sadrzaj)</p>
-              <h3 className="detail-info">{book.description}</h3>
-            </div>
-          </div>
-        </div>
-
-        <div className="side-info-book-details">
-         <div className="category-info">
-          <div className="side-category00">
-            <span className="side-category01">Na raspolaganju:</span>
-            <span className="side-category01">Rezervisano:</span>
-            <span className="side-category01">Izdato:</span>
-            <span className="side-category01">U prekoračenju:</span>
-            <span className="side-category01">Ukupna količina:</span>
-          </div>
-          <div className="side-info00">
-            <span className="side-info01">{book.samples - book.rSamples - book.bSamples - book.fSamples} primjeraka</span>
-            <span className="side-info01">{book.rSamples} primjeraka</span>
-            <span className="side-info01">{book.bSamples} primjeraka</span>
-            <span className="side-info01">{book.fSamples} primjeraka</span>
-            <span className="side-info01">{book.samples} primjeraka</span>
-           </div>
-          </div>
-          <div className="side-evidention-info00">
-            <span>Izdavanje Knjiga - 4days ago</span>
-            <span>Valentina.K je izdala knjigu Borisu Bojicicu dana 21.09.2023.</span>
-            <span>Pogledaj detaljnije</span>
-          </div>
-        </div>
-      </div>)}
-      {currentStep === 2 && (
-             <div className="details-content">
-             <div className="columns">
-               <div>
-                 <div className="book-details-01">
-                   <p className="category-info">Broj strana</p>
-                   <h3 className="detail-info">{book.pages}</h3>
-                 </div>
-                 <div className="book-details-01">
-                   <p className="category-info">Pismo</p>
-                   <h3 className="detail-info">
-                   {book.script && book.script.name}
-                   </h3>
-                 </div>
-                 <div className="book-details-01">
-                   <p className="category-info">Jezik</p>
-                   <h3 className="detail-info">
-                   {book.language && book.language.name}
-                   </h3>
-                 </div>
-                 <div className="book-details-01">
-                   <p className="category-info">Povez</p>
-                   <h3 className="detail-info">
-                   {book.bookbind && book.bookbind.name}
-                   </h3>
-                 </div>
-                 <div className="book-details-01">
-                   <p className="category-info">Format</p>
-                   <h3 className="detail-info">
-                   {book.format && book.format.name}
-                   </h3>
-                 </div>
-                 <div className="book-details-01">
-                   <p className="category-info">International Standard Book Number (ISBN)</p>
-                   <h3 className="detail-info">{book.isbn}</h3>
-                 </div>
-               </div>
-             </div>
-     
-             <div className="side-info-book-details">
-              <div className="category-info">
-               <div className="side-category00">
-                 <span className="side-category01">Na raspolaganju:</span>
-                 <span className="side-category01">Rezervisano:</span>
-                 <span className="side-category01">Izdato:</span>
-                 <span className="side-category01">U prekoračenju:</span>
-                 <span className="side-category01">Ukupna količina:</span>
-               </div>
-               <div className="side-info00">
-                 <span className="side-info01">{book.samples - book.rSamples - book.bSamples - book.fSamples} primjeraka</span>
-                 <span className="side-info01">{book.rSamples} primjeraka</span>
-                 <span className="side-info01">{book.bSamples} primjeraka</span>
-                 <span className="side-info01">{book.fSamples} primjeraka</span>
-                 <span className="side-info01">{book.samples} primjeraka</span>
-                </div>
-               </div>
-               <div className="side-evidention-info00">
-                 <span>Izdavanje Knjiga - 4days ago</span>
-                 <span>Valentina.K je izdala knjigu Borisu Bojicicu dana 21.09.2023.</span>
-                 <span>Pogledaj detaljnije</span>
-               </div>
-             </div>
-           </div>
-      )}
-            {currentStep === 3 && (
-             <div className="details-content">
-             <div className="columns">
-               <div>
-                 <div className="book-details-01">
-                   <p className="category-info">Multimedija</p>
-                   <h3 className="detail-info"><img className="slika-user" src={book.photo}/></h3>
-                 </div>
-               </div>
-             </div>
-     
-             <div className="side-info-book-details">
-              <div className="category-info">
-               <div className="side-category00">
-                 <span className="side-category01">Na raspolaganju:</span>
-                 <span className="side-category01">Rezervisano:</span>
-                 <span className="side-category01">Izdato:</span>
-                 <span className="side-category01">U prekoračenju:</span>
-                 <span className="side-category01">Ukupna količina:</span>
-               </div>
-               <div className="side-info00">
-                 <span className="side-info01">{book.samples - book.rSamples - book.bSamples - book.fSamples} primjeraka</span>
-                 <span className="side-info01">{book.rSamples} primjeraka</span>
-                 <span className="side-info01">{book.bSamples} primjeraka</span>
-                 <span className="side-info01">{book.fSamples} primjeraka</span>
-                 <span className="side-info01">{book.samples} primjeraka</span>
-                </div>
-               </div>
-               <div className="side-evidention-info00">
-                 <span>Izdavanje Knjiga - 4days ago</span>
-                 <span>Valentina.K je izdala knjigu Borisu Bojicicu dana 21.09.2023.</span>
-                 <span>Pogledaj detaljnije</span>
-               </div>
-             </div>
-           </div>
-      )}
-    </div>
+      <Tabs
+        defaultActiveKey={currentStep.toString()}
+        items={items}
+        onChange={(key) => setCurrentStep(parseInt(key))}
+        tabPosition="top"
+      ></Tabs>
+    </>
   );
 }
 
