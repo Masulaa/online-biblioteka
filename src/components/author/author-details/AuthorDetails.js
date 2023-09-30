@@ -1,41 +1,24 @@
+import { useParams, useNavigate } from "react-router-dom";
+import { AuthorService } from "../../../api/api";
+import {
+  MoreOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
+import { Card, Tabs, Dropdown, Menu, Modal } from "antd";
+import { useState, useEffect, useRef } from "react";
 import "./AuthorDetails.css";
 import { Link } from "react-router-dom";
-import { AiFillDelete } from "react-icons/ai";
-import { AiFillEdit } from "react-icons/ai";
-import { HiOutlineArrowUturnUp } from "react-icons/hi2";
-import { FaRegHandScissors } from "react-icons/fa";
-import { HiOutlineArrowPath } from "react-icons/hi2";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { AuthorService } from "../../../api/api";
 
-function AuthorDetails() {
+const { Meta } = Card;
+
+function LibrarianDetails() {
   const [author, setAuthor] = useState([]);
-  const [userIconMenuOpen, setUserIconMenuOpen] = useState(false);
-
-  const profilRef = useRef(null);
 
   const navigate = useNavigate();
 
   const { id } = useParams();
-
-  const isMenuOpen = useSelector((state) => state.menu.isMenuOpen);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profilRef.current && !profilRef.current.contains(event.target)) {
-        setUserIconMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   const deleteAuthor = async () => {
     try {
@@ -47,11 +30,15 @@ function AuthorDetails() {
     }
   };
 
-  const isOpennedUserIconMenu = () => {
-    setUserIconMenuOpen(!userIconMenuOpen);
-    if (userIconMenuOpen === false) {
-      setUserIconMenuOpen(!userIconMenuOpen);
-    }
+  const confirm = (id) => {
+    Modal.confirm({
+      title: "Potvrdi",
+      icon: <ExclamationCircleOutlined />,
+      content: "Da li ste sigurni da zelite obrisati autora?",
+      okText: "Da, Obrisi",
+      cancelText: "Ne",
+      onOk: () => deleteAuthor(id),
+    });
   };
 
   useEffect(() => {
@@ -67,24 +54,38 @@ function AuthorDetails() {
     fetchAuthor();
   }, []);
 
+  const menu = (
+    <Menu>
+      <Menu.Item key="1">
+        <Link to={`/AuthorEvidention/EditAuthor/${id}`}>
+          <EditOutlined className="detail-icons" />
+          Izmjeni Podatke
+        </Link>
+      </Menu.Item>
+      <Menu.Item onClick={() => confirm(id)} key="6" danger="true">
+        <DeleteOutlined className="detail-icons" />
+        Obriši Autora
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
-    <div className={`blur ${isMenuOpen ? "blur-showed" : ""}`}>
+    <>
       <div className="wrapper10">
         <div className="book-details">
           {/* <div className="book-image">
-          <img src={me.photoPath} alt="book img" className="slika" />
-        </div> */}
-
+            <img src={librarian.photoPath} alt="book img" className="slika" />
+          </div> */}
           <div className="book-info">
             <div className="naslov">
               <h1 className="h1">
                 {author.name} {author.surname}
                 <div className="links">
                   <p class="breadcrumbs">
-                    <Link to="/AuthorEvidention">
-                      <span className="paragraf">Evidencija Autora </span>
-                    </Link>
-                    <Link to="/UserProfile">/ ID-{author.id}</Link>{" "}
+                    <Link to="/LibrarianEvidention">
+                      <span className="paragraf">Evidencija Autora</span>
+                    </Link>{" "}
+                    / ID-{author.id}
                   </p>
                 </div>
               </h1>
@@ -92,56 +93,43 @@ function AuthorDetails() {
           </div>
         </div>
         <div>
-          <Link to="#" className="links2" ref={profilRef}>
-            <BsThreeDotsVertical
-              className="more-options"
-              onClick={isOpennedUserIconMenu}
-            />
-          </Link>
-          {userIconMenuOpen && (
-            <div className="option-menu01">
-              <ul>
-                <li
-                  onClick={() => {
-                    isOpennedUserIconMenu();
-                    navigate();
-                  }}
-                >
-                  <FaRegHandScissors className="detail-icons" />
-                  Izmjeni Autora
-                </li>
-                <li
-                  onClick={() => {
-                    isOpennedUserIconMenu();
-                    navigate();
-                  }}
-                >
-                  <AiFillDelete className="detail-icons" />
-                  Obriši Autora
-                </li>
-              </ul>
-            </div>
-          )}
+          <Dropdown overlay={menu} trigger={["click"]}>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              <MoreOutlined
+                className="detail-icons"
+                style={{
+                  fontSize: "40px",
+                  color: "#76a5af",
+                  cursor: "pointer",
+                  borderLeft: "1px solid #ccc",
+                }}
+              />
+            </a>
+          </Dropdown>
         </div>
       </div>
-      <div className="line2"></div>
 
       <div className="details-content">
         <div className="columns">
           <div>
-            <div className="book-details-01">
-              <p className="category-info">Ime i prezime</p>
-              <h3 className="detail-info">{author.name} {author.surname}</h3>
-            </div>
-            <div className="book-details-01 opis-short">
-              <p className="category-info">Opis</p>
-              <h3 className="detail-info">{author.bio}</h3>
-            </div>
+            <Card type="inner" title="Ime i prezime">
+              {author.name} {author.surname}
+            </Card>
+            <Card
+              type="inner"
+              title="Opis"
+              style={{ marginTop: 16 }}
+            >
+              {author.bio}
+            </Card>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-export default AuthorDetails;
+export default LibrarianDetails;

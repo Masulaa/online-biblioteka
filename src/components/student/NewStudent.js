@@ -74,7 +74,6 @@ function NewStudent() {
         </div>
 
         <div>
-          <div className="line2"></div>
 
           <div className="flex-columns">
             <div className="column">

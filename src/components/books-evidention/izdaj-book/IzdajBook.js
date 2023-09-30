@@ -218,7 +218,6 @@ const IzdajBook = () => {
 
         <Card
           style={{
-            width: 300,
           }}
           type="inner"
           title="Informacije"
